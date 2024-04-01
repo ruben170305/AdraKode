@@ -1,3 +1,3 @@
 Grupo: webOS
 
-Integrantes: Ainhoa, Adrian Arcones, Dani Correa y Rubén
+Integrantes: Ainhoa, Adrian Arcones, Daniel Correa y Rubén
