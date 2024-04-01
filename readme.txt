@@ -1,3 +1,3 @@
-Grupo: webOS
+Grupo: AdraKode
 
-Integrantes: Ainhoa, Adrian Arcones, Daniel Correa y Rubén
+Integrantes: Ainhoa Blanca, Adrián Arcones, Daniel Correa y Rubén Peña
