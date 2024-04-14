@@ -198,7 +198,7 @@ public class CrearPersonaje extends JPanel {
 		add(txtCarisma);
 		
 		//Boton crear
-		btnCrear = new JButton("Crear");
+		btnCrear = new JButton("CREAR");
 		btnCrear.setFont(new Font("Oxygen", Font.BOLD, 17));
 		btnCrear.setForeground(new Color(242, 242, 242));
 		btnCrear.setBackground(new Color(29, 161, 242));

@@ -68,13 +68,13 @@ public class VentanaPrincipalLogin extends JPanel {
 		inicioSesion.setForeground(new Color(29, 29, 27));
 		inicioSesion.setHorizontalAlignment(SwingConstants.CENTER);
 		inicioSesion.setFont(new Font("Open Sans", Font.BOLD, 19));
-		inicioSesion.setBounds(215,22,186,45);
+		inicioSesion.setBounds(214,17,186,45);
 		add(inicioSesion);
 
 		//Logo
 	    logoIcono = new JLabel();
 		logoIcono.setIcon(new ImageIcon(VentanaPrincipalLogin.class.getResource("/img/LogoLogin.png")));
-		logoIcono.setBounds(260,62,88,105);
+		logoIcono.setBounds(261,68,88,105);
 		add(logoIcono);
 		
 		//Campo usuario
@@ -122,7 +122,7 @@ public class VentanaPrincipalLogin extends JPanel {
 		entrar.setBackground(new Color(29, 161, 242));
 		entrar.setOpaque(true);
         entrar.setBorderPainted(false);
-		entrar.setBounds(215,317,186,50);
+		entrar.setBounds(223,328,171,42);
 		add(entrar);
 		
 
