@@ -8,7 +8,8 @@ import javax.swing.UIManager;
 import javax.swing.WindowConstants;
 import java.awt.Font;
 import java.awt.Color;
-import java.awt.Dimension;
+import javax.swing.ImageIcon;
+import java.awt.SystemColor;
 
 import javax.swing.ImageIcon;
 import java.awt.SystemColor;
@@ -34,7 +35,8 @@ public class VentanaPrincipalLogin extends JPanel {
 		//Adaptar la apariencia del SO donde se ejecuta
 		try {
 			UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
-		}catch(Exception e){
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -46,6 +48,7 @@ public class VentanaPrincipalLogin extends JPanel {
 		
 		//Tamaño y posicion de ventana
 		setSize(600, 400);
+		setLocation(null);
 		
 		
 		/* COMPONENTES */
@@ -58,12 +61,6 @@ public class VentanaPrincipalLogin extends JPanel {
 		inicioSesion.setBounds(215,10,186,45);
 		add(inicioSesion);
 		
-
-        
-        // Crea un JLabel con el logo y lo añade al panel
-        JLabel logoLabel = new JLabel(new ImageIcon(VentanaPrincipalLogin.class.getResource("/img/logo.png")));
-        logoLabel.setBounds(53, 66, 168, 158);
-        add(logoLabel);
 		
 		
 		//Campo usuario
@@ -77,8 +74,9 @@ public class VentanaPrincipalLogin extends JPanel {
 	    //Icono usuario
 	    usuarioIcono = new JLabel("");
 		usuarioIcono.setIcon(new ImageIcon(VentanaPrincipalLogin.class.getResource("/img/IconoUsuario.png")));
-		usuarioIcono.setBounds(187,176,45,45);
+		usuarioIcono.setBounds(175,123,45,45);
 		add(usuarioIcono);
+	
 		
 	    //Campo contraseña
 		contraseña = new JPasswordField();
@@ -93,7 +91,7 @@ public class VentanaPrincipalLogin extends JPanel {
 		administrador = new JCheckBox("Administrador");
 		administrador.setForeground(new Color(29, 29, 27));
 		administrador.setFont(new Font("Open Sans", Font.PLAIN, 11));
-		administrador.setBounds(252,225,132,20);
+		administrador.setBounds(251,237,132,20);
 		add (administrador);
 		
 		//Botón entrar
@@ -103,7 +101,7 @@ public class VentanaPrincipalLogin extends JPanel {
 		entrar.setBackground(new Color(29, 161, 242));
 		entrar.setOpaque(true);
         entrar.setBorderPainted(false);
-		entrar.setBounds(215,274,200,50);
+		entrar.setBounds(215,287,186,50);
 		add(entrar);
 		
 
