@@ -1,4 +1,4 @@
-package Ventanas;
+package views;
 
 // Librerías
 import javax.swing.*;
