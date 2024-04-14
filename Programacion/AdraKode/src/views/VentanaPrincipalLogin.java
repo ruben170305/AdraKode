@@ -1,8 +1,6 @@
-package login;
+package views;
 
-import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JFrame;
+import javax.swing.*;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
@@ -12,7 +10,6 @@ import java.awt.Font;
 import java.awt.Color;
 import javax.swing.ImageIcon;
 import java.awt.SystemColor;
-import javax.swing.SwingConstants;
 
 public class VentanaPrincipalLogin extends JPanel {
 
@@ -51,12 +48,12 @@ public class VentanaPrincipalLogin extends JPanel {
 		add(inicioSesion);
 		
 		logo = new JLabel("");
-		logo.setIcon(new ImageIcon("C:\\Users\\USER\\Desktop\\Proyecto Integrador\\AdraKode\\logo.jpeg"));
+		logo.setIcon(new ImageIcon(VentanaPrincipalLogin.class.getResource("/img/logo.jpeg")));
 		logo.setBounds(225,46,160,132);
 		add(logo);
 		
 		usuarioIcono = new JLabel("");
-		usuarioIcono.setIcon(new ImageIcon("C:\\Users\\USER\\Downloads\\icons8-usuario-32.png"));
+		usuarioIcono.setIcon(new ImageIcon(VentanaPrincipalLogin.class.getResource("/img/IconoUsuario.png")));
 		usuarioIcono.setBounds(187,176,45,45);
 		add(usuarioIcono);
 		
@@ -69,7 +66,7 @@ public class VentanaPrincipalLogin extends JPanel {
 		add(usuario);
 		
 		contraseñaIcono = new JLabel("");
-		contraseñaIcono.setIcon(new ImageIcon("C:\\Users\\USER\\Downloads\\icons8-contraseña-26.png"));
+		contraseñaIcono.setIcon(new ImageIcon(VentanaPrincipalLogin.class.getResource("/img/IconoContraseña.png")));
 		contraseñaIcono.setBounds(187,231,45,50);
 		add(contraseñaIcono);
 		
