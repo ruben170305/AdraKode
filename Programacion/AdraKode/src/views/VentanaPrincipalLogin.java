@@ -14,7 +14,6 @@ import java.awt.SystemColor;
 public class VentanaPrincipalLogin extends JPanel {
 
 	private JLabel inicioSesion;
-	private JLabel logo;
 	private JLabel usuarioIcono;
 	private JLabel usuario;
 	private JLabel contraseñaIcono;
@@ -25,6 +24,7 @@ public class VentanaPrincipalLogin extends JPanel {
 	//private VentanaPrincipalLogin listener;
 	public VentanaPrincipalLogin (String login) {
 		super ();
+		setBackground(new Color(242, 242, 242));
 		//listener = new VentanaPrincipalLogin(login);
 		inicializarComponentes ();
 		
@@ -43,18 +43,13 @@ public class VentanaPrincipalLogin extends JPanel {
 		
 		inicioSesion = new JLabel("INICIAR SESIÓN");
 		inicioSesion.setHorizontalAlignment(SwingConstants.CENTER);
-		inicioSesion.setFont(new Font("Calibri", Font.BOLD, 17));
+		inicioSesion.setFont(new Font("Open Sans", Font.BOLD, 17));
 		inicioSesion.setBounds(215,10,186,45);
 		add(inicioSesion);
 		
-		logo = new JLabel("");
-		logo.setIcon(new ImageIcon(VentanaPrincipalLogin.class.getResource("/img/logo.jpeg")));
-		logo.setBounds(225,46,160,132);
-		add(logo);
-		
 		usuarioIcono = new JLabel("");
 		usuarioIcono.setIcon(new ImageIcon(VentanaPrincipalLogin.class.getResource("/img/IconoUsuario.png")));
-		usuarioIcono.setBounds(187,176,45,45);
+		usuarioIcono.setBounds(197,120,45,45);
 		add(usuarioIcono);
 		
 		usuario = new JLabel("Usuario");
@@ -62,12 +57,12 @@ public class VentanaPrincipalLogin extends JPanel {
 		usuario.setForeground(UIManager.getColor("Button.focus"));
 		usuario.setBackground(new Color(0, 0, 0));
 		usuario.setFont(new Font("Calibri", Font.PLAIN, 13));
-		usuario.setBounds(231,176,186,45);
+		usuario.setBounds(225,76,186,45);
 		add(usuario);
 		
 		contraseñaIcono = new JLabel("");
 		contraseñaIcono.setIcon(new ImageIcon(VentanaPrincipalLogin.class.getResource("/img/IconoContraseña.png")));
-		contraseñaIcono.setBounds(187,231,45,50);
+		contraseñaIcono.setBounds(197,163,45,50);
 		add(contraseñaIcono);
 		
 		contraseña = new JPasswordField("");
@@ -76,11 +71,16 @@ public class VentanaPrincipalLogin extends JPanel {
 		add(contraseña);
 		
 		entrar = new JButton("ENTRAR");
-		entrar.setBackground(new Color(0, 0, 0));
-		entrar.setBounds(215,320,186,35);
+		entrar.setFont(new Font("Oxygen", Font.BOLD, 11));
+		entrar.setForeground(new Color(242, 242, 242));
+		entrar.setBackground(new Color(29, 161, 242));
+		entrar.setOpaque(true);
+        entrar.setBorderPainted(false);
+		entrar.setBounds(215,320,200,50);
 		add(entrar);
 		
 		administrador = new JCheckBox("Administrador");
+		administrador.setFont(new Font("Open Sans", Font.PLAIN, 11));
 		administrador.setBounds(242,294,132,20);
 		add (administrador);
 		
