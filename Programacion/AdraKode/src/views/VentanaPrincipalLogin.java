@@ -60,6 +60,9 @@ public class VentanaPrincipalLogin extends JPanel {
 		
 		/* COMPONENTES */
 		
+		//Creo border para cajas de texto (solo linea inferior)
+		Border border = BorderFactory.createMatteBorder(0, 0, 2, 0, new Color(29, 29, 27));
+		
 		//Titulo
 		inicioSesion = new JLabel("INICIAR SESIÓN");
 		inicioSesion.setForeground(new Color(29, 29, 27));
@@ -80,7 +83,6 @@ public class VentanaPrincipalLogin extends JPanel {
 		usuario.setFont(new Font("Open Sans", Font.PLAIN, 11));
 		usuario.setForeground(new Color(29, 29, 27));
 	    usuario.setBounds(215, 163, 186, 35); 
-		Border border = BorderFactory.createMatteBorder(0, 0, 2, 0, new Color(29, 29, 27));
 	    usuario.setBorder(border);
 	    add(usuario);
 		
