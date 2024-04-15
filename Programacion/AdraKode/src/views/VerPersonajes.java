@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -20,10 +21,12 @@ import java.awt.event.ActionEvent;
 
 public class VerPersonajes extends JPanel {
 	
-    private JLabel lblTitulo, lblNombrePersonaje, lblRaza, lblExp;
-    private JLabel lblFuerza, lblDestreza, lblConstitucion, lblInteligencia, lblSabiduria, lblCarisma;
+    private JLabel lblTitulo, lblNombrePersonaje, lblRaza, lblExp, lblSeleccionarPersonaje, lblIconoExp, lblIconoFuerza, lblIconoDestreza, lblIconoCarisma, lblClase;
+    private JLabel lblFuerza, lblDestreza, lblConstitucion, lblInteligencia, lblSabiduria, lblCarisma, lblIconoConst, lblIconoInteligencia, lblIconoSabiduria;
     private JButton btnCrear, btnDespues, btnAntes;
     private JProgressBar pbExp;
+    private JComboBox comboBoxSeleccionar;
+    private JButton btnCrear_1;
 
 	
 	public VerPersonajes(String titulo) {
@@ -48,7 +51,7 @@ public class VerPersonajes extends JPanel {
 		setLayout(null);
 		
 		//Tamaño y posicion de ventana
-		setSize(600, 400);
+		setSize(600, 462);
 		setLocation(null);
 		
 		
@@ -62,28 +65,95 @@ public class VerPersonajes extends JPanel {
 		lblTitulo.setForeground(new Color(29, 29, 27));
 		lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTitulo.setFont(new Font("Open Sans", Font.BOLD, 19));
-		lblTitulo.setBounds(206,23,186,33);
+		lblTitulo.setBounds(180,25,215,33);
 		add(lblTitulo);
+			
+		//Etiqueta seleccionar personaje
+        lblSeleccionarPersonaje = new JLabel("PERSONAJE");
+        lblSeleccionarPersonaje.setHorizontalAlignment(SwingConstants.RIGHT);
+        lblSeleccionarPersonaje.setFont(new Font("Open Sans", Font.BOLD, 14));
+        lblSeleccionarPersonaje.setBounds(190, 90, 90, 14);
+        add(lblSeleccionarPersonaje);
+
+        //ComboBox
+        String[] opcionesComboBox = {"Jugador 1", "Jugador 2", "Jugador 3", "Jugador 4"};
+        comboBoxSeleccionar = new JComboBox<String>(opcionesComboBox);
+        comboBoxSeleccionar.setFont(new Font("Open Sans", Font.BOLD, 13));
+        comboBoxSeleccionar.setForeground(new Color(29, 29, 27));
+        comboBoxSeleccionar.setBackground(new Color(242, 242, 242));
+        comboBoxSeleccionar.setBounds(295, 86, 105, 22);
+        comboBoxSeleccionar.setBorder(BorderFactory.createEmptyBorder());
+        comboBoxSeleccionar.setOpaque(true);
+        add(comboBoxSeleccionar);
 		
-		//Etiqueta nombre personaje
-		lblNombrePersonaje = new JLabel("Personaje 1");
-		lblNombrePersonaje.setFont(new Font("Open Sans", Font.BOLD, 16));
-		lblNombrePersonaje.setBounds(253, 82, 102, 14);
-		add(lblNombrePersonaje);
+	    //Icono 
+	    lblIconoExp = new JLabel();
+	    lblIconoExp.setHorizontalAlignment(SwingConstants.CENTER);
+		lblIconoExp.setIcon(new ImageIcon(VerPersonajes.class.getResource("/img/IconoExp.png")));
+		lblIconoExp.setBounds(255,147,29,33);
+		add(lblIconoExp);
 		
+	    //Icono 
+		lblIconoFuerza = new JLabel();
+		lblIconoFuerza.setHorizontalAlignment(SwingConstants.CENTER);
+		lblIconoFuerza.setIcon(new ImageIcon(VerPersonajes.class.getResource("/img/IconoFrza.png")));
+		lblIconoFuerza.setBounds(252,174,35,33);
+		add(lblIconoFuerza);
 		
+	    //Icono 
+		lblIconoDestreza = new JLabel();
+		lblIconoDestreza.setHorizontalAlignment(SwingConstants.CENTER);
+		lblIconoDestreza.setIcon(new ImageIcon(VerPersonajes.class.getResource("/img/IconoDestreza.png")));
+		lblIconoDestreza.setBounds(252,201,35,33);
+		add(lblIconoDestreza);
+		
+	    //Icono 
+		lblIconoConst = new JLabel();
+		lblIconoConst.setHorizontalAlignment(SwingConstants.CENTER);
+		lblIconoConst.setIcon(new ImageIcon(VerPersonajes.class.getResource("/img/IconoConstitucion.png")));
+		lblIconoConst.setBounds(252,228,35,33);
+		add(lblIconoConst);
+		
+		//Icono 
+		lblIconoInteligencia = new JLabel();
+		lblIconoInteligencia.setHorizontalAlignment(SwingConstants.CENTER);
+		lblIconoInteligencia.setIcon(new ImageIcon(VerPersonajes.class.getResource("/img/IconoInteli.png")));
+		lblIconoInteligencia.setBounds(252,253,35,33);
+		add(lblIconoInteligencia);
+		
+		//Icono 
+		lblIconoSabiduria = new JLabel();
+		lblIconoSabiduria.setHorizontalAlignment(SwingConstants.CENTER);
+		lblIconoSabiduria.setIcon(new ImageIcon(VerPersonajes.class.getResource("/img/IconoSab.png")));
+		lblIconoSabiduria.setBounds(252,279,35,33);
+		add(lblIconoSabiduria);
+
+		//Icono 
+		lblIconoCarisma = new JLabel();
+		lblIconoCarisma.setHorizontalAlignment(SwingConstants.CENTER);
+		lblIconoCarisma.setIcon(new ImageIcon(VerPersonajes.class.getResource("/img/IconoCarisma.png")));
+		lblIconoCarisma.setBounds(252,305,35,33);
+		add(lblIconoCarisma);
 		
 		//Etiqueta raza
 		lblRaza = new JLabel("Raza 1");
+		lblRaza.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblRaza.setFont(new Font("Open Sans", Font.BOLD, 14));
-		lblRaza.setBounds(276, 107, 52, 14);
+		lblRaza.setBounds(232, 128, 52, 14);
 		add(lblRaza);
 		
+		//Etiqueta clase
+		lblClase = new JLabel("Clase 1");
+		lblClase.setHorizontalAlignment(SwingConstants.LEFT);
+		lblClase.setFont(new Font("Open Sans", Font.BOLD, 14));
+		lblClase.setBounds(299, 128, 52, 14);
+		add(lblClase);
 		
 		//Etiqueta exp
 		lblExp = new JLabel("Experiencia");
-		lblExp.setFont(new Font("Open Sans", Font.PLAIN, 12));
-		lblExp.setBounds(206, 138, 70, 14);
+		lblExp.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblExp.setFont(new Font("Open Sans", Font.PLAIN, 14));
+		lblExp.setBounds(160, 158, 90, 14);
 		add(lblExp);
 		
 		//Barra progreso experiencia
@@ -92,14 +162,15 @@ public class VerPersonajes extends JPanel {
 		pbExp.setForeground(new Color(52, 75, 89));
 		pbExp.setFont(new Font("Oxygen", Font.PLAIN, 11));
 		pbExp.setStringPainted(true);
-		pbExp.setBounds(286, 140, 102, 14);
+		pbExp.setBounds(299, 160, 102, 14);
 		add(pbExp);
 		
 		
 		// Etiqueta fuerza
 		lblFuerza = new JLabel("Fuerza");
-		lblFuerza.setFont(new Font("Open Sans", Font.PLAIN, 12));
-		lblFuerza.setBounds(235, 164, 41, 14);
+		lblFuerza.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblFuerza.setFont(new Font("Open Sans", Font.PLAIN, 14));
+		lblFuerza.setBounds(189, 184, 61, 14);
 		add(lblFuerza);
 
 		// Barra progreso fuerza
@@ -108,13 +179,14 @@ public class VerPersonajes extends JPanel {
 		pbFuerza.setForeground(new Color(52, 75, 89));
 		pbFuerza.setFont(new Font("Oxygen", Font.PLAIN, 11));
 		pbFuerza.setStringPainted(true);
-		pbFuerza.setBounds(286, 166, 102, 14);
+		pbFuerza.setBounds(299, 186, 102, 14);
 		add(pbFuerza);
 
 		// Etiqueta destreza
 		lblDestreza = new JLabel("Destreza");
-		lblDestreza.setFont(new Font("Open Sans", Font.PLAIN, 12));
-		lblDestreza.setBounds(224, 190, 52, 14);
+		lblDestreza.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblDestreza.setFont(new Font("Open Sans", Font.PLAIN, 14));
+		lblDestreza.setBounds(178, 210, 72, 14);
 		add(lblDestreza);
 
 		// Barra progreso destreza
@@ -123,13 +195,14 @@ public class VerPersonajes extends JPanel {
 		pbDestreza.setForeground(new Color(52, 75, 89));
 		pbDestreza.setFont(new Font("Oxygen", Font.PLAIN, 11));
 		pbDestreza.setStringPainted(true);
-		pbDestreza.setBounds(286, 192, 102, 14);
+		pbDestreza.setBounds(299, 212, 102, 14);
 		add(pbDestreza);
 
 		// Etiqueta constitución
 		lblConstitucion = new JLabel("Constitución");
-		lblConstitucion.setFont(new Font("Open Sans", Font.PLAIN, 12));
-		lblConstitucion.setBounds(206, 216, 70, 14);
+		lblConstitucion.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblConstitucion.setFont(new Font("Open Sans", Font.PLAIN, 14));
+		lblConstitucion.setBounds(160, 236, 90, 14);
 		add(lblConstitucion);
 
 		// Barra progreso constitución
@@ -138,13 +211,14 @@ public class VerPersonajes extends JPanel {
 		pbConstitucion.setForeground(new Color(52, 75, 89));
 		pbConstitucion.setFont(new Font("Oxygen", Font.PLAIN, 11));
 		pbConstitucion.setStringPainted(true);
-		pbConstitucion.setBounds(286, 218, 102, 14);
+		pbConstitucion.setBounds(299, 238, 102, 14);
 		add(pbConstitucion);
 
 		// Etiqueta inteligencia
 		lblInteligencia = new JLabel("Inteligencia");
-		lblInteligencia.setFont(new Font("Open Sans", Font.PLAIN, 12));
-		lblInteligencia.setBounds(212, 241, 64, 17);
+		lblInteligencia.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblInteligencia.setFont(new Font("Open Sans", Font.PLAIN, 14));
+		lblInteligencia.setBounds(166, 261, 84, 17);
 		add(lblInteligencia);
 
 		// Barra progreso inteligencia
@@ -153,13 +227,14 @@ public class VerPersonajes extends JPanel {
 		pbInteligencia.setForeground(new Color(52, 75, 89));
 		pbInteligencia.setFont(new Font("Oxygen", Font.PLAIN, 11));
 		pbInteligencia.setStringPainted(true);
-		pbInteligencia.setBounds(286, 243, 102, 14);
+		pbInteligencia.setBounds(299, 263, 102, 14);
 		add(pbInteligencia);
 
 		// Etiqueta sabiduría
 		lblSabiduria = new JLabel("Sabiduría");
-		lblSabiduria.setFont(new Font("Open Sans", Font.PLAIN, 12));
-		lblSabiduria.setBounds(222, 268, 54, 14);
+		lblSabiduria.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblSabiduria.setFont(new Font("Open Sans", Font.PLAIN, 14));
+		lblSabiduria.setBounds(176, 288, 74, 14);
 		add(lblSabiduria);
 
 		// Barra progreso sabiduría
@@ -168,13 +243,14 @@ public class VerPersonajes extends JPanel {
 		pbSabiduria.setForeground(new Color(52, 75, 89));
 		pbSabiduria.setFont(new Font("Oxygen", Font.PLAIN, 11));
 		pbSabiduria.setStringPainted(true);
-		pbSabiduria.setBounds(286, 270, 102, 14);
+		pbSabiduria.setBounds(299, 290, 102, 14);
 		add(pbSabiduria);
 
 		// Etiqueta carisma
 		lblCarisma = new JLabel("Carisma");
-		lblCarisma.setFont(new Font("Open Sans", Font.PLAIN, 12));
-		lblCarisma.setBounds(226, 294, 50, 14);
+		lblCarisma.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblCarisma.setFont(new Font("Open Sans", Font.PLAIN, 14));
+		lblCarisma.setBounds(180, 314, 70, 14);
 		add(lblCarisma);
 
 		// Barra progreso carisma
@@ -183,36 +259,45 @@ public class VerPersonajes extends JPanel {
 		pbCarisma.setForeground(new Color(52, 75, 89));
 		pbCarisma.setFont(new Font("Oxygen", Font.PLAIN, 11));
 		pbCarisma.setStringPainted(true);
-		pbCarisma.setBounds(286, 296, 102, 14);
+		pbCarisma.setBounds(299, 316, 102, 14);
 		add(pbCarisma);
 
 		//Boton seleccionar
 		btnCrear = new JButton("SELECCIONAR");
+		btnCrear.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnCrear.setFont(new Font("Oxygen", Font.BOLD, 17));
 		btnCrear.setForeground(new Color(242, 242, 242));
 		btnCrear.setBackground(new Color(29, 161, 242));
 		btnCrear.setOpaque(true);
 		btnCrear.setBorderPainted(false);
-		btnCrear.setBounds(221, 345, 167, 33);
+		btnCrear.setBounds(209, 363, 167, 33);
 		add(btnCrear);
 		
-		btnAntes = new JButton("<");
-		btnAntes.setOpaque(true);
-		btnAntes.setForeground(new Color(242, 242, 242));
-		btnAntes.setFont(new Font("Oxygen", Font.BOLD, 14));
-		btnAntes.setBorderPainted(false);
-		btnAntes.setBackground(new Color(52, 75, 89));
-		btnAntes.setBounds(27, 189, 52, 33);
-		add(btnAntes);
+		btnCrear_1 = new JButton();
+		btnCrear_1.setIcon(new ImageIcon(VerPersonajes.class.getResource("/img/botonEditarW.png")));
+		btnCrear_1.setOpaque(true);
+		btnCrear_1.setForeground(new Color(29, 29, 27));
+		btnCrear_1.setFont(new Font("Oxygen", Font.BOLD, 17));
+		btnCrear_1.setBorderPainted(false);
+		btnCrear_1.setBackground(new Color(29, 29, 27));
+		btnCrear_1.setBounds(209, 401, 81, 33);
+		add(btnCrear_1);
 		
-		btnDespues = new JButton(">");
-		btnDespues.setOpaque(true);
-		btnDespues.setForeground(new Color(242, 242, 242));
-		btnDespues.setFont(new Font("Oxygen", Font.BOLD, 14));
-		btnDespues.setBorderPainted(false);
-		btnDespues.setBackground(new Color(52, 75, 89));
-		btnDespues.setBounds(518, 189, 52, 33);
-		add(btnDespues);
+		JButton btnCrear_1_1 = new JButton();
+		btnCrear_1_1.setIcon(new ImageIcon(VerPersonajes.class.getResource("/img/botonBorrarW.png")));
+		btnCrear_1_1.setOpaque(true);
+		btnCrear_1_1.setForeground(new Color(29, 29, 27));
+		btnCrear_1_1.setFont(new Font("Oxygen", Font.BOLD, 17));
+		btnCrear_1_1.setBorderPainted(false);
+		btnCrear_1_1.setBackground(new Color(29, 29, 27));
+		btnCrear_1_1.setBounds(295, 401, 81, 33);
+		add(btnCrear_1_1);
+		
+
+		
 				
 		
 	}
