@@ -80,7 +80,7 @@ public class CrearPersonaje extends JPanel {
 		//Etiqueta raza
 		lblRaza = new JLabel("Raza:");
 		lblRaza.setFont(new Font("Open Sans", Font.PLAIN, 12));
-		lblRaza.setBounds(246, 112, 30, 14);
+		lblRaza.setBounds(235, 112, 41, 14);
 		add(lblRaza);
 		
 		//Campo texto raza

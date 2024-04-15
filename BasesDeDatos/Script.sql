@@ -22,7 +22,7 @@ CREATE TABLE partida (
     num_sesion INT,
     nombre VARCHAR(50),
     duracion INT,
-    dia_hora DATETIME,
+    dia VARCHAR(50),
     ambientacion VARCHAR(50),
     enCurso boolean,
     controlador INT,
@@ -64,11 +64,11 @@ INSERT INTO miembro (cod, fullname, expediente, estudio) VALUES
 (2005, 'Carol White', 12349, 'Seguridad Informática');
 
 INSERT INTO partida (cod, num_sesion, nombre, duracion, dia_hora, ambientacion, enCurso, controlador) VALUES
-(3001, 10, 'Amanecer de fuego', 180, '2023-10-03 19:00:00', 'Fantasía medieval', true, 2001),
-(3002, 15, 'Crepúsculo gélido', 150, '2023-10-10 19:30:00', 'Fantasía gélida', false, 2002),
-(3003, 20, 'La caída de la noche', 210, '2023-10-17 20:00:00', 'Fantasía oscura', true, 2003),
-(3004, 25, 'El alba dorada', 160, '2023-10-24 18:30:00', 'Fantasía clásica', false, 2004),
-(3005, 30, 'Sombras persistentes', 190, '2023-10-31 19:45:00', 'Fantasía steampunk', true, 2005);
+(3001, 10, 'Amanecer de fuego', 180, 'Martes a las 17:00', 'Fantasía medieval', true, 2001),
+(3002, 15, 'Crepúsculo gélido', 150, 'Martes a las 19:00', 'Fantasía gélida', false, 2002),
+(3003, 20, 'La caída de la noche', 210, 'Miercoles a las 16:00', 'Fantasía oscura', true, 2003),
+(3004, 25, 'El alba dorada', 160, 'Jueves a las 21:00', 'Fantasía clásica', false, 2004),
+(3005, 30, 'Sombras persistentes', 190, 'Sábado a las 20:00', 'Fantasía steampunk', true, 2005);
 
 INSERT INTO utiliza_personaje (id_miembro, id_personaje) VALUES
 (2001, 1001),

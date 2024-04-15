@@ -94,6 +94,7 @@ public class VentanaPrincipalLogin extends JPanel {
 		
 	    //Campo contraseña
 		contraseña = new JPasswordField();
+		contraseña.setToolTipText("");
 		contraseña.setFont(new Font("Open Sans", Font.PLAIN, 11));
 		contraseña.setForeground(new Color(29, 29, 27));
 		contraseña.setBackground(new Color(242, 242, 242));
@@ -109,7 +110,7 @@ public class VentanaPrincipalLogin extends JPanel {
 		add(contrasenaIcono);
 		
 		//Checkbox admin
-		administrador = new JCheckBox("Administrador");
+		administrador = new JCheckBox("Game Master");
 		administrador.setForeground(new Color(29, 29, 27));
 		administrador.setFont(new Font("Open Sans", Font.BOLD, 11));
 		administrador.setBounds(249,267,132,20);
