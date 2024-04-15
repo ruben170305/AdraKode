@@ -296,10 +296,6 @@ public class VerPersonajes extends JPanel {
 		btnCrear_1_1.setBounds(295, 401, 81, 33);
 		add(btnCrear_1_1);
 		
-
-		
-				
-		
 	}
 	
 	public void hacerVisible() {

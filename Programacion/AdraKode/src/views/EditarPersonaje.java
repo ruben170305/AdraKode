@@ -4,15 +4,20 @@ import javax.swing.*;
 import javax.swing.border.Border;
 
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.Color;
 
 public class EditarPersonaje extends JPanel {
 	private JTextField txtDestreza, txtConstitucion, txtInteligencia, txtSabiduria, txtCarisma;
 	private JLabel lblDestreza, lblConstitucion, lblInteligencia, lblSabiduria, lblCarisma;
 	private JLabel lblTitulo, lblExperiencia, lblFuerza, txtSeleccionarPersonaje, lblRaza;
+	private JLabel lblSeleccionarPersonaje, lblIconoExp, lblIconoFuerza, lblIconoDestreza, lblIconoConst, lblIconoInteligencia, lblIconoSabiduria, lblIconoCarisma, lblClase, lblExp;
     private JTextField txtExperiencia, txtFuerza, txtRaza;
     private JComboBox<String> comboBoxSeleccionar;
-    private JButton btnEditar, btnEliminar;
+    private JButton btnEditar, btnEliminar, btnGuardar;
+    private JSlider sliderExperiencia, sliderFuerza, sliderDestreza,  sliderConstitucion, sliderInteligencia, sliderSabiduria, sliderCarisma;
+
 	
 	
 	public EditarPersonaje(String titulo) {
@@ -46,171 +51,191 @@ public class EditarPersonaje extends JPanel {
 		
 		//Creo border para cajas de texto (solo linea inferior)
 		Border border = BorderFactory.createMatteBorder(0, 0, 2, 0, new Color(29, 29, 27));
-
 		
 		//Titulo
-		JLabel txtTitulo = new JLabel("EDITAR PERSONAJE");
-        txtTitulo.setHorizontalAlignment(SwingConstants.CENTER);
-        lblTitulo.setForeground(new Color(29, 29, 27));
-        txtTitulo.setFont(new Font("Open Sans", Font.BOLD, 19));
-        txtTitulo.setBounds(206, 11, 200, 31);
-        add(txtTitulo);
-
-        //Etiqueta seleccionar personaje
-        txtSeleccionarPersonaje = new JLabel("Seleccione personaje:");
-        txtSeleccionarPersonaje.setFont(new Font("Open Sans", Font.BOLD, 12));
-        txtSeleccionarPersonaje.setBounds(161, 71, 130, 14);
-        add(txtSeleccionarPersonaje);
+		lblTitulo = new JLabel("EDITAR PERSONAJES");
+		lblTitulo.setForeground(new Color(29, 29, 27));
+		lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
+		lblTitulo.setFont(new Font("Open Sans", Font.BOLD, 19));
+		lblTitulo.setBounds(180,25,215,33);
+		add(lblTitulo);
+			
+		//Etiqueta seleccionar personaje
+        lblSeleccionarPersonaje = new JLabel("PERSONAJE");
+        lblSeleccionarPersonaje.setHorizontalAlignment(SwingConstants.RIGHT);
+        lblSeleccionarPersonaje.setFont(new Font("Open Sans", Font.BOLD, 14));
+        lblSeleccionarPersonaje.setBounds(188, 77, 90, 14);
+        add(lblSeleccionarPersonaje);
 
         //ComboBox
         String[] opcionesComboBox = {"Jugador 1", "Jugador 2", "Jugador 3", "Jugador 4"};
         comboBoxSeleccionar = new JComboBox<String>(opcionesComboBox);
-        comboBoxSeleccionar.setFont(new Font("Open Sans", Font.PLAIN, 11));
+        comboBoxSeleccionar.setFont(new Font("Open Sans", Font.BOLD, 13));
         comboBoxSeleccionar.setForeground(new Color(29, 29, 27));
         comboBoxSeleccionar.setBackground(new Color(242, 242, 242));
-        comboBoxSeleccionar.setBounds(301, 67, 105, 22);
+        comboBoxSeleccionar.setBounds(293, 73, 105, 22);
+        comboBoxSeleccionar.setBorder(BorderFactory.createEmptyBorder());
+        comboBoxSeleccionar.setOpaque(true);
         add(comboBoxSeleccionar);
+		
+	    //Icono 
+	    lblIconoExp = new JLabel();
+	    lblIconoExp.setHorizontalAlignment(SwingConstants.CENTER);
+		lblIconoExp.setIcon(new ImageIcon(VerPersonajes.class.getResource("/img/IconoExp.png")));
+		lblIconoExp.setBounds(253,134,29,33);
+		add(lblIconoExp);
+		
+	    //Icono 
+		lblIconoFuerza = new JLabel();
+		lblIconoFuerza.setHorizontalAlignment(SwingConstants.CENTER);
+		lblIconoFuerza.setIcon(new ImageIcon(VerPersonajes.class.getResource("/img/IconoFrza.png")));
+		lblIconoFuerza.setBounds(250,161,35,33);
+		add(lblIconoFuerza);
+		
+	    //Icono 
+		lblIconoDestreza = new JLabel();
+		lblIconoDestreza.setHorizontalAlignment(SwingConstants.CENTER);
+		lblIconoDestreza.setIcon(new ImageIcon(VerPersonajes.class.getResource("/img/IconoDestreza.png")));
+		lblIconoDestreza.setBounds(250,188,35,33);
+		add(lblIconoDestreza);
+		
+	    //Icono 
+		lblIconoConst = new JLabel();
+		lblIconoConst.setHorizontalAlignment(SwingConstants.CENTER);
+		lblIconoConst.setIcon(new ImageIcon(VerPersonajes.class.getResource("/img/IconoConstitucion.png")));
+		lblIconoConst.setBounds(250,215,35,33);
+		add(lblIconoConst);
+		
+		//Icono 
+		lblIconoInteligencia = new JLabel();
+		lblIconoInteligencia.setHorizontalAlignment(SwingConstants.CENTER);
+		lblIconoInteligencia.setIcon(new ImageIcon(VerPersonajes.class.getResource("/img/IconoInteli.png")));
+		lblIconoInteligencia.setBounds(250,240,35,33);
+		add(lblIconoInteligencia);
+		
+		//Icono 
+		lblIconoSabiduria = new JLabel();
+		lblIconoSabiduria.setHorizontalAlignment(SwingConstants.CENTER);
+		lblIconoSabiduria.setIcon(new ImageIcon(VerPersonajes.class.getResource("/img/IconoSab.png")));
+		lblIconoSabiduria.setBounds(250,266,35,33);
+		add(lblIconoSabiduria);
 
-        //Etiqueta raza
-		lblRaza = new JLabel("Raza:");
-		lblRaza.setFont(new Font("Open Sans", Font.PLAIN, 12));
-		lblRaza.setBounds(239, 107, 30, 14);
+		//Icono 
+		lblIconoCarisma = new JLabel();
+		lblIconoCarisma.setHorizontalAlignment(SwingConstants.CENTER);
+		lblIconoCarisma.setIcon(new ImageIcon(VerPersonajes.class.getResource("/img/IconoCarisma.png")));
+		lblIconoCarisma.setBounds(250,292,35,33);
+		add(lblIconoCarisma);
+		
+		//Etiqueta raza
+		lblRaza = new JLabel("Raza 1");
+		lblRaza.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblRaza.setFont(new Font("Open Sans", Font.BOLD, 14));
+		lblRaza.setBounds(230, 115, 52, 14);
 		add(lblRaza);
 		
-		//Campo texto raza
-		txtRaza = new JTextField();
-		txtRaza.setBackground(new Color(242, 242, 242));
-		txtRaza.setFont(new Font("Open Sans", Font.PLAIN, 11));
-		txtRaza.setBounds(279, 107, 102, 14);
-		txtRaza.setColumns(10);
-		txtRaza.setBorder(border);
-		add(txtRaza);
+		//Etiqueta clase
+		lblClase = new JLabel("Clase 1");
+		lblClase.setHorizontalAlignment(SwingConstants.LEFT);
+		lblClase.setFont(new Font("Open Sans", Font.BOLD, 14));
+		lblClase.setBounds(297, 115, 52, 14);
+		add(lblClase);
+		
+		//Etiqueta exp
+		lblExp = new JLabel("Experiencia");
+		lblExp.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblExp.setFont(new Font("Open Sans", Font.PLAIN, 14));
+		lblExp.setBounds(158, 145, 90, 14);
+		add(lblExp);
+		
+		
+		// Etiqueta fuerza
+		lblFuerza = new JLabel("Fuerza");
+		lblFuerza.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblFuerza.setFont(new Font("Open Sans", Font.PLAIN, 14));
+		lblFuerza.setBounds(187, 171, 61, 14);
+		add(lblFuerza);
 
-        //Etiqueta experiencia
-        lblExperiencia = new JLabel("Experiencia:");
-        lblExperiencia.setFont(new Font("Open Sans", Font.PLAIN, 12));
-        lblExperiencia.setBounds(201, 132, 68, 14);
-        add(lblExperiencia);
+		// Etiqueta destreza
+		lblDestreza = new JLabel("Destreza");
+		lblDestreza.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblDestreza.setFont(new Font("Open Sans", Font.PLAIN, 14));
+		lblDestreza.setBounds(176, 197, 72, 14);
+		add(lblDestreza);
 
-        //Campo texto experiencia
-        txtExperiencia = new JTextField();
-        txtExperiencia.setBackground(new Color(242, 242, 242));
-        txtExperiencia.setFont(new Font("Open Sans", Font.PLAIN, 11));
-        txtExperiencia.setBounds(279, 132, 102, 14);
-        txtExperiencia.setColumns(10);
-        txtExperiencia.setBorder(border);
-        add(txtExperiencia);
+		// Etiqueta constitución
+		lblConstitucion = new JLabel("Constitución");
+		lblConstitucion.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblConstitucion.setFont(new Font("Open Sans", Font.PLAIN, 14));
+		lblConstitucion.setBounds(158, 223, 90, 14);
+		add(lblConstitucion);
 
-        //Etiqueta fuerza
-        lblFuerza = new JLabel("Fuerza:");
-        lblFuerza.setFont(new Font("Open Sans", Font.PLAIN, 12));
-        lblFuerza.setBounds(228, 160, 41, 14);
-        add(lblFuerza);
+		// Etiqueta inteligencia
+		lblInteligencia = new JLabel("Inteligencia");
+		lblInteligencia.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblInteligencia.setFont(new Font("Open Sans", Font.PLAIN, 14));
+		lblInteligencia.setBounds(164, 248, 84, 17);
+		add(lblInteligencia);
 
-        //Campo texto fuerza
-        txtFuerza = new JTextField();
-        txtFuerza.setBackground(new Color(242, 242, 242));
-        txtFuerza.setFont(new Font("Open Sans", Font.PLAIN, 11));
-        txtFuerza.setBounds(279, 160, 102, 14);
-        txtFuerza.setColumns(10);
-        txtFuerza.setBorder(border);
-        add(txtFuerza);
+		// Etiqueta sabiduría
+		lblSabiduria = new JLabel("Sabiduría");
+		lblSabiduria.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblSabiduria.setFont(new Font("Open Sans", Font.PLAIN, 14));
+		lblSabiduria.setBounds(174, 275, 74, 14);
+		add(lblSabiduria);
 
-     // Etiqueta destreza
-        lblDestreza = new JLabel("Destreza:");
-        lblDestreza.setFont(new Font("Open Sans", Font.PLAIN, 12));
-        lblDestreza.setBounds(215, 188, 54, 14);
-        add(lblDestreza);
+		// Etiqueta carisma
+		lblCarisma = new JLabel("Carisma");
+		lblCarisma.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblCarisma.setFont(new Font("Open Sans", Font.PLAIN, 14));
+		lblCarisma.setBounds(178, 301, 70, 14);
+		add(lblCarisma);
 
-        // Campo texto destreza
-        txtDestreza = new JTextField();
-        txtDestreza.setBackground(new Color(242, 242, 242));
-        txtDestreza.setFont(new Font("Open Sans", Font.PLAIN, 11));
-        txtDestreza.setBounds(279, 188, 102, 14);
-        txtDestreza.setColumns(10);
-        txtDestreza.setBorder(border);
-        add(txtDestreza);
+		//Boton seleccionar
+		btnGuardar = new JButton("GUARDAR");
+		btnGuardar.setFont(new Font("Oxygen", Font.BOLD, 17));
+		btnGuardar.setForeground(new Color(242, 242, 242));
+		btnGuardar.setBackground(new Color(29, 161, 242));
+		btnGuardar.setOpaque(true);
+		btnGuardar.setBorderPainted(false);
+		btnGuardar.setBounds(212, 342, 167, 33);
+		add(btnGuardar);
+		
+		sliderExperiencia = new JSlider();
+		sliderExperiencia.setPaintTicks(true);
+		sliderExperiencia.setBounds(297, 141, 130, 22);
+		add(sliderExperiencia);
+		
+		sliderFuerza = new JSlider();
+		sliderFuerza.setPaintTicks(true);
+		sliderFuerza.setBounds(297, 167, 130, 22);
+		add(sliderFuerza);
+		
+		sliderDestreza = new JSlider();
+		sliderDestreza.setPaintTicks(true);
+		sliderDestreza.setBounds(297, 193, 130, 22);
+		add(sliderDestreza);
+		
+		sliderConstitucion = new JSlider();
+		sliderConstitucion.setPaintTicks(true);
+		sliderConstitucion.setBounds(297, 219, 130, 22);
+		add(sliderConstitucion);
+		
+		sliderInteligencia = new JSlider();
+		sliderInteligencia.setPaintTicks(true);
+		sliderInteligencia.setBounds(297, 245, 130, 22);
+		add(sliderInteligencia);
+		
+		sliderSabiduria = new JSlider();
+		sliderSabiduria.setPaintTicks(true);
+		sliderSabiduria.setBounds(297, 271, 130, 22);
+		add(sliderSabiduria);
+		
+		sliderCarisma = new JSlider();
+		sliderCarisma.setPaintTicks(true);
+		sliderCarisma.setBounds(297, 297, 130, 22);
+		add(sliderCarisma);
 
-        // Etiqueta constitución
-        lblConstitucion = new JLabel("Constitución:");
-        lblConstitucion.setFont(new Font("Open Sans", Font.PLAIN, 12));
-        lblConstitucion.setBounds(197, 216, 72, 14);
-        add(lblConstitucion);
-
-        // Campo texto constitución
-        txtConstitucion = new JTextField();
-        txtConstitucion.setBackground(new Color(242, 242, 242));
-        txtConstitucion.setFont(new Font("Open Sans", Font.PLAIN, 11));
-        txtConstitucion.setBounds(279, 216, 102, 14);
-        txtConstitucion.setColumns(10);
-        txtConstitucion.setBorder(border);
-        add(txtConstitucion);
-
-        // Etiqueta inteligencia
-        lblInteligencia = new JLabel("Inteligencia:");
-        lblInteligencia.setFont(new Font("Open Sans", Font.PLAIN, 12));
-        lblInteligencia.setBounds(201, 244, 68, 14);
-        add(lblInteligencia);
-
-        // Campo texto inteligencia
-        txtInteligencia = new JTextField();
-        txtInteligencia.setBackground(new Color(242, 242, 242));
-        txtInteligencia.setFont(new Font("Open Sans", Font.PLAIN, 11));
-        txtInteligencia.setBounds(279, 244, 102, 14);
-        txtInteligencia.setColumns(10);
-        txtInteligencia.setBorder(border);
-        add(txtInteligencia);
-
-        // Etiqueta sabiduría
-        lblSabiduria = new JLabel("Sabiduría:");
-        lblSabiduria.setFont(new Font("Open Sans", Font.PLAIN, 12));
-        lblSabiduria.setBounds(213, 272, 56, 14);
-        add(lblSabiduria);
-
-        // Campo texto sabiduría
-        txtSabiduria = new JTextField();
-        txtSabiduria.setBackground(new Color(242, 242, 242));
-        txtSabiduria.setFont(new Font("Open Sans", Font.PLAIN, 11));
-        txtSabiduria.setBounds(279, 272, 102, 14);
-        txtSabiduria.setColumns(10);
-        txtSabiduria.setBorder(border);
-        add(txtSabiduria);
-
-        // Etiqueta carisma
-        lblCarisma = new JLabel("Carisma:");
-        lblCarisma.setFont(new Font("Open Sans", Font.PLAIN, 12));
-        lblCarisma.setBounds(219, 300, 50, 14);
-        add(lblCarisma);
-
-        // Campo texto carisma
-        txtCarisma = new JTextField();
-        txtCarisma.setBackground(new Color(242, 242, 242));
-        txtCarisma.setFont(new Font("Open Sans", Font.PLAIN, 11));
-        txtCarisma.setBounds(279, 300, 102, 14);
-        txtCarisma.setColumns(10);
-        txtCarisma.setBorder(border);
-        add(txtCarisma);
-        
-        
-        // Botón editar
-        btnEditar = new JButton("GUARDAR");
-        btnEditar.setFont(new Font("Oxygen", Font.BOLD, 15));
-        btnEditar.setForeground(new Color(242, 242, 242));
-        btnEditar.setBackground(new Color(29, 161, 242));
-        btnEditar.setOpaque(true);
-        btnEditar.setBorderPainted(false);
-        btnEditar.setBounds(161, 336, 110, 35);
-        add(btnEditar);
-
-        // Botón eliminar
-        btnEliminar = new JButton("ELIMINAR");
-        btnEliminar.setFont(new Font("Oxygen", Font.BOLD, 15));
-        btnEliminar.setForeground(new Color(242, 242, 242));
-        btnEliminar.setBackground(new Color(29, 29, 27));
-        btnEliminar.setOpaque(true);
-        btnEliminar.setBorderPainted(false);
-        btnEliminar.setBounds(326, 336, 110, 35);
-        add(btnEliminar);
 	}
 	
 	public void hacerVisible() {
