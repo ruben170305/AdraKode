@@ -6,18 +6,20 @@ import javax.swing.*;
 import listeners.PMenuListener;
 
 public class Menu extends JFrame {
-	static final int ANCHO = 800;
-	static final int ALTO = 600;
+	static final int ANCHO = 770;
+	static final int ALTO = 530;
 	private JMenuItem mntmNuevo;
 	private JMenuItem mntmVer;
-	private JMenuItem mntmModificar;
+	private JMenuItem mntmModificarP;
 	private JMenuItem mntmTexto;
 	private JMenuItem mntmSalir;
 	private JScrollPane scrpContenedor;
+	
 	private JMenu mnPartidas;
 	private JMenuItem mntmBuscar;
+	private JMenuItem mntmCrearPartidas;
 	private JMenuItem mntmVerPartidas;
-	private JMenuItem mntmLogin;
+	private JMenuItem mntmEditarPartidas;
 	
 	public Menu(String titulo) {
 		super(titulo);
@@ -27,7 +29,6 @@ public class Menu extends JFrame {
 	private void initComponents() {
 		
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		
 		setSize(ANCHO, ALTO);
 		
 		// Se obtienen las dimensiones en pixels de la pantalla.       
@@ -53,8 +54,8 @@ public class Menu extends JFrame {
 		mntmVer = new JMenuItem("Ver personajes");
 		mnPersonajes.add(mntmVer);
 		
-		mntmModificar = new JMenuItem("Modificar personaje");
-		mnPersonajes.add(mntmModificar);
+		mntmModificarP = new JMenuItem("Modificar personaje");
+		mnPersonajes.add(mntmModificarP);
 		
 		mnPartidas = new JMenu("Partidas");
 		menuBar.add(mnPartidas);
@@ -62,11 +63,14 @@ public class Menu extends JFrame {
 		mntmBuscar = new JMenuItem("Buscar partida");
 		mnPartidas.add(mntmBuscar);
 		
+		mntmCrearPartidas = new JMenuItem("Crear partida");
+		mnPartidas.add(mntmCrearPartidas);
+		
+		mntmEditarPartidas = new JMenuItem("Editar partidas");
+		mnPartidas.add(mntmEditarPartidas);
+		
 		mntmVerPartidas = new JMenuItem("Ver partidas");
 		mnPartidas.add(mntmVerPartidas);
-		
-		mntmLogin = new JMenuItem("Login");
-		menuBar.add(mntmLogin);
 		
 		mntmTexto = new JMenuItem("");
 		menuBar.add(mntmTexto);
@@ -84,9 +88,15 @@ public class Menu extends JFrame {
 	public void setListener(PMenuListener listener) {
         mntmNuevo.addActionListener(listener);
         mntmBuscar.addActionListener(listener);
-        mntmLogin.addActionListener(listener);
-        mntmModificar.addActionListener(listener);
+        mntmVer.addActionListener(listener);
+        
+        
+        mntmCrearPartidas.addActionListener(listener);
+        mntmVerPartidas.addActionListener(listener);
+        mntmModificarP.addActionListener(listener);
+        mntmEditarPartidas.addActionListener(listener);
         mntmSalir.addActionListener(listener);
+        
     }
 	
 	public void hacerVisible() {
@@ -98,7 +108,7 @@ public class Menu extends JFrame {
 
 	public void mostrarMensajeConfirm() {
 		int opcion = JOptionPane.showConfirmDialog(this, 
-				"Seguro que desea abandonar la aplicación?", 
+				"¿Seguro que desea abandonar la aplicación?", 
 				"Confirmación de salida",
 				JOptionPane.YES_NO_OPTION,
 				JOptionPane.WARNING_MESSAGE);

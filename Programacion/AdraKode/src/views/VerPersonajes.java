@@ -1,6 +1,7 @@
 package views;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 
 import javax.swing.BorderFactory;
@@ -29,7 +30,7 @@ public class VerPersonajes extends JPanel {
     private JButton btnCrear_1;
 
 	
-	public VerPersonajes(String titulo) {
+	public VerPersonajes() {
 		setBackground(new Color(242, 242, 242));
 		//super(titulo);
 		inicializarComponentes();
@@ -37,12 +38,12 @@ public class VerPersonajes extends JPanel {
 	
 	private void inicializarComponentes() {
 		//Adaptar la apariencia del SO donde se ejecuta
-		try {
+		/*try {
 			UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 
 		//Añadir operación de cierre de la ventana
 		//setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -51,8 +52,8 @@ public class VerPersonajes extends JPanel {
 		setLayout(null);
 		
 		//Tamaño y posicion de ventana
-		setSize(600, 462);
-		setLocation(null);
+		setSize(800, 600);
+		//setLocation(null);
 		
 		
 		/* COMPONENTES */

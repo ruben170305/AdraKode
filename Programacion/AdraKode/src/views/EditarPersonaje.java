@@ -20,7 +20,7 @@ public class EditarPersonaje extends JPanel {
 
 	
 	
-	public EditarPersonaje(String titulo) {
+	public EditarPersonaje() {
 		//super(titulo);
 		setBackground(new Color(242, 242, 242));
 		inicializarComponentes();
@@ -29,12 +29,12 @@ public class EditarPersonaje extends JPanel {
 	
 	private void inicializarComponentes() {
 		//Adaptar la apariencia del SO donde se ejecuta
-		try {
-			UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
-		} catch (Exception e) {
+		//try {
+			//UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
+		//} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		//	e.printStackTrace();
+		//}
 
 		//Añadir operación de cierre de la ventana
 		//setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -43,8 +43,7 @@ public class EditarPersonaje extends JPanel {
 		setLayout(null);
 		
 		//Tamaño y posicion de ventana
-		setSize(600, 400);
-		setLocation(null);
+		setSize(800, 600);
 		
 		
 		/* COMPONENTES */

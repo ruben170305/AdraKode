@@ -30,7 +30,7 @@ public class VentanaPrincipalLogin extends JPanel {
 
 
 	//private VentanaPrincipalLogin listener;
-	public VentanaPrincipalLogin (String login) {
+	public VentanaPrincipalLogin () {
 		super ();
 		setBackground(new Color(242, 242, 242));
 		//listener = new VentanaPrincipalLogin(login);
@@ -39,23 +39,23 @@ public class VentanaPrincipalLogin extends JPanel {
 	}
 	private void inicializarComponentes () {
 		
-		//Adaptar la apariencia del SO donde se ejecuta
+		/*/Adaptar la apariencia del SO donde se ejecuta
 		try {
 			UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 
 		//Añadir operación de cierre de la ventana
-		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		//setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		
 		//layout absoluto
 		setLayout(null);
 		
 		//Tamaño y posicion de ventana
 		setSize(600, 400);
-		setLocation(null);
+		//setLocation(null);
 		
 		
 		/* COMPONENTES */
@@ -127,10 +127,6 @@ public class VentanaPrincipalLogin extends JPanel {
 		add(entrar);
 		
 
-	}
-	private void setDefaultCloseOperation(int exitOnClose) {
-		// TODO Auto-generated method stub
-		
 	}
 	public void hacerVisible () {
 		setVisible (true);

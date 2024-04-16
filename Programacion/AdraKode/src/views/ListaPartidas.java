@@ -5,22 +5,22 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 
-public class ListaPartidas extends JFrame {
+public class ListaPartidas extends JPanel {
     
 	// Creamos la ventana
     public ListaPartidas() {
     	
-    	// Adecuamos la ventana al OS
+    	/*/ Adecuamos la ventana al OS
         try {
             UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        }*/
 
         // Especificaciones de la ventana
-        setTitle( "Lista Partidas" );
-        setSize( 600, 400 );
-        setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
+        //setTitle( "Lista Partidas" );
+        setSize( 800, 600 );
+        //setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
 
         // Añadimos un título
         JLabel title_label = new JLabel( "VER PARTIDAS", SwingConstants.CENTER );
@@ -59,7 +59,7 @@ public class ListaPartidas extends JFrame {
     }
     
     // Ejecutamos la ventana
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
     	
     	// Evitamos el Event Dispatch
 		java.awt.EventQueue.invokeLater( new Runnable() {
@@ -72,5 +72,5 @@ public class ListaPartidas extends JFrame {
 	            window.setVisible(true);
 			}
         });
-    }
+    }*/
 }

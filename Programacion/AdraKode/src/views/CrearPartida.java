@@ -26,15 +26,15 @@ public class CrearPartida extends JPanel {
 	}
 	
 	private void inicializarComponentes() {
-    	// Adecuamos la ventana al OS
+    	/*/ Adecuamos la ventana al OS
         try {
             UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName() );
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        }*/
         
         setLayout(null);
-        setPreferredSize(new Dimension(600, 400));
+        setPreferredSize(new Dimension(800, 600));
         
         // Añadimos un título
         JLabel title_label = new JLabel( "CREAR PARTIDA", SwingConstants.CENTER );

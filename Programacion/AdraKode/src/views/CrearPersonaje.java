@@ -23,7 +23,7 @@ public class CrearPersonaje extends JPanel {
     private JTextField txtFuerza, txtDestreza, txtConstitucion, txtInteligencia, txtSabiduria, txtCarisma;
     private JButton btnCrear;
 	
-	public CrearPersonaje(String titulo) {
+	public CrearPersonaje() {
 		setBackground(new Color(242, 242, 242));
 		//super(titulo);
 		inicializarComponentes();
@@ -31,12 +31,12 @@ public class CrearPersonaje extends JPanel {
 	
 	private void inicializarComponentes() {
 		//Adaptar la apariencia del SO donde se ejecuta
-		try {
-			UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
-		} catch (Exception e) {
+		//try {
+			//UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
+		//} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+			//e.printStackTrace();
+		//}
 
 		//Añadir operación de cierre de la ventana
 		//setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -45,8 +45,8 @@ public class CrearPersonaje extends JPanel {
 		setLayout(null);
 		
 		//Tamaño y posicion de ventana
-		setSize(600, 400);
-		setLocation(null);
+		setSize(800, 600);
+		//setLocation(null);
 		
 		
 		/* COMPONENTES */
