@@ -1,6 +1,9 @@
 package views;
 
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
 import javax.swing.*;
 
 import listeners.PMenuListener;
@@ -28,7 +31,14 @@ public class Menu extends JFrame {
 
 	private void initComponents() {
 		
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+		addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                // Llamar al método para mostrar la notificación
+            	mostrarMensajeConfirm();
+            }
+        });
 		setSize(ANCHO, ALTO);
 		
 		// Se obtienen las dimensiones en pixels de la pantalla.       
@@ -75,10 +85,10 @@ public class Menu extends JFrame {
 		mntmTexto = new JMenuItem("");
 		menuBar.add(mntmTexto);
 		
-		mntmSalir = new JMenuItem("Salir");
+		/*mntmSalir = new JMenuItem("Salir");
 		mntmSalir.setFont(new Font("Segoe UI", Font.BOLD, 12));
 		menuBar.add(mntmSalir);
-		getContentPane().setLayout(null);
+		getContentPane().setLayout(null);*/
 		
 		scrpContenedor = new JScrollPane();
 		scrpContenedor.setBounds(0, 0, 784, 533);
@@ -95,7 +105,7 @@ public class Menu extends JFrame {
         mntmVerPartidas.addActionListener(listener);
         mntmModificarP.addActionListener(listener);
         mntmEditarPartidas.addActionListener(listener);
-        mntmSalir.addActionListener(listener);
+        //mntmSalir.addActionListener(listener);
         
     }
 	
