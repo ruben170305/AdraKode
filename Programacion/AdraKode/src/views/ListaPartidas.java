@@ -19,7 +19,7 @@ public class ListaPartidas extends JPanel {
 
         // Especificaciones de la ventana
         //setTitle( "Lista Partidas" );
-        setSize( 800, 600 );
+    	setSize(800,600);
         //setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
 
         // Añadimos un título

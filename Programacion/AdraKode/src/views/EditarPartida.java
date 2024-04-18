@@ -21,7 +21,7 @@ public class EditarPartida extends JPanel {
         }*/
         
         setLayout(null);
-        setPreferredSize(new Dimension(800, 600));
+        setSize(800,600);
 
         // Añadimos un título
         JLabel title_label = new JLabel( "EDITAR PARTIDA", SwingConstants.CENTER );
