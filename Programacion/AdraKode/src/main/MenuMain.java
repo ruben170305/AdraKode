@@ -24,7 +24,7 @@ public class MenuMain {
 						new PMenuListener(ventanaPpal, ePersonaje,
 								cPersonaje, vPersonajes,
 								cPartidas, ePartidas, vPartidas);
-				
+			
 				ventanaPpal.setListener(listener);
 				ventanaPpal.hacerVisible();
 				ventanaPpal.cargarPanel(login);

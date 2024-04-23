@@ -9,8 +9,8 @@ import javax.swing.*;
 import listeners.PMenuListener;
 
 public class Menu extends JFrame {
-	static final int ANCHO = 770;
-	static final int ALTO = 530;
+	static final int ANCHO = 800;
+	static final int ALTO = 650;
 	private JMenuItem mntmNuevo;
 	private JMenuItem mntmVer;
 	private JMenuItem mntmModificarP;

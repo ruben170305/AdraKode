@@ -54,7 +54,7 @@ public class VentanaPrincipalLogin extends JPanel {
 		setLayout(null);
 		
 		//Tamaño y posicion de ventana
-		setSize(600, 400);
+		setSize(800, 600);
 		//setLocation(null);
 		
 		
@@ -67,14 +67,15 @@ public class VentanaPrincipalLogin extends JPanel {
 		inicioSesion = new JLabel("INICIAR SESIÓN");
 		inicioSesion.setForeground(new Color(29, 29, 27));
 		inicioSesion.setHorizontalAlignment(SwingConstants.CENTER);
-		inicioSesion.setFont(new Font("Open Sans", Font.BOLD, 19));
-		inicioSesion.setBounds(214,17,186,45);
+		inicioSesion.setFont(new Font("Open Sans", Font.BOLD, 25));
+		inicioSesion.setBounds(295,31,209,45);
+		inicioSesion.setBorder(new MatteBorder(0, 0, 3, 0, (Color) new Color(29, 29, 27)));
 		add(inicioSesion);
 
 		//Logo
 	    logoIcono = new JLabel();
-		logoIcono.setIcon(new ImageIcon(VentanaPrincipalLogin.class.getResource("/img/LogoLogin.png")));
-		logoIcono.setBounds(261,68,88,105);
+		logoIcono.setIcon(new ImageIcon(VentanaPrincipalLogin.class.getResource("/img/imagenLogin.png")));
+		logoIcono.setBounds(338,124,124,142);
 		add(logoIcono);
 		
 		//Campo usuario
@@ -82,14 +83,14 @@ public class VentanaPrincipalLogin extends JPanel {
 		usuario.setBackground(new Color(242, 242, 242));
 		usuario.setFont(new Font("Open Sans", Font.PLAIN, 11));
 		usuario.setForeground(new Color(29, 29, 27));
-	    usuario.setBounds(215, 163, 186, 35); 
+	    usuario.setBounds(288, 264, 240, 35); 
 	    usuario.setBorder(border);
 	    add(usuario);
 		
 	    //Icono usuario
 	    usuarioIcono = new JLabel();
 		usuarioIcono.setIcon(new ImageIcon(VentanaPrincipalLogin.class.getResource("/img/IconoUsuario.png")));
-		usuarioIcono.setBounds(181,163,34,45);
+		usuarioIcono.setBounds(254,264,34,45);
 		add(usuarioIcono);
 		
 	    //Campo contraseña
@@ -99,21 +100,21 @@ public class VentanaPrincipalLogin extends JPanel {
 		contraseña.setForeground(new Color(29, 29, 27));
 		contraseña.setBackground(new Color(242, 242, 242));
 		contraseña.setEchoChar('\u2022'); // Establece el carácter de ocultación 
-		contraseña.setBounds(215,213,186,35);
+		contraseña.setBounds(288,320,240,35);
 	    contraseña.setBorder(border);
 		add(contraseña);
 		
 	    //Icono contraseña
 	    contrasenaIcono = new JLabel();
 		contrasenaIcono.setIcon(new ImageIcon(VentanaPrincipalLogin.class.getResource("/img/IconoContraseña.png")));
-		contrasenaIcono.setBounds(181,213,34,45);
+		contrasenaIcono.setBounds(254,320,34,45);
 		add(contrasenaIcono);
 		
 		//Checkbox admin
 		administrador = new JCheckBox("Game Master");
 		administrador.setForeground(new Color(29, 29, 27));
 		administrador.setFont(new Font("Open Sans", Font.BOLD, 11));
-		administrador.setBounds(249,267,132,20);
+		administrador.setBounds(351,384,97,20);
 		add (administrador);
 		
 		//Botón entrar
@@ -123,7 +124,7 @@ public class VentanaPrincipalLogin extends JPanel {
 		entrar.setBackground(new Color(29, 161, 242));
 		entrar.setOpaque(true);
         entrar.setBorderPainted(false);
-		entrar.setBounds(223,328,171,42);
+		entrar.setBounds(295,455,209,50);
 		add(entrar);
 		
 
