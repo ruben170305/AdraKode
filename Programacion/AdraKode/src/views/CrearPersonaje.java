@@ -28,12 +28,7 @@ public class CrearPersonaje extends JPanel {
 	private JTextField txtNombre, txtRaza, txtClase,txtExp;
     private JTextField txtFuerza, txtDestreza, txtConstitucion, txtInteligencia, txtSabiduria, txtCarisma;
     private JButton btnGuardar;
-    private JSpinner spinner_1;
-    private JSpinner spinner_2;
-    private JSpinner spinner_3;
-    private JSpinner spinner_4;
-    private JSpinner spinner_5;
-    private JSpinner spinner_6;
+    private JSpinner spinner_1, spinner_2, spinner_3, spinner_4, spinner_5, spinner_6;
 	
 	public CrearPersonaje() {
 		setBackground(new Color(242, 242, 242));
@@ -71,7 +66,7 @@ public class CrearPersonaje extends JPanel {
 		lblTitulo.setForeground(new Color(29, 29, 27));
 		lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTitulo.setFont(new Font("Open Sans", Font.BOLD, 25));
-		lblTitulo.setBounds(269,32,261,45);
+		lblTitulo.setBounds(281,32,238,45);
 		lblTitulo.setBorder(new MatteBorder(0, 0, 3, 0, (Color) new Color(29, 29, 27)));
 		add(lblTitulo);
 		
