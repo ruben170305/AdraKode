@@ -80,7 +80,7 @@ public class VentanaPrincipalLogin extends JPanel {
 		usuario.setBackground(new Color(242, 242, 242));
 		usuario.setFont(new Font("Open Sans", Font.PLAIN, 11));
 		usuario.setForeground(new Color(29, 29, 27));
-	    usuario.setBounds(314, 271, 200, 35); 
+	    usuario.setBounds(320, 271, 200, 35); 
 	    usuario.setBorder(border);
 	    add(usuario);
 		
@@ -88,7 +88,7 @@ public class VentanaPrincipalLogin extends JPanel {
 	    usuarioIcono = new JLabel();
 	    usuarioIcono.setHorizontalAlignment(SwingConstants.CENTER);
 		usuarioIcono.setIcon(new ImageIcon(VentanaPrincipalLogin.class.getResource("/img/IconoUsuario.png")));
-		usuarioIcono.setBounds(270,271,34,45);
+		usuarioIcono.setBounds(276,271,34,45);
 		add(usuarioIcono);
 		
 	    //Campo contraseña
@@ -98,7 +98,7 @@ public class VentanaPrincipalLogin extends JPanel {
 		contraseña.setForeground(new Color(29, 29, 27));
 		contraseña.setBackground(new Color(242, 242, 242));
 		contraseña.setEchoChar('\u2022'); // Establece el carácter de ocultación 
-		contraseña.setBounds(314,327,200,35);
+		contraseña.setBounds(320,327,200,35);
 	    contraseña.setBorder(border);
 		add(contraseña);
 		
@@ -106,7 +106,7 @@ public class VentanaPrincipalLogin extends JPanel {
 	    contrasenaIcono = new JLabel();
 	    contrasenaIcono.setHorizontalAlignment(SwingConstants.CENTER);
 		contrasenaIcono.setIcon(new ImageIcon(VentanaPrincipalLogin.class.getResource("/img/IconoContraseña.png")));
-		contrasenaIcono.setBounds(268,327,34,45);
+		contrasenaIcono.setBounds(274,327,34,45);
 		add(contrasenaIcono);
 		
 		//Checkbox admin
