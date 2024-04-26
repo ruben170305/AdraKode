@@ -31,24 +31,20 @@ public class VentanaPrincipalLogin extends JPanel {
 
 	//private VentanaPrincipalLogin listener;
 	public VentanaPrincipalLogin () {
-		super ();
 		setBackground(new Color(242, 242, 242));
 		//listener = new VentanaPrincipalLogin(login);
 		inicializarComponentes();
+		hacerVisible();
 		
 	}
 	private void inicializarComponentes () {
-		
-		/*/Adaptar la apariencia del SO donde se ejecuta
+		//Adaptar la apariencia del SO donde se ejecuta
 		try {
 			UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}*/
-
-		//Añadir operación de cierre de la ventana
-		//setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		}
 		
 		//layout absoluto
 		setLayout(null);

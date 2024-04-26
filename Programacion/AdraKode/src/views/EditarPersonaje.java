@@ -25,8 +25,20 @@ public class EditarPersonaje extends JPanel {
     }
 
     private void inicializarComponentes() {
-        setLayout(null);
-        setSize(800, 600);
+		//Adaptar la apariencia del SO donde se ejecuta
+		try {
+			UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		//layout absoluto
+		setLayout(null);
+		
+		//Tamaño y posicion de ventana
+		setSize(800, 600);
+		//setLocation(null);
 
         // Titulo
         lblTitulo = new JLabel("EDITAR PERSONAJES");
@@ -53,22 +65,6 @@ public class EditarPersonaje extends JPanel {
         lblSeleccionarPersonaje.setFont(new Font("Open Sans", Font.BOLD, 20));
         lblSeleccionarPersonaje.setBounds(320, 142, 159, 22);
         add(lblSeleccionarPersonaje);
-
-        // Etiqueta raza
-        lblRaza = new JLabel("Raza 1");
-        lblRaza.setForeground(new Color(29, 29, 27));
-        lblRaza.setHorizontalAlignment(SwingConstants.CENTER);
-        lblRaza.setFont(new Font("Open Sans", Font.BOLD, 16));
-        lblRaza.setBounds(212, 357, 140, 14);
-        add(lblRaza);
-
-        // Etiqueta clase
-        lblClase = new JLabel("Clase 1");
-        lblClase.setForeground(new Color(29, 29, 27));
-        lblClase.setHorizontalAlignment(SwingConstants.CENTER);
-        lblClase.setFont(new Font("Open Sans", Font.BOLD, 16));
-        lblClase.setBounds(212, 389, 140, 14);
-        add(lblClase);
 
         // Iconos
         lblIconoExp = new JLabel();
@@ -218,6 +214,22 @@ public class EditarPersonaje extends JPanel {
         lblIconoPersn.setHorizontalAlignment(SwingConstants.CENTER);
         lblIconoPersn.setBounds(240, 208, 84, 123);
         add(lblIconoPersn);
+        
+        // Etiqueta raza
+        lblRaza = new JLabel("Raza 1");
+        lblRaza.setForeground(new Color(29, 29, 27));
+        lblRaza.setHorizontalAlignment(SwingConstants.CENTER);
+        lblRaza.setFont(new Font("Open Sans", Font.BOLD, 16));
+        lblRaza.setBounds(212, 366, 140, 14);
+        add(lblRaza);
+
+        // Etiqueta clase
+        lblClase = new JLabel("Clase 1");
+        lblClase.setForeground(new Color(29, 29, 27));
+        lblClase.setHorizontalAlignment(SwingConstants.CENTER);
+        lblClase.setFont(new Font("Open Sans", Font.BOLD, 16));
+        lblClase.setBounds(212, 397, 140, 14);
+        add(lblClase);
 
         // Botones
         btnGuardar = new JButton("GUARDAR");
@@ -226,7 +238,7 @@ public class EditarPersonaje extends JPanel {
         btnGuardar.setBackground(new Color(29, 161, 242));
         btnGuardar.setOpaque(true);
         btnGuardar.setBorderPainted(false);
-        btnGuardar.setBounds(268, 484, 196, 45);
+        btnGuardar.setBounds(286, 485, 159, 45);
         add(btnGuardar);
 
         btnGuardarImagen = new JButton("");
@@ -236,7 +248,7 @@ public class EditarPersonaje extends JPanel {
         btnGuardarImagen.setFont(new Font("Oxygen", Font.BOLD, 17));
         btnGuardarImagen.setBorderPainted(false);
         btnGuardarImagen.setBackground(new Color(29, 29, 27));
-        btnGuardarImagen.setBounds(474, 484, 61, 45);
+        btnGuardarImagen.setBounds(453, 485, 61, 45);
         add(btnGuardarImagen);
     }
 

@@ -32,21 +32,18 @@ public class CrearPersonaje extends JPanel {
 	
 	public CrearPersonaje() {
 		setBackground(new Color(242, 242, 242));
-		//super(titulo);
 		inicializarComponentes();
+		hacerVisible();
 	}
 	
 	private void inicializarComponentes() {
 		//Adaptar la apariencia del SO donde se ejecuta
-		//try {
-			//UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
-		//} catch (Exception e) {
+		try {
+			UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			//e.printStackTrace();
-		//}
-
-		//Añadir operación de cierre de la ventana
-		//setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+			e.printStackTrace();
+		}
 		
 		//layout absoluto
 		setLayout(null);
