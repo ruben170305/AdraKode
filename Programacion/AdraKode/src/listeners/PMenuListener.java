@@ -18,7 +18,7 @@ public class PMenuListener implements ActionListener {
 	private ListaPartidas vPartidas;
 
 	public PMenuListener(Menu ventana, EditarPersonaje ePersonaje, CrearPersonaje cPersonaje, VerPersonajes vPersonajes,
-			CrearPartida cPartida, EditarPartida ePartidas, ListaPartidas vPartidas) {
+			CrearPartida cPartida, EditarPartida ePartidas, ListaPartidas vPartidas, VentanaPrincipalLogin login) {
 		this.ventana = ventana;
 		this.cPersonaje = cPersonaje;
 		this.ePersonaje = ePersonaje;
@@ -26,6 +26,7 @@ public class PMenuListener implements ActionListener {
 		this.cPartida = cPartida;
 		this.ePartidas = ePartidas;
 		this.vPartidas = vPartidas;
+		this.login = login;
 	}
 
 	@Override

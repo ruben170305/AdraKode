@@ -23,7 +23,7 @@ public class MenuMain {
 				PMenuListener listener = 
 						new PMenuListener(ventanaPpal, ePersonaje,
 								cPersonaje, vPersonajes,
-								cPartidas, ePartidas, vPartidas);
+								cPartidas, ePartidas, vPartidas, login);
 			
 				ventanaPpal.setListener(listener);
 				ventanaPpal.hacerVisible();

@@ -82,7 +82,7 @@ public class Menu extends JFrame {
 		mntmVerPartidas = new JMenuItem("Ver partidas");
 		mnPartidas.add(mntmVerPartidas);
 		
-		mntmTexto = new JMenuItem("");
+		mntmTexto = new JMenuItem("Login");
 		menuBar.add(mntmTexto);
 		
 		/*mntmSalir = new JMenuItem("Salir");
@@ -105,6 +105,8 @@ public class Menu extends JFrame {
         mntmVerPartidas.addActionListener(listener);
         mntmModificarP.addActionListener(listener);
         mntmEditarPartidas.addActionListener(listener);
+        
+        mntmTexto.addActionListener(listener);
         //mntmSalir.addActionListener(listener);
         
     }
