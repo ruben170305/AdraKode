@@ -254,7 +254,9 @@ public class EditarPersonaje extends JPanel {
         btnGuardarImagen.setBounds(453, 485, 61, 45);
         add(btnGuardarImagen);
     }
-
+    
+   
+    
     public void hacerVisible() {
         setVisible(true);
     }

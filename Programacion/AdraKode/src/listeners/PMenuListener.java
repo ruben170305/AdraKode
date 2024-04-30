@@ -45,7 +45,8 @@ public class PMenuListener implements ActionListener {
 			} else if (ev.getActionCommand().equals("Ver partidas")) {
 				ventana.cargarPanel(vPartidas);
 			} else if (ev.getActionCommand().equals("Login")) {
-				ventana.cargarPanel(login);
+				ventana.dispose();
+				login.hacerVisible();
 			} else if (ev.getActionCommand().equals("Salir")) {
 				ventana.mostrarMensajeConfirm();
 			}

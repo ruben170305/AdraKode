@@ -2,6 +2,7 @@ package main;
 
 import java.awt.EventQueue;
 
+import listeners.LoginListener;
 import listeners.PMenuListener;
 import views.*;
 
@@ -19,15 +20,18 @@ public class MenuMain {
 				EditarPartida ePartidas = new EditarPartida();
 				ListaPartidas vPartidas = new ListaPartidas();
 				VentanaPrincipalLogin login = new VentanaPrincipalLogin();
+				Home home = new Home();
 				
 				PMenuListener listener = 
 						new PMenuListener(ventanaPpal, ePersonaje,
 								cPersonaje, vPersonajes,
 								cPartidas, ePartidas, vPartidas, login);
+				LoginListener loginlistener = new LoginListener(login, ventanaPpal);
 			
 				ventanaPpal.setListener(listener);
-				ventanaPpal.hacerVisible();
-				ventanaPpal.cargarPanel(login);
+				login.setListener(loginlistener);
+				login.hacerVisible();
+				ventanaPpal.cargarPanel(home);
 				
 			}
 		});
