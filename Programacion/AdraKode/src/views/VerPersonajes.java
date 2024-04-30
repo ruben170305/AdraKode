@@ -1,28 +1,13 @@
 package views;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
+import java.awt.*;
+import javax.swing.*;
+import javax.swing.border.*;
 
-import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
-import javax.swing.UIManager;
-import javax.swing.WindowConstants;
-import javax.swing.border.Border;
-import javax.swing.border.LineBorder;
-import javax.swing.border.MatteBorder;
+import listeners.VerPersonajesListener;
+
 import javax.swing.JProgressBar;
 import javax.swing.JSeparator;
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class VerPersonajes extends JPanel {
 	
@@ -30,7 +15,7 @@ public class VerPersonajes extends JPanel {
     private JLabel lblFuerza, lblDestreza, lblConstitucion, lblInteligencia, lblSabiduria, lblCarisma, lblIconoConst, lblIconoInteligencia, lblIconoSabiduria,  lblIconoPersn;
     private JButton btnSeleccionar, btnEditar, btnBorrar; 
     private JProgressBar pbExp, pbFuerza, pbDestreza, pbConstitucion, pbInteligencia, pbSabiduria, pbCarisma; 
-    private JComboBox comboBoxSeleccionar; 
+    private JComboBox comboBoxSeleccionar;
 
 	
 	public VerPersonajes() {
@@ -295,7 +280,7 @@ public class VerPersonajes extends JPanel {
 		add(btnSeleccionar);
 		
 		//Boton editar
-		btnEditar = new JButton();
+		btnEditar = new JButton( "ep" );
 		btnEditar.setIcon(new ImageIcon(VerPersonajes.class.getResource("/img/botonEditarW.png")));
 		btnEditar.setOpaque(true);
 		btnEditar.setForeground(new Color(29, 29, 27));
@@ -318,6 +303,10 @@ public class VerPersonajes extends JPanel {
 		
 	}
 	
+	public void setListener( VerPersonajesListener listener ) {
+		btnEditar.addActionListener( listener );
+	}
+
 	public void hacerVisible() {
 		setVisible(true);
 	}

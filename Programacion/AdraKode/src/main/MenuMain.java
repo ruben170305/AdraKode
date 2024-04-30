@@ -4,6 +4,7 @@ import java.awt.EventQueue;
 
 import listeners.LoginListener;
 import listeners.PMenuListener;
+import listeners.VerPersonajesListener;
 import views.*;
 
 public class MenuMain {
@@ -21,17 +22,20 @@ public class MenuMain {
 				ListaPartidas vPartidas = new ListaPartidas();
 				VentanaPrincipalLogin login = new VentanaPrincipalLogin();
 				Home home = new Home();
+				Menu menu = new Menu( "Menú" );
 				
 				PMenuListener listener = 
 						new PMenuListener(ventanaPpal, home, ePersonaje,
 								cPersonaje, vPersonajes,
 								cPartidas, ePartidas, vPartidas, login);
 				LoginListener loginlistener = new LoginListener(login, ventanaPpal);
+				VerPersonajesListener ver_personajes_listener = new VerPersonajesListener( vPersonajes, ePersonaje, menu );
 			
 				ventanaPpal.setListener(listener);
 				login.setListener(loginlistener);
 				login.hacerVisible();
 				ventanaPpal.cargarPanel(home);
+				vPersonajes.setListener( ver_personajes_listener );
 				
 			}
 		});

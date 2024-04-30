@@ -16,6 +16,7 @@ public class LoginListener implements ActionListener {
 		this.menu = menu;
 	
 	}
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
