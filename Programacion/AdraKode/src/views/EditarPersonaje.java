@@ -242,6 +242,7 @@ public class EditarPersonaje extends JPanel {
         add(btnGuardar);
 
         btnGuardarImagen = new JButton("");
+        btnGuardarImagen.setName("botonSubirImagen");
         btnGuardarImagen.setIcon(new ImageIcon(EditarPersonaje.class.getResource("/img/camara_fotografica.png")));
         btnGuardarImagen.setOpaque(true);
         btnGuardarImagen.setForeground(new Color(242, 242, 242));
