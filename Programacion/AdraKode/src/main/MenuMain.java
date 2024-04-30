@@ -23,7 +23,7 @@ public class MenuMain {
 				Home home = new Home();
 				
 				PMenuListener listener = 
-						new PMenuListener(ventanaPpal, ePersonaje,
+						new PMenuListener(ventanaPpal, home, ePersonaje,
 								cPersonaje, vPersonajes,
 								cPartidas, ePartidas, vPartidas, login);
 				LoginListener loginlistener = new LoginListener(login, ventanaPpal);

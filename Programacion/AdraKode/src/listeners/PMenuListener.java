@@ -9,6 +9,7 @@ import javax.swing.JMenuItem;
 public class PMenuListener implements ActionListener {
 	
 	private Menu ventana;
+	private Home home;
 	private views.CrearPersonaje cPersonaje;
 	private views.EditarPersonaje ePersonaje;
 	private views.VentanaPrincipalLogin login;
@@ -17,9 +18,10 @@ public class PMenuListener implements ActionListener {
 	private EditarPartida ePartidas;
 	private ListaPartidas vPartidas;
 
-	public PMenuListener(Menu ventana, EditarPersonaje ePersonaje, CrearPersonaje cPersonaje, VerPersonajes vPersonajes,
+	public PMenuListener(Menu ventana, Home home, EditarPersonaje ePersonaje, CrearPersonaje cPersonaje, VerPersonajes vPersonajes,
 			CrearPartida cPartida, EditarPartida ePartidas, ListaPartidas vPartidas, VentanaPrincipalLogin login) {
 		this.ventana = ventana;
+		this.home = home;
 		this.cPersonaje = cPersonaje;
 		this.ePersonaje = ePersonaje;
 		this.vPersonajes = vPersonajes;
@@ -46,6 +48,7 @@ public class PMenuListener implements ActionListener {
 				ventana.cargarPanel(vPartidas);
 			} else if (ev.getActionCommand().equals("Login")) {
 				ventana.dispose();
+				ventana.cargarPanel(home);
 				login.hacerVisible();
 			} else if (ev.getActionCommand().equals("Salir")) {
 				ventana.mostrarMensajeConfirm();
