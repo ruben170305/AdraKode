@@ -10,8 +10,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class ListaPartidas extends JPanel {
-	private JLabel lblTitulo;
+	private JLabel lblTitulo, lblImagen;
 	private JButton btnEditar, btnBorrar, btnSeleccionar;
+	private JLabel lblNewLabel;
+	private JLabel lblAnfitrin;
+	private JLabel lblAnfitrin_1;
+	private JLabel lblAnfitrin_2;
+	private JLabel lblAnfitrin_3;
+	private JLabel lblAnfitrin_4;
 
 	public ListaPartidas() {
 		setBackground(new Color(242, 242, 242));
@@ -58,18 +64,28 @@ public class ListaPartidas extends JPanel {
 		separator.setBounds(337, 88, 125, 3);
 		add(separator);
 		// Designamos el nombre de las columnas de la tabla
-		String[] columns = { "ID", "Anfitrión", "Jugadores", "Duración", "Fecha", "Estado", "" };
+		String[] columns = { "ID", "Anfitrión", "Jugadores", "Duración", "Fecha", "Estado" };
 
 		// Insertamos los datos de la tabla
-		Object[][] data = { { "Partida 1", "Usuario 1", 4, "30'", "13-04 16:00 pm", "En curso", "Seleccionar" },
-				{ "Partida 2", "Usuario 2", 3, "15'", "16-04 15:00 pm", "En espera", "Seleccionar" },
-				{ "Partida 3", "Usuario 5", 2, "25'", "12-04 11:00 am", "Finalizada", "Seleccionar" } };
+		Object[][] data = { { "Partida 1", "Usuario 1", 4, "30'", "13-04 16:00 pm", "En curso" },
+				{ "Partida 2", "Usuario 2", 3, "15'", "16-04 15:00 pm", "En espera" },
+				{ "Partida 3", "Usuario 5", 2, "25'", "12-04 11:00 am", "Finalizada" },
+				{ "Partida 2", "Usuario 2", 3, "15'", "16-04 15:00 pm", "En espera" },
+				{ "Partida 3", "Usuario 5", 2, "25'", "12-04 11:00 am", "Finalizada" },
+				{ "Partida 2", "Usuario 2", 3, "15'", "16-04 15:00 pm", "En espera" },
+				{ "Partida 2", "Usuario 2", 3, "15'", "16-04 15:00 pm", "En espera" },
+				{ "Partida 3", "Usuario 5", 2, "25'", "12-04 11:00 am", "Finalizada" }
+
+		};
 
 		// Creamos una plantilla para la tabla
 		DefaultTableModel template = new DefaultTableModel(data, columns);
 		JTable table = new JTable(template);
+		table.setForeground(new Color(29, 29, 27));
+		table.setBackground(new Color(242, 242, 242));
+		table.setFont(new Font("Open Sans", Font.PLAIN, 12));
 		JScrollPane scrollPane = new JScrollPane(table);
-		scrollPane.setBounds(50, 120, 700, 300);
+		scrollPane.setBounds(101, 323, 599, 141);
 		add(scrollPane);
 
 		btnEditar = new JButton();
@@ -79,7 +95,7 @@ public class ListaPartidas extends JPanel {
 		btnEditar.setFont(new Font("Oxygen", Font.BOLD, 17));
 		btnEditar.setBorderPainted(false);
 		btnEditar.setBackground(new Color(29, 29, 27));
-		btnEditar.setBounds(315, 467, 83, 36);
+		btnEditar.setBounds(315, 482, 83, 36);
 		add(btnEditar);
 
 		// Boton borrar
@@ -90,11 +106,11 @@ public class ListaPartidas extends JPanel {
 		btnBorrar.setFont(new Font("Oxygen", Font.BOLD, 17));
 		btnBorrar.setBorderPainted(false);
 		btnBorrar.setBackground(new Color(29, 29, 27));
-		btnBorrar.setBounds(404, 467, 83, 36);
+		btnBorrar.setBounds(404, 482, 83, 36);
 		add(btnBorrar);
 
 		// Boton seleccionar
-		btnSeleccionar = new JButton("SELECCIONAR");
+		btnSeleccionar = new JButton("JUGAR");
 		btnSeleccionar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
@@ -104,8 +120,55 @@ public class ListaPartidas extends JPanel {
 		btnSeleccionar.setBackground(new Color(29, 161, 242));
 		btnSeleccionar.setOpaque(true);
 		btnSeleccionar.setBorderPainted(false);
-		btnSeleccionar.setBounds(315, 509, 172, 41);
+		btnSeleccionar.setBounds(315, 523, 172, 41);
 		add(btnSeleccionar);
+
+		lblImagen = new JLabel("");
+		lblImagen.setIcon(new ImageIcon(ListaPartidas.class.getResource("/img/paisaje.jpeg")));
+		lblImagen.setBounds(226, 125, 172, 172);
+		add(lblImagen);
+
+		lblNewLabel = new JLabel("Partida 1");
+		lblNewLabel.setIcon(new ImageIcon(ListaPartidas.class.getResource("/img/boton-de-play.png")));
+		lblNewLabel.setForeground(new Color(29, 29, 27));
+		lblNewLabel.setFont(new Font("Oxygen", Font.BOLD, 14));
+		lblNewLabel.setBounds(420, 125, 183, 26);
+		add(lblNewLabel);
+
+		lblAnfitrin = new JLabel("Anfitrión 1");
+		lblAnfitrin.setIcon(new ImageIcon(ListaPartidas.class.getResource("/img/usuario.png")));
+		lblAnfitrin.setForeground(new Color(29, 29, 27));
+		lblAnfitrin.setFont(new Font("Oxygen", Font.BOLD, 14));
+		lblAnfitrin.setBounds(420, 154, 183, 26);
+		add(lblAnfitrin);
+
+		lblAnfitrin_1 = new JLabel("4");
+		lblAnfitrin_1.setIcon(new ImageIcon(ListaPartidas.class.getResource("/img/equipo.png")));
+		lblAnfitrin_1.setForeground(new Color(29, 29, 27));
+		lblAnfitrin_1.setFont(new Font("Oxygen", Font.BOLD, 14));
+		lblAnfitrin_1.setBounds(420, 183, 183, 26);
+		add(lblAnfitrin_1);
+
+		lblAnfitrin_2 = new JLabel("30'");
+		lblAnfitrin_2.setIcon(new ImageIcon(ListaPartidas.class.getResource("/img/repetir.png")));
+		lblAnfitrin_2.setForeground(new Color(29, 29, 27));
+		lblAnfitrin_2.setFont(new Font("Oxygen", Font.BOLD, 14));
+		lblAnfitrin_2.setBounds(420, 212, 183, 26);
+		add(lblAnfitrin_2);
+
+		lblAnfitrin_3 = new JLabel("13-04 16:00 pm");
+		lblAnfitrin_3.setIcon(new ImageIcon(ListaPartidas.class.getResource("/img/calendario.png")));
+		lblAnfitrin_3.setForeground(new Color(29, 29, 27));
+		lblAnfitrin_3.setFont(new Font("Oxygen", Font.BOLD, 14));
+		lblAnfitrin_3.setBounds(420, 241, 183, 26);
+		add(lblAnfitrin_3);
+
+		lblAnfitrin_4 = new JLabel("En curso");
+		lblAnfitrin_4.setIcon(new ImageIcon(ListaPartidas.class.getResource("/img/ajustes.png")));
+		lblAnfitrin_4.setForeground(new Color(29, 29, 27));
+		lblAnfitrin_4.setFont(new Font("Oxygen", Font.BOLD, 14));
+		lblAnfitrin_4.setBounds(420, 270, 183, 26);
+		add(lblAnfitrin_4);
 
 	}
 
@@ -113,5 +176,3 @@ public class ListaPartidas extends JPanel {
 		setVisible(true);
 	}
 }
-
-
