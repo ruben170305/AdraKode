@@ -29,7 +29,7 @@ public class MenuMain {
 								cPersonaje, vPersonajes,
 								cPartidas, ePartidas, vPartidas, login);
 				LoginListener loginlistener = new LoginListener(login, ventanaPpal);
-				VerPersonajesListener ver_personajes_listener = new VerPersonajesListener( vPersonajes, ePersonaje, menu );
+				VerPersonajesListener ver_personajes_listener = new VerPersonajesListener( ePersonaje, ventanaPpal, home );
 			
 				ventanaPpal.setListener(listener);
 				login.setListener(loginlistener);

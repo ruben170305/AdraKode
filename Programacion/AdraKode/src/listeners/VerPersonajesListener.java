@@ -3,31 +3,33 @@
     import java.awt.event.ActionEvent;
     import java.awt.event.ActionListener;
 
-    import javax.swing.JMenuItem;
-
-    import views.EditarPersonaje;
-    import views.VerPersonajes;
-    import views.Menu;
+    import views.*;
 
     public class VerPersonajesListener implements ActionListener {
 
         private Menu ventana;
         private EditarPersonaje ep;
-        private VerPersonajes vp;
+        private Home home;
         
         // Constructor del Listener
-        public VerPersonajesListener ( VerPersonajes vp, EditarPersonaje ep, Menu ventana ) {
-            this.vp      = vp;
+        public VerPersonajesListener ( EditarPersonaje ep, Menu ventana, Home home ) {
             this.ep      = ep;
             this.ventana = ventana;
+            this.home    = home;
         }
 
+        // Listener del botón de editar personaje
+        // Redigirimos a la ventana ModificarPersonaje
         @Override
         public void actionPerformed( ActionEvent ae ) {
-            if ( ae.getActionCommand().equals( "ep" ) ) {
-                System.out.println( this.ventana );
-                this.ventana.dispose();
+            if ( ae.getActionCommand().equals( "" ) ) {
                 this.ventana.cargarPanel( ep );
+                this.ep.hacerVisible();
+            } else if( ae.getActionCommand().equals( "SELECCIONAR" ) ) {
+                this.ventana.cargarPanel( home );
+                this.ep.hacerVisible();
+            } else {
+                this.ventana.cargarPanel( home );
                 this.ep.hacerVisible();
             }
         }

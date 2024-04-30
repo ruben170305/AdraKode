@@ -280,7 +280,7 @@ public class VerPersonajes extends JPanel {
 		add(btnSeleccionar);
 		
 		//Boton editar
-		btnEditar = new JButton( "ep" );
+		btnEditar = new JButton( "" );
 		btnEditar.setIcon(new ImageIcon(VerPersonajes.class.getResource("/img/botonEditarW.png")));
 		btnEditar.setOpaque(true);
 		btnEditar.setForeground(new Color(29, 29, 27));
@@ -305,6 +305,8 @@ public class VerPersonajes extends JPanel {
 	
 	public void setListener( VerPersonajesListener listener ) {
 		btnEditar.addActionListener( listener );
+		btnSeleccionar.addActionListener( listener );
+		btnBorrar.addActionListener( listener );
 	}
 
 	public void hacerVisible() {
