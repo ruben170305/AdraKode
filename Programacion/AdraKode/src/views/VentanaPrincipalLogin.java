@@ -1,10 +1,13 @@
 package views;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import javax.swing.border.*;
 import listeners.LoginListener;
 import java.awt.event.*;
+import java.io.IOException;
+import java.io.InputStream;
 
 public class VentanaPrincipalLogin extends JFrame {
 
@@ -20,6 +23,7 @@ public class VentanaPrincipalLogin extends JFrame {
 		super("Login AdraKode");
 		setBackground(new Color(242, 242, 242));
 		// listener = new VentanaPrincipalLogin(login);
+		setIcon();
 		inicializarComponentes();
 		hacerVisible();
 
@@ -155,6 +159,17 @@ public class VentanaPrincipalLogin extends JFrame {
 		} 
 		
 	}
+	
+	private void setIcon() {
+        try {
+        	InputStream iconStream = getClass().getResourceAsStream("/img/iconoLogo2.png");
+            Image icon = ImageIO.read(iconStream);
+            setIconImage(icon);
+            repaint();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 	
 	public void hacerVisible() {
 		setVisible(true);

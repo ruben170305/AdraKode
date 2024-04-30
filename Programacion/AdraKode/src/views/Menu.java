@@ -3,7 +3,11 @@ package views;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 
+import javax.imageio.*;
 import javax.swing.*;
 
 import listeners.PMenuListener;
@@ -26,6 +30,7 @@ public class Menu extends JFrame {
 	
 	public Menu(String titulo) {
 		super(titulo);
+		setIcon();
 		initComponents();
 	}
 
@@ -118,6 +123,16 @@ public class Menu extends JFrame {
 		scrpContenedor.setViewportView(panel);
 	}
 
+	private void setIcon() {
+        try {
+        	InputStream iconStream = getClass().getResourceAsStream("/img/iconoLogo2.png");
+            Image icon = ImageIO.read(iconStream);
+            setIconImage(icon);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+	
 	public void mostrarMensajeConfirm() {
 		int opcion = JOptionPane.showConfirmDialog(this, 
 				"¿Seguro que desea abandonar la aplicación?", 
