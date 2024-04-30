@@ -1,14 +1,11 @@
 package views;
 
 import javax.swing.*;
-import javax.swing.border.Border;
-import javax.swing.border.MatteBorder;
 
-import java.awt.Font;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Rectangle;
+import java.awt.*;
 import javax.swing.border.LineBorder;
+
+import listeners.EditarPersonajesListener;
 
 public class EditarPersonaje extends JPanel {
     private JLabel lblDestreza, lblConstitucion, lblInteligencia, lblSabiduria, lblCarisma;
@@ -254,6 +251,11 @@ public class EditarPersonaje extends JPanel {
         btnGuardarImagen.setBounds(453, 485, 61, 45);
         add(btnGuardarImagen);
     }
+
+    public void setListener( EditarPersonajesListener listener ) {
+		btnGuardar.addActionListener( listener );
+        btnGuardarImagen.addActionListener( listener );
+	}
     
     public void hacerVisible() {
         setVisible(true);

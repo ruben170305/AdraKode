@@ -2,6 +2,7 @@ package main;
 
 import java.awt.EventQueue;
 
+import listeners.EditarPersonajesListener;
 import listeners.LoginListener;
 import listeners.PMenuListener;
 import listeners.VerPersonajesListener;
@@ -30,12 +31,15 @@ public class MenuMain {
 								cPartidas, ePartidas, vPartidas, login);
 				LoginListener loginlistener = new LoginListener(login, ventanaPpal);
 				VerPersonajesListener ver_personajes_listener = new VerPersonajesListener( ePersonaje, ventanaPpal, home );
-			
+				EditarPersonajesListener editar_personajes_listener = new EditarPersonajesListener( ventanaPpal, home );
+
+
 				ventanaPpal.setListener(listener);
 				login.setListener(loginlistener);
 				login.hacerVisible();
 				ventanaPpal.cargarPanel(home);
 				vPersonajes.setListener( ver_personajes_listener );
+				ePersonaje.setListener( editar_personajes_listener );
 				
 			}
 		});
