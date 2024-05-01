@@ -21,7 +21,7 @@ public class MenuMain {
 				VerPersonajes vPersonajes = new VerPersonajes();
 				CrearPartida cPartidas = new CrearPartida();
 				EditarPartida ePartidas = new EditarPartida();
-				ListaPartidas vPartidas = new ListaPartidas();
+				VerPartidasMaster vPartidas = new VerPartidasMaster();
 				VentanaPrincipalLogin login = new VentanaPrincipalLogin();
 				Home home = new Home();
 				Menu menu = new Menu( "Menú" );

@@ -9,12 +9,12 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class VerPartidasMaster extends JPanel {
+public class VerPartidas extends JPanel {
 	private JLabel lblTitulo, lblImagen;
-	private JButton btnEditar, btnBorrar, btnSeleccionar;
+	private JButton btnSeleccionar;
 	private JLabel lblTituloPartida, lblAnfitrion, lblJugadores, lblDuración, lblFecha, lblEstado;
 
-	public VerPartidasMaster() {
+	public VerPartidas() {
 		setBackground(new Color(242, 242, 242));
 		inicializarComponentes();
 		//hacerVisible();
@@ -86,13 +86,13 @@ public class VerPartidasMaster extends JPanel {
 		table.setBackground(new Color(242, 242, 242));
 		table.setFont(new Font("Open Sans", Font.PLAIN, 12));
 		JScrollPane scrollPane = new JScrollPane(table);
-		scrollPane.setBounds(122, 331, 556, 122);
+		scrollPane.setBounds(122, 343, 556, 122);
 		add(scrollPane);
 
 		
 		// Imagen de la partida
 		lblImagen = new JLabel("");
-		lblImagen.setIcon(new ImageIcon(VerPartidasMaster.class.getResource("/img/paisaje.jpeg")));
+		lblImagen.setIcon(new ImageIcon(VerPartidas.class.getResource("/img/paisaje.jpeg")));
 		lblImagen.setBounds(231, 164, 172, 143);
 		add(lblImagen);
 		
@@ -106,61 +106,39 @@ public class VerPartidasMaster extends JPanel {
 		add(lblTituloPartida);
 		
 		lblAnfitrion = new JLabel("Anfitrión 1");
-		lblAnfitrion.setIcon(new ImageIcon(VerPartidasMaster.class.getResource("/img/usuario.png")));
+		lblAnfitrion.setIcon(new ImageIcon(VerPartidas.class.getResource("/img/usuario.png")));
 		lblAnfitrion.setForeground(new Color(29, 29, 27));
 		lblAnfitrion.setFont(new Font("Oxygen", Font.BOLD, 14));
 		lblAnfitrion.setBounds(425, 164, 183, 26);
 		add(lblAnfitrion);
 		
 		lblJugadores = new JLabel("4");
-		lblJugadores.setIcon(new ImageIcon(VerPartidasMaster.class.getResource("/img/equipo.png")));
+		lblJugadores.setIcon(new ImageIcon(VerPartidas.class.getResource("/img/equipo.png")));
 		lblJugadores.setForeground(new Color(29, 29, 27));
 		lblJugadores.setFont(new Font("Oxygen", Font.BOLD, 14));
 		lblJugadores.setBounds(425, 193, 183, 26);
 		add(lblJugadores);
 
 		lblDuración = new JLabel("30'");
-		lblDuración.setIcon(new ImageIcon(VerPartidasMaster.class.getResource("/img/repetir.png")));
+		lblDuración.setIcon(new ImageIcon(VerPartidas.class.getResource("/img/repetir.png")));
 		lblDuración.setForeground(new Color(29, 29, 27));
 		lblDuración.setFont(new Font("Oxygen", Font.BOLD, 14));
 		lblDuración.setBounds(425, 222, 183, 26);
 		add(lblDuración);
 		
 		lblFecha = new JLabel("13-04 16:00 pm");
-		lblFecha.setIcon(new ImageIcon(VerPartidasMaster.class.getResource("/img/calendario.png")));
+		lblFecha.setIcon(new ImageIcon(VerPartidas.class.getResource("/img/calendario.png")));
 		lblFecha.setForeground(new Color(29, 29, 27));
 		lblFecha.setFont(new Font("Oxygen", Font.BOLD, 14));
 		lblFecha.setBounds(425, 251, 183, 26);
 		add(lblFecha);
 		
 		lblEstado = new JLabel("En curso");
-		lblEstado.setIcon(new ImageIcon(VerPartidasMaster.class.getResource("/img/ajustes.png")));
+		lblEstado.setIcon(new ImageIcon(VerPartidas.class.getResource("/img/ajustes.png")));
 		lblEstado.setForeground(new Color(29, 29, 27));
 		lblEstado.setFont(new Font("Oxygen", Font.BOLD, 14));
 		lblEstado.setBounds(425, 280, 183, 26);
 		add(lblEstado);
-		
-		
-		// Botones
-		btnEditar = new JButton();
-		btnEditar.setIcon(new ImageIcon(VerPersonajes.class.getResource("/img/botonEditarW.png")));
-		btnEditar.setOpaque(true);
-		btnEditar.setForeground(new Color(29, 29, 27));
-		btnEditar.setFont(new Font("Oxygen", Font.BOLD, 17));
-		btnEditar.setBorderPainted(false);
-		btnEditar.setBackground(new Color(29, 29, 27));
-		btnEditar.setBounds(315, 482, 83, 36);
-		add(btnEditar);
-
-		btnBorrar = new JButton();
-		btnBorrar.setIcon(new ImageIcon(VerPersonajes.class.getResource("/img/botonBorrarW.png")));
-		btnBorrar.setOpaque(true);
-		btnBorrar.setForeground(new Color(29, 29, 27));
-		btnBorrar.setFont(new Font("Oxygen", Font.BOLD, 17));
-		btnBorrar.setBorderPainted(false);
-		btnBorrar.setBackground(new Color(29, 29, 27));
-		btnBorrar.setBounds(404, 482, 83, 36);
-		add(btnBorrar);
 
 		btnSeleccionar = new JButton("JUGAR");
 		btnSeleccionar.addActionListener(new ActionListener() {
@@ -172,7 +150,7 @@ public class VerPartidasMaster extends JPanel {
 		btnSeleccionar.setBackground(new Color(29, 161, 242));
 		btnSeleccionar.setOpaque(true);
 		btnSeleccionar.setBorderPainted(false);
-		btnSeleccionar.setBounds(315, 523, 172, 41);
+		btnSeleccionar.setBounds(314, 493, 172, 41);
 		add(btnSeleccionar);
 
 	}
