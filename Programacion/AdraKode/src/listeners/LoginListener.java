@@ -18,6 +18,9 @@ public class LoginListener implements ActionListener {
 	}
 	
 	@Override
+	/**
+	 * Metodo del listener que si el login es correcto cerramos la ventana de login y mostramos la ventana principal (Menu)
+	 */
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 			login.dispose();

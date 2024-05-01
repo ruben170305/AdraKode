@@ -32,6 +32,9 @@ public class PMenuListener implements ActionListener {
 	}
 
 	@Override
+	/**
+	 * Metodo del listener que cambia de ventana según la opcion que clickemos en el menu
+	 */
 	public void actionPerformed(ActionEvent ev) {
 		if (ev.getSource() instanceof JMenuItem) {
 			if (ev.getActionCommand().equals("Nuevo personaje")) {

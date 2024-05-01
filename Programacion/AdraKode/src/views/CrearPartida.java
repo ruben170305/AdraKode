@@ -42,42 +42,51 @@ public class CrearPartida extends JPanel {
         title_label.setFont( new Font( "Arial", Font.BOLD, 24 ) ); 
 		add(title_label);
 		
+		//Label jugadores la colocamos y mostramos
 		JLabel jugadores_label = new JLabel("Jugadores:");
 		jugadores_label.setBounds(202, 146, 83, 14);
 		add(jugadores_label);
 		
+		//TexyField jugadores la colocamos y mostramos
 		jugadores_txt = new JTextField();
 		jugadores_txt.setBounds(284, 143, 86, 20);
 		add(jugadores_txt);
 		jugadores_txt.setColumns(10);
 		
+		//Label duración la colocamos y mostramos
 		JLabel duracion_label = new JLabel("Duración:");
 		duracion_label.setBounds(202, 174, 83, 14);
 		add(duracion_label);
 		
+		//TextField duracion la colocamos y mostramos
 		duracion_txt = new JTextField();
 		duracion_txt.setColumns(10);
 		duracion_txt.setBounds(284, 171, 86, 20);
 		add(duracion_txt);
 		
+		//Label fecha la colocamos y mostramos
 		JLabel fecha_label = new JLabel("Fecha:");
 		fecha_label.setBounds(202, 199, 83, 14);
 		add(fecha_label);
 		
+		//TextField de la fecha la colocamos y mostramos
 		fecha_txt = new JTextField();
 		fecha_txt.setColumns(10);
 		fecha_txt.setBounds(284, 196, 86, 20);
 		add(fecha_txt);
 		
+		//Label estado la colocamos y mostramos
 		JLabel estado_label = new JLabel("Estado:");
 		estado_label.setBounds(202, 224, 83, 14);
 		add(estado_label);
 		
+		//TextField de estado la colocamos y mostramos
 		estado_txt = new JTextField();
 		estado_txt.setColumns(10);
 		estado_txt.setBounds(284, 221, 86, 20);
 		add(estado_txt);
 		
+		//Botón de crear la partida
 		JButton btnCrear = new JButton("Crear");
 		btnCrear.setBounds(245, 327, 89, 23);
 		add(btnCrear);
@@ -85,20 +94,20 @@ public class CrearPartida extends JPanel {
 	}
 	
     // Ejecutamos la ventana
-    public static void main(String[] args) {
-    	
-    	// Evitamos el Event Dispatch
-		java.awt.EventQueue.invokeLater( new Runnable() {
-			
-			public void run() {
-				// Abrimos la ventana
-		        JFrame frame = new JFrame( "Crear Partida" );
-		        frame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
-		        frame.add( new CrearPartida() );
-		        frame.pack();
-		        frame.setLocationRelativeTo(null);
-		        frame.setVisible(true);
-			}
-        });
-    }
+//    public static void main(String[] args) {
+//    	
+//    	// Evitamos el Event Dispatch
+//		java.awt.EventQueue.invokeLater( new Runnable() {
+//			
+//			public void run() {
+//				// Abrimos la ventana
+//		        JFrame frame = new JFrame( "Crear Partida" );
+//		        frame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
+//		        frame.add( new CrearPartida() );
+//		        frame.pack();
+//		        frame.setLocationRelativeTo(null);
+//		        frame.setVisible(true);
+//			}
+//        });
+//    }
 }

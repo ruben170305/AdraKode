@@ -13,9 +13,11 @@ public class Home extends JPanel {
 		setBounds(new Rectangle(0, 0, 0, 19));
 		setBackground(new Color(242, 242, 242));
 		inicializarComponentes();
-		hacerVisible();
+		//hacerVisible();
 	}
-
+	/**
+	 * Método que inicializa la ventana y los componentes
+	 */
 	public void inicializarComponentes() {
 		// Adaptar la apariencia del SO donde se ejecuta
 		try {
@@ -40,7 +42,7 @@ public class Home extends JPanel {
 		
 	}
 
-	public void hacerVisible() {
-		setVisible(true);
-	}
+//	public void hacerVisible() {
+//		setVisible(true);
+//	}
 }

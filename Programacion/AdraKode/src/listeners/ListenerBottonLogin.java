@@ -12,6 +12,9 @@ public class ListenerBottonLogin implements ActionListener {
 		
 	}
 	@Override
+	/**
+	 * Metodo del listener del login 
+	 */
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 

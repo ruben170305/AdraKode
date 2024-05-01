@@ -143,10 +143,17 @@ public class VentanaPrincipalLogin extends JFrame {
 
 	}
 
+	/**
+	 * Método que asigna el listener
+	 * @param listener Recibe el listener que quieres asignar
+	 */
 	public void setListener(LoginListener listener) {
 		entrar.addActionListener(listener);
 	}
 
+	/**
+	 * Metodo que muestra la confirmacion al salir
+	 */
 	public void mostrarMensajeConfirm() {
 		int opcion = JOptionPane.showConfirmDialog(this, 
 				"¿Seguro que desea abandonar la aplicación?", 
@@ -160,6 +167,9 @@ public class VentanaPrincipalLogin extends JFrame {
 		
 	}
 	
+	/**
+	 * Metodo que cambia el icono de la esquina y de la barra de tareas
+	 */
 	private void setIcon() {
         try {
         	InputStream iconStream = getClass().getResourceAsStream("/img/iconoLogo2.png");
@@ -171,6 +181,9 @@ public class VentanaPrincipalLogin extends JFrame {
         }
     }
 	
+	/**
+	 * Metodo que hace visible la ventana (JFrame)
+	 */
 	public void hacerVisible() {
 		setVisible(true);
 	}

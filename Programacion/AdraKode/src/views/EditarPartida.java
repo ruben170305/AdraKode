@@ -137,20 +137,20 @@ public class EditarPartida extends JPanel {
     }
     
     // Ejecutamos la ventana
-    public static void main(String[] args) {
-    	
-    	// Evitamos el Event Dispatch
-		java.awt.EventQueue.invokeLater( new Runnable() {
-			
-			public void run() {
-				// Abrimos la ventana
-		        JFrame frame = new JFrame( "Editar Partida" );
-		        frame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
-		        frame.add( new EditarPartida() );
-		        frame.pack();
-		        frame.setLocationRelativeTo(null);
-		        frame.setVisible(true);
-			}
-        });
-    }
+//    public static void main(String[] args) {
+//    	
+//    	// Evitamos el Event Dispatch
+//		java.awt.EventQueue.invokeLater( new Runnable() {
+//			
+//			public void run() {
+//				// Abrimos la ventana
+//		        JFrame frame = new JFrame( "Editar Partida" );
+//		        frame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
+//		        frame.add( new EditarPartida() );
+//		        frame.pack();
+//		        frame.setLocationRelativeTo(null);
+//		        frame.setVisible(true);
+//			}
+//        });
+//    }
 }

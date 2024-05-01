@@ -1,15 +1,10 @@
 package views;
 
 import java.awt.*;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-
+import java.awt.event.*;
+import java.io.*;
 import javax.imageio.*;
 import javax.swing.*;
-
 import listeners.PMenuListener;
 
 public class Menu extends JFrame {
@@ -55,14 +50,19 @@ public class Menu extends JFrame {
 		
 		crearMenu();
 	}
-
+	
+	/**
+	 * Método que crea el JMenuBar y los items principales (JMenu) y el submenu de cada item (JMenuItem)
+	 */
 	private void crearMenu() {
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 		
+		//Creamos los items principales
 		JMenu mnPersonajes = new JMenu("Personajes");
 		menuBar.add(mnPersonajes);
 		
+		//Creamos los items secundarios de Personajes
 		mntmNuevo = new JMenuItem("Nuevo personaje");
 		mnPersonajes.add(mntmNuevo);
 		
@@ -72,9 +72,11 @@ public class Menu extends JFrame {
 		mntmModificarP = new JMenuItem("Modificar personaje");
 		mnPersonajes.add(mntmModificarP);
 		
+		//Creamos el item principal Partidas
 		mnPartidas = new JMenu("Partidas");
 		menuBar.add(mnPartidas);
 		
+		//Creamos el submenu de partidas
 		mntmBuscar = new JMenuItem("Buscar partida");
 		mnPartidas.add(mntmBuscar);
 		
@@ -87,6 +89,7 @@ public class Menu extends JFrame {
 		mntmVerPartidas = new JMenuItem("Ver partidas");
 		mnPartidas.add(mntmVerPartidas);
 		
+		//Creamos y asignamos el boton Login al menu principal
 		mntmTexto = new JMenuItem("Login");
 		menuBar.add(mntmTexto);
 		
@@ -100,6 +103,10 @@ public class Menu extends JFrame {
 		getContentPane().add(scrpContenedor);
 	}
 	
+	/**
+	 * Asginamos el listener a cada JMenuItem
+	 * @param listener Parametro que recibe el listener que queremos asignar
+	 */
 	public void setListener(PMenuListener listener) {
         mntmNuevo.addActionListener(listener);
         mntmBuscar.addActionListener(listener);
@@ -116,13 +123,24 @@ public class Menu extends JFrame {
         
     }
 	
+	/**
+	 * Método que hace visible la ventana (JFrame)
+	 */
 	public void hacerVisible() {
 		setVisible(true);
 	}
+	
+	/**
+	 * Método que cambia los paneles (JPanel) que se muestran en esta ventana
+	 * @param panel Vista (extiende JPanel) que queremos mostrar
+	 */
 	public void cargarPanel(JPanel panel) {
 		scrpContenedor.setViewportView(panel);
 	}
-
+	
+	/**
+	 * Método que cambia el icono de la esquina y de la barra de tareas
+	 */
 	private void setIcon() {
         try {
         	InputStream iconStream = getClass().getResourceAsStream("/img/iconoLogo2.png");
@@ -133,6 +151,9 @@ public class Menu extends JFrame {
         }
     }
 	
+	/**
+	 * Mostrar mensaje de confirmación de cierre
+	 */
 	public void mostrarMensajeConfirm() {
 		int opcion = JOptionPane.showConfirmDialog(this, 
 				"¿Seguro que desea abandonar la aplicación?", 

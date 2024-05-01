@@ -1,13 +1,9 @@
 package views;
 
 import java.awt.*;
-import javax.swing.*;
 import javax.swing.border.*;
-
 import listeners.VerPersonajesListener;
-
-import javax.swing.JProgressBar;
-import javax.swing.JSeparator;
+import javax.swing.*;
 
 public class VerPersonajes extends JPanel {
 	
@@ -21,7 +17,7 @@ public class VerPersonajes extends JPanel {
 	public VerPersonajes() {
 		setBackground(new Color(242, 242, 242));
 		inicializarComponentes();
-		hacerVisible();
+		//hacerVisible();
 	}
 	
 	private void inicializarComponentes() {
@@ -303,13 +299,17 @@ public class VerPersonajes extends JPanel {
 		
 	}
 	
+	/**
+	 * Metodo que asigna el listener
+	 * @param listener Recibe el listener con el que quieres asignar los objetos
+	 */
 	public void setListener( VerPersonajesListener listener ) {
 		btnEditar.addActionListener( listener );
 		btnSeleccionar.addActionListener( listener );
 		btnBorrar.addActionListener( listener );
 	}
 
-	public void hacerVisible() {
-		setVisible(true);
-	}
+//	public void hacerVisible() {
+//		setVisible(true);
+//	}
 }

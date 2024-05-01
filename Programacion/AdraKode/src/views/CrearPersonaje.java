@@ -1,27 +1,8 @@
 package views;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-
-import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JSlider;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
-import javax.swing.UIManager;
-import javax.swing.WindowConstants;
-import javax.swing.border.Border;
-import javax.swing.border.LineBorder;
-import javax.swing.border.MatteBorder;
-import javax.swing.JScrollBar;
-import javax.swing.JSeparator;
-import javax.swing.JSpinner;
+import java.awt.*;
+import javax.swing.*;
+import javax.swing.border.*;
 
 public class CrearPersonaje extends JPanel {
 	private JTextField txtRaza, txtClase;
@@ -292,7 +273,9 @@ public class CrearPersonaje extends JPanel {
 
 		
 	}
-	
+	/**
+	 * Método para mostrar la ventana
+	 */
 	public void hacerVisible() {
 		setVisible(true);
 	}

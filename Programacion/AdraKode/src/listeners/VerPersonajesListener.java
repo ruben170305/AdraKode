@@ -18,19 +18,20 @@ public class VerPersonajesListener implements ActionListener {
         this.home    = home;
     }
 
-    // Listener del botón de editar personaje
-    // Redigirimos a la ventana ModificarPersonaje
+    /**
+     * Listener del botón de editar personaje. Redigirimos a la ventana dependiendo del boton
+     */
     @Override
     public void actionPerformed( ActionEvent ae ) {
         if ( ae.getActionCommand().equals( "" ) ) {
             this.ventana.cargarPanel( ep );
-            this.ep.hacerVisible();
+            //this.ep.hacerVisible();
         } else if( ae.getActionCommand().equals( "SELECCIONAR" ) ) {
             this.ventana.cargarPanel( home );
-            this.ep.hacerVisible();
+            //this.ep.hacerVisible();
         } else {
             this.ventana.cargarPanel( home );
-            this.ep.hacerVisible();
+            //this.ep.hacerVisible();
         }
     }
 }

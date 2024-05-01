@@ -18,7 +18,7 @@ public class EditarPersonaje extends JPanel {
         setBounds(new Rectangle(0, 0, 0, 19));
         setBackground(new Color(242, 242, 242));
         inicializarComponentes();
-        hacerVisible();
+        //hacerVisible();
     }
 
     private void inicializarComponentes() {
@@ -253,12 +253,18 @@ public class EditarPersonaje extends JPanel {
         add(btnGuardarImagen);
     }
 
+    /**
+     * Método que asigna los listeners
+     */
     public void setListener( EditarPersonajesListener listener ) {
 		btnGuardar.addActionListener( listener );
         btnGuardarImagen.addActionListener( listener );
 	}
     
-    public void hacerVisible() {
-        setVisible(true);
-    }
+    /**
+     * Método que hace visible la ventana al ejecutarlo
+     */
+//    public void hacerVisible() {
+//        setVisible(true);
+//    }
 }
