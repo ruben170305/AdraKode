@@ -85,7 +85,7 @@ public class ListaPartidas extends JPanel {
 		table.setBackground(new Color(242, 242, 242));
 		table.setFont(new Font("Open Sans", Font.PLAIN, 12));
 		JScrollPane scrollPane = new JScrollPane(table);
-		scrollPane.setBounds(101, 323, 599, 141);
+		scrollPane.setBounds(122, 331, 556, 122);
 		add(scrollPane);
 
 		//Botón editar partida
@@ -127,15 +127,16 @@ public class ListaPartidas extends JPanel {
 		//Imagen de la partida
 		lblImagen = new JLabel("");
 		lblImagen.setIcon(new ImageIcon(ListaPartidas.class.getResource("/img/paisaje.jpeg")));
-		lblImagen.setBounds(226, 125, 172, 172);
+		lblImagen.setBounds(231, 154, 172, 153);
 		add(lblImagen);
 		
 		//Label y configuracion de la etiqueta partida
 		lblNewLabel = new JLabel("Partida 1");
-		lblNewLabel.setIcon(new ImageIcon(ListaPartidas.class.getResource("/img/boton-de-play.png")));
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setIcon(null);
 		lblNewLabel.setForeground(new Color(29, 29, 27));
-		lblNewLabel.setFont(new Font("Oxygen", Font.BOLD, 14));
-		lblNewLabel.setBounds(420, 125, 183, 26);
+		lblNewLabel.setFont(new Font("Oxygen", Font.BOLD, 18));
+		lblNewLabel.setBounds(302, 117, 195, 26);
 		add(lblNewLabel);
 		
 		//Label y configuracion de la etiqueta anfitrion
@@ -143,7 +144,7 @@ public class ListaPartidas extends JPanel {
 		lblAnfitrin.setIcon(new ImageIcon(ListaPartidas.class.getResource("/img/usuario.png")));
 		lblAnfitrin.setForeground(new Color(29, 29, 27));
 		lblAnfitrin.setFont(new Font("Oxygen", Font.BOLD, 14));
-		lblAnfitrin.setBounds(420, 154, 183, 26);
+		lblAnfitrin.setBounds(425, 154, 183, 26);
 		add(lblAnfitrin);
 		
 		//Label y configuracion de la etiqueta equipo
@@ -151,7 +152,7 @@ public class ListaPartidas extends JPanel {
 		lblAnfitrin_1.setIcon(new ImageIcon(ListaPartidas.class.getResource("/img/equipo.png")));
 		lblAnfitrin_1.setForeground(new Color(29, 29, 27));
 		lblAnfitrin_1.setFont(new Font("Oxygen", Font.BOLD, 14));
-		lblAnfitrin_1.setBounds(420, 183, 183, 26);
+		lblAnfitrin_1.setBounds(425, 185, 183, 26);
 		add(lblAnfitrin_1);
 
 		//Label y configuracion de la etiqueta duracion
@@ -159,7 +160,7 @@ public class ListaPartidas extends JPanel {
 		lblAnfitrin_2.setIcon(new ImageIcon(ListaPartidas.class.getResource("/img/repetir.png")));
 		lblAnfitrin_2.setForeground(new Color(29, 29, 27));
 		lblAnfitrin_2.setFont(new Font("Oxygen", Font.BOLD, 14));
-		lblAnfitrin_2.setBounds(420, 212, 183, 26);
+		lblAnfitrin_2.setBounds(425, 216, 183, 26);
 		add(lblAnfitrin_2);
 		
 		//Label y configuracion de la etiqueta fecha
@@ -167,7 +168,7 @@ public class ListaPartidas extends JPanel {
 		lblAnfitrin_3.setIcon(new ImageIcon(ListaPartidas.class.getResource("/img/calendario.png")));
 		lblAnfitrin_3.setForeground(new Color(29, 29, 27));
 		lblAnfitrin_3.setFont(new Font("Oxygen", Font.BOLD, 14));
-		lblAnfitrin_3.setBounds(420, 241, 183, 26);
+		lblAnfitrin_3.setBounds(425, 247, 183, 26);
 		add(lblAnfitrin_3);
 		
 		//Label y configuracion de la etiqueta "En curso"
@@ -175,7 +176,7 @@ public class ListaPartidas extends JPanel {
 		lblAnfitrin_4.setIcon(new ImageIcon(ListaPartidas.class.getResource("/img/ajustes.png")));
 		lblAnfitrin_4.setForeground(new Color(29, 29, 27));
 		lblAnfitrin_4.setFont(new Font("Oxygen", Font.BOLD, 14));
-		lblAnfitrin_4.setBounds(420, 270, 183, 26);
+		lblAnfitrin_4.setBounds(425, 278, 183, 26);
 		add(lblAnfitrin_4);
 
 	}

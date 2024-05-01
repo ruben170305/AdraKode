@@ -3,11 +3,14 @@ package views;
 import javax.swing.*;
 
 import java.awt.*;
+
+import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 
 import listeners.EditarPersonajesListener;
 
 public class EditarPersonaje extends JPanel {
+	private JTextField txtRaza, txtClase;
     private JLabel lblDestreza, lblConstitucion, lblInteligencia, lblSabiduria, lblCarisma;
     private JLabel lblTitulo, lblFuerza, lblSeleccionarPersonaje, lblRaza, lblIconoPersn;
     private JLabel lblIconoExp, lblIconoFuerza, lblIconoDestreza, lblIconoConst, lblIconoInteligencia, lblIconoSabiduria, lblIconoCarisma, lblClase, lblExp;
@@ -39,9 +42,12 @@ public class EditarPersonaje extends JPanel {
 		
 		
 		/* COMPONENTES */
+		
+		//Creo border para cajas de texto (solo linea inferior)
+		Border border = BorderFactory.createMatteBorder(0, 0, 2, 0, new Color(29, 29, 27));
 
         // Titulo
-        lblTitulo = new JLabel("EDITAR PERSONAJES");
+        lblTitulo = new JLabel("EDITAR PERSONAJE");
         lblTitulo.setForeground(new Color(29, 29, 27));
         lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
         lblTitulo.setFont(new Font("Open Sans", Font.BOLD, 25));
@@ -62,100 +68,100 @@ public class EditarPersonaje extends JPanel {
         lblSeleccionarPersonaje = new JLabel("PERSONAJE 1");
         lblSeleccionarPersonaje.setForeground(new Color(29, 29, 27));
         lblSeleccionarPersonaje.setHorizontalAlignment(SwingConstants.CENTER);
-        lblSeleccionarPersonaje.setFont(new Font("Open Sans", Font.BOLD, 20));
-        lblSeleccionarPersonaje.setBounds(320, 142, 159, 22);
+        lblSeleccionarPersonaje.setFont(new Font("Open Sans", Font.BOLD, 18));
+        lblSeleccionarPersonaje.setBounds(293, 136, 214, 28);
         add(lblSeleccionarPersonaje);
 
         // Iconos
         lblIconoExp = new JLabel();
         lblIconoExp.setHorizontalAlignment(SwingConstants.CENTER);
         lblIconoExp.setIcon(new ImageIcon(EditarPersonaje.class.getResource("/img/IconoExp.png")));
-        lblIconoExp.setBounds(464, 197, 29, 33);
+        lblIconoExp.setBounds(367, 199, 35, 33);
         add(lblIconoExp);
 
         lblIconoFuerza = new JLabel();
         lblIconoFuerza.setHorizontalAlignment(SwingConstants.CENTER);
         lblIconoFuerza.setIcon(new ImageIcon(EditarPersonaje.class.getResource("/img/IconoFrza.png")));
-        lblIconoFuerza.setBounds(458, 229, 35, 33);
+        lblIconoFuerza.setBounds(367, 230, 35, 33);
         add(lblIconoFuerza);
 
         lblIconoDestreza = new JLabel();
         lblIconoDestreza.setHorizontalAlignment(SwingConstants.CENTER);
         lblIconoDestreza.setIcon(new ImageIcon(EditarPersonaje.class.getResource("/img/IconoDestreza.png")));
-        lblIconoDestreza.setBounds(458, 261, 35, 33);
+        lblIconoDestreza.setBounds(367, 261, 35, 33);
         add(lblIconoDestreza);
 
         lblIconoConst = new JLabel();
         lblIconoConst.setHorizontalAlignment(SwingConstants.CENTER);
         lblIconoConst.setIcon(new ImageIcon(EditarPersonaje.class.getResource("/img/IconoConstitucion.png")));
-        lblIconoConst.setBounds(458, 293, 35, 33);
+        lblIconoConst.setBounds(367, 292, 35, 33);
         add(lblIconoConst);
 
         lblIconoInteligencia = new JLabel();
         lblIconoInteligencia.setHorizontalAlignment(SwingConstants.CENTER);
         lblIconoInteligencia.setIcon(new ImageIcon(EditarPersonaje.class.getResource("/img/IconoInteli.png")));
-        lblIconoInteligencia.setBounds(458, 325, 35, 33);
+        lblIconoInteligencia.setBounds(367, 323, 35, 33);
         add(lblIconoInteligencia);
 
         lblIconoSabiduria = new JLabel();
         lblIconoSabiduria.setHorizontalAlignment(SwingConstants.CENTER);
         lblIconoSabiduria.setIcon(new ImageIcon(EditarPersonaje.class.getResource("/img/IconoSab.png")));
-        lblIconoSabiduria.setBounds(458, 357, 35, 33);
+        lblIconoSabiduria.setBounds(367, 354, 35, 33);
         add(lblIconoSabiduria);
 
         lblIconoCarisma = new JLabel();
         lblIconoCarisma.setHorizontalAlignment(SwingConstants.CENTER);
         lblIconoCarisma.setIcon(new ImageIcon(EditarPersonaje.class.getResource("/img/IconoCarisma.png")));
-        lblIconoCarisma.setBounds(458, 389, 35, 33);
+        lblIconoCarisma.setBounds(367, 385, 35, 33);
         add(lblIconoCarisma);
 
         // Etiqueta exp
         lblExp = new JLabel("Experiencia");
-        lblExp.setHorizontalAlignment(SwingConstants.RIGHT);
+        lblExp.setHorizontalAlignment(SwingConstants.LEFT);
         lblExp.setFont(new Font("Open Sans", Font.PLAIN, 14));
-        lblExp.setBounds(364, 208, 90, 14);
+        lblExp.setBounds(412, 206, 104, 18);
         add(lblExp);
 
         // Etiqueta fuerza
         lblFuerza = new JLabel("Fuerza");
-        lblFuerza.setHorizontalAlignment(SwingConstants.RIGHT);
+        lblFuerza.setHorizontalAlignment(SwingConstants.LEFT);
         lblFuerza.setFont(new Font("Open Sans", Font.PLAIN, 14));
-        lblFuerza.setBounds(393, 239, 61, 14);
+        lblFuerza.setBounds(412, 237, 104, 18);
         add(lblFuerza);
 
         // Etiqueta destreza
         lblDestreza = new JLabel("Destreza");
-        lblDestreza.setHorizontalAlignment(SwingConstants.RIGHT);
+        lblDestreza.setHorizontalAlignment(SwingConstants.LEFT);
         lblDestreza.setFont(new Font("Open Sans", Font.PLAIN, 14));
-        lblDestreza.setBounds(382, 270, 72, 14);
+        lblDestreza.setBounds(412, 268, 104, 18);
         add(lblDestreza);
 
         // Etiqueta constitución
         lblConstitucion = new JLabel("Constitución");
-        lblConstitucion.setHorizontalAlignment(SwingConstants.RIGHT);
+        lblConstitucion.setHorizontalAlignment(SwingConstants.LEFT);
         lblConstitucion.setFont(new Font("Open Sans", Font.PLAIN, 14));
-        lblConstitucion.setBounds(364, 301, 90, 14);
+        lblConstitucion.setBounds(412, 299, 104, 18);
         add(lblConstitucion);
 
         // Etiqueta inteligencia
         lblInteligencia = new JLabel("Inteligencia");
-        lblInteligencia.setHorizontalAlignment(SwingConstants.RIGHT);
+        lblInteligencia.setHorizontalAlignment(SwingConstants.LEFT);
         lblInteligencia.setFont(new Font("Open Sans", Font.PLAIN, 14));
-        lblInteligencia.setBounds(370, 332, 84, 17);
+        lblInteligencia.setBounds(412, 330, 104, 18);
         add(lblInteligencia);
 
         // Etiqueta sabiduría
         lblSabiduria = new JLabel("Sabiduría");
-        lblSabiduria.setHorizontalAlignment(SwingConstants.RIGHT);
+        lblSabiduria.setHorizontalAlignment(SwingConstants.LEFT);
         lblSabiduria.setFont(new Font("Open Sans", Font.PLAIN, 14));
-        lblSabiduria.setBounds(380, 366, 74, 14);
+        lblSabiduria.setBounds(412, 361, 104, 18);
         add(lblSabiduria);
 
         // Etiqueta carisma
         lblCarisma = new JLabel("Carisma");
-        lblCarisma.setHorizontalAlignment(SwingConstants.RIGHT);
+        lblCarisma.setHorizontalAlignment(SwingConstants.LEFT);
         lblCarisma.setFont(new Font("Open Sans", Font.PLAIN, 14));
-        lblCarisma.setBounds(384, 397, 70, 14);
+        lblCarisma.setBounds(412, 392, 104, 18);
         add(lblCarisma);
 
         // Spinners
@@ -163,49 +169,49 @@ public class EditarPersonaje extends JPanel {
         spinnerExperiencia.setForeground(new Color(242, 242, 242));
         spinnerExperiencia.setBackground(new Color(29, 161, 242));
         spinnerExperiencia.setOpaque(true);
-        spinnerExperiencia.setBounds(506, 205, 42, 20);
+        spinnerExperiencia.setBounds(515, 206, 42, 20);
         add(spinnerExperiencia);
 
         spinnerFuerza = new JSpinner();
         spinnerFuerza.setOpaque(true);
         spinnerFuerza.setForeground(new Color(242, 242, 242));
         spinnerFuerza.setBackground(new Color(29, 161, 242));
-        spinnerFuerza.setBounds(506, 236, 42, 20);
+        spinnerFuerza.setBounds(515, 237, 42, 20);
         add(spinnerFuerza);
 
         spinnerDestreza = new JSpinner();
         spinnerDestreza.setOpaque(true);
         spinnerDestreza.setForeground(new Color(242, 242, 242));
         spinnerDestreza.setBackground(new Color(29, 161, 242));
-        spinnerDestreza.setBounds(506, 267, 42, 20);
+        spinnerDestreza.setBounds(515, 268, 42, 20);
         add(spinnerDestreza);
 
         spinnerConstitucion = new JSpinner();
         spinnerConstitucion.setOpaque(true);
         spinnerConstitucion.setForeground(new Color(242, 242, 242));
         spinnerConstitucion.setBackground(new Color(29, 161, 242));
-        spinnerConstitucion.setBounds(506, 298, 42, 20);
+        spinnerConstitucion.setBounds(515, 299, 42, 20);
         add(spinnerConstitucion);
 
         spinnerInteligencia = new JSpinner();
         spinnerInteligencia.setOpaque(true);
         spinnerInteligencia.setForeground(new Color(242, 242, 242));
         spinnerInteligencia.setBackground(new Color(29, 161, 242));
-        spinnerInteligencia.setBounds(506, 329, 42, 20);
+        spinnerInteligencia.setBounds(515, 330, 42, 20);
         add(spinnerInteligencia);
 
         spinnerSabiduria = new JSpinner();
         spinnerSabiduria.setOpaque(true);
         spinnerSabiduria.setForeground(new Color(242, 242, 242));
         spinnerSabiduria.setBackground(new Color(29, 161, 242));
-        spinnerSabiduria.setBounds(506, 360, 42, 20);
+        spinnerSabiduria.setBounds(515, 361, 42, 20);
         add(spinnerSabiduria);
 
         spinnerCarisma = new JSpinner();
         spinnerCarisma.setOpaque(true);
         spinnerCarisma.setForeground(new Color(242, 242, 242));
         spinnerCarisma.setBackground(new Color(29, 161, 242));
-        spinnerCarisma.setBounds(506, 391, 42, 20);
+        spinnerCarisma.setBounds(515, 392, 42, 20);
         add(spinnerCarisma);
 
         // Imagen del personaje
@@ -216,20 +222,38 @@ public class EditarPersonaje extends JPanel {
         add(lblIconoPersn);
         
         // Etiqueta raza
-        lblRaza = new JLabel("Raza 1");
+        lblRaza = new JLabel("Raza");
         lblRaza.setForeground(new Color(29, 29, 27));
-        lblRaza.setHorizontalAlignment(SwingConstants.CENTER);
+        lblRaza.setHorizontalAlignment(SwingConstants.RIGHT);
         lblRaza.setFont(new Font("Open Sans", Font.BOLD, 16));
-        lblRaza.setBounds(212, 366, 140, 14);
+        lblRaza.setBounds(165, 364, 78, 14);
         add(lblRaza);
 
         // Etiqueta clase
-        lblClase = new JLabel("Clase 1");
+        lblClase = new JLabel("Clase");
         lblClase.setForeground(new Color(29, 29, 27));
-        lblClase.setHorizontalAlignment(SwingConstants.CENTER);
+        lblClase.setHorizontalAlignment(SwingConstants.RIGHT);
         lblClase.setFont(new Font("Open Sans", Font.BOLD, 16));
-        lblClase.setBounds(212, 397, 140, 14);
+        lblClase.setBounds(165, 395, 78, 14);
         add(lblClase);
+        
+        //Campo texto raza
+  		txtRaza = new JTextField();
+  		txtRaza.setBackground(new Color(242, 242, 242));
+  		txtRaza.setFont(new Font("Open Sans", Font.PLAIN, 11));
+  		txtRaza.setBounds(251, 364, 101, 14);
+  		txtRaza.setColumns(10);
+  		txtRaza.setBorder(border);
+  		add(txtRaza);
+  		
+  		//Campo texto raza
+  		txtClase = new JTextField();
+  		txtClase.setBackground(new Color(242, 242, 242));
+  		txtClase.setFont(new Font("Open Sans", Font.PLAIN, 11));
+  		txtClase.setBounds(251, 395, 101, 14);
+  		txtClase.setColumns(10);
+  		txtClase.setBorder(border);
+  		add(txtClase);
 
         // Botones
         btnGuardar = new JButton("GUARDAR");
