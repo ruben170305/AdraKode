@@ -2,7 +2,6 @@ package views;
 
 // Librerías
 import javax.swing.*;
-import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -25,7 +24,6 @@ public class VerPartidasMaster extends JPanel {
 		try {
 			UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -39,9 +37,6 @@ public class VerPartidasMaster extends JPanel {
 		
 		
 		/* COMPONENTES */
-
-		// Creo border para cajas de texto (solo linea inferior)
-		Border border = BorderFactory.createMatteBorder(0, 0, 2, 0, new Color(29, 29, 27));
 
 		// Titulo
 		lblTitulo = new JLabel("VER PARTIDAS");

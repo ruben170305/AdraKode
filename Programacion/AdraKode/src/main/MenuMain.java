@@ -24,7 +24,6 @@ public class MenuMain {
 				VerPartidasMaster vPartidas = new VerPartidasMaster();
 				VentanaPrincipalLogin login = new VentanaPrincipalLogin();
 				Home home = new Home();
-				Menu menu = new Menu( "Menú" );
 				
 				//Creamos el listener del menu
 				PMenuListener listener = 

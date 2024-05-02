@@ -39,9 +39,6 @@ public class VerPersonajes extends JPanel {
 		
 		/* COMPONENTES */
 		
-		//Creo border para cajas de texto (solo linea inferior)
-		Border border = BorderFactory.createMatteBorder(0, 0, 2, 0, new Color(29, 29, 27));
-		
         // Titulo
         lblTitulo = new JLabel("VER PERSONAJES");
         lblTitulo.setForeground(new Color(29, 29, 27));

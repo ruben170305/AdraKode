@@ -2,7 +2,6 @@ package views;
 
 // Librerías
 import javax.swing.*;
-import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -39,9 +38,6 @@ public class VerPartidas extends JPanel {
 		
 		
 		/* COMPONENTES */
-
-		// Creo border para cajas de texto (solo linea inferior)
-		Border border = BorderFactory.createMatteBorder(0, 0, 2, 0, new Color(29, 29, 27));
 
 		// Titulo
 		lblTitulo = new JLabel("VER PARTIDAS");
