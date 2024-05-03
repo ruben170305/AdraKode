@@ -16,10 +16,11 @@ public class PMenuListener implements ActionListener {
 	private VerPersonajes vPersonajes;
 	private CrearPartida cPartida;
 	private EditarPartida ePartidas;
-	private VerPartidasMaster vPartidas;
+	private VerPartidas vPartidas;
+	private VerPartidasMaster vPartidasMaster;
 
 	public PMenuListener(Menu ventana, Home home, EditarPersonaje ePersonaje, CrearPersonaje cPersonaje, VerPersonajes vPersonajes,
-			CrearPartida cPartida, EditarPartida ePartidas, VerPartidasMaster vPartidas, VentanaPrincipalLogin login) {
+			CrearPartida cPartida, EditarPartida ePartidas, VerPartidas vPartidas, VerPartidasMaster vPartidasMaster, VentanaPrincipalLogin login) {
 		this.ventana = ventana;
 		this.home = home;
 		this.cPersonaje = cPersonaje;
@@ -28,6 +29,7 @@ public class PMenuListener implements ActionListener {
 		this.cPartida = cPartida;
 		this.ePartidas = ePartidas;
 		this.vPartidas = vPartidas;
+		this.vPartidasMaster = vPartidasMaster;
 		this.login = login;
 	}
 
@@ -49,6 +51,8 @@ public class PMenuListener implements ActionListener {
 				ventana.cargarPanel(ePartidas);
 			} else if (ev.getActionCommand().equals("Ver partidas")) {
 				ventana.cargarPanel(vPartidas);
+			} else if (ev.getActionCommand().equals("Ver partidas Master")) {
+				ventana.cargarPanel(vPartidasMaster);
 			} else if (ev.getActionCommand().equals("Login")) {
 				ventana.dispose();
 				ventana.cargarPanel(home);

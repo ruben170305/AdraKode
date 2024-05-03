@@ -20,8 +20,11 @@ public class Menu extends JFrame {
 	private JMenu mnPartidas;
 	private JMenuItem mntmBuscar;
 	private JMenuItem mntmCrearPartidas;
+	private JMenuItem mntmVerPartidasMaster;
 	private JMenuItem mntmVerPartidas;
 	private JMenuItem mntmEditarPartidas;
+	
+	private boolean gameMaster;
 	
 	public Menu(String titulo) {
 		super(titulo);
@@ -29,7 +32,7 @@ public class Menu extends JFrame {
 		initComponents();
 	}
 
-	private void initComponents() {
+	public void initComponents() {
 		
 		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		addWindowListener(new WindowAdapter() {
@@ -47,14 +50,13 @@ public class Menu extends JFrame {
 		Dimension ventana = new Dimension(ANCHO, ALTO);               
 		// Una cuenta para situar la ventana en el centro de la pantalla.       
 		setLocation((pantalla.width - ventana.width) / 2,  (pantalla.height - ventana.height) / 2);
-		
 		crearMenu();
 	}
 	
 	/**
 	 * Método que crea el JMenuBar y los items principales (JMenu) y el submenu de cada item (JMenuItem)
 	 */
-	private void crearMenu() {
+	public void crearMenu() {
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 		
@@ -87,7 +89,14 @@ public class Menu extends JFrame {
 		mnPartidas.add(mntmEditarPartidas);
 		
 		mntmVerPartidas = new JMenuItem("Ver partidas");
-		mnPartidas.add(mntmVerPartidas);
+		mntmVerPartidasMaster = new JMenuItem("Ver partidas Master");
+		
+		//Agregamos el menu de ver partidas dependiendo si eres game master o no
+		if (gameMaster) {
+			mnPartidas.add(mntmVerPartidasMaster);
+		} else {
+			mnPartidas.add(mntmVerPartidas);
+		}
 		
 		//Creamos y asignamos el boton Login al menu principal
 		mntmTexto = new JMenuItem("Login");
@@ -101,6 +110,7 @@ public class Menu extends JFrame {
 		scrpContenedor = new JScrollPane();
 		scrpContenedor.setBounds(0, 0, 784, 533);
 		getContentPane().add(scrpContenedor);
+		
 	}
 	
 	/**
@@ -114,7 +124,11 @@ public class Menu extends JFrame {
         
         
         mntmCrearPartidas.addActionListener(listener);
-        mntmVerPartidas.addActionListener(listener);
+        if (gameMaster) {
+        	mntmVerPartidasMaster.addActionListener(listener);
+		} else {
+			mntmVerPartidas.addActionListener(listener);
+		}
         mntmModificarP.addActionListener(listener);
         mntmEditarPartidas.addActionListener(listener);
         
@@ -166,5 +180,15 @@ public class Menu extends JFrame {
 		} 
 		
 	}
+
+	public boolean isGameMaster() {
+		return gameMaster;
+	}
+
+	public void setGameMaster(boolean gameMaster) {
+		this.gameMaster = gameMaster;
+	}
+	
+	
 	
 }

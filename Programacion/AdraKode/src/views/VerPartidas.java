@@ -21,12 +21,12 @@ public class VerPartidas extends JPanel {
 
 	private void inicializarComponentes() {
 		// Adaptar la apariencia del SO donde se ejecuta
-		try {
-			UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		try {
+//			UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 
 		// layout absoluto
 		setLayout(null);

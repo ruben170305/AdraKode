@@ -8,6 +8,8 @@ import listeners.LoginListener;
 import java.awt.event.*;
 import java.io.IOException;
 import java.io.InputStream;
+import javax.swing.event.ChangeListener;
+import javax.swing.event.ChangeEvent;
 
 public class VentanaPrincipalLogin extends JFrame {
 
@@ -29,7 +31,7 @@ public class VentanaPrincipalLogin extends JFrame {
 
 	}
 
-	private void inicializarComponentes() {
+	public void inicializarComponentes() {
 		// Adaptar la apariencia del SO donde se ejecuta
 		try {
 			UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
@@ -126,11 +128,13 @@ public class VentanaPrincipalLogin extends JFrame {
 
 		// Checkbox admin
 		administrador = new JCheckBox("Game Master");
+		administrador.setName("gamemaster");
 		administrador.setHorizontalAlignment(SwingConstants.CENTER);
 		administrador.setForeground(new Color(29, 29, 27));
 		administrador.setFont(new Font("Open Sans", Font.BOLD, 12));
 		administrador.setBounds(297, 391, 189, 20);
 		getContentPane().add(administrador);
+		
 
 		// Botón entrar
 		entrar = new JButton("ENTRAR");
@@ -150,6 +154,7 @@ public class VentanaPrincipalLogin extends JFrame {
 	 */
 	public void setListener(LoginListener listener) {
 		entrar.addActionListener(listener);
+		administrador.addActionListener(listener);
 	}
 
 	/**
@@ -188,4 +193,38 @@ public class VentanaPrincipalLogin extends JFrame {
 	public void hacerVisible() {
 		setVisible(true);
 	}
+
+	public JLabel getLblTitulo() {
+		return lblTitulo;
+	}
+
+	public JLabel getUsuarioIcono() {
+		return usuarioIcono;
+	}
+
+	public JLabel getContrasenaIcono() {
+		return contrasenaIcono;
+	}
+
+	public JLabel getLogoIcono() {
+		return logoIcono;
+	}
+
+	public JTextField getUsuario() {
+		return usuario;
+	}
+
+	public JPasswordField getContraseña() {
+		return contraseña;
+	}
+
+	public JCheckBox getAdministrador() {
+		return administrador;
+	}
+
+	public JButton getEntrar() {
+		return entrar;
+	}
+	
+	
 }
