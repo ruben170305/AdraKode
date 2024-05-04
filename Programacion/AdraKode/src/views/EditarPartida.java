@@ -5,6 +5,8 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
+import listeners.EditarPartidaListener;
+
 import java.awt.*;
 
 public class EditarPartida extends JPanel {
@@ -252,5 +254,9 @@ public class EditarPartida extends JPanel {
         btnGuardarImagen.setBounds(453, 510, 61, 45);
         add(btnGuardarImagen);
 
+	}
+	
+	public void setListener( EditarPartidaListener listener ) {
+		btnGuardar.addActionListener(listener);
 	}
 }

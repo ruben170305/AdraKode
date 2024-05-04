@@ -4,6 +4,9 @@ package views;
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
+
+import listeners.CrearPartidaListener;
+
 import java.awt.*;
 
 public class CrearPartida extends JPanel {
@@ -220,5 +223,9 @@ public class CrearPartida extends JPanel {
         btnGuardarImagen.setBounds(453, 501, 61, 45);
         add(btnGuardarImagen);
 
+	}
+	
+	public void setListener(CrearPartidaListener listener ) {
+		btnGuardar.addActionListener(listener);
 	}
 }

@@ -4,6 +4,9 @@ package views;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
+
+import listeners.VerPartidaMasterListener;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -139,6 +142,7 @@ public class VerPartidasMaster extends JPanel {
 		// Botones
 		btnEditar = new JButton();
 		btnEditar.setIcon(new ImageIcon(VerPersonajes.class.getResource("/img/botonEditarW.png")));
+		btnEditar.setName("editar");
 		btnEditar.setOpaque(true);
 		btnEditar.setForeground(new Color(29, 29, 27));
 		btnEditar.setFont(new Font("Oxygen", Font.BOLD, 17));
@@ -149,6 +153,7 @@ public class VerPartidasMaster extends JPanel {
 
 		btnBorrar = new JButton();
 		btnBorrar.setIcon(new ImageIcon(VerPersonajes.class.getResource("/img/botonBorrarW.png")));
+		btnBorrar.setName("borrar");
 		btnBorrar.setOpaque(true);
 		btnBorrar.setForeground(new Color(29, 29, 27));
 		btnBorrar.setFont(new Font("Oxygen", Font.BOLD, 17));
@@ -171,8 +176,16 @@ public class VerPartidasMaster extends JPanel {
 		add(btnSeleccionar);
 
 	}
+	
+	public void setListener(VerPartidaMasterListener listener ) {
+		btnEditar.addActionListener( listener );
+		btnSeleccionar.addActionListener( listener );
+		btnBorrar.addActionListener( listener );
+	}
 
 //	public void hacerVisible() {
 //		setVisible(true);
 //	}
+	
+	
 }

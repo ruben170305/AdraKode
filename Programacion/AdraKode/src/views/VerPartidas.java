@@ -4,6 +4,7 @@ package views;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
+import listeners.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -137,10 +138,6 @@ public class VerPartidas extends JPanel {
 		add(lblEstado);
 
 		btnSeleccionar = new JButton("JUGAR");
-		btnSeleccionar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
 		btnSeleccionar.setFont(new Font("Oxygen", Font.BOLD, 17));
 		btnSeleccionar.setForeground(new Color(242, 242, 242));
 		btnSeleccionar.setBackground(new Color(29, 161, 242));
@@ -149,6 +146,10 @@ public class VerPartidas extends JPanel {
 		btnSeleccionar.setBounds(314, 493, 172, 41);
 		add(btnSeleccionar);
 
+	}
+	
+	public void setListener(VerPartidaListener listener) {
+		btnSeleccionar.addActionListener(listener);
 	}
 
 //	public void hacerVisible() {

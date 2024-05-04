@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
+import main.MenuMain;
 import views.Menu;
 import views.VentanaPrincipalLogin;
 
@@ -13,10 +14,10 @@ public class LoginListener implements ActionListener {
 	private VentanaPrincipalLogin login;
 	private Menu menu;
 	private String estado = "ejecutando";
+	private boolean esMaster;
 	
-	public LoginListener(VentanaPrincipalLogin login, Menu menu) {
+	public LoginListener(VentanaPrincipalLogin login) {
 		this.login = login;
-		this.menu = menu;
 	
 	}
 	
@@ -31,16 +32,13 @@ public class LoginListener implements ActionListener {
         if (source instanceof JCheckBox) {
             JCheckBox checkBox = (JCheckBox) source;
             if ("gamemaster".equals(checkBox.getName())) {
-                boolean esGameMaster = checkBox.isSelected();
-                menu.setGameMaster(esGameMaster);
-                menu.crearMenu();
-                System.out.println("¿Es game master? " + esGameMaster);
-                menu.repaint();
+                esMaster = checkBox.isSelected();
+                System.out.println("¿Es game master? " + esMaster);
             }
         } else if (source instanceof JButton) {
             if (e.getActionCommand().equals("ENTRAR")) {
                 login.dispose();
-                menu.dispose();
+                this.menu = MenuMain.arranque(esMaster);
                 menu.hacerVisible();
             }
         }

@@ -26,8 +26,9 @@ public class Menu extends JFrame {
 	
 	private boolean gameMaster;
 	
-	public Menu(String titulo) {
+	public Menu(String titulo, boolean esMaster) {
 		super(titulo);
+		this.gameMaster = esMaster;
 		setIcon();
 		initComponents();
 	}
@@ -78,23 +79,17 @@ public class Menu extends JFrame {
 		mnPartidas = new JMenu("Partidas");
 		menuBar.add(mnPartidas);
 		
-		//Creamos el submenu de partidas
-		mntmBuscar = new JMenuItem("Buscar partida");
-		mnPartidas.add(mntmBuscar);
-		
-		mntmCrearPartidas = new JMenuItem("Crear partida");
-		mnPartidas.add(mntmCrearPartidas);
-		
-		mntmEditarPartidas = new JMenuItem("Editar partidas");
-		mnPartidas.add(mntmEditarPartidas);
-		
-		mntmVerPartidas = new JMenuItem("Ver partidas");
-		mntmVerPartidasMaster = new JMenuItem("Ver partidas Master");
-		
 		//Agregamos el menu de ver partidas dependiendo si eres game master o no
 		if (gameMaster) {
+			mntmVerPartidasMaster = new JMenuItem("Ver partidas Master");
 			mnPartidas.add(mntmVerPartidasMaster);
+			mntmCrearPartidas = new JMenuItem("Crear partida");
+			mnPartidas.add(mntmCrearPartidas);
+			
+			mntmEditarPartidas = new JMenuItem("Editar partidas");
+			mnPartidas.add(mntmEditarPartidas);	
 		} else {
+			mntmVerPartidas = new JMenuItem("Ver partidas");
 			mnPartidas.add(mntmVerPartidas);
 		}
 		
@@ -119,18 +114,16 @@ public class Menu extends JFrame {
 	 */
 	public void setListener(PMenuListener listener) {
         mntmNuevo.addActionListener(listener);
-        mntmBuscar.addActionListener(listener);
         mntmVer.addActionListener(listener);
         
-        
-        mntmCrearPartidas.addActionListener(listener);
         if (gameMaster) {
         	mntmVerPartidasMaster.addActionListener(listener);
+        	mntmCrearPartidas.addActionListener(listener);
+            mntmEditarPartidas.addActionListener(listener);
 		} else {
 			mntmVerPartidas.addActionListener(listener);
 		}
         mntmModificarP.addActionListener(listener);
-        mntmEditarPartidas.addActionListener(listener);
         
         mntmTexto.addActionListener(listener);
         //mntmSalir.addActionListener(listener);
@@ -178,6 +171,21 @@ public class Menu extends JFrame {
 		if (opcion == JOptionPane.YES_OPTION) {
 			System.exit(0);
 		} 
+		
+	}
+	
+	public boolean mostrarMensajeConfirmborrado() {
+		int opcion = JOptionPane.showConfirmDialog(this, 
+				"¿Seguro que desea borrar el elemento?", 
+				"Confirmación de borrado",
+				JOptionPane.YES_NO_OPTION,
+				JOptionPane.WARNING_MESSAGE);
+		
+		if (opcion == JOptionPane.YES_OPTION) {
+			return true;
+		} else {
+			return false;
+		}
 		
 	}
 

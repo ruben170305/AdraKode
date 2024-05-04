@@ -52,6 +52,7 @@ public class PMenuListener implements ActionListener {
 			} else if (ev.getActionCommand().equals("Ver partidas")) {
 				ventana.cargarPanel(vPartidas);
 			} else if (ev.getActionCommand().equals("Ver partidas Master")) {
+				System.out.println("vPartidas Master");
 				ventana.cargarPanel(vPartidasMaster);
 			} else if (ev.getActionCommand().equals("Login")) {
 				ventana.dispose();
