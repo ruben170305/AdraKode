@@ -38,6 +38,7 @@ public class LoginListener implements ActionListener {
         } else if (source instanceof JButton) {
             if (e.getActionCommand().equals("ENTRAR")) {
                 login.dispose();
+                //Llamamos al metodo arranque para que cree la ventana menu y nos devuelva esa ventana y poder mostrarla
                 this.menu = MenuMain.arranque(esMaster);
                 menu.hacerVisible();
             }

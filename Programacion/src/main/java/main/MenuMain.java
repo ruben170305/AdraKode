@@ -28,11 +28,7 @@ public class MenuMain {
 			
 			@Override
 			public void run() {
-				//Arrancamos todas las vistas del programa
-				
-
-				//Asignamos los listeners
-				
+				//Arrancamos la vista login para comprobar si es game master o no
 				LoginListener loginlistener = new LoginListener(login);
 				login.setListener(loginlistener);
 				//Hacemos visible el login y cargamos el panel home a la ventana principal para que cuando se muestre este preparada
@@ -43,6 +39,13 @@ public class MenuMain {
 		});
 
 	}
+	/**
+	 * Método que inicializa la ventana principal (Menu) este se encarga de decir al menu si es game master o no.
+	 * Se llama desde el loginlistener para que cuando se cierre el login se ejecuten estas sentencias y se actualice
+	 * correctamente el menu
+	 * @param esMaster Recibe true or false dependiendo del checkbox de login
+	 * @return Devuelve Menu ventanaPpal para asignar todos los listeners a la ventana creada
+	 */
 	public static Menu arranque(boolean esMaster) {
 		if (esMaster) {
 			ventanaPpal = new Menu("AdraKode Master", esMaster);
