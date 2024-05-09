@@ -9,27 +9,23 @@ public class MenuMain {
 
 	// Inicializamos todas las vistas
 	static Menu ventanaPpal;
-
-	// Inicializamos el Home y arrancamos la aplicación
+	static CrearPersonaje cPersonaje = new CrearPersonaje();
+	static EditarPersonaje ePersonaje = new EditarPersonaje();
 	static Home home = new Home();
+	static VerPersonajesListener ver_personajes_listener = new VerPersonajesListener( ePersonaje, ventanaPpal, home );
+	static VerPersonajes vPersonajes = new VerPersonajes(ver_personajes_listener);
+	static CrearPartida cPartidas = new CrearPartida();
+	static EditarPartida ePartidas = new EditarPartida();
 
-	static VerPartidaListener vPartidaListener = new VerPartidaListener(home, ventanaPpal);
-
-	static CrearPersonaje cPersonaje 		 = new CrearPersonaje();
-	static EditarPersonaje ePersonaje 		 = new EditarPersonaje();
-	static VerPersonajes vPersonajes 		 = new VerPersonajes();
-	static CrearPartida cPartidas 			 = new CrearPartida();
-	static EditarPartida ePartidas 			 = new EditarPartida();
-	static VerPartidas vPartidas 			 = new VerPartidas( vPartidaListener );
+	static VerPartidaListener ver_partidas = new VerPartidaListener( ePersonaje, ventanaPpal, home );
+	static VerPartidas vPartidas = new VerPartidas( ver_partidas );
 	static VerPartidasMaster vPartidasMaster = new VerPartidasMaster();
-	static VentanaPrincipalLogin login 		 = new VentanaPrincipalLogin();
-
+	static VentanaPrincipalLogin login = new VentanaPrincipalLogin();
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			
 			@Override
 			public void run() {
-
 				//Arrancamos la vista login para comprobar si es game master o no
 				LoginListener loginlistener = new LoginListener(login);
 				login.setListener(loginlistener);
@@ -70,20 +66,17 @@ public class MenuMain {
 						
 		//Creamos el listener de VerPersonajes
 		VerPersonajesListener ver_personajes_listener = new VerPersonajesListener( ePersonaje, ventanaPpal, home );
-
 		//Creamos el listener de EditarPersonajes
 		EditarPersonajesListener editar_personajes_listener = new EditarPersonajesListener( ventanaPpal, home );
-
-		if ( esMaster ) {
-			CrearPartidaListener cPartidaListener 		= new CrearPartidaListener(home, ventanaPpal);
-			EditarPartidaListener ePartidaListener 		= new EditarPartidaListener(home, ventanaPpal);
-			VerPartidaMasterListener vPartidaMasterListener			= new VerPartidaMasterListener( home, ventanaPpal, ePartidas );
-
-			vPartidasMaster.setListener( vPartidaMasterListener );
+		if (esMaster) {
+			VerPartidaMasterListener vpartidaMasterLis = new VerPartidaMasterListener(home, ventanaPpal, ePartidas);
+			vPartidasMaster.setListener(vpartidaMasterLis);
+			CrearPartidaListener cPartidaListener = new CrearPartidaListener(home, ventanaPpal);
+			EditarPartidaListener ePartidaListener = new EditarPartidaListener(home, ventanaPpal);
 			cPartidas.setListener(cPartidaListener);
 			ePartidas.setListener(ePartidaListener);
 		} else {
-			vPartidas.setListener(vPartidaListener);
+			vPartidas.setListener(ver_partidas);
 		}
 		
 		

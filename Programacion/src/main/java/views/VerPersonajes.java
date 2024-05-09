@@ -16,9 +16,11 @@ public class VerPersonajes extends JPanel {
     private JComboBox comboBoxSeleccionar;
     
     private Personaje personaje;
+    private VerPersonajesListener listener;
 
 	
-	public VerPersonajes() {
+    public VerPersonajes( VerPersonajesListener listener ) {
+		this.listener = listener;
 		setBackground(new Color(242, 242, 242));
 		inicializarComponentes();
 		//hacerVisible();

@@ -11,6 +11,7 @@ public class Model {
 	
 	public Connection getConexion() {
 		Connection conn = null;
+		
 		try {
 			// Cargamos el driver de MySQL
 			Class.forName( driver );

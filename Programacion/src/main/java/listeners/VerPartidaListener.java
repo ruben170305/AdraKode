@@ -19,7 +19,12 @@ public class VerPartidaListener implements ActionListener {
 	}
 
 
-	@Override
+	public VerPartidaListener(EditarPersonaje ePersonaje, Menu ventanaPpal, Home home2) {
+        //TODO Auto-generated constructor stub
+    }
+
+
+    @Override
 	public void actionPerformed(ActionEvent ae) {
 		if ( ae.getActionCommand().equals("JUGAR") ) {
             this.menu.cargarPanel(home);
