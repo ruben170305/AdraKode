@@ -2,8 +2,7 @@ package listeners;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 import views.*;
 import model.*;
@@ -32,17 +31,21 @@ public class VerPartidaListener implements ActionListener {
         }
 	}
 
-	public void get_data() {
+	public ResultSet get_data() {
+
+		ResultSet rs = null;
 
 		// Creamos una conexión con MySQL
 		Model mysql = new Model();
 		mysql.getConexion();
 
-		try ( ResultSet rs = mysql.Model_query( "select * from miembro" ) ) {
-			System.out.println( rs );
+		try {
+			rs = mysql.Model_query( "select * from partida" );
+			return rs;
 		} catch ( SQLException e ) {
 			e.printStackTrace();
 		}
-	}
 
+		return rs;
+	}
 }

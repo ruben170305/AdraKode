@@ -66,14 +66,6 @@ public class Model {
 			System.out.println( "SQL Error: " + sqle.getMessage() );
 			throw sqle;
 
-		} finally {
-			try {
-				// Si existe un Statement por cerrar, lo cerramos
-				if ( stmt != null )
-					stmt.close();
-			} catch( SQLException sqle ) {
-				System.out.println( "Error al cerrar el Statement: " + sqle.getMessage() );
-			}
 		}
 	}
 }

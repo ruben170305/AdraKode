@@ -6,6 +6,8 @@ import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 import listeners.*;
 import java.awt.*;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class VerPartidas extends JPanel {
 	private JLabel lblTitulo, lblImagen;
@@ -17,7 +19,6 @@ public class VerPartidas extends JPanel {
 		this.listener = listener;
 		setBackground(new Color(242, 242, 242));
 		inicializarComponentes();
-		//hacerVisible();
 	}
 
 	private void inicializarComponentes() {
@@ -56,19 +57,31 @@ public class VerPartidas extends JPanel {
 
 		
 		// Designamos el nombre de las columnas de la tabla
-		String[] columns = { "ID", "Anfitrión", "Jugadores", "Duración", "Fecha", "Estado" };
+		String[] columns = { "ID", "Nombre", "Ambientación", "Duración", "Fecha", "Estado" };
 
-		// Insertamos los datos de la tabla
-		Object[][] data = { 
-				{ "Partida 1", "Usuario 1", 4, "30'", "13-04 16:00 pm", "En curso" },
-				{ "Partida 2", "Usuario 2", 3, "15'", "16-04 15:00 pm", "En espera" },
-				{ "Partida 3", "Usuario 5", 2, "25'", "12-04 11:00 am", "Finalizada" },
-				{ "Partida 2", "Usuario 2", 3, "15'", "16-04 15:00 pm", "En espera" },
-				{ "Partida 3", "Usuario 5", 2, "25'", "12-04 11:00 am", "Finalizada" },
-				{ "Partida 2", "Usuario 2", 3, "15'", "16-04 15:00 pm", "En espera" },
-				{ "Partida 2", "Usuario 2", 3, "15'", "16-04 15:00 pm", "En espera" },
-				{ "Partida 3", "Usuario 5", 2, "25'", "12-04 11:00 am", "Finalizada" }
-		};
+		// Generamos el array de datos de la tabla
+        Object[][] data = new Object[100][6];
+
+		// Capturamos los datos de MySQL mediante una consulta
+		ResultSet rows = this.listener.get_data();
+		try {
+			// Mientras haya registros, rellenamos el array
+            for ( int i = 0; rows.next() && i < data.length; i++ ) {
+
+				// Insertamos los datos
+                data[i][0] = rows.getString( "cod" );
+                data[i][1] = rows.getString( "nombre" );
+                data[i][2] = rows.getString( "ambientacion" );
+                data[i][3] = rows.getString( "duracion" );
+                data[i][4] = rows.getString( "dia" );
+
+				// Determinamos el estado
+				String en_curso_text = ( Integer.parseInt( rows.getString( "enCurso" ) ) == 1 ) ? "En curso" : "Finalizada";
+                data[i][5] = en_curso_text;
+            }
+		} catch ( SQLException sqle ) {
+			sqle.printStackTrace();
+		}
 
 		// Creamos una plantilla para la tabla
 		DefaultTableModel template = new DefaultTableModel(data, columns);
