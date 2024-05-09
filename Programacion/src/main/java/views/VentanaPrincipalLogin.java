@@ -187,6 +187,20 @@ public class VentanaPrincipalLogin extends JFrame {
         }
     }
 	
+	public boolean mostrarMensajeErrorLogin() {
+		int opcion = JOptionPane.showConfirmDialog(this, 
+				"Usuario o contraseña incorrecto", 
+				"Error login",
+				JOptionPane.CLOSED_OPTION, 
+				JOptionPane.ERROR_MESSAGE);
+		
+		if (opcion == JOptionPane.CLOSED_OPTION) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
 	/**
 	 * Metodo que hace visible la ventana (JFrame)
 	 */

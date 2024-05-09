@@ -3,6 +3,8 @@ package views;
 import java.awt.*;
 import javax.swing.border.*;
 import listeners.VerPersonajesListener;
+import model.Personaje;
+
 import javax.swing.*;
 
 public class VerPersonajes extends JPanel {
@@ -12,6 +14,8 @@ public class VerPersonajes extends JPanel {
     private JButton btnSeleccionar, btnEditar, btnBorrar; 
     private JProgressBar pbExp, pbFuerza, pbDestreza, pbConstitucion, pbInteligencia, pbSabiduria, pbCarisma; 
     private JComboBox comboBoxSeleccionar;
+    
+    private Personaje personaje;
 
 	
 	public VerPersonajes() {

@@ -52,6 +52,7 @@ public class MenuMain {
 		} else {
 			ventanaPpal = new Menu("AdraKode", esMaster);
 		}
+		ventanaPpal.cargarPanel(home);
 		
 		//Creamos el listener del menu
 		PMenuListener listener = 

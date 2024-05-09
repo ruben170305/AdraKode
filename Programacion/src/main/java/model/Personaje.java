@@ -1,10 +1,13 @@
 package model;
 
+import java.sql.Connection;
+
 public class Personaje {
 
     // Definimos las características del Personaje
     private String nombre, clase, exp;
     private int pers_id, raza;
+    private Model model;
     
     // Constructor
     public Personaje( int pers_id, String nombre, int raza, String clase, String exp ) {
@@ -13,6 +16,12 @@ public class Personaje {
         this.raza    = raza;
         this.clase   = clase;
         this.exp     = exp;
+    }
+    
+    public void hacerConsulta() {
+    	Connection connection = model.getConexion();
+    	String nPersonaje = "SELECT * FROM cod WHERE ";
+    	
     }
 
     // Getters y Setters

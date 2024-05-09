@@ -2,10 +2,12 @@ package listeners;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 import javax.swing.*;
 
 import main.MenuMain;
+import model.Usuario;
 import views.Menu;
 import views.VentanaPrincipalLogin;
 
@@ -14,6 +16,7 @@ public class LoginListener implements ActionListener {
 	private VentanaPrincipalLogin login;
 	private Menu menu;
 	private String estado = "ejecutando";
+	private Usuario user;
 	private boolean esMaster;
 	
 	public LoginListener(VentanaPrincipalLogin login) {
@@ -37,10 +40,20 @@ public class LoginListener implements ActionListener {
             }
         } else if (source instanceof JButton) {
             if (e.getActionCommand().equals("ENTRAR")) {
-                login.dispose();
-                //Llamamos al metodo arranque para que cree la ventana menu y nos devuelva esa ventana y poder mostrarla
-                this.menu = MenuMain.arranque(esMaster);
-                menu.hacerVisible();
+                try {
+                	user = new Usuario(login.getUsuario().getText(), login.getContraseña().getText());
+					if (user.consultaLogin(login.getUsuario().toString())) {
+						login.dispose();
+		                //Llamamos al metodo arranque para que cree la ventana menu y nos devuelva esa ventana y poder mostrarla
+		                this.menu = MenuMain.arranque(esMaster);
+		                menu.hacerVisible();
+					} else {
+						login.mostrarMensajeErrorLogin();
+					}
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
             }
         }
 			

@@ -188,7 +188,7 @@ public class Menu extends JFrame {
 		}
 		
 	}
-
+	
 	public boolean isGameMaster() {
 		return gameMaster;
 	}
