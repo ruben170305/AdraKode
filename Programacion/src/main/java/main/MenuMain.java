@@ -16,13 +16,14 @@ public class MenuMain {
 	static Menu ventanaPpal;
 	static CrearPersonaje cPersonaje = new CrearPersonaje();
 	static EditarPersonaje ePersonaje = new EditarPersonaje();
-	static VerPersonajes vPersonajes = new VerPersonajes();
+	static Home home = new Home();
+	static VerPersonajesListener ver_personajes_listener = new VerPersonajesListener( ePersonaje, ventanaPpal, home );
+	static VerPersonajes vPersonajes = new VerPersonajes(ver_personajes_listener);
 	static CrearPartida cPartidas = new CrearPartida();
 	static EditarPartida ePartidas = new EditarPartida();
 	static VerPartidas vPartidas = new VerPartidas();
 	static VerPartidasMaster vPartidasMaster = new VerPartidasMaster();
 	static VentanaPrincipalLogin login = new VentanaPrincipalLogin();
-	static Home home = new Home();
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			
@@ -61,9 +62,11 @@ public class MenuMain {
 						cPartidas, ePartidas, vPartidas, vPartidasMaster, login);
 		//Creamos el listener del login
 		//Creamos el listener de VerPersonajes
-		VerPersonajesListener ver_personajes_listener = new VerPersonajesListener( ePersonaje, ventanaPpal, home );
+		
 		//Creamos el listener de EditarPersonajes
 		EditarPersonajesListener editar_personajes_listener = new EditarPersonajesListener( ventanaPpal, home );
+		
+		
 		if (esMaster) {
 			VerPartidaMasterListener vpartidaMasterLis = new VerPartidaMasterListener(home, ventanaPpal, ePartidas);
 			vPartidasMaster.setListener(vpartidaMasterLis);

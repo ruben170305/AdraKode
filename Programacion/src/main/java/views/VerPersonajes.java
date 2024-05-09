@@ -14,11 +14,16 @@ public class VerPersonajes extends JPanel {
     private JButton btnSeleccionar, btnEditar, btnBorrar; 
     private JProgressBar pbExp, pbFuerza, pbDestreza, pbConstitucion, pbInteligencia, pbSabiduria, pbCarisma; 
     private JComboBox comboBoxSeleccionar;
+<<<<<<< Updated upstream
     
     private Personaje personaje;
+=======
+	private VerPersonajesListener listener;
+>>>>>>> Stashed changes
 
 	
-	public VerPersonajes() {
+    public VerPersonajes( VerPersonajesListener listener ) {
+		this.listener = listener;
 		setBackground(new Color(242, 242, 242));
 		inicializarComponentes();
 		//hacerVisible();
