@@ -6,37 +6,30 @@ import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 import listeners.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class VerPartidas extends JPanel {
 	private JLabel lblTitulo, lblImagen;
 	private JButton btnSeleccionar;
 	private JLabel lblTituloPartida, lblAnfitrion, lblJugadores, lblDuración, lblFecha, lblEstado;
+	private VerPartidaListener listener;
 
-	public VerPartidas() {
+	public VerPartidas( VerPartidaListener listener ) {
+		this.listener = listener;
 		setBackground(new Color(242, 242, 242));
 		inicializarComponentes();
 		//hacerVisible();
 	}
 
 	private void inicializarComponentes() {
-		// Adaptar la apariencia del SO donde se ejecuta
-//		try {
-//			UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
-//		} catch (Exception e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
 
 		// layout absoluto
 		setLayout(null);
 
 		// Tamaño y posicion de ventana
 		setSize(800, 600);
-		// setLocation(null);
 
-		
+		// Capturamos la colección de datos de MySQL
+		this.listener.get_data();
 		
 		/* COMPONENTES */
 
@@ -60,6 +53,7 @@ public class VerPartidas extends JPanel {
 		
 		
 		// Tabla
+
 		
 		// Designamos el nombre de las columnas de la tabla
 		String[] columns = { "ID", "Anfitrión", "Jugadores", "Duración", "Fecha", "Estado" };
@@ -151,8 +145,4 @@ public class VerPartidas extends JPanel {
 	public void setListener(VerPartidaListener listener) {
 		btnSeleccionar.addActionListener(listener);
 	}
-
-//	public void hacerVisible() {
-//		setVisible(true);
-//	}
 }

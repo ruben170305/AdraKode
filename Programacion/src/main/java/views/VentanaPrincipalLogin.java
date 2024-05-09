@@ -8,8 +8,6 @@ import listeners.LoginListener;
 import java.awt.event.*;
 import java.io.IOException;
 import java.io.InputStream;
-import javax.swing.event.ChangeListener;
-import javax.swing.event.ChangeEvent;
 
 public class VentanaPrincipalLogin extends JFrame {
 

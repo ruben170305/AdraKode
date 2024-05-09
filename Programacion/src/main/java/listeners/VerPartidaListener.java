@@ -2,7 +2,11 @@ package listeners;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 import views.*;
+import model.*;
 
 public class VerPartidaListener implements ActionListener {
 	private Menu menu;
@@ -17,11 +21,23 @@ public class VerPartidaListener implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent ae) {
-		// TODO Auto-generated method stub
 		if ( ae.getActionCommand().equals("JUGAR") ) {
             this.menu.cargarPanel(home);
             //this.ep.hacerVisible();
         }
+	}
+
+	public void get_data() {
+
+		// Creamos una conexión con MySQL
+		Model mysql = new Model();
+		mysql.getConexion();
+
+		try ( ResultSet rs = mysql.Model_query( "select * from miembro" ) ) {
+			System.out.println( rs );
+		} catch ( SQLException e ) {
+			e.printStackTrace();
+		}
 	}
 
 }
