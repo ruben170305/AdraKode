@@ -7,31 +7,42 @@ import views.*;
 
 public class MenuMain {
 
-	// Inicializamos todas las vistas
-	static Menu ventanaPpal;
-	static CrearPersonaje cPersonaje = new CrearPersonaje();
-	static EditarPersonaje ePersonaje = new EditarPersonaje();
+	// Inicializamos la ventana principal y la ventana del Home
+	static Menu menu = new Menu( "Adrakode", false );
 	static Home home = new Home();
-	static VerPersonajesListener ver_personajes_listener = new VerPersonajesListener( ePersonaje, ventanaPpal, home );
-	static VerPersonajes vPersonajes = new VerPersonajes(ver_personajes_listener);
-	static CrearPartida cPartidas = new CrearPartida();
-	static EditarPartida ePartidas = new EditarPartida();
+	static Listener list = new Listener( menu, home );
 
-	static VerPartidaListener ver_partidas = new VerPartidaListener( ePersonaje, ventanaPpal, home );
-	static VerPartidas vPartidas = new VerPartidas( ver_partidas );
+
+	// Instanciamos las ventanas junto a sus listeners
+	static CrearPartida cPartida 			 = new CrearPartida();
+	static EditarPartida ePartida 			 = new EditarPartida();
 	static VerPartidasMaster vPartidasMaster = new VerPartidasMaster();
+
+	static VerPartidaListener ver_partidas_listener = new VerPartidaListener( menu, home );
+	static VerPartidas vPartidas = new VerPartidas( ver_partidas_listener) ;
+	
+	static EditarPersonajesListener editar_personaje_listener = new EditarPersonajesListener( menu, home );
+	static EditarPersonaje ePersonaje = new EditarPersonaje();
+
+	static VerPersonajesListener ver_personajes_listener = new VerPersonajesListener( ePersonaje, menu, home );
+	static VerPersonajes vPersonajes = new VerPersonajes( ver_personajes_listener );
+
+	static CrearPersonajeListener crear_personaje_listener = new CrearPersonajeListener( menu, home );
+	static CrearPersonaje cPersonaje = new CrearPersonaje();
+
 	static VentanaPrincipalLogin login = new VentanaPrincipalLogin();
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
+
+	public static void main( String[] args ) {
+		EventQueue.invokeLater( new Runnable() {
 			
 			@Override
 			public void run() {
 				//Arrancamos la vista login para comprobar si es game master o no
 				LoginListener loginlistener = new LoginListener(login);
-				login.setListener(loginlistener);
+				login.setListener( loginlistener );
 
 				//Hacemos visible el login y cargamos el panel home a la ventana principal para que cuando se muestre este preparada
-				login.hacerVisible();
+				login.make_visible();
 			}
 		});
 	}
@@ -45,46 +56,52 @@ public class MenuMain {
 	 */
 	public static Menu arranque( boolean esMaster ) {
 
+		System.out.println( esMaster );
+
 		// Creamos una ventana y cargamos el panel
 		String title_window = ( esMaster ) ? "Adrakode Master" : "Adrakode";
-		ventanaPpal 		= new Menu( title_window, esMaster );
-		ventanaPpal.cargarPanel( home );
+		menu.setGameMaster( esMaster );
+		menu.setTitle( title_window );
+		menu.crearMenu();
+		menu.cargarPanel( home );
 		
 		//Creamos el listener del menu
 		PMenuListener listener = new PMenuListener(
-				ventanaPpal
+				menu
 			, 	home
 			, 	ePersonaje
 			,	cPersonaje
 			, 	vPersonajes
-			,	cPartidas
-			, 	ePartidas
+			,	cPartida
+			, 	ePartida
 			, 	vPartidas
 			, 	vPartidasMaster
 			, 	login
 		);
-						
-		//Creamos el listener de VerPersonajes
-		VerPersonajesListener ver_personajes_listener = new VerPersonajesListener( ePersonaje, ventanaPpal, home );
-		//Creamos el listener de EditarPersonajes
-		EditarPersonajesListener editar_personajes_listener = new EditarPersonajesListener( ventanaPpal, home );
-		if (esMaster) {
-			VerPartidaMasterListener vpartidaMasterLis = new VerPartidaMasterListener(home, ventanaPpal, ePartidas);
-			vPartidasMaster.setListener(vpartidaMasterLis);
-			CrearPartidaListener cPartidaListener = new CrearPartidaListener(home, ventanaPpal);
-			EditarPartidaListener ePartidaListener = new EditarPartidaListener(home, ventanaPpal);
-			cPartidas.setListener(cPartidaListener);
-			ePartidas.setListener(ePartidaListener);
+		
+		if( esMaster ) {
+			CrearPartidaListener crear_partida_listener = new CrearPartidaListener( menu, home );
+			EditarPartidaListener editar_partida_listener = new EditarPartidaListener( menu, home );
+			VerPartidaMasterListener ver_partidas_master_listener = new VerPartidaMasterListener( ePartida, menu, home );
+
+			// Vinculación de listeners
+			cPartida.setListener( crear_partida_listener );
+			ePartida.setListener( editar_partida_listener );
+			vPartidasMaster.setListener( ver_partidas_master_listener );
 		} else {
-			vPartidas.setListener(ver_partidas);
+
+			// Vinculación de listeners
+			VerPartidaListener ver_partidas_listener = new VerPartidaListener( menu, home );
+			vPartidas.setListener( ver_partidas_listener );
 		}
+
+		// Vinculación de Listeners
+		ePersonaje.setListener( editar_personaje_listener );
+		vPersonajes.setListener();
+
+		// Vinculamos el listener de la ventana principal a su ventana
+		menu.setListener( listener );
 		
-		
-		//Asignamos los listeners
-		vPersonajes.setListener( ver_personajes_listener );
-		ePersonaje.setListener( editar_personajes_listener );
-		ventanaPpal.setListener(listener);
-		
-		return ventanaPpal;
+		return menu;
 	}
 }

@@ -19,7 +19,7 @@ public class Personaje {
     }
     
     public void hacerConsulta() {
-    	Connection connection = model.getConexion();
+    	Connection connection = model.get_connection();
     	String nPersonaje = "SELECT * FROM cod WHERE ";
     	
     }

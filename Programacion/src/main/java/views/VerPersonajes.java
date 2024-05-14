@@ -22,11 +22,11 @@ public class VerPersonajes extends JPanel {
     public VerPersonajes( VerPersonajesListener listener ) {
 		this.listener = listener;
 		setBackground(new Color(242, 242, 242));
-		inicializarComponentes();
-		//hacerVisible();
+		initialize_components();
+		//make_visible();
 	}
 	
-	private void inicializarComponentes() {
+	private void initialize_components() {
 		//Adaptar la apariencia del SO donde se ejecuta
 		try {
 			UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
@@ -302,13 +302,10 @@ public class VerPersonajes extends JPanel {
 	 * Metodo que asigna el listener
 	 * @param listener Recibe el listener con el que quieres asignar los objetos
 	 */
-	public void setListener( VerPersonajesListener listener ) {
-		btnEditar.addActionListener( listener );
-		btnSeleccionar.addActionListener( listener );
-		btnBorrar.addActionListener( listener );
+	public void setListener() {
+		btnEditar.addActionListener( this.listener );
+		btnSeleccionar.addActionListener( this.listener );
+		btnBorrar.addActionListener( this.listener );
 	}
 
-//	public void hacerVisible() {
-//		setVisible(true);
-//	}
 }

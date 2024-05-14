@@ -6,19 +6,17 @@ import javax.swing.border.*;
 
 public class CrearPersonaje extends JPanel {
 	private JTextField txtRaza, txtClase;
-    private JLabel lblDestreza, lblConstitucion, lblInteligencia, lblSabiduria, lblCarisma;
-    private JLabel lblTitulo, lblFuerza, lblSeleccionarPersonaje, lblRaza, lblIconoPersn;
+    private JLabel lblDestreza, lblConstitucion, lblInteligencia, lblSabiduria, lblCarisma, lblTitulo, lblFuerza, lblSeleccionarPersonaje, lblRaza, lblIconoPersn;
     private JLabel lblIconoExp, lblIconoFuerza, lblIconoDestreza, lblIconoConst, lblIconoInteligencia, lblIconoSabiduria, lblIconoCarisma, lblClase, lblExp;
     private JSpinner spinnerExperiencia, spinnerFuerza, spinnerDestreza, spinnerConstitucion, spinnerInteligencia, spinnerSabiduria, spinnerCarisma;
     private JButton btnGuardarImagen, btnGuardar;
 	
 	public CrearPersonaje() {
-		setBackground(new Color(242, 242, 242));
-		inicializarComponentes();
-		hacerVisible();
+		initialize_components();
+		make_visible();
 	}
 	
-	private void inicializarComponentes() {
+	private void initialize_components() {
 		//Adaptar la apariencia del SO donde se ejecuta
 		try {
 			UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
@@ -26,6 +24,8 @@ public class CrearPersonaje extends JPanel {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
+		setBackground(new Color(242, 242, 242));
 		
 		//layout absoluto
 		setLayout(null);
@@ -275,7 +275,7 @@ public class CrearPersonaje extends JPanel {
 	/**
 	 * Método para mostrar la ventana
 	 */
-	public void hacerVisible() {
+	public void make_visible() {
 		setVisible(true);
 	}
 }

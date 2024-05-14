@@ -1,13 +1,13 @@
 package listeners;
 
 import java.awt.event.*;
-import views.*;
 
-public class CrearPartidaListener extends Listener implements ActionListener {
-	private Menu menu;
-	private Home home;
+import views.Home;
+import views.Menu;
+
+public class CrearPersonajeListener extends Listener implements ActionListener {
 	
-	public CrearPartidaListener( Menu menu, Home home ) {
+	public CrearPersonajeListener( Menu menu, Home home ) {
 		super( menu, home );
 	}
 

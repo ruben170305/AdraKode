@@ -4,12 +4,12 @@ import java.sql.*;
 
 public class Model {
 	private String driver = "com.mysql.cj.jdbc.Driver";
-	private String url = "jdbc:mysql://localhost/kode";
+	private String url = "jdbc:mysql://10.8.0.1/kode";
 	private String usuario = "root";
-	private String pword = "password";
+	private String pword = "ALIENware$$";
 	private Connection conn;
 	
-	public Connection getConexion() {
+	public Connection get_connection() {
 		Connection conn = null;
 		
 		try {
@@ -37,10 +37,10 @@ public class Model {
 		return conn;
 	}
 	
-	public void cerrarConexion(Connection c) {
+	public void close_connection(Connection c) {
 		try {
 			c.close();
-		} catch (SQLException e) {
+		} catch ( SQLException e ) {
 			e.printStackTrace();
 		}
 	}

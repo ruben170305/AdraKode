@@ -18,32 +18,30 @@ public class EditarPersonaje extends JPanel {
     private JButton btnGuardarImagen, btnGuardar;
 
     public EditarPersonaje() {
-        setBounds(new Rectangle(0, 0, 0, 19));
-        setBackground(new Color(242, 242, 242));
-        inicializarComponentes();
-        //hacerVisible();
+        initialize_components();
     }
 
-    private void inicializarComponentes() {
+    private void initialize_components() {
 		//Adaptar la apariencia del SO donde se ejecuta
 		try {
-			UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
+			UIManager.setLookAndFeel( UIManager.getCrossPlatformLookAndFeelClassName() );
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+        
+        setBounds( new Rectangle( 0, 0, 0, 19 ) );
+        setBackground( new Color( 242, 242, 242 ) );
 		
 		//layout absoluto
 		setLayout(null);
 		
 		//Tamaño y posicion de ventana
-		setSize(800, 600);
-		//setLocation(null);
-		
+		setSize( 800, 600 );		
 		
 		/* COMPONENTES */
 		
-		//Creo border para cajas de texto (solo linea inferior)
+		// Creo border para cajas de texto (solo linea inferior)
 		Border border = BorderFactory.createMatteBorder(0, 0, 2, 0, new Color(29, 29, 27));
 
         // Titulo
@@ -238,22 +236,22 @@ public class EditarPersonaje extends JPanel {
         add(lblClase);
         
         //Campo texto raza
-  		txtRaza = new JTextField();
-  		txtRaza.setBackground(new Color(242, 242, 242));
-  		txtRaza.setFont(new Font("Open Sans", Font.PLAIN, 11));
-  		txtRaza.setBounds(251, 364, 101, 14);
-  		txtRaza.setColumns(10);
-  		txtRaza.setBorder(border);
-  		add(txtRaza);
-  		
-  		//Campo texto raza
-  		txtClase = new JTextField();
-  		txtClase.setBackground(new Color(242, 242, 242));
-  		txtClase.setFont(new Font("Open Sans", Font.PLAIN, 11));
-  		txtClase.setBounds(251, 395, 101, 14);
-  		txtClase.setColumns(10);
-  		txtClase.setBorder(border);
-  		add(txtClase);
+        txtRaza = new JTextField();
+        txtRaza.setBackground(new Color(242, 242, 242));
+        txtRaza.setFont(new Font("Open Sans", Font.PLAIN, 11));
+        txtRaza.setBounds(251, 364, 101, 14);
+        txtRaza.setColumns(10);
+        txtRaza.setBorder(border);
+        add(txtRaza);
+        
+        //Campo texto raza
+        txtClase = new JTextField();
+        txtClase.setBackground(new Color(242, 242, 242));
+        txtClase.setFont(new Font("Open Sans", Font.PLAIN, 11));
+        txtClase.setBounds(251, 395, 101, 14);
+        txtClase.setColumns(10);
+        txtClase.setBorder(border);
+        add(txtClase);
 
         // Botones
         btnGuardar = new JButton("GUARDAR");
@@ -284,11 +282,4 @@ public class EditarPersonaje extends JPanel {
 		btnGuardar.addActionListener( listener );
         btnGuardarImagen.addActionListener( listener );
 	}
-    
-    /**
-     * Método que hace visible la ventana al ejecutarlo
-     */
-//    public void hacerVisible() {
-//        setVisible(true);
-//    }
 }

@@ -1,43 +1,36 @@
 package listeners;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import java.sql.*;
-
-import views.*;
 import model.*;
+import views.Home;
+import views.Menu;
 
-public class VerPartidaListener implements ActionListener {
-	private Menu menu;
-	private Home home;
+public class VerPartidaListener extends Listener implements ActionListener {
 	
 	
-	public VerPartidaListener(Home home, Menu menu) {
-		this.menu = menu;
-		this.home = home;
+	public VerPartidaListener( Menu menu, Home home ) {
+		super( menu, home );
 	}
-
-
-	public VerPartidaListener(EditarPersonaje ePersonaje, Menu ventanaPpal, Home home2) {
-        //TODO Auto-generated constructor stub
-    }
 
 
     @Override
-	public void actionPerformed(ActionEvent ae) {
-		if ( ae.getActionCommand().equals("JUGAR") ) {
-            this.menu.cargarPanel(home);
-            //this.ep.hacerVisible();
-        }
+	public void actionPerformed( ActionEvent ae ) {
+		if ( ae.getActionCommand().equals( "JUGAR" ) )
+            this.menu.cargarPanel( home );
 	}
 
+	/**
+	 * Método que realiza la consulta de datos a MySQL
+	 * @return rs
+	 */
 	public ResultSet get_data() {
 
 		ResultSet rs = null;
 
 		// Creamos una conexión con MySQL
 		Model mysql = new Model();
-		mysql.getConexion();
+		mysql.get_connection();
 
 		try {
 			rs = mysql.Model_query( "select * from partida" );

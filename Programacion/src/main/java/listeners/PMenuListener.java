@@ -1,9 +1,7 @@
 package listeners;
 
 import views.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
+import java.awt.event.*;
 import javax.swing.JMenuItem;
 
 public class PMenuListener implements ActionListener {
@@ -15,56 +13,76 @@ public class PMenuListener implements ActionListener {
 	private views.VentanaPrincipalLogin login;
 	private VerPersonajes vPersonajes;
 	private CrearPartida cPartida;
-	private EditarPartida ePartidas;
+	private EditarPartida ePartida;
 	private VerPartidas vPartidas;
 	private VerPartidasMaster vPartidasMaster;
 
-	public PMenuListener(Menu ventana, Home home, EditarPersonaje ePersonaje, CrearPersonaje cPersonaje, VerPersonajes vPersonajes,
-			CrearPartida cPartida, EditarPartida ePartidas, VerPartidas vPartidas, VerPartidasMaster vPartidasMaster, VentanaPrincipalLogin login) {
-		this.ventana = ventana;
-		this.home = home;
-		this.cPersonaje = cPersonaje;
-		this.ePersonaje = ePersonaje;
-		this.vPersonajes = vPersonajes;
-		this.cPartida = cPartida;
-		this.ePartidas = ePartidas;
-		this.vPartidas = vPartidas;
-		this.vPartidasMaster = vPartidasMaster;
-		this.login = login;
-	}
+	public PMenuListener(
+			Menu ventana
+		, 	Home home
+		, 	EditarPersonaje ePersonaje
+		, 	CrearPersonaje cPersonaje
+		, 	VerPersonajes vPersonajes
+		,	CrearPartida cPartida
+		, 	EditarPartida ePartida
+		, 	VerPartidas vPartidas
+		, 	VerPartidasMaster vPartidasMaster
+		, 	VentanaPrincipalLogin login
+		) {
+			this.ventana 			= ventana;
+			this.home 				= home;
+			this.cPersonaje 		= cPersonaje;
+			this.ePersonaje 		= ePersonaje;
+			this.vPersonajes 		= vPersonajes;
+			this.cPartida 			= cPartida;
+			this.ePartida 			= ePartida;
+			this.vPartidas 			= vPartidas;
+			this.vPartidasMaster 	= vPartidasMaster;
+			this.login 				= login;
+		}	
 
 	@Override
 	/**
 	 * Metodo del listener que cambia de ventana según la opcion que clickemos en el menu
 	 */
-	public void actionPerformed(ActionEvent ev) {
-		if (ev.getSource() instanceof JMenuItem) {
-			if (ev.getActionCommand().equals("Nuevo personaje")) {
-				ventana.cargarPanel(cPersonaje);
-			} else if (ev.getActionCommand().equals("Modificar personaje")) {
-				ventana.cargarPanel(ePersonaje);
-			} else if (ev.getActionCommand().equals("Ver personajes")) {
-				ventana.cargarPanel(vPersonajes);
-			} else if (ev.getActionCommand().equals("Crear partida")) {
-				ventana.cargarPanel(cPartida);
-			} else if (ev.getActionCommand().equals("Editar partidas")) {
-				ventana.cargarPanel(ePartidas);
-			} else if (ev.getActionCommand().equals("Ver partidas")) {
-				ventana.cargarPanel(vPartidas);
-			} else if (ev.getActionCommand().equals("Ver partidas Master")) {
-				System.out.println("vPartidas Master");
-				ventana.cargarPanel(vPartidasMaster);
-			} else if (ev.getActionCommand().equals("Login")) {
-				ventana.dispose();
-				ventana.cargarPanel(home);
-				login.hacerVisible();
-			} else if (ev.getActionCommand().equals("Salir")) {
-				ventana.mostrarMensajeConfirm();
+	public void actionPerformed( ActionEvent ev ) {
+		if ( ev.getSource() instanceof JMenuItem ) {
+
+			// Dependiendo de la instrucción, mostramos una vista u otra
+			switch ( ev.getActionCommand() ) {
+				case "Nuevo personaje":
+					ventana.cargarPanel( cPersonaje );
+					break;
+				case "Modificar personaje":
+					ventana.cargarPanel( ePersonaje );
+					break;
+				case "Ver personajes":
+					ventana.cargarPanel( vPersonajes );
+					break;
+				case "Crear partida":
+					ventana.cargarPanel( cPartida );
+					break;
+				case "Editar partidas":
+					ventana.cargarPanel( ePartida );
+					break;
+				case "Ver partidas":
+					ventana.cargarPanel( vPartidas );
+					break;
+				case "Ver partidas Master":
+					ventana.cargarPanel( vPartidasMaster );
+					break;
+				case "Login":
+					ventana.dispose();
+					ventana.cargarPanel( home );
+					login.make_visible();
+					break;
+				case "Salir":
+					ventana.mostrarMensajeConfirm();
+					break;
+				default:
+					break;
 			}
-				
 		}
 	}
 
 }
-
-

@@ -5,52 +5,51 @@ import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javax.naming.spi.DirStateFactory.Result;
+
 import model.Model;
 import views.*;
 
-public class VerPersonajesListener implements ActionListener {
+public class VerPersonajesListener extends Listener implements ActionListener {
 
-	private Menu ventana;
 	private EditarPersonaje ep;
-	private Home home;
 
 	// Constructor del Listener
-	public VerPersonajesListener(EditarPersonaje ep, Menu ventana, Home home) {
+	public VerPersonajesListener( EditarPersonaje ep, Menu menu, Home home ) {
+		super( menu, home );
 		this.ep = ep;
-		this.ventana = ventana;
-		this.home = home;
 	}
-	public void get_data() {
-	// Creamos una conexión con MySQL
-	Model mysql = new Model();
-	mysql.getConexion();
+	
+	public ResultSet get_data() {
+		
+		ResultSet rs = null;
 
-	try(
-	ResultSet rs = mysql.Model_query("select * from miembro"))
-	{
-		System.out.println(rs);
-	}catch(
-	SQLException e)
-	{
-		e.printStackTrace();
+		// Creamos una conexión con MySQL
+		Model mysql = new Model();
+		mysql.get_connection();
+
+		try {
+			rs = mysql.Model_query( "select * from miembro" );
+			return rs;
+		} catch( SQLException sqle ) {
+			sqle.printStackTrace();
+		}
+
+		return rs;
 	}
-}
 
 	/**
      * Listener del botón de editar personaje. Redigirimos a la ventana dependiendo del boton
      */
     @Override
-    
     public void actionPerformed( ActionEvent ae ) {
-        if ( ae.getActionCommand().equals( "" ) ) {
-            this.ventana.cargarPanel( ep );
-            //this.ep.hacerVisible();
-        } else if( ae.getActionCommand().equals( "SELECCIONAR" ) ) {
-            this.ventana.cargarPanel( home );
-            //this.ep.hacerVisible();
-        } else {
-            this.ventana.cargarPanel( home );
-            //this.ep.hacerVisible();
-        }
+		
+        if ( ae.getActionCommand().equals( "" ) )
+            super.menu.cargarPanel( ep );
+        else if( ae.getActionCommand().equals( "SELECCIONAR" ) )
+			super.menu.cargarPanel( home );
+        else
+			super.menu.cargarPanel( home );
+
     }
 }

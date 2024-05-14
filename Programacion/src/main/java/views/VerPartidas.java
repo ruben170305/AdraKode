@@ -17,11 +17,11 @@ public class VerPartidas extends JPanel {
 
 	public VerPartidas( VerPartidaListener listener ) {
 		this.listener = listener;
-		setBackground(new Color(242, 242, 242));
-		inicializarComponentes();
+		setBackground( new Color( 242, 242, 242 ) );
+		initialize_components();
 	}
 
-	private void inicializarComponentes() {
+	private void initialize_components() {
 
 		// layout absoluto
 		setLayout(null);
@@ -155,7 +155,7 @@ public class VerPartidas extends JPanel {
 
 	}
 	
-	public void setListener(VerPartidaListener listener) {
-		btnSeleccionar.addActionListener(listener);
+	public void setListener( VerPartidaListener listener ) {
+		btnSeleccionar.addActionListener( listener );
 	}
 }

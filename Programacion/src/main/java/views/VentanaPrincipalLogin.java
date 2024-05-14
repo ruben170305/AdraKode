@@ -24,12 +24,12 @@ public class VentanaPrincipalLogin extends JFrame {
 		setBackground(new Color(242, 242, 242));
 		// listener = new VentanaPrincipalLogin(login);
 		setIcon();
-		inicializarComponentes();
-		hacerVisible();
+		initialize_components();
+		make_visible();
 
 	}
 
-	public void inicializarComponentes() {
+	public void initialize_components() {
 		// Adaptar la apariencia del SO donde se ejecuta
 		try {
 			UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
@@ -202,7 +202,7 @@ public class VentanaPrincipalLogin extends JFrame {
 	/**
 	 * Metodo que hace visible la ventana (JFrame)
 	 */
-	public void hacerVisible() {
+	public void make_visible() {
 		setVisible(true);
 	}
 
