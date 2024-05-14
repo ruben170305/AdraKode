@@ -4,9 +4,9 @@ import java.sql.*;
 
 public class Model {
 	private String driver = "com.mysql.cj.jdbc.Driver";
-	private String url = "jdbc:mysql://10.8.0.1/kode";
+	private String url = "jdbc:mysql://localhost/kode";
 	private String usuario = "root";
-	private String pword = "ALIENware$$";
+	private String pword = "password";
 	private Connection conn;
 	
 	public Connection get_connection() {
