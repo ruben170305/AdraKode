@@ -3,6 +3,7 @@ package main;
 import java.awt.EventQueue;
 
 import listeners.*;
+import model.Usuario;
 import views.*;
 
 public class MenuMain {
@@ -11,6 +12,7 @@ public class MenuMain {
 	static Menu menu = new Menu( "Adrakode", false );
 	static Home home = new Home();
 	static Listener list = new Listener( menu, home );
+	static Usuario user = new Usuario();
 
 	// Instanciamos las ventanas junto a sus listeners
 	static CrearPartida cPartida 			 = new CrearPartida();
@@ -23,13 +25,13 @@ public class MenuMain {
 	static EditarPersonajesListener editar_personaje_listener = new EditarPersonajesListener( menu, home );
 	static EditarPersonaje ePersonaje = new EditarPersonaje();
 
-	static VerPersonajesListener ver_personajes_listener = new VerPersonajesListener( ePersonaje, menu, home );
+	static VerPersonajesListener ver_personajes_listener = new VerPersonajesListener( ePersonaje, menu, home, user );
 	static VerPersonajes vPersonajes = new VerPersonajes( ver_personajes_listener );
 
-	static CrearPersonajeListener crear_personaje_listener = new CrearPersonajeListener( menu, home );
-	static CrearPersonaje cPersonaje = new CrearPersonaje();
+	static CrearPersonaje cPersonaje = new CrearPersonaje(menu);
+	static CrearPersonajeListener crear_personaje_listener = new CrearPersonajeListener( menu, home, cPersonaje, user );
 
-	static VentanaPrincipalLogin login = new VentanaPrincipalLogin();
+	static VentanaPrincipalLogin login = new VentanaPrincipalLogin(user);
 
 	public static void main( String[] args ) {
 		EventQueue.invokeLater( new Runnable() {
@@ -61,6 +63,7 @@ public class MenuMain {
 		String title_window = ( esMaster ) ? "Adrakode Master" : "Adrakode";
 		menu.setGameMaster( esMaster );
 		menu.setTitle( title_window );
+		cPersonaje.inicializarComponentes();
 		menu.crearMenu();
 		menu.cargarPanel( home );
 		
@@ -95,6 +98,7 @@ public class MenuMain {
 		}
 
 		// Vinculación de Listeners
+		cPersonaje.setListener(crear_personaje_listener);
 		ePersonaje.setListener( editar_personaje_listener );
 		vPersonajes.setListener();
 

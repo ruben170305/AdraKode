@@ -5,6 +5,8 @@ import javax.swing.*;
 import java.awt.*;
 import javax.swing.border.*;
 import listeners.LoginListener;
+import model.Usuario;
+
 import java.awt.event.*;
 import java.io.IOException;
 import java.io.InputStream;
@@ -16,12 +18,14 @@ public class VentanaPrincipalLogin extends JFrame {
 	private JPasswordField contraseña;
 	private JCheckBox administrador;
 	private JButton entrar;
+	private Usuario user;
 	//private LoginListener listener;
 
 	// private VentanaPrincipalLogin listener;
-	public VentanaPrincipalLogin() {
+	public VentanaPrincipalLogin(Usuario user) {
 		super("Login AdraKode");
 		setBackground(new Color(242, 242, 242));
+		this.user=user;
 		// listener = new VentanaPrincipalLogin(login);
 		setIcon();
 		initialize_components();
@@ -237,6 +241,11 @@ public class VentanaPrincipalLogin extends JFrame {
 	public JButton getEntrar() {
 		return entrar;
 	}
+
+	public Usuario getUser() {
+		return user;
+	}
+	
 	
 	
 }
