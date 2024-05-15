@@ -16,8 +16,18 @@ public class VerPartidaListener extends Listener implements ActionListener {
 
     @Override
 	public void actionPerformed( ActionEvent ae ) {
-		if ( ae.getActionCommand().equals( "JUGAR" ) )
-            this.menu.cargarPanel( home );
+
+		// Dependiendo del listener, realizamos una acción u otra
+		switch ( ae.getActionCommand() ) {
+			case "JUGAR":
+				this.menu.cargarPanel( home );
+				break;
+			case "DETALLE":
+				break;
+		
+			default:
+				break;
+		}
 	}
 
 	/**
@@ -37,6 +47,30 @@ public class VerPartidaListener extends Listener implements ActionListener {
 			"FROM partida p " +
 			"LEFT JOIN miembro m " +
 			"ON p.anfitrion_id = m.cod";
+
+			rs = mysql.Model_query( sql );
+			return rs;
+		} catch ( SQLException e ) {
+			e.printStackTrace();
+		}
+
+		return rs;
+	}
+
+	public ResultSet get_filtered_data( int partida_id ) {
+
+		ResultSet rs = null;
+
+		// Creamos una conexión con MySQL
+		Model mysql = new Model();
+		mysql.get_connection();
+
+		try {
+			String sql = "select p.*, m.nombre as nombre_anfitrion, m.apellidos as apellidos_anfitrion " +
+			"from partida p " +
+			"left join miembro m " +
+			"on p.anfitrion_id = m.cod " + 
+			"where p.partida_id = " + partida_id;
 
 			rs = mysql.Model_query( sql );
 			return rs;
