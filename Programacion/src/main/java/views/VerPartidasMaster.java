@@ -5,6 +5,7 @@ import javax.swing.*;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 
+import views.*;
 import listeners.VerPartidaMasterListener;
 
 import java.awt.*;

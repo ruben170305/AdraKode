@@ -42,8 +42,8 @@ public class CrearPersonajeListener extends Listener implements ActionListener {
 	         PreparedStatement pstmt = conn.prepareStatement(insert)) {
 
 	        // Configura los valores para la consulta
-	        pstmt.setString(1, "Personaje");  // Suponiendo que 'Personaje' es un valor fijo
-	        pstmt.setString(2, "Personaje");  // Suponiendo que 'Personaje' es un valor fijo
+	        pstmt.setString(1, cPersonaje.getLblSeleccionarPersonaje().getText());  // Suponiendo que 'Personaje' es un valor fijo
+	        pstmt.setString(2, cPersonaje.getLblSeleccionarPersonaje().getText());  // Suponiendo que 'Personaje' es un valor fijo
 	        pstmt.setString(3, cPersonaje.getTxtRaza().getText());
 	        pstmt.setString(4, cPersonaje.getTxtClase().getText());
 	        pstmt.setInt(5, 0);  // Si 'expe' es un entero, debes definir cómo se obtiene el valor
