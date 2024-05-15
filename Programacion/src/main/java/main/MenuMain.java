@@ -2,9 +2,9 @@ package main;
 
 import java.awt.EventQueue;
 
+import views.*;
 import listeners.*;
 import model.Usuario;
-import views.*;
 
 public class MenuMain {
 
