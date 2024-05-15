@@ -8,8 +8,8 @@ import listeners.CrearPartidaListener;
 import listeners.CrearPersonajeListener;
 
 public class CrearPersonaje extends JPanel {
-	private JTextField txtRaza, txtClase;
-    private JLabel lblDestreza, lblConstitucion, lblInteligencia, lblSabiduria, lblCarisma, lblTitulo, lblFuerza, lblSeleccionarPersonaje, lblRaza, lblIconoPersn;
+	private JTextField txtRaza, txtClase, lblSeleccionarPersonaje;
+    private JLabel lblDestreza, lblConstitucion, lblInteligencia, lblSabiduria, lblCarisma, lblTitulo, lblFuerza, lblRaza, lblIconoPersn;
     private JLabel lblIconoExp, lblIconoFuerza, lblIconoDestreza, lblIconoConst, lblIconoInteligencia, lblIconoSabiduria, lblIconoCarisma, lblClase, lblExp;
     private JSpinner spinnerExperiencia, spinnerFuerza, spinnerDestreza, spinnerConstitucion, spinnerInteligencia, spinnerSabiduria, spinnerCarisma;
     private JButton btnGuardarImagen, btnGuardar;
@@ -65,7 +65,7 @@ public class CrearPersonaje extends JPanel {
         add(separator);
 
         // Etiqueta seleccionar personaje
-        lblSeleccionarPersonaje = new JLabel("PERSONAJE 1");
+        lblSeleccionarPersonaje = new JTextField();
         lblSeleccionarPersonaje.setForeground(new Color(29, 29, 27));
         lblSeleccionarPersonaje.setHorizontalAlignment(SwingConstants.CENTER);
         lblSeleccionarPersonaje.setFont(new Font("Open Sans", Font.BOLD, 18));
@@ -373,6 +373,12 @@ public class CrearPersonaje extends JPanel {
 	public void setSpinnerCarisma(JSpinner spinnerCarisma) {
 		this.spinnerCarisma = spinnerCarisma;
 	}
+
+	public JTextField getLblSeleccionarPersonaje() {
+		return lblSeleccionarPersonaje;
+	}
+	
+	
 	
 	
 }
