@@ -1,5 +1,5 @@
 DROP TABLE juega;
-DROP TABLE utiliza_personaje;
+-- DROP TABLE utiliza_personaje;
 DROP TABLE partida;
 DROP TABLE personaje;
 DROP TABLE miembro;
@@ -12,7 +12,7 @@ CREATE TABLE miembro (
     estudio VARCHAR(50)
 );
 CREATE TABLE personaje (
-	cod INT PRIMARY KEY,
+	cod INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(50),
     personaje VARCHAR(50),
     raza VARCHAR(50),
@@ -22,7 +22,7 @@ CREATE TABLE personaje (
 	CONSTRAINT FOREIGN KEY (cod_miembro) REFERENCES miembro(cod)
 );
 CREATE TABLE partida (
-	cod INT PRIMARY KEY,
+	cod INT AUTO_INCREMENT PRIMARY KEY,
     num_sesion INT,
     nombre VARCHAR(50),
     duracion INT,
