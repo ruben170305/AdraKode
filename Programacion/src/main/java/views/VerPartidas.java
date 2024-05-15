@@ -3,11 +3,14 @@ package views;
 // Librerías
 import javax.swing.*;
 import javax.swing.border.LineBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import listeners.*;
 import java.awt.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class VerPartidas extends JPanel {
 	private JLabel lblTitulo, lblImagen;
@@ -52,41 +55,47 @@ public class VerPartidas extends JPanel {
 		separator.setBounds(337, 88, 125, 3);
 		add(separator);
 		
-		
-		// Tabla
-
-		
 		// Designamos el nombre de las columnas de la tabla
-		String[] columns = { "ID", "Nombre", "Ambientación", "Duración", "Fecha", "Anfitrion", "Estado" };
-
-		// Generamos el array de datos de la tabla
-        Object[][] data = new Object[100][8];
+		String[] columns = { "ID", "Nombre", "Ambientación", "Duración", "Fecha", "Anfitrion", "Nº jugadores", "Estado" };
 
 		// Capturamos los datos de MySQL mediante una consulta
 		ResultSet rows = this.listener.get_data();
+		ArrayList<Object[]> row_data_list = new ArrayList<>();
+
+		// Capturamos el número de filas del resultado de la consulta
 		try {
-			// Mientras haya registros, rellenamos el array
-            for ( int i = 0; rows.next() && i < data.length; i++ ) {
+			while ( rows.next() ) {
+
+				// Inicializamos un Objeto temporal donde almacenamos los datos de la fila
+				Object[] row_data = new Object[ columns.length ];
 
 				// Insertamos los datos
-                data[i][0] = rows.getString( "partida_id" );
-                data[i][1] = rows.getString( "nombre" );
-                data[i][2] = rows.getString( "ambientacion" );
-                data[i][3] = rows.getString( "duracion" );
-                data[i][4] = rows.getString( "fecha" );
+                row_data[0] = rows.getString( "partida_id" );
+                row_data[1] = rows.getString( "nombre" );
+                row_data[2] = rows.getString( "ambientacion" );
+                row_data[3] = rows.getString( "duracion" );
+                row_data[4] = rows.getString( "fecha" );
+				row_data[6] = rows.getInt( "numero_jugadores" );
 
+				// Formateo de campos
 				String anfitrion = rows.getString( "nombre_anfitrion" ) + " " + rows.getString( "apellidos_anfitrion" );
-				data[i][5] = anfitrion;
-
-				data[i][6] = rows.getInt( "numero_jugadores" );
+				row_data[5] = anfitrion;
 
 				// Determinamos el estado
 				String en_curso_text = ( Integer.parseInt( rows.getString( "en_curso" ) ) == 1 ) ? "En curso" : "Finalizada";
-                data[i][7] = en_curso_text;
-            }
-		} catch ( SQLException sqle ) {
-			sqle.printStackTrace();
+                row_data[7] = en_curso_text;
+
+				// Añadimos los datos al arrayList final
+				row_data_list.add( row_data );
+			}
+
+		} catch ( SQLException e ) {
+			e.printStackTrace();
 		}
+
+		// Pasamos los datos al Objeto final que insertaremos en la tabla
+        Object[][] data = new Object[ row_data_list.size() ][ columns.length ];
+		row_data_list.toArray( data );
 
 		// Creamos una plantilla para la tabla
 		DefaultTableModel template = new DefaultTableModel(data, columns);
@@ -94,10 +103,10 @@ public class VerPartidas extends JPanel {
 		table.setForeground(new Color(29, 29, 27));
 		table.setBackground(new Color(242, 242, 242));
 		table.setFont(new Font("Open Sans", Font.PLAIN, 12));
+
 		JScrollPane scrollPane = new JScrollPane(table);
 		scrollPane.setBounds(122, 343, 556, 122);
 		add(scrollPane);
-
 		
 		// Imagen de la partida
 		lblImagen = new JLabel("");
@@ -157,6 +166,25 @@ public class VerPartidas extends JPanel {
 		btnSeleccionar.setBorderPainted(false);
 		btnSeleccionar.setBounds(314, 493, 172, 41);
 		add(btnSeleccionar);
+
+		// Añadimos un listener a cada fila de la tabla de partidas
+		table.getSelectionModel().addListSelectionListener( new ListSelectionListener() {
+			
+			public void valueChanged( ListSelectionEvent e ) {
+
+				// Capturamos la fila y el valor del ID de la partida
+				int selected_row = table.getSelectedRow();
+
+				// Actualizamos los JLabel con la información de la fila seleccionada
+				lblTituloPartida.setText( table.getValueAt( selected_row, 1 ).toString() );
+				lblAnfitrion.setText( table.getValueAt( selected_row, 5 ).toString() );
+				lblJugadores.setText( table.getValueAt( selected_row, 6 ).toString() );
+				lblDuración.setText( table.getValueAt( selected_row, 3 ).toString() + "'" );
+				lblFecha.setText( table.getValueAt( selected_row, 4 ).toString() );
+				lblEstado.setText( table.getValueAt( selected_row, 7 ).toString() );
+			}
+
+		} );
 
 	}
 	
