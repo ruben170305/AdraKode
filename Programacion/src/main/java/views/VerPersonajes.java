@@ -1,10 +1,10 @@
 package views;
 
 import java.awt.*;
+import java.util.ArrayList;
 import javax.swing.border.*;
 import listeners.VerPersonajesListener;
 import model.Personaje;
-
 import javax.swing.*;
 
 public class VerPersonajes extends JPanel {
@@ -71,8 +71,12 @@ public class VerPersonajes extends JPanel {
         add(lblSeleccionarPersonaje);
 
         //ComboBox
-        String[] opcionesComboBox = {"Jugador 1", "Jugador 2", "Jugador 3", "Jugador 4"};
-        comboBoxSeleccionar = new JComboBox<String>(opcionesComboBox);
+        ArrayList<String> opcionesComboBox = listener.get_data();
+
+        // Convertir el ArrayList a un array
+        String[] opcionesArray = new String[opcionesComboBox.size()];
+        opcionesComboBox.toArray(opcionesArray);
+        comboBoxSeleccionar = new JComboBox<>(opcionesArray);
         comboBoxSeleccionar.setFont(new Font("Open Sans", Font.BOLD, 14));
         comboBoxSeleccionar.setForeground(new Color(29, 29, 27));
         comboBoxSeleccionar.setBackground(new Color(242, 242, 242));
@@ -302,6 +306,17 @@ public class VerPersonajes extends JPanel {
 	 * Metodo que asigna el listener
 	 * @param listener Recibe el listener con el que quieres asignar los objetos
 	 */
+	
+	public void cargarDatosEnComboBox() {
+		ArrayList<String> opcionesComboBox = new ArrayList<String>(); 
+        // Guardar los datos en el ArrayList y actualizar el JComboBox
+        opcionesComboBox.addAll(listener.get_data());
+        comboBoxSeleccionar.removeAllItems();
+        for (String nombre : opcionesComboBox) {
+            comboBoxSeleccionar.addItem(nombre);
+        }
+    }
+	
 	public void setListener() {
 		btnEditar.addActionListener( this.listener );
 		btnSeleccionar.addActionListener( this.listener );

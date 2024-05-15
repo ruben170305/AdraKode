@@ -25,7 +25,7 @@ public class MenuMain {
 	static EditarPersonajesListener editar_personaje_listener = new EditarPersonajesListener( menu, home );
 	static EditarPersonaje ePersonaje = new EditarPersonaje();
 
-	static VerPersonajesListener ver_personajes_listener = new VerPersonajesListener( ePersonaje, menu, home );
+	static VerPersonajesListener ver_personajes_listener = new VerPersonajesListener( ePersonaje, menu, home, user );
 	static VerPersonajes vPersonajes = new VerPersonajes( ver_personajes_listener );
 
 	static CrearPersonaje cPersonaje = new CrearPersonaje(menu);

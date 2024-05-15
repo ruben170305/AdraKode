@@ -57,6 +57,7 @@ public class PMenuListener implements ActionListener {
 					ventana.cargarPanel( ePersonaje );
 					break;
 				case "Ver personajes":
+					vPersonajes.cargarDatosEnComboBox();
 					ventana.cargarPanel( vPersonajes );
 					break;
 				case "Crear partida":
