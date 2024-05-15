@@ -33,7 +33,12 @@ public class VerPartidaListener extends Listener implements ActionListener {
 		mysql.get_connection();
 
 		try {
-			rs = mysql.Model_query( "select * from partida" );
+			String sql = "SELECT p.*, m.nombre as nombre_anfitrion, m.apellidos as apellidos_anfitrion " +
+			"FROM partida p " +
+			"LEFT JOIN miembro m " +
+			"ON p.anfitrion_id = m.cod";
+
+			rs = mysql.Model_query( sql );
 			return rs;
 		} catch ( SQLException e ) {
 			e.printStackTrace();

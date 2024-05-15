@@ -28,10 +28,7 @@ public class VerPartidasMaster extends JPanel {
 
 		// Tamaño y posicion de ventana
 		setSize(800, 600);
-		// setLocation(null);
 
-		
-		
 		/* COMPONENTES */
 
 		// Titulo

@@ -4,8 +4,6 @@ import java.awt.event.*;
 import views.*;
 
 public class CrearPartidaListener extends Listener implements ActionListener {
-	private Menu menu;
-	private Home home;
 	
 	public CrearPartidaListener( Menu menu, Home home ) {
 		super( menu, home );

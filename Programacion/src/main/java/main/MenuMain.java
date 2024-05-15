@@ -12,7 +12,6 @@ public class MenuMain {
 	static Home home = new Home();
 	static Listener list = new Listener( menu, home );
 
-
 	// Instanciamos las ventanas junto a sus listeners
 	static CrearPartida cPartida 			 = new CrearPartida();
 	static EditarPartida ePartida 			 = new EditarPartida();

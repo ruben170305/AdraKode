@@ -173,6 +173,9 @@ public class Menu extends JFrame {
 		
 	}
 	
+	/**
+	 * Mostrar mensaje de confirmación de borrado
+	 */
 	public boolean mostrarMensajeConfirmborrado() {
 		int opcion = JOptionPane.showConfirmDialog(this, 
 				"¿Seguro que desea borrar el elemento?", 
@@ -188,6 +191,7 @@ public class Menu extends JFrame {
 		
 	}
 	
+	// Getters y Setters
 	public boolean isGameMaster() {
 		return gameMaster;
 	}

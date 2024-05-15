@@ -21,7 +21,6 @@ public class CrearPersonaje extends JPanel {
 		try {
 			UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -31,16 +30,13 @@ public class CrearPersonaje extends JPanel {
 		setLayout(null);
 		
 		//Tamaño y posicion de ventana
-		setSize(800, 600);
-		//setLocation(null);
-		
+		setSize(800, 600);		
 		
 		/* COMPONENTES */
 		
 		//Creo border para cajas de texto (solo linea inferior)
 		Border border = BorderFactory.createMatteBorder(0, 0, 2, 0, new Color(29, 29, 27));
 		
-
         // Titulo
         lblTitulo = new JLabel("CREAR PERSONAJE");
         lblTitulo.setForeground(new Color(29, 29, 27));

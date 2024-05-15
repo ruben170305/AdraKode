@@ -37,7 +37,7 @@ public class Model {
 		return conn;
 	}
 	
-	public void close_connection(Connection c) {
+	public void close_connection( Connection c ) {
 		try {
 			c.close();
 		} catch ( SQLException e ) {

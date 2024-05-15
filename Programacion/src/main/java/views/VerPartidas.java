@@ -57,10 +57,10 @@ public class VerPartidas extends JPanel {
 
 		
 		// Designamos el nombre de las columnas de la tabla
-		String[] columns = { "ID", "Nombre", "Ambientación", "Duración", "Fecha", "Estado" };
+		String[] columns = { "ID", "Nombre", "Ambientación", "Duración", "Fecha", "Anfitrion", "Estado" };
 
 		// Generamos el array de datos de la tabla
-        Object[][] data = new Object[100][6];
+        Object[][] data = new Object[100][8];
 
 		// Capturamos los datos de MySQL mediante una consulta
 		ResultSet rows = this.listener.get_data();
@@ -69,15 +69,20 @@ public class VerPartidas extends JPanel {
             for ( int i = 0; rows.next() && i < data.length; i++ ) {
 
 				// Insertamos los datos
-                data[i][0] = rows.getString( "cod" );
+                data[i][0] = rows.getString( "partida_id" );
                 data[i][1] = rows.getString( "nombre" );
                 data[i][2] = rows.getString( "ambientacion" );
                 data[i][3] = rows.getString( "duracion" );
-                data[i][4] = rows.getString( "dia" );
+                data[i][4] = rows.getString( "fecha" );
+
+				String anfitrion = rows.getString( "nombre_anfitrion" ) + " " + rows.getString( "apellidos_anfitrion" );
+				data[i][5] = anfitrion;
+
+				data[i][6] = rows.getInt( "numero_jugadores" );
 
 				// Determinamos el estado
-				String en_curso_text = ( Integer.parseInt( rows.getString( "enCurso" ) ) == 1 ) ? "En curso" : "Finalizada";
-                data[i][5] = en_curso_text;
+				String en_curso_text = ( Integer.parseInt( rows.getString( "en_curso" ) ) == 1 ) ? "En curso" : "Finalizada";
+                data[i][7] = en_curso_text;
             }
 		} catch ( SQLException sqle ) {
 			sqle.printStackTrace();
@@ -101,7 +106,7 @@ public class VerPartidas extends JPanel {
 		add(lblImagen);
 		
 		// Etiquetas
-		lblTituloPartida = new JLabel("Partida 1");
+		lblTituloPartida = new JLabel( data[0][1].toString() );
 		lblTituloPartida.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTituloPartida.setIcon(null);
 		lblTituloPartida.setForeground(new Color(29, 29, 27));
@@ -109,35 +114,35 @@ public class VerPartidas extends JPanel {
 		lblTituloPartida.setBounds(302, 121, 195, 26);
 		add(lblTituloPartida);
 		
-		lblAnfitrion = new JLabel("Anfitrión 1");
+		lblAnfitrion = new JLabel( data[0][5].toString() );
 		lblAnfitrion.setIcon(new ImageIcon(VerPartidas.class.getResource("/img/usuario.png")));
 		lblAnfitrion.setForeground(new Color(29, 29, 27));
 		lblAnfitrion.setFont(new Font("Oxygen", Font.BOLD, 14));
 		lblAnfitrion.setBounds(425, 164, 183, 26);
 		add(lblAnfitrion);
 		
-		lblJugadores = new JLabel("4");
+		lblJugadores = new JLabel( data[0][6].toString() );
 		lblJugadores.setIcon(new ImageIcon(VerPartidas.class.getResource("/img/equipo.png")));
 		lblJugadores.setForeground(new Color(29, 29, 27));
 		lblJugadores.setFont(new Font("Oxygen", Font.BOLD, 14));
 		lblJugadores.setBounds(425, 193, 183, 26);
 		add(lblJugadores);
 
-		lblDuración = new JLabel("30'");
+		lblDuración = new JLabel( data[0][3].toString() + "'" );
 		lblDuración.setIcon(new ImageIcon(VerPartidas.class.getResource("/img/repetir.png")));
 		lblDuración.setForeground(new Color(29, 29, 27));
 		lblDuración.setFont(new Font("Oxygen", Font.BOLD, 14));
 		lblDuración.setBounds(425, 222, 183, 26);
 		add(lblDuración);
 		
-		lblFecha = new JLabel("13-04 16:00 pm");
+		lblFecha = new JLabel( data[0][4].toString() );
 		lblFecha.setIcon(new ImageIcon(VerPartidas.class.getResource("/img/calendario.png")));
 		lblFecha.setForeground(new Color(29, 29, 27));
 		lblFecha.setFont(new Font("Oxygen", Font.BOLD, 14));
 		lblFecha.setBounds(425, 251, 183, 26);
 		add(lblFecha);
 		
-		lblEstado = new JLabel("En curso");
+		lblEstado = new JLabel( data[0][7].toString() );
 		lblEstado.setIcon(new ImageIcon(VerPartidas.class.getResource("/img/ajustes.png")));
 		lblEstado.setForeground(new Color(29, 29, 27));
 		lblEstado.setFont(new Font("Oxygen", Font.BOLD, 14));
