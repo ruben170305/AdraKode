@@ -4,19 +4,24 @@ import java.awt.*;
 import javax.swing.*;
 import javax.swing.border.*;
 
+import listeners.CrearPartidaListener;
+import listeners.CrearPersonajeListener;
+
 public class CrearPersonaje extends JPanel {
 	private JTextField txtRaza, txtClase;
     private JLabel lblDestreza, lblConstitucion, lblInteligencia, lblSabiduria, lblCarisma, lblTitulo, lblFuerza, lblSeleccionarPersonaje, lblRaza, lblIconoPersn;
     private JLabel lblIconoExp, lblIconoFuerza, lblIconoDestreza, lblIconoConst, lblIconoInteligencia, lblIconoSabiduria, lblIconoCarisma, lblClase, lblExp;
     private JSpinner spinnerExperiencia, spinnerFuerza, spinnerDestreza, spinnerConstitucion, spinnerInteligencia, spinnerSabiduria, spinnerCarisma;
     private JButton btnGuardarImagen, btnGuardar;
+    
+    private Menu menu;
 	
-	public CrearPersonaje() {
-		initialize_components();
-		make_visible();
+	public CrearPersonaje(Menu menu) {
+		this.menu = menu;
+		hacerVisible();
 	}
 	
-	private void initialize_components() {
+	public void inicializarComponentes() {
 		//Adaptar la apariencia del SO donde se ejecuta
 		try {
 			UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
@@ -165,6 +170,11 @@ public class CrearPersonaje extends JPanel {
         spinnerExperiencia.setBackground(new Color(29, 161, 242));
         spinnerExperiencia.setOpaque(true);
         spinnerExperiencia.setBounds(515, 206, 42, 20);
+        if (!menu.isGameMaster()) {
+			spinnerExperiencia.setEnabled(false);
+		} else {
+
+		}
         add(spinnerExperiencia);
 
         spinnerFuerza = new JSpinner();
@@ -275,7 +285,94 @@ public class CrearPersonaje extends JPanel {
 	/**
 	 * Método para mostrar la ventana
 	 */
-	public void make_visible() {
+	public void hacerVisible() {
 		setVisible(true);
 	}
+
+	public void setListener( CrearPersonajeListener listener ) {
+		btnGuardar.addActionListener( listener );
+	}
+
+	
+	public JTextField getTxtRaza() {
+		return txtRaza;
+	}
+
+	public void setTxtRaza(JTextField txtRaza) {
+		this.txtRaza = txtRaza;
+	}
+
+	public JTextField getTxtClase() {
+		return txtClase;
+	}
+
+	public void setTxtClase(JTextField txtClase) {
+		this.txtClase = txtClase;
+	}
+
+	public JLabel getLblIconoPersn() {
+		return lblIconoPersn;
+	}
+
+	public void setLblIconoPersn(JLabel lblIconoPersn) {
+		this.lblIconoPersn = lblIconoPersn;
+	}
+
+	public JSpinner getSpinnerExperiencia() {
+		return spinnerExperiencia;
+	}
+
+	public void setSpinnerExperiencia(JSpinner spinnerExperiencia) {
+		this.spinnerExperiencia = spinnerExperiencia;
+	}
+
+	public JSpinner getSpinnerFuerza() {
+		return spinnerFuerza;
+	}
+
+	public void setSpinnerFuerza(JSpinner spinnerFuerza) {
+		this.spinnerFuerza = spinnerFuerza;
+	}
+
+	public JSpinner getSpinnerDestreza() {
+		return spinnerDestreza;
+	}
+
+	public void setSpinnerDestreza(JSpinner spinnerDestreza) {
+		this.spinnerDestreza = spinnerDestreza;
+	}
+
+	public JSpinner getSpinnerConstitucion() {
+		return spinnerConstitucion;
+	}
+
+	public void setSpinnerConstitucion(JSpinner spinnerConstitucion) {
+		this.spinnerConstitucion = spinnerConstitucion;
+	}
+
+	public JSpinner getSpinnerInteligencia() {
+		return spinnerInteligencia;
+	}
+
+	public void setSpinnerInteligencia(JSpinner spinnerInteligencia) {
+		this.spinnerInteligencia = spinnerInteligencia;
+	}
+
+	public JSpinner getSpinnerSabiduria() {
+		return spinnerSabiduria;
+	}
+
+	public void setSpinnerSabiduria(JSpinner spinnerSabiduria) {
+		this.spinnerSabiduria = spinnerSabiduria;
+	}
+
+	public JSpinner getSpinnerCarisma() {
+		return spinnerCarisma;
+	}
+
+	public void setSpinnerCarisma(JSpinner spinnerCarisma) {
+		this.spinnerCarisma = spinnerCarisma;
+	}
+	
+	
 }

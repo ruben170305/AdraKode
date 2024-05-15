@@ -15,8 +15,8 @@ public class LoginListener implements ActionListener {
 	
 	private VentanaPrincipalLogin login;
 	private Menu menu;
-	private String estado = "ejecutando";
 	private Usuario user;
+	private String estado = "ejecutando";
 	private boolean esMaster;
 	
 	public LoginListener( VentanaPrincipalLogin login ) {
@@ -44,8 +44,8 @@ public class LoginListener implements ActionListener {
                 try {
 
 					// Si el usuario y la constraseña son correctos, continuamos
-                	user = new Usuario( login.getUsuario().getText(), login.getContraseña().getText() );
-					if ( user.consultaLogin( login.getUsuario().toString() ) ) {
+                	user = login.getUser();
+					if ( user.consultaLogin( login.getUsuario().getText(), login.getContraseña().getText() ) ) {
 						login.dispose();
 
 		                // Llamamos al metodo arranque para que cree la ventana menu y nos devuelva esa ventana
