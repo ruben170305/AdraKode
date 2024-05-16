@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import model.Model;
+import model.Personaje;
 import model.Usuario;
 import views.CrearPersonaje;
 import views.Home;
@@ -16,11 +17,13 @@ public class CrearPersonajeListener extends Listener implements ActionListener {
 	
 	private CrearPersonaje cPersonaje;
 	private Usuario user;
+	private Personaje personaje; 
 	
-	public CrearPersonajeListener( Menu menu, Home home, CrearPersonaje cPersonaje, Usuario user ) {
+	public CrearPersonajeListener( Menu menu, Home home, CrearPersonaje cPersonaje, Usuario user, Personaje personaje ) {
 		super( menu, home );
 		this.cPersonaje = cPersonaje;
 		this.user = user;
+		this.personaje = personaje;
 	}
 
 	@Override
@@ -28,6 +31,17 @@ public class CrearPersonajeListener extends Listener implements ActionListener {
 		if ( ae.getActionCommand().equals( "CREAR" ) ) {
 			get_data();
 			super.menu.cargarPanel( home );
+		}else if (ae.getActionCommand().equals("ACTUALIZAR")) {
+			update_data();
+			super.menu.cargarPanel(home);
+		}else if(ae.getActionCommand().equals("ELIMINAR")) {
+			try {
+				delete_data();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			super.menu.cargarPanel(home);
 		}
 	}
 	
@@ -55,5 +69,43 @@ public class CrearPersonajeListener extends Listener implements ActionListener {
 	        e.printStackTrace();
 	    }
 	}
+	public void update_data () {
+		Model mysql = new Model ();
+		mysql.get_connection();
+		
+		String update = "UPDATE personaje SET nombre = ?, personaje = ?, raza = ?; clase = ?, expe = ? WHERE cod_miembro = ? AND id_personaje = ?";
+		try ( Connection conn = mysql.get_connection();
+				PreparedStatement pstmt = conn.prepareStatement(update)){
+			pstmt.setString(1, cPersonaje.getLblSeleccionarPersonaje().getText());
+			pstmt.setString(2, cPersonaje.getLblSeleccionarPersonaje().getText());
+			pstmt.setString(3, cPersonaje.getTxtRaza().getText());
+			pstmt.setString(4, cPersonaje.getTxtClase().getText());
+			pstmt.setInt(5, 0);
+			pstmt.setInt(6, user.getUser_id());
+			
+			//Ejecuta la inserción
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	}
+	
+	public void delete_data() throws SQLException {
+		Model mysql = new Model ();
+		mysql.get_connection();
+		
+		String delete = "DELETE FROM personaje WHERE cod_miembro = ? AND id_personaje = ?";
+		try (Connection conn = mysql.get_connection();
+				PreparedStatement pstmt = conn.prepareStatement(delete)){
+			
+			pstmt.setInt(1, user.getUser_id());
+			pstmt.setInt(2, personaje.getPers_id());
+			
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	}
+	
 
 }
