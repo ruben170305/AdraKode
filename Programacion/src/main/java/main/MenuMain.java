@@ -4,6 +4,7 @@ import java.awt.EventQueue;
 
 import views.*;
 import listeners.*;
+import model.Personaje;
 import model.Usuario;
 
 public class MenuMain {
@@ -31,7 +32,8 @@ public class MenuMain {
 	static VerPersonajes vPersonajes = new VerPersonajes( ver_personajes_listener );
 
 	static CrearPersonaje cPersonaje = new CrearPersonaje(menu);
-	static CrearPersonajeListener crear_personaje_listener = new CrearPersonajeListener( menu, home, cPersonaje, user );
+	static Personaje personaje;
+	static CrearPersonajeListener crear_personaje_listener = new CrearPersonajeListener( menu, home, cPersonaje, user, personaje );
 
 	static VentanaPrincipalLogin login = new VentanaPrincipalLogin(user);
 

@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import model.Model;
+import model.Personaje;
 import model.Usuario;
 import views.CrearPersonaje;
 import views.Home;
@@ -16,11 +17,12 @@ public class CrearPersonajeListener extends Listener implements ActionListener {
 	
 	private CrearPersonaje cPersonaje;
 	private Usuario user;
-	
-	public CrearPersonajeListener( Menu menu, Home home, CrearPersonaje cPersonaje, Usuario user ) {
+	private Personaje personaje;
+	public CrearPersonajeListener( Menu menu, Home home, CrearPersonaje cPersonaje, Usuario user, Personaje personaje ) {
 		super( menu, home );
 		this.cPersonaje = cPersonaje;
 		this.user = user;
+		this.personaje = personaje;
 	}
 
 	@Override
@@ -54,6 +56,26 @@ public class CrearPersonajeListener extends Listener implements ActionListener {
 	    } catch (SQLException e) {
 	        e.printStackTrace();
 	    }
+	}
+	
+	public void update_data() throws SQLException {
+		Model mysql = new Model ();
+		mysql.get_connection();
+		
+		String update = "UPDATE personaje SET nombre = ?, personaje = ?, raza = ?, clase = ?, expe = ? WHERE cod_miembro = ? AND id_personaje = ?";
+		try (Connection conn = mysql.get_connection();
+				PreparedStatement pstmt = conn.prepareStatement(update)){
+	        pstmt.setString(1, cPersonaje.getLblSeleccionarPersonaje().getText());  // Suponiendo que 'Personaje' es un valor fijo
+	        pstmt.setString(2, cPersonaje.getLblSeleccionarPersonaje().getText());  // Suponiendo que 'Personaje' es un valor fijo
+	        pstmt.setString(3, cPersonaje.getTxtRaza().getText());
+	        pstmt.setString(4, cPersonaje.getTxtClase().getText());
+	        pstmt.setInt(5, 0);  // Si 'expe' es un entero, debes definir cómo se obtiene el valor
+	        pstmt.setInt(6, user.getUser_id());
+	        pstmt.setInt(7, personaje.getPers_id());
+
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 }
