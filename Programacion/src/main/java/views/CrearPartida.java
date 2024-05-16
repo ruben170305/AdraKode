@@ -11,23 +11,23 @@ import java.awt.*;
 
 public class CrearPartida extends JPanel {
 	private JLabel lblTitulo, lblImagen, lblAnfitrion, lblJugadores, lblDuracion, lblFecha, lblEstado;
+	private JLabel lblNewLabel, lblIconAnfitrion, lblIconJugadores, lblIconDuracion, lblIconFecha, lblIconEstado;
 	private JButton btnGuardar, btnGuardarImagen;
 	private JTextField txtNombrePartida, txtAnfitrion, txtJugadores, txtDuracion, txtFecha, txtEstado;
-	private JLabel lblNewLabel, lblIconAnfitrion, lblIconJugadores, lblIconDuracion, lblIconFecha, lblIconEstado;
 
 	public CrearPartida() {
-		setBackground(new Color(242, 242, 242));
-		inicializarComponentes();
-		//hacerVisible();
+		initialize_components();
 	}
 
-	private void inicializarComponentes() {
+	private void initialize_components() {
 		// Adaptar la apariencia del SO donde se ejecuta
 		try {
 			UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+
+		setBackground(new Color(242, 242, 242));
 
 		// layout absoluto
 		setLayout(null);
@@ -225,7 +225,7 @@ public class CrearPartida extends JPanel {
 
 	}
 	
-	public void setListener(CrearPartidaListener listener ) {
-		btnGuardar.addActionListener(listener);
+	public void setListener( CrearPartidaListener listener ) {
+		btnGuardar.addActionListener( listener );
 	}
 }

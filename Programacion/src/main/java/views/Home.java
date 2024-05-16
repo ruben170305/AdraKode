@@ -12,13 +12,13 @@ public class Home extends JPanel {
 	public Home() {
 		setBounds(new Rectangle(0, 0, 0, 19));
 		setBackground(new Color(242, 242, 242));
-		inicializarComponentes();
-		//hacerVisible();
+		initialize_components();
+		//make_visible();
 	}
 	/**
 	 * Método que inicializa la ventana y los componentes
 	 */
-	public void inicializarComponentes() {
+	public void initialize_components() {
 		// Adaptar la apariencia del SO donde se ejecuta
 		try {
 			UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
@@ -42,7 +42,4 @@ public class Home extends JPanel {
 		
 	}
 
-//	public void hacerVisible() {
-//		setVisible(true);
-//	}
 }

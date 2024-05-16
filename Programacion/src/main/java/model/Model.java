@@ -3,30 +3,26 @@ package model;
 import java.sql.*;
 
 public class Model {
-	
-	private String database_name, user, password, url;
+	private String driver = "com.mysql.cj.jdbc.Driver";
+	private String url = "jdbc:mysql://localhost/kode";
+	private String usuario = "root";
+	private String pword = "password";
 	private Connection conn;
-
-	// Constructor para instanciar MySQL
-	public Model( String database_name, String url, String user, String password ) {
-		this.database_name = database_name;
-		this.url 		   = url;
-		this.user 		   = user;
-		this.password 	   = password;
-	}
 	
-	public void Model_mysql_connect() {
+	public Connection get_connection() {
+		Connection conn = null;
+		
 		try {
 			// Cargamos el driver de MySQL
-			Class.forName( "con.mysql.cj.jdbc.Driver" );
+			Class.forName( driver );
 			
 			// Conectamos con MySQL
-			Connection conn = DriverManager.getConnection(
-					this.url
-				, 	this.user
-				, 	this.password
+			conn = DriverManager.getConnection(
+					url
+				, 	usuario
+				, 	pword
 			);
-			
+
 			if( conn != null )
 				this.conn = conn;
 			
@@ -34,9 +30,19 @@ public class Model {
             System.out.println( "MySQL JDBC Driver no encontrado" );
             cnfe.printStackTrace();
         } catch ( SQLException sqle ) {
-            System.out.println( "Error al conectar a la base de datos" );
+            System.out.println( "Error al conectar a MySQL" );
             sqle.printStackTrace();
         }
+
+		return conn;
+	}
+	
+	public void close_connection( Connection c ) {
+		try {
+			c.close();
+		} catch ( SQLException e ) {
+			e.printStackTrace();
+		}
 	}
 
 	public ResultSet Model_query( String sql ) throws SQLException {
@@ -60,14 +66,6 @@ public class Model {
 			System.out.println( "SQL Error: " + sqle.getMessage() );
 			throw sqle;
 
-		} finally {
-			try {
-				// Si existe un Statement por cerrar, lo cerramos
-				if ( stmt != null )
-					stmt.close();
-			} catch( SQLException sqle ) {
-				System.out.println( "Error al cerrar el Statement: " + sqle.getMessage() );
-			}
 		}
 	}
 }

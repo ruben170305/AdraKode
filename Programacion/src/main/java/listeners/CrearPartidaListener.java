@@ -1,26 +1,18 @@
 package listeners;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import views.Home;
-import views.Menu;
+import java.awt.event.*;
+import views.*;
 
-public class CrearPartidaListener implements ActionListener {
-	private Menu menu;
-	private Home home;
+public class CrearPartidaListener extends Listener implements ActionListener {
 	
-	public CrearPartidaListener(Home home, Menu menu) {
-		this.menu = menu;
-		this.home = home;
+	public CrearPartidaListener( Menu menu, Home home ) {
+		super( menu, home );
 	}
+
 	@Override
-	public void actionPerformed(ActionEvent ae) {
-		// TODO Auto-generated method stub
-		if ( ae.getActionCommand().equals("CREAR") ) {
-            this.menu.cargarPanel(home);
-            //this.ep.hacerVisible();
-        } 
-		
+	public void actionPerformed( ActionEvent ae ) {
+		if ( ae.getActionCommand().equals( "CREAR" ) )
+            this.menu.cargarPanel( home );
 	}
 
 }

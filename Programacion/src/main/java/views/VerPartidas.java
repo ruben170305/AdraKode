@@ -3,40 +3,37 @@ package views;
 // Librerías
 import javax.swing.*;
 import javax.swing.border.LineBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import listeners.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class VerPartidas extends JPanel {
 	private JLabel lblTitulo, lblImagen;
 	private JButton btnSeleccionar;
 	private JLabel lblTituloPartida, lblAnfitrion, lblJugadores, lblDuración, lblFecha, lblEstado;
+	private VerPartidaListener listener;
 
-	public VerPartidas() {
-		setBackground(new Color(242, 242, 242));
-		inicializarComponentes();
-		//hacerVisible();
+	public VerPartidas( VerPartidaListener listener ) {
+		this.listener = listener;
+		setBackground( new Color( 242, 242, 242 ) );
+		initialize_components();
 	}
 
-	private void inicializarComponentes() {
-		// Adaptar la apariencia del SO donde se ejecuta
-//		try {
-//			UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
-//		} catch (Exception e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
+	private void initialize_components() {
 
 		// layout absoluto
 		setLayout(null);
 
 		// Tamaño y posicion de ventana
 		setSize(800, 600);
-		// setLocation(null);
 
-		
+		// Capturamos la colección de datos de MySQL
+		this.listener.get_data();
 		
 		/* COMPONENTES */
 
@@ -58,23 +55,47 @@ public class VerPartidas extends JPanel {
 		separator.setBounds(337, 88, 125, 3);
 		add(separator);
 		
-		
-		// Tabla
-		
 		// Designamos el nombre de las columnas de la tabla
-		String[] columns = { "ID", "Anfitrión", "Jugadores", "Duración", "Fecha", "Estado" };
+		String[] columns = { "ID", "Nombre", "Ambientación", "Duración", "Fecha", "Anfitrion", "Nº jugadores", "Estado" };
 
-		// Insertamos los datos de la tabla
-		Object[][] data = { 
-				{ "Partida 1", "Usuario 1", 4, "30'", "13-04 16:00 pm", "En curso" },
-				{ "Partida 2", "Usuario 2", 3, "15'", "16-04 15:00 pm", "En espera" },
-				{ "Partida 3", "Usuario 5", 2, "25'", "12-04 11:00 am", "Finalizada" },
-				{ "Partida 2", "Usuario 2", 3, "15'", "16-04 15:00 pm", "En espera" },
-				{ "Partida 3", "Usuario 5", 2, "25'", "12-04 11:00 am", "Finalizada" },
-				{ "Partida 2", "Usuario 2", 3, "15'", "16-04 15:00 pm", "En espera" },
-				{ "Partida 2", "Usuario 2", 3, "15'", "16-04 15:00 pm", "En espera" },
-				{ "Partida 3", "Usuario 5", 2, "25'", "12-04 11:00 am", "Finalizada" }
-		};
+		// Capturamos los datos de MySQL mediante una consulta
+		ResultSet rows = this.listener.get_data();
+		ArrayList<Object[]> row_data_list = new ArrayList<>();
+
+		// Capturamos el número de filas del resultado de la consulta
+		try {
+			while ( rows.next() ) {
+
+				// Inicializamos un Objeto temporal donde almacenamos los datos de la fila
+				Object[] row_data = new Object[ columns.length ];
+
+				// Insertamos los datos
+                row_data[0] = rows.getString( "partida_id" );
+                row_data[1] = rows.getString( "nombre" );
+                row_data[2] = rows.getString( "ambientacion" );
+                row_data[3] = rows.getString( "duracion" );
+                row_data[4] = rows.getString( "fecha" );
+				row_data[6] = rows.getInt( "numero_jugadores" );
+
+				// Formateo de campos
+				String anfitrion = rows.getString( "nombre_anfitrion" ) + " " + rows.getString( "apellidos_anfitrion" );
+				row_data[5] = anfitrion;
+
+				// Determinamos el estado
+				String en_curso_text = ( Integer.parseInt( rows.getString( "en_curso" ) ) == 1 ) ? "En curso" : "Finalizada";
+                row_data[7] = en_curso_text;
+
+				// Añadimos los datos al arrayList final
+				row_data_list.add( row_data );
+			}
+
+		} catch ( SQLException e ) {
+			e.printStackTrace();
+		}
+
+		// Pasamos los datos al Objeto final que insertaremos en la tabla
+        Object[][] data = new Object[ row_data_list.size() ][ columns.length ];
+		row_data_list.toArray( data );
 
 		// Creamos una plantilla para la tabla
 		DefaultTableModel template = new DefaultTableModel(data, columns);
@@ -82,10 +103,10 @@ public class VerPartidas extends JPanel {
 		table.setForeground(new Color(29, 29, 27));
 		table.setBackground(new Color(242, 242, 242));
 		table.setFont(new Font("Open Sans", Font.PLAIN, 12));
+
 		JScrollPane scrollPane = new JScrollPane(table);
 		scrollPane.setBounds(122, 343, 556, 122);
 		add(scrollPane);
-
 		
 		// Imagen de la partida
 		lblImagen = new JLabel("");
@@ -94,7 +115,7 @@ public class VerPartidas extends JPanel {
 		add(lblImagen);
 		
 		// Etiquetas
-		lblTituloPartida = new JLabel("Partida 1");
+		lblTituloPartida = new JLabel( data[0][1].toString() );
 		lblTituloPartida.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTituloPartida.setIcon(null);
 		lblTituloPartida.setForeground(new Color(29, 29, 27));
@@ -102,35 +123,35 @@ public class VerPartidas extends JPanel {
 		lblTituloPartida.setBounds(302, 121, 195, 26);
 		add(lblTituloPartida);
 		
-		lblAnfitrion = new JLabel("Anfitrión 1");
+		lblAnfitrion = new JLabel( data[0][5].toString() );
 		lblAnfitrion.setIcon(new ImageIcon(VerPartidas.class.getResource("/img/usuario.png")));
 		lblAnfitrion.setForeground(new Color(29, 29, 27));
 		lblAnfitrion.setFont(new Font("Oxygen", Font.BOLD, 14));
 		lblAnfitrion.setBounds(425, 164, 183, 26);
 		add(lblAnfitrion);
 		
-		lblJugadores = new JLabel("4");
+		lblJugadores = new JLabel( data[0][6].toString() );
 		lblJugadores.setIcon(new ImageIcon(VerPartidas.class.getResource("/img/equipo.png")));
 		lblJugadores.setForeground(new Color(29, 29, 27));
 		lblJugadores.setFont(new Font("Oxygen", Font.BOLD, 14));
 		lblJugadores.setBounds(425, 193, 183, 26);
 		add(lblJugadores);
 
-		lblDuración = new JLabel("30'");
+		lblDuración = new JLabel( data[0][3].toString() + "'" );
 		lblDuración.setIcon(new ImageIcon(VerPartidas.class.getResource("/img/repetir.png")));
 		lblDuración.setForeground(new Color(29, 29, 27));
 		lblDuración.setFont(new Font("Oxygen", Font.BOLD, 14));
 		lblDuración.setBounds(425, 222, 183, 26);
 		add(lblDuración);
 		
-		lblFecha = new JLabel("13-04 16:00 pm");
+		lblFecha = new JLabel( data[0][4].toString() );
 		lblFecha.setIcon(new ImageIcon(VerPartidas.class.getResource("/img/calendario.png")));
 		lblFecha.setForeground(new Color(29, 29, 27));
 		lblFecha.setFont(new Font("Oxygen", Font.BOLD, 14));
 		lblFecha.setBounds(425, 251, 183, 26);
 		add(lblFecha);
 		
-		lblEstado = new JLabel("En curso");
+		lblEstado = new JLabel( data[0][7].toString() );
 		lblEstado.setIcon(new ImageIcon(VerPartidas.class.getResource("/img/ajustes.png")));
 		lblEstado.setForeground(new Color(29, 29, 27));
 		lblEstado.setFont(new Font("Oxygen", Font.BOLD, 14));
@@ -146,13 +167,28 @@ public class VerPartidas extends JPanel {
 		btnSeleccionar.setBounds(314, 493, 172, 41);
 		add(btnSeleccionar);
 
+		// Añadimos un listener a cada fila de la tabla de partidas
+		table.getSelectionModel().addListSelectionListener( new ListSelectionListener() {
+			
+			public void valueChanged( ListSelectionEvent e ) {
+
+				// Capturamos la fila y el valor del ID de la partida
+				int selected_row = table.getSelectedRow();
+
+				// Actualizamos los JLabel con la información de la fila seleccionada
+				lblTituloPartida.setText( table.getValueAt( selected_row, 1 ).toString() );
+				lblAnfitrion.setText( table.getValueAt( selected_row, 5 ).toString() );
+				lblJugadores.setText( table.getValueAt( selected_row, 6 ).toString() );
+				lblDuración.setText( table.getValueAt( selected_row, 3 ).toString() + "'" );
+				lblFecha.setText( table.getValueAt( selected_row, 4 ).toString() );
+				lblEstado.setText( table.getValueAt( selected_row, 7 ).toString() );
+			}
+
+		} );
+
 	}
 	
-	public void setListener(VerPartidaListener listener) {
-		btnSeleccionar.addActionListener(listener);
+	public void setListener( VerPartidaListener listener ) {
+		btnSeleccionar.addActionListener( listener );
 	}
-
-//	public void hacerVisible() {
-//		setVisible(true);
-//	}
 }

@@ -5,11 +5,11 @@ import javax.swing.*;
 import java.awt.*;
 import javax.swing.border.*;
 import listeners.LoginListener;
+import model.Usuario;
+
 import java.awt.event.*;
 import java.io.IOException;
 import java.io.InputStream;
-import javax.swing.event.ChangeListener;
-import javax.swing.event.ChangeEvent;
 
 public class VentanaPrincipalLogin extends JFrame {
 
@@ -18,20 +18,22 @@ public class VentanaPrincipalLogin extends JFrame {
 	private JPasswordField contraseña;
 	private JCheckBox administrador;
 	private JButton entrar;
+	private Usuario user;
 	//private LoginListener listener;
 
 	// private VentanaPrincipalLogin listener;
-	public VentanaPrincipalLogin() {
+	public VentanaPrincipalLogin(Usuario user) {
 		super("Login AdraKode");
 		setBackground(new Color(242, 242, 242));
+		this.user=user;
 		// listener = new VentanaPrincipalLogin(login);
 		setIcon();
-		inicializarComponentes();
-		hacerVisible();
+		initialize_components();
+		make_visible();
 
 	}
 
-	public void inicializarComponentes() {
+	public void initialize_components() {
 		// Adaptar la apariencia del SO donde se ejecuta
 		try {
 			UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
@@ -187,10 +189,24 @@ public class VentanaPrincipalLogin extends JFrame {
         }
     }
 	
+	public boolean mostrarMensajeErrorLogin() {
+		int opcion = JOptionPane.showConfirmDialog(this, 
+				"Usuario o contraseña incorrecto", 
+				"Error login",
+				JOptionPane.CLOSED_OPTION, 
+				JOptionPane.ERROR_MESSAGE);
+		
+		if (opcion == JOptionPane.CLOSED_OPTION) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
 	/**
 	 * Metodo que hace visible la ventana (JFrame)
 	 */
-	public void hacerVisible() {
+	public void make_visible() {
 		setVisible(true);
 	}
 
@@ -225,6 +241,11 @@ public class VentanaPrincipalLogin extends JFrame {
 	public JButton getEntrar() {
 		return entrar;
 	}
+
+	public Usuario getUser() {
+		return user;
+	}
+	
 	
 	
 }

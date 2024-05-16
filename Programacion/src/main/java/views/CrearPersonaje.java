@@ -4,43 +4,44 @@ import java.awt.*;
 import javax.swing.*;
 import javax.swing.border.*;
 
+import listeners.CrearPartidaListener;
+import listeners.CrearPersonajeListener;
+
 public class CrearPersonaje extends JPanel {
-	private JTextField txtRaza, txtClase;
-    private JLabel lblDestreza, lblConstitucion, lblInteligencia, lblSabiduria, lblCarisma;
-    private JLabel lblTitulo, lblFuerza, lblSeleccionarPersonaje, lblRaza, lblIconoPersn;
+	private JTextField txtRaza, txtClase, lblSeleccionarPersonaje;
+    private JLabel lblDestreza, lblConstitucion, lblInteligencia, lblSabiduria, lblCarisma, lblTitulo, lblFuerza, lblRaza, lblIconoPersn;
     private JLabel lblIconoExp, lblIconoFuerza, lblIconoDestreza, lblIconoConst, lblIconoInteligencia, lblIconoSabiduria, lblIconoCarisma, lblClase, lblExp;
     private JSpinner spinnerExperiencia, spinnerFuerza, spinnerDestreza, spinnerConstitucion, spinnerInteligencia, spinnerSabiduria, spinnerCarisma;
     private JButton btnGuardarImagen, btnGuardar;
+    
+    private Menu menu;
 	
-	public CrearPersonaje() {
-		setBackground(new Color(242, 242, 242));
-		inicializarComponentes();
+	public CrearPersonaje(Menu menu) {
+		this.menu = menu;
 		hacerVisible();
 	}
 	
-	private void inicializarComponentes() {
+	public void inicializarComponentes() {
 		//Adaptar la apariencia del SO donde se ejecuta
 		try {
 			UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
+		setBackground(new Color(242, 242, 242));
 		
 		//layout absoluto
 		setLayout(null);
 		
 		//Tamaño y posicion de ventana
-		setSize(800, 600);
-		//setLocation(null);
-		
+		setSize(800, 600);		
 		
 		/* COMPONENTES */
 		
 		//Creo border para cajas de texto (solo linea inferior)
 		Border border = BorderFactory.createMatteBorder(0, 0, 2, 0, new Color(29, 29, 27));
 		
-
         // Titulo
         lblTitulo = new JLabel("CREAR PERSONAJE");
         lblTitulo.setForeground(new Color(29, 29, 27));
@@ -60,7 +61,7 @@ public class CrearPersonaje extends JPanel {
         add(separator);
 
         // Etiqueta seleccionar personaje
-        lblSeleccionarPersonaje = new JLabel("PERSONAJE 1");
+        lblSeleccionarPersonaje = new JTextField();
         lblSeleccionarPersonaje.setForeground(new Color(29, 29, 27));
         lblSeleccionarPersonaje.setHorizontalAlignment(SwingConstants.CENTER);
         lblSeleccionarPersonaje.setFont(new Font("Open Sans", Font.BOLD, 18));
@@ -165,6 +166,11 @@ public class CrearPersonaje extends JPanel {
         spinnerExperiencia.setBackground(new Color(29, 161, 242));
         spinnerExperiencia.setOpaque(true);
         spinnerExperiencia.setBounds(515, 206, 42, 20);
+        if (!menu.isGameMaster()) {
+			spinnerExperiencia.setEnabled(false);
+		} else {
+
+		}
         add(spinnerExperiencia);
 
         spinnerFuerza = new JSpinner();
@@ -278,4 +284,97 @@ public class CrearPersonaje extends JPanel {
 	public void hacerVisible() {
 		setVisible(true);
 	}
+
+	public void setListener( CrearPersonajeListener listener ) {
+		btnGuardar.addActionListener( listener );
+	}
+
+	
+	public JTextField getTxtRaza() {
+		return txtRaza;
+	}
+
+	public void setTxtRaza(JTextField txtRaza) {
+		this.txtRaza = txtRaza;
+	}
+
+	public JTextField getTxtClase() {
+		return txtClase;
+	}
+
+	public void setTxtClase(JTextField txtClase) {
+		this.txtClase = txtClase;
+	}
+
+	public JLabel getLblIconoPersn() {
+		return lblIconoPersn;
+	}
+
+	public void setLblIconoPersn(JLabel lblIconoPersn) {
+		this.lblIconoPersn = lblIconoPersn;
+	}
+
+	public JSpinner getSpinnerExperiencia() {
+		return spinnerExperiencia;
+	}
+
+	public void setSpinnerExperiencia(JSpinner spinnerExperiencia) {
+		this.spinnerExperiencia = spinnerExperiencia;
+	}
+
+	public JSpinner getSpinnerFuerza() {
+		return spinnerFuerza;
+	}
+
+	public void setSpinnerFuerza(JSpinner spinnerFuerza) {
+		this.spinnerFuerza = spinnerFuerza;
+	}
+
+	public JSpinner getSpinnerDestreza() {
+		return spinnerDestreza;
+	}
+
+	public void setSpinnerDestreza(JSpinner spinnerDestreza) {
+		this.spinnerDestreza = spinnerDestreza;
+	}
+
+	public JSpinner getSpinnerConstitucion() {
+		return spinnerConstitucion;
+	}
+
+	public void setSpinnerConstitucion(JSpinner spinnerConstitucion) {
+		this.spinnerConstitucion = spinnerConstitucion;
+	}
+
+	public JSpinner getSpinnerInteligencia() {
+		return spinnerInteligencia;
+	}
+
+	public void setSpinnerInteligencia(JSpinner spinnerInteligencia) {
+		this.spinnerInteligencia = spinnerInteligencia;
+	}
+
+	public JSpinner getSpinnerSabiduria() {
+		return spinnerSabiduria;
+	}
+
+	public void setSpinnerSabiduria(JSpinner spinnerSabiduria) {
+		this.spinnerSabiduria = spinnerSabiduria;
+	}
+
+	public JSpinner getSpinnerCarisma() {
+		return spinnerCarisma;
+	}
+
+	public void setSpinnerCarisma(JSpinner spinnerCarisma) {
+		this.spinnerCarisma = spinnerCarisma;
+	}
+
+	public JTextField getLblSeleccionarPersonaje() {
+		return lblSeleccionarPersonaje;
+	}
+	
+	
+	
+	
 }

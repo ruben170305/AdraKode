@@ -16,12 +16,10 @@ public class EditarPartida extends JPanel {
 	private JLabel lblNewLabel, lblIconAnfitrion, lblIconJugadores, lblIconDuracion, lblIconFecha, lblIconEstado;
 
 	public EditarPartida() {
-		setBackground(new Color(242, 242, 242));
-		inicializarComponentes();
-		//hacerVisible();
+		initialize_components();
 	}
 
-	private void inicializarComponentes() {
+	private void initialize_components() {
 		// Adaptar la apariencia del SO donde se ejecuta
 		try {
 			UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
@@ -29,6 +27,8 @@ public class EditarPartida extends JPanel {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
+		setBackground(new Color(242, 242, 242));
 
 		// layout absoluto
 		setLayout(null);
@@ -257,6 +257,6 @@ public class EditarPartida extends JPanel {
 	}
 	
 	public void setListener( EditarPartidaListener listener ) {
-		btnGuardar.addActionListener(listener);
+		btnGuardar.addActionListener( listener );
 	}
 }

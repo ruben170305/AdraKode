@@ -5,6 +5,7 @@ import javax.swing.*;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 
+import views.*;
 import listeners.VerPartidaMasterListener;
 
 import java.awt.*;
@@ -12,33 +13,23 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class VerPartidasMaster extends JPanel {
-	private JLabel lblTitulo, lblImagen;
 	private JButton btnEditar, btnBorrar, btnSeleccionar;
-	private JLabel lblTituloPartida, lblAnfitrion, lblJugadores, lblDuración, lblFecha, lblEstado;
+	private JLabel lblTituloPartida, lblAnfitrion, lblJugadores, lblDuración, lblFecha, lblEstado, lblTitulo, lblImagen;
 
 	public VerPartidasMaster() {
-		setBackground(new Color(242, 242, 242));
-		inicializarComponentes();
-		//hacerVisible();
+		initialize_components();
 	}
 
-	private void inicializarComponentes() {
-		// Adaptar la apariencia del SO donde se ejecuta
-//		try {
-//			UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
+	private void initialize_components() {
+		
+		setBackground(new Color(242, 242, 242));
 
 		// layout absoluto
 		setLayout(null);
 
 		// Tamaño y posicion de ventana
 		setSize(800, 600);
-		// setLocation(null);
 
-		
-		
 		/* COMPONENTES */
 
 		// Titulo
@@ -177,15 +168,10 @@ public class VerPartidasMaster extends JPanel {
 
 	}
 	
-	public void setListener(VerPartidaMasterListener listener ) {
+	public void setListener( VerPartidaMasterListener listener ) {
 		btnEditar.addActionListener( listener );
 		btnSeleccionar.addActionListener( listener );
 		btnBorrar.addActionListener( listener );
 	}
-
-//	public void hacerVisible() {
-//		setVisible(true);
-//	}
-	
 	
 }

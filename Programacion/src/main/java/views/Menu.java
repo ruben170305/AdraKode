@@ -30,10 +30,10 @@ public class Menu extends JFrame {
 		super(titulo);
 		this.gameMaster = esMaster;
 		setIcon();
-		initComponents();
+		initialize_components();
 	}
 
-	public void initComponents() {
+	public void initialize_components() {
 		
 		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		addWindowListener(new WindowAdapter() {
@@ -51,7 +51,11 @@ public class Menu extends JFrame {
 		Dimension ventana = new Dimension(ANCHO, ALTO);               
 		// Una cuenta para situar la ventana en el centro de la pantalla.       
 		setLocation((pantalla.width - ventana.width) / 2,  (pantalla.height - ventana.height) / 2);
-		crearMenu();
+
+		// Inicializamos scrpContenedor
+		scrpContenedor = new JScrollPane();
+		scrpContenedor.setBounds(0, 0, 784, 533);
+		getContentPane().add(scrpContenedor);
 	}
 	
 	/**
@@ -80,31 +84,23 @@ public class Menu extends JFrame {
 		menuBar.add(mnPartidas);
 		
 		//Agregamos el menu de ver partidas dependiendo si eres game master o no
-		if (gameMaster) {
-			mntmVerPartidasMaster = new JMenuItem("Ver partidas Master");
-			mnPartidas.add(mntmVerPartidasMaster);
-			mntmCrearPartidas = new JMenuItem("Crear partida");
-			mnPartidas.add(mntmCrearPartidas);
+		if ( gameMaster ) {
+			mntmVerPartidasMaster = new JMenuItem( "Ver partidas Master" );
+			mnPartidas.add( mntmVerPartidasMaster );
+
+			mntmCrearPartidas = new JMenuItem( "Crear partida" );
+			mnPartidas.add( mntmCrearPartidas );
 			
-			mntmEditarPartidas = new JMenuItem("Editar partidas");
+			mntmEditarPartidas = new JMenuItem( "Editar partidas" );
 			mnPartidas.add(mntmEditarPartidas);	
 		} else {
-			mntmVerPartidas = new JMenuItem("Ver partidas");
-			mnPartidas.add(mntmVerPartidas);
+			mntmVerPartidas = new JMenuItem( "Ver partidas" );
+			mnPartidas.add( mntmVerPartidas );
 		}
 		
 		//Creamos y asignamos el boton Login al menu principal
 		mntmTexto = new JMenuItem("Login");
 		menuBar.add(mntmTexto);
-		
-		/*mntmSalir = new JMenuItem("Salir");
-		mntmSalir.setFont(new Font("Segoe UI", Font.BOLD, 12));
-		menuBar.add(mntmSalir);
-		getContentPane().setLayout(null);*/
-		
-		scrpContenedor = new JScrollPane();
-		scrpContenedor.setBounds(0, 0, 784, 533);
-		getContentPane().add(scrpContenedor);
 		
 	}
 	
@@ -113,27 +109,26 @@ public class Menu extends JFrame {
 	 * @param listener Parametro que recibe el listener que queremos asignar
 	 */
 	public void setListener(PMenuListener listener) {
-        mntmNuevo.addActionListener(listener);
-        mntmVer.addActionListener(listener);
-        
-        if (gameMaster) {
-        	mntmVerPartidasMaster.addActionListener(listener);
-        	mntmCrearPartidas.addActionListener(listener);
-            mntmEditarPartidas.addActionListener(listener);
+		mntmNuevo.addActionListener(listener);
+		mntmVer.addActionListener(listener);
+	
+		if ( gameMaster ) {
+			mntmVerPartidasMaster.addActionListener(listener);
+			mntmCrearPartidas.addActionListener(listener);
+			mntmEditarPartidas.addActionListener(listener);
 		} else {
 			mntmVerPartidas.addActionListener(listener);
 		}
-        mntmModificarP.addActionListener(listener);
-        
-        mntmTexto.addActionListener(listener);
-        //mntmSalir.addActionListener(listener);
-        
-    }
+
+		mntmModificarP.addActionListener(listener);
+		mntmTexto.addActionListener(listener);
+		//mntmSalir.addActionListener(listener);
+	}
 	
 	/**
 	 * Método que hace visible la ventana (JFrame)
 	 */
-	public void hacerVisible() {
+	public void make_visible() {
 		setVisible(true);
 	}
 	
@@ -143,6 +138,10 @@ public class Menu extends JFrame {
 	 */
 	public void cargarPanel(JPanel panel) {
 		scrpContenedor.setViewportView(panel);
+
+		// Limpiamos el
+		revalidate();
+		repaint();
 	}
 	
 	/**
@@ -174,6 +173,9 @@ public class Menu extends JFrame {
 		
 	}
 	
+	/**
+	 * Mostrar mensaje de confirmación de borrado
+	 */
 	public boolean mostrarMensajeConfirmborrado() {
 		int opcion = JOptionPane.showConfirmDialog(this, 
 				"¿Seguro que desea borrar el elemento?", 
@@ -188,15 +190,15 @@ public class Menu extends JFrame {
 		}
 		
 	}
-
+	
+	// Getters y Setters
 	public boolean isGameMaster() {
 		return gameMaster;
 	}
 
 	public void setGameMaster(boolean gameMaster) {
 		this.gameMaster = gameMaster;
+		crearMenu();	
 	}
-	
-	
 	
 }

@@ -16,7 +16,6 @@ public class ListenerBottonLogin implements ActionListener {
 	 * Metodo del listener del login 
 	 */
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
 
 	}
 
