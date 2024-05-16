@@ -17,7 +17,6 @@ AdraKode es una aplicación desarrollada para el Club de Rol de la UEM que permi
    - [Gestión de Personajes](#gestión-de-personajes)
    - [Gestión de Partidas](#gestión-de-partidas)
 5. [Contribuir](#contribuir)
-6. [Licencia](#licencia)
 
 ## Descripción
 
