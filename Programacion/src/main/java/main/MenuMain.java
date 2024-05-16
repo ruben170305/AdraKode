@@ -15,9 +15,11 @@ public class MenuMain {
 	static Usuario user = new Usuario();
 
 	// Instanciamos las ventanas junto a sus listeners
-	static CrearPartida cPartida 			 = new CrearPartida();
-	static EditarPartida ePartida 			 = new EditarPartida();
-	static VerPartidasMaster vPartidasMaster = new VerPartidasMaster();
+	static CrearPartida cPartida  = new CrearPartida();
+	static EditarPartida ePartida = new EditarPartida();
+
+	static VerPartidaMasterListener ver_partidas_master_listener = new VerPartidaMasterListener( ePartida, menu, home );
+	static VerPartidasMaster vPartidasMaster = new VerPartidasMaster( ver_partidas_master_listener );
 
 	static VerPartidaListener ver_partidas_listener = new VerPartidaListener( menu, home );
 	static VerPartidas vPartidas = new VerPartidas( ver_partidas_listener) ;

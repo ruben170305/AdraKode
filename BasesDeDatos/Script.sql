@@ -22,15 +22,17 @@ CREATE TABLE personaje (
 	CONSTRAINT FOREIGN KEY (cod_miembro) REFERENCES miembro(cod)
 );
 CREATE TABLE partida (
-	cod INT AUTO_INCREMENT PRIMARY KEY,
+	partida_id INT AUTO_INCREMENT PRIMARY KEY,
     num_sesion INT,
     nombre VARCHAR(50),
     duracion INT,
-    dia VARCHAR(50),
+	dificultad int(11),
+    fecha VARCHAR(50),
+    numero_jugadores int(11),
     ambientacion VARCHAR(50),
-    enCurso boolean,
-    controlador INT,
-    CONSTRAINT FOREIGN KEY (controlador) REFERENCES miembro(cod)
+    en_curso boolean,
+    anfitrion_id INT,
+    CONSTRAINT FOREIGN KEY (anfitrion_id) REFERENCES miembro(cod)
 );
 CREATE TABLE juega (
 	id_partida INT,
@@ -42,7 +44,7 @@ CREATE TABLE juega (
     sabiduria INT,
     carisma INT,
     PRIMARY KEY (id_partida, id_personaje),
-    CONSTRAINT FOREIGN KEY (id_partida) REFERENCES partida(cod),
+    CONSTRAINT FOREIGN KEY (id_partida) REFERENCES partida(partida_id),
     CONSTRAINT FOREIGN KEY (id_personaje) REFERENCES personaje(cod)
 );
 
@@ -60,12 +62,12 @@ INSERT INTO personaje (cod, nombre, personaje, raza, clase, expe, cod_miembro) V
 (1004, 'Alya', 'Starfire', 'Elfo', 'Clerigo', 4800, 2004),
 (1005, 'Borin', 'Hammerhand', 'Enano', 'Paladin', 5500, 2005);
 
-INSERT INTO partida (cod, num_sesion, nombre, duracion, dia, ambientacion, enCurso, controlador) VALUES
-(3001, 10, 'Amanecer de fuego', 180, 'Martes a las 17:00', 'Fantasía medieval', true, 2001),
-(3002, 15, 'Crepúsculo gélido', 150, 'Martes a las 19:00', 'Fantasía gélida', false, 2002),
-(3003, 20, 'La caída de la noche', 210, 'Miercoles a las 16:00', 'Fantasía oscura', true, 2003),
-(3004, 25, 'El alba dorada', 160, 'Jueves a las 21:00', 'Fantasía clásica', false, 2004),
-(3005, 30, 'Sombras persistentes', 190, 'Sábado a las 20:00', 'Fantasía steampunk', true, 2005);
+INSERT INTO `partida` (`partida_id`, `num_sesion`, `nombre`, `duracion`, `dificultad`, `fecha`, `numero_jugadores`, `ambientacion`, `en_curso`, `anfitrion_id`) VALUES
+(3001, 10, 'Amanecer de fuego', 180, 0, 'Martes a las 17:00', 4, 'Fantasía medieval', 1, 2001),
+(3002, 15, 'Crepúsculo gélido', 150, 0, 'Martes a las 19:00', 4, 'Fantasía gélida', 0, 2002),
+(3003, 20, 'La caída de la noche', 210, 0, 'Miercoles a las 16:00', 4, 'Fantasía oscura', 1, 2003),
+(3004, 25, 'El alba dorada', 160, 0, 'Jueves a las 21:00', 4, 'Fantasía clásica', 0, 2004),
+(3005, 30, 'Sombras persistentes', 190, 0, 'Sábado a las 20:00', 4, 'Fantasía steampunk', 1, 2005);
 
 INSERT INTO juega (id_partida, id_personaje, fuerza, destreza, constitucion, inteligencia, sabiduria, carisma) VALUES
 (3001, 1001, 12, 14, 13, 18, 15, 10),
