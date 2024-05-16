@@ -4,6 +4,7 @@ import java.awt.EventQueue;
 
 import views.*;
 import listeners.*;
+import model.Personaje;
 import model.Usuario;
 
 public class MenuMain {
@@ -15,11 +16,9 @@ public class MenuMain {
 	static Usuario user = new Usuario();
 
 	// Instanciamos las ventanas junto a sus listeners
-	static CrearPartida cPartida  = new CrearPartida();
-	static EditarPartida ePartida = new EditarPartida();
-
-	static VerPartidaMasterListener ver_partidas_master_listener = new VerPartidaMasterListener( ePartida, menu, home );
-	static VerPartidasMaster vPartidasMaster = new VerPartidasMaster( ver_partidas_master_listener );
+	static CrearPartida cPartida 			 = new CrearPartida();
+	static EditarPartida ePartida 			 = new EditarPartida();
+	static VerPartidasMaster vPartidasMaster = new VerPartidasMaster();
 
 	static VerPartidaListener ver_partidas_listener = new VerPartidaListener( menu, home );
 	static VerPartidas vPartidas = new VerPartidas( ver_partidas_listener) ;
@@ -31,7 +30,8 @@ public class MenuMain {
 	static VerPersonajes vPersonajes = new VerPersonajes( ver_personajes_listener );
 
 	static CrearPersonaje cPersonaje = new CrearPersonaje(menu);
-	static CrearPersonajeListener crear_personaje_listener = new CrearPersonajeListener( menu, home, cPersonaje, user );
+	static Personaje personaje;
+	static CrearPersonajeListener crear_personaje_listener = new CrearPersonajeListener( menu, home, cPersonaje, user, personaje );
 
 	static VentanaPrincipalLogin login = new VentanaPrincipalLogin(user);
 
