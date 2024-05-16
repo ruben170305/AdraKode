@@ -12,7 +12,7 @@ public class MenuMain {
 	static Menu menu = new Menu( "Adrakode", false );
 	static Home home = new Home();
 	static Listener list = new Listener( menu, home );
-	static Usuario user = new Usuario();
+	static Usuario user = new Usuario(); 
 
 	// Instanciamos las ventanas junto a sus listeners
 	static CrearPartida cPartida  = new CrearPartida();
