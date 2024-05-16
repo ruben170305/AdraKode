@@ -30,6 +30,12 @@ public class CrearPersonajeListener extends Listener implements ActionListener {
 		if ( ae.getActionCommand().equals( "CREAR" ) ) {
 			get_data();
 			super.menu.cargarPanel( home );
+		}else if (ae.getActionCommand().equals("ACTUALIZAR")) {
+			get_data();
+			super.menu.cargarPanel(home);
+		}else if (ae.getActionCommand().equals("ELIMINAR")) {
+			get_data();
+			super.menu.cargarPanel(home);
 		}
 	}
 	
@@ -58,7 +64,7 @@ public class CrearPersonajeListener extends Listener implements ActionListener {
 	    }
 	}
 	
-	public void update_data() throws SQLException {
+	public void update_data() {
 		Model mysql = new Model ();
 		mysql.get_connection();
 		
@@ -76,6 +82,21 @@ public class CrearPersonajeListener extends Listener implements ActionListener {
 		}catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+	public void delete_data () {
+		Model mysql = new Model ();
+		mysql.get_connection();
+		
+		String delete = "DELETE FROM personaje WHERE cod_miembro = ? AND id_personaje = ?";
+		try (Connection conn = mysql.get_connection();
+				PreparedStatement pstmt = conn.prepareStatement(delete)){
+			pstmt.setInt(1, user.getUser_id());
+			pstmt.setInt(2, personaje.getPers_id());
+			
+			pstmt.executeUpdate();
+			}catch (SQLException e) {
+				e.printStackTrace();
+			}
 	}
 
 }

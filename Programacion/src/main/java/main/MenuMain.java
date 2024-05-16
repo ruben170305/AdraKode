@@ -14,6 +14,7 @@ public class MenuMain {
 	static Home home = new Home();
 	static Listener list = new Listener( menu, home );
 	static Usuario user = new Usuario(); 
+	static Personaje personaje;
 
 	// Instanciamos las ventanas junto a sus listeners
 	static CrearPartida cPartida  = new CrearPartida();
@@ -32,7 +33,6 @@ public class MenuMain {
 	static VerPersonajes vPersonajes = new VerPersonajes( ver_personajes_listener );
 
 	static CrearPersonaje cPersonaje = new CrearPersonaje(menu);
-	static Personaje personaje;
 	static CrearPersonajeListener crear_personaje_listener = new CrearPersonajeListener( menu, home, cPersonaje, user, personaje );
 
 	static VentanaPrincipalLogin login = new VentanaPrincipalLogin(user);
