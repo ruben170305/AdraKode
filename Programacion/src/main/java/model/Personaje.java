@@ -1,21 +1,21 @@
 package model;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class Personaje {
+import views.CrearPersonaje;
+
+public class Personaje extends Data {
 
     // Definimos las características del Personaje
     private String nombre, clase, exp;
     private int pers_id, raza;
-    private Model model;
-    private ArrayList<Integer> id_personaje = new ArrayList<Integer>();
     private ArrayList<String> nombres = new ArrayList<String>();
     
     // Constructor
-    public Personaje()  {
-    	
-    }
     public Personaje( int pers_id, String nombre, int raza, String clase, String exp ) {
         this.pers_id = pers_id;
         this.nombre  = nombre;
@@ -24,13 +24,61 @@ public class Personaje {
         this.exp     = exp;
     }
     
-    public void hacerConsulta() {
-    	Connection connection = model.get_connection();
-    	String nPersonaje = "SELECT * FROM cod WHERE ";
-    	
-    }
     
-    
+	public void crear_personaje( CrearPersonaje cPersonaje, Usuario user ) {
+
+		// Instanciamos el modelo
+		Model mysql = new Model();
+		mysql.get_connection();
+
+		// Consulta SQL
+		String sql = "insert into personaje (nombre, personaje, raza, clase, expe, cod_miembro) values (?, ?, ?, ?, ?, ?)";
+		try {
+            Connection conn = mysql.get_connection();
+            PreparedStatement pstmt = conn.prepareStatement( sql );
+
+			// Configura los valores para la consulta
+			pstmt.setString(1, cPersonaje.getLblSeleccionarPersonaje().getText()); // Suponiendo que 'Personaje' es un valor fijo
+			pstmt.setString(2, cPersonaje.getLblSeleccionarPersonaje().getText()); // Suponiendo que 'Personaje' es un valor fijo
+			pstmt.setString(3, cPersonaje.getTxtRaza().getText());
+			pstmt.setString(4, cPersonaje.getTxtClase().getText());
+			pstmt.setInt(5, 0); // Si 'expe' es un entero, debes definir cómo se obtiene el valor
+			pstmt.setInt(6, user.getUser_id());
+
+			// Ejecuta la inserción
+			pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+    /**
+	 * Método que realiza la consulta de datos a MySQL
+	 */
+	public ResultSet conseguir_personajes() {
+
+		ResultSet rs = null;
+
+		// Creamos una conexión con MySQL
+		Model mysql = new Model();
+		mysql.get_connection();
+
+		try {
+			String sql = "SELECT p.*, m.nombre as nombre_anfitrion, m.apellidos as apellidos_anfitrion " +
+			"FROM partida p " +
+			"LEFT JOIN miembro m " +
+			"ON p.anfitrion_id = m.cod";
+
+			rs = mysql.Model_query( sql );
+			return rs;
+		} catch ( SQLException e ) {
+			e.printStackTrace();
+		}
+
+		return rs;
+	}
+
 
     // Getters y Setters
     

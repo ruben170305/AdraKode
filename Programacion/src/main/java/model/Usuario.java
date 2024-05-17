@@ -1,9 +1,8 @@
 package model;
 
 import java.sql.*;
-import model.*;
 
-public class Usuario {
+public class Usuario extends Data {
 
 	// Definimos las características del Personaje
 	private String usuario, apellidos, password, expediente, estudio;
