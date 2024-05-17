@@ -18,8 +18,7 @@ public class VerPartidas extends JPanel {
 	private JLabel lblTituloPartida, lblAnfitrion, lblJugadores, lblDuración, lblFecha, lblEstado;
 	private VerPartidaListener listener;
 
-	public VerPartidas( VerPartidaListener listener ) {
-		this.listener = listener;
+	public VerPartidas(  ) {
 		setBackground( new Color( 242, 242, 242 ) );
 		initialize_components();
 	}

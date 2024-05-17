@@ -26,7 +26,7 @@ public class PMenuListener implements ActionListener {
 		,	CrearPartida cPartida
 		, 	EditarPartida ePartida
 		, 	VerPartidas vPartidas
-		, 	VerPartidasMaster vPartidasMaster
+		//, 	VerPartidasMaster vPartidasMaster
 		, 	VentanaPrincipalLogin login
 		) {
 			this.ventana 			= ventana;

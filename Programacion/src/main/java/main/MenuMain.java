@@ -15,20 +15,21 @@ public class MenuMain {
 	static Menu menu = new Menu( "Adrakode", false );
 	static Home home = new Home();
 	static Listener list = new Listener( menu, home );
-	static Usuario user = new Usuario(); 
-	static Personaje personaje = new Personaje();
+
 	static CrearPersonaje cPersonaje = new CrearPersonaje(menu);
+	static Usuario user = new Usuario(); 
+	static Personaje personaje = new Personaje(cPersonaje, user);
 
 	// Instanciamos las ventanas junto a sus listeners
 	static CrearPartida cPartida 			 = new CrearPartida();
 	static EditarPartida ePartida 			 = new EditarPartida();
 	
 
-	static VerPartidaMasterListener ver_partidas_master_listener = new VerPartidaMasterListener( ePartida, menu, home );
-	static VerPartidasMaster vPartidasMaster = new VerPartidasMaster(ver_partidas_master_listener);
+//	static VerPartidaMasterListener ver_partidas_master_listener = new VerPartidaMasterListener( ePartida, menu, home );
+//	static VerPartidasMaster vPartidasMaster = new VerPartidasMaster(ver_partidas_master_listener);
 
-	static VerPartidaListener ver_partidas_listener = new VerPartidaListener( menu, home );
-	static VerPartidas vPartidas = new VerPartidas( ver_partidas_listener) ;
+	//static VerPartidaListener ver_partidas_listener = new VerPartidaListener( menu, home );
+	static VerPartidas vPartidas = new VerPartidas() ;
 	
 	static EditarPersonajesListener editar_personaje_listener = new EditarPersonajesListener( menu, home );
 	static EditarPersonaje ePersonaje = new EditarPersonaje();
@@ -85,7 +86,7 @@ public class MenuMain {
 			,	cPartida
 			, 	ePartida
 			, 	vPartidas
-			, 	vPartidasMaster
+			//, 	vPartidasMaster
 			, 	login
 		);
 		
@@ -96,7 +97,7 @@ public class MenuMain {
 			// Vinculación de listeners
 			cPartida.setListener( crear_partida_listener );
 			ePartida.setListener( editar_partida_listener );
-			vPartidasMaster.setListener( ver_partidas_master_listener );
+			//vPartidasMaster.setListener( ver_partidas_master_listener );
 		} else {
 
 			// Vinculación de listeners

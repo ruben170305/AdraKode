@@ -14,9 +14,16 @@ public class Personaje extends Data {
     private String nombre, personaje, clase, raza;
     private int cod, cod_miembro, exp;
     
+    private CrearPersonaje cPersonaje;
+    private Usuario user;
+    
     // Constructor
     public Personaje() {
     	
+    }
+    public Personaje( CrearPersonaje cPersonaje, Usuario user) {
+    	this.cPersonaje = cPersonaje;
+    	this.user = user;
     }
     public Personaje( int cod, String nombre, String personaje, String raza, String clase, int exp, int cod_miembro ) {
         this.cod 			= cod;
@@ -120,7 +127,7 @@ public class Personaje extends Data {
 			pstmt.setString(4, cPersonaje.getTxtClase().getText());
 			pstmt.setInt(5, 0); // Si 'expe' es un entero, debes definir cómo se obtiene el valor
 			pstmt.setInt(6, user.getUser_id());
-			pstmt.setInt(7, personaje.getPers_id());
+			pstmt.setInt(7, this.cod);
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -138,7 +145,7 @@ public class Personaje extends Data {
 			pstmt = conn.prepareStatement(delete);
 			
 			pstmt.setInt(1, user.getUser_id());
-			pstmt.setInt(2, personaje.getPers_id());
+			pstmt.setInt(2, this.cod);
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
