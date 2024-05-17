@@ -4,6 +4,7 @@ import java.awt.EventQueue;
 
 import views.*;
 import listeners.*;
+import model.Personaje;
 import model.Usuario;
 
 public class MenuMain {
@@ -12,12 +13,17 @@ public class MenuMain {
 	static Menu menu = new Menu( "Adrakode", false );
 	static Home home = new Home();
 	static Listener list = new Listener( menu, home );
-	static Usuario user = new Usuario();
+	static Usuario user = new Usuario(); 
+	static Personaje personaje = new Personaje();
+	static CrearPersonaje cPersonaje = new CrearPersonaje(menu);
 
 	// Instanciamos las ventanas junto a sus listeners
 	static CrearPartida cPartida 			 = new CrearPartida();
 	static EditarPartida ePartida 			 = new EditarPartida();
-	static VerPartidasMaster vPartidasMaster = new VerPartidasMaster();
+	
+
+	static VerPartidaMasterListener ver_partidas_master_listener = new VerPartidaMasterListener( ePartida, menu, home );
+	static VerPartidasMaster vPartidasMaster = new VerPartidasMaster(ver_partidas_master_listener);
 
 	static VerPartidaListener ver_partidas_listener = new VerPartidaListener( menu, home );
 	static VerPartidas vPartidas = new VerPartidas( ver_partidas_listener) ;
@@ -25,10 +31,10 @@ public class MenuMain {
 	static EditarPersonajesListener editar_personaje_listener = new EditarPersonajesListener( menu, home );
 	static EditarPersonaje ePersonaje = new EditarPersonaje();
 
-	static VerPersonajesListener ver_personajes_listener = new VerPersonajesListener( ePersonaje, menu, home, user );
+	static VerPersonajesListener ver_personajes_listener = new VerPersonajesListener( ePersonaje, menu, home, user, cPersonaje, personaje );
+	
 	static VerPersonajes vPersonajes = new VerPersonajes( ver_personajes_listener );
 
-	static CrearPersonaje cPersonaje = new CrearPersonaje(menu);
 	static CrearPersonajeListener crear_personaje_listener = new CrearPersonajeListener( menu, home, cPersonaje, user );
 
 	static VentanaPrincipalLogin login = new VentanaPrincipalLogin(user);
@@ -84,7 +90,6 @@ public class MenuMain {
 		if( esMaster ) {
 			CrearPartidaListener crear_partida_listener = new CrearPartidaListener( menu, home );
 			EditarPartidaListener editar_partida_listener = new EditarPartidaListener( menu, home );
-			VerPartidaMasterListener ver_partidas_master_listener = new VerPartidaMasterListener( ePartida, menu, home );
 
 			// Vinculación de listeners
 			cPartida.setListener( crear_partida_listener );

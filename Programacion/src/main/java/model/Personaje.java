@@ -10,6 +10,9 @@ public class Personaje {
     private Model model;
     
     // Constructor
+    public Personaje()  {
+    	
+    }
     public Personaje( int pers_id, String nombre, int raza, String clase, String exp ) {
         this.pers_id = pers_id;
         this.nombre  = nombre;
