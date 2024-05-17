@@ -31,9 +31,6 @@ public class VerPartidas extends JPanel {
 
 		// Tamaño y posicion de ventana
 		setSize(800, 600);
-
-		// Capturamos la colección de datos de MySQL
-		this.listener.get_data();
 		
 		/* COMPONENTES */
 

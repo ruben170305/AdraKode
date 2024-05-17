@@ -13,7 +13,6 @@ public class VerPartidaListener extends Listener implements ActionListener {
 		super( menu, home );
 	}
 
-
     @Override
 	public void actionPerformed( ActionEvent ae ) {
 
