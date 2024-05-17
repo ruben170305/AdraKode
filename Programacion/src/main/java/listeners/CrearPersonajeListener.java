@@ -1,17 +1,9 @@
 package listeners;
 
 import java.awt.event.*;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
-import model.Model;
-import model.Personaje;
-import model.Usuario;
-import views.CrearPersonaje;
-import views.Home;
-import views.Menu;
+import java.sql.*;
+import model.*;
+import views.*;
 
 public class CrearPersonajeListener extends Listener implements ActionListener {
 	
