@@ -69,11 +69,7 @@ public class Menu extends JFrame {
 		JMenu mnPersonajes = new JMenu("Personajes");
 		menuBar.add(mnPersonajes);
 		
-		//Creamos los items secundarios de Personajes
-		
-		
-		mntmModificarP = new JMenuItem("Modificar personaje");
-		mnPersonajes.add(mntmModificarP);
+		//Creamos los items secundarios de Personaje
 		
 		//Creamos el item principal Partidas
 		mnPartidas = new JMenu("Partidas");
@@ -99,6 +95,9 @@ public class Menu extends JFrame {
 			mntmVer = new JMenuItem("Ver personajes");
 			mnPersonajes.add(mntmVer);
 		}
+		
+		mntmModificarP = new JMenuItem("Modificar personaje");
+		mnPersonajes.add(mntmModificarP);
 		
 		//Creamos y asignamos el boton Login al menu principal
 		mntmTexto = new JMenuItem("Login");
