@@ -1,6 +1,7 @@
 package model;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 
 public class Personaje {
 
@@ -8,6 +9,8 @@ public class Personaje {
     private String nombre, clase, exp;
     private int pers_id, raza;
     private Model model;
+    private ArrayList<Integer> id_personaje = new ArrayList<Integer>();
+    private ArrayList<String> nombres = new ArrayList<String>();
     
     // Constructor
     public Personaje()  {
@@ -26,13 +29,22 @@ public class Personaje {
     	String nPersonaje = "SELECT * FROM cod WHERE ";
     	
     }
+    
+    
 
     // Getters y Setters
+    
     public int getPers_id() {
         return pers_id;
     }
 
-    public void setPers_id( int pers_id ) {
+    public ArrayList<String> getNombres() {
+		return nombres;
+	}
+	public void setNombres(ArrayList<String> nombres) {
+		this.nombres = nombres;
+	}
+	public void setPers_id( int pers_id ) {
         this.pers_id = pers_id;
     }
 

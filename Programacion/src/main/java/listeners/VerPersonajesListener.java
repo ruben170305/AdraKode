@@ -102,17 +102,20 @@ public class VerPersonajesListener extends Listener implements ActionListener {
 	public void delete_data() {
 		Model mysql = new Model();
 		mysql.get_connection();
-
-		String delete = "DELETE FROM personaje WHERE cod_miembro = ? AND id_personaje = ?";
-
-		try (Connection conn = mysql.get_connection(); PreparedStatement pstmt = conn.prepareStatement(delete)) {
+		
+		Connection conn = mysql.get_connection();
+		String delete = "DELETE FROM personaje WHERE cod_miembro = ? AND cod = ?";
+		PreparedStatement pstmt;
+		try {
+			pstmt = conn.prepareStatement(delete);
+			
 			pstmt.setInt(1, user.getUser_id());
 			pstmt.setInt(2, personaje.getPers_id());
-			System.out.println(delete);
-
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 	}
 }

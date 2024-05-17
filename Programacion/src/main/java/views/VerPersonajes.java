@@ -20,8 +20,9 @@ public class VerPersonajes extends JPanel {
     private VerPersonajesListener listener;
 
 	
-    public VerPersonajes( VerPersonajesListener listener ) {
+    public VerPersonajes( VerPersonajesListener listener, Personaje personaje ) {
 		this.listener = listener;
+		this.personaje = personaje;
 		setBackground(new Color(242, 242, 242));
 		initialize_components();
 		//make_visible();

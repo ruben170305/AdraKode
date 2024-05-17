@@ -33,7 +33,7 @@ public class MenuMain {
 
 	static VerPersonajesListener ver_personajes_listener = new VerPersonajesListener( ePersonaje, menu, home, user, cPersonaje, personaje );
 	
-	static VerPersonajes vPersonajes = new VerPersonajes( ver_personajes_listener );
+	static VerPersonajes vPersonajes = new VerPersonajes( ver_personajes_listener, personaje );
 
 	static CrearPersonajeListener crear_personaje_listener = new CrearPersonajeListener( menu, home, cPersonaje, user );
 
