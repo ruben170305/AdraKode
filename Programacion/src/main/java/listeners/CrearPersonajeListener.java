@@ -17,12 +17,11 @@ public class CrearPersonajeListener extends Listener implements ActionListener {
 	
 	private CrearPersonaje cPersonaje;
 	private Usuario user;
-	private Personaje personaje;
-	public CrearPersonajeListener( Menu menu, Home home, CrearPersonaje cPersonaje, Usuario user, Personaje personaje ) {
+	
+	public CrearPersonajeListener( Menu menu, Home home, CrearPersonaje cPersonaje, Usuario user) {
 		super( menu, home );
 		this.cPersonaje = cPersonaje;
 		this.user = user;
-		this.personaje = personaje;
 	}
 
 	@Override
@@ -30,15 +29,8 @@ public class CrearPersonajeListener extends Listener implements ActionListener {
 		if ( ae.getActionCommand().equals( "CREAR" ) ) {
 			get_data();
 			super.menu.cargarPanel( home );
-		}else if (ae.getActionCommand().equals("ACTUALIZAR")) {
-			get_data();
-			super.menu.cargarPanel(home);
-		}else if (ae.getActionCommand().equals("ELIMINAR")) {
-			get_data();
-			super.menu.cargarPanel(home);
-		}
 	}
-	
+	}
 	public void get_data() {
 	    // Instanciamos el modelo
 	    Model mysql = new Model();
@@ -64,39 +56,6 @@ public class CrearPersonajeListener extends Listener implements ActionListener {
 	    }
 	}
 	
-	public void update_data() {
-		Model mysql = new Model ();
-		mysql.get_connection();
-		
-		String update = "UPDATE personaje SET nombre = ?, personaje = ?, raza = ?, clase = ?, expe = ? WHERE cod_miembro = ? AND id_personaje = ?";
-		try (Connection conn = mysql.get_connection();
-				PreparedStatement pstmt = conn.prepareStatement(update)){
-	        pstmt.setString(1, cPersonaje.getLblSeleccionarPersonaje().getText());  // Suponiendo que 'Personaje' es un valor fijo
-	        pstmt.setString(2, cPersonaje.getLblSeleccionarPersonaje().getText());  // Suponiendo que 'Personaje' es un valor fijo
-	        pstmt.setString(3, cPersonaje.getTxtRaza().getText());
-	        pstmt.setString(4, cPersonaje.getTxtClase().getText());
-	        pstmt.setInt(5, 0);  // Si 'expe' es un entero, debes definir cómo se obtiene el valor
-	        pstmt.setInt(6, user.getUser_id());
-	        pstmt.setInt(7, personaje.getPers_id());
-
-		}catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
-	public void delete_data () {
-		Model mysql = new Model ();
-		mysql.get_connection();
-		
-		String delete = "DELETE FROM personaje WHERE cod_miembro = ? AND id_personaje = ?";
-		try (Connection conn = mysql.get_connection();
-				PreparedStatement pstmt = conn.prepareStatement(delete)){
-			pstmt.setInt(1, user.getUser_id());
-			pstmt.setInt(2, personaje.getPers_id());
-			
-			pstmt.executeUpdate();
-			}catch (SQLException e) {
-				e.printStackTrace();
-			}
-	}
+	
 
 }
