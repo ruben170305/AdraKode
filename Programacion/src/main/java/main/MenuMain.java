@@ -20,7 +20,10 @@ public class MenuMain {
 	// Instanciamos las ventanas junto a sus listeners
 	static CrearPartida cPartida 			 = new CrearPartida();
 	static EditarPartida ePartida 			 = new EditarPartida();
-	static VerPartidasMaster vPartidasMaster = new VerPartidasMaster();
+	
+
+	static VerPartidaMasterListener ver_partidas_master_listener = new VerPartidaMasterListener( ePartida, menu, home );
+	static VerPartidasMaster vPartidasMaster = new VerPartidasMaster(ver_partidas_master_listener);
 
 	static VerPartidaListener ver_partidas_listener = new VerPartidaListener( menu, home );
 	static VerPartidas vPartidas = new VerPartidas( ver_partidas_listener) ;
@@ -87,7 +90,6 @@ public class MenuMain {
 		if( esMaster ) {
 			CrearPartidaListener crear_partida_listener = new CrearPartidaListener( menu, home );
 			EditarPartidaListener editar_partida_listener = new EditarPartidaListener( menu, home );
-			VerPartidaMasterListener ver_partidas_master_listener = new VerPartidaMasterListener( ePartida, menu, home );
 
 			// Vinculación de listeners
 			cPartida.setListener( crear_partida_listener );
