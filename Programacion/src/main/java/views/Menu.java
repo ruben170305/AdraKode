@@ -70,11 +70,7 @@ public class Menu extends JFrame {
 		menuBar.add(mnPersonajes);
 		
 		//Creamos los items secundarios de Personajes
-		mntmNuevo = new JMenuItem("Nuevo personaje");
-		mnPersonajes.add(mntmNuevo);
 		
-		mntmVer = new JMenuItem("Ver personajes");
-		mnPersonajes.add(mntmVer);
 		
 		mntmModificarP = new JMenuItem("Modificar personaje");
 		mnPersonajes.add(mntmModificarP);
@@ -96,6 +92,12 @@ public class Menu extends JFrame {
 		} else {
 			mntmVerPartidas = new JMenuItem( "Ver partidas" );
 			mnPartidas.add( mntmVerPartidas );
+			
+			mntmNuevo = new JMenuItem("Nuevo personaje");
+			mnPersonajes.add(mntmNuevo);
+			
+			mntmVer = new JMenuItem("Ver personajes");
+			mnPersonajes.add(mntmVer);
 		}
 		
 		//Creamos y asignamos el boton Login al menu principal
