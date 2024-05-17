@@ -9,8 +9,8 @@ public class Usuario extends Data {
 	private int cod;
 
 	// Constructor
-	public Usuario() {
-		
+	public Usuario( Model mysql ) {
+		super( mysql );
 	}
 
 	public boolean consultaLogin(String usuario, String pass) throws SQLException {
@@ -23,8 +23,8 @@ public class Usuario extends Data {
 		String userST = "SELECT * FROM miembro WHERE nombre = '" + usuario + "'";
 		ResultSet userRS = mysql.Model_query(userST);
 
-		if (!userRS.next()) {
-			System.out.println("No se encontraron resultados para el usuario: " + usuario);
+		if ( !userRS.next() ) {
+			System.out.println( "No se encontraron resultados para el usuario: " + usuario );
 			return false;
 		} else {
 

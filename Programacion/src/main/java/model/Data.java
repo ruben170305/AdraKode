@@ -5,11 +5,9 @@ import java.util.ArrayList;
 public class Data {
 
 	protected Model mysql;
-	protected ArrayList<Usuario> usuarios;
-    protected ArrayList<Partida> partidas;
-    protected ArrayList<Personaje> personajes;
-	
-	public Data(){}
+	public ArrayList<Usuario> usuarios;
+    public ArrayList<Partida> partidas;
+    public ArrayList<Personaje> personajes;
 
     public Data( Model mysql ) {
 		this.mysql = mysql;
@@ -38,12 +36,14 @@ public class Data {
 	}
 	
     public void initialize_personajes() {
+		this.personajes.clear();
         Personaje personaje = new Personaje( mysql );
         personaje.conseguir_personajes();
         this.personajes.add( personaje );
     }
 
     public void initialize_partidas() {
+		this.personajes.clear();
         Partida partida = new Partida( mysql );
         partida.conseguir_partidas();
         this.partidas.add( partida );

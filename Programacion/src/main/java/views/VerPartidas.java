@@ -15,7 +15,7 @@ public class VerPartidas extends JPanel {
 	private JLabel lblTitulo, lblImagen;
 	private JButton btnSeleccionar;
 	private JLabel lblTituloPartida, lblAnfitrion, lblJugadores, lblDuración, lblFecha, lblEstado;
-	private Data data;
+	public Data data;
 
 	public VerPartidas( Data data ) {
 		this.data = data;
@@ -55,12 +55,12 @@ public class VerPartidas extends JPanel {
 		String[] columns = { "ID", "Nombre", "Ambientación", "Duración", "Fecha", "Anfitrion", "Nº jugadores", "Estado" };
 
 		// Capturamos los datos de MySQL mediante una consulta
-		ArrayList<Partida> rows = this.data.getPartidas();
-		ArrayList<Object[]> row_data_list = new ArrayList<>();
+		ArrayList<Partida> rows = data.getPartidas();
+		ArrayList<Object[]> row_data_list = new ArrayList<Object[]>();
 
 		for ( Partida partida : rows ) {
 
-			System.out.println(partida.getAmbientacion());
+			System.out.println( partida.getAmbientacion() );
 			
 			// Inicializamos un Objeto temporal donde almacenamos los datos de la fila
 			Object[] row_data = new Object[ columns.length ];

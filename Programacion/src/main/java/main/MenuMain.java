@@ -15,7 +15,7 @@ public class MenuMain {
 	static Menu menu = new Menu( "Adrakode", false );
 	static Home home = new Home();
 	static Listener list = new Listener( menu, home );
-	static Usuario user = new Usuario(); 
+	static Usuario user = new Usuario( mysql );
 	static Personaje personaje = new Personaje( mysql );
 
 	static CrearPersonaje cPersonaje = new CrearPersonaje(menu);
@@ -33,7 +33,7 @@ public class MenuMain {
 	static VerPersonajesListener ver_personajes_listener = new VerPersonajesListener( ePersonaje, menu, home, user, cPersonaje, personaje );
 	static CrearPersonajeListener crear_personaje_listener = new CrearPersonajeListener( menu, home, cPersonaje, user );
 
-	static VentanaPrincipalLogin login = new VentanaPrincipalLogin(user);
+	static VentanaPrincipalLogin login = new VentanaPrincipalLogin( user );
 
 	public static void main( String[] args ) {
 		EventQueue.invokeLater( new Runnable() {
@@ -54,7 +54,7 @@ public class MenuMain {
 				//Hacemos visible el login y cargamos el panel home a la ventana principal para que cuando se muestre este preparada
 				login.make_visible();
 			}
-		});
+		} );
 	}
 
 	/**
@@ -65,8 +65,6 @@ public class MenuMain {
 	 * @return Devuelve Menu ventanaPpal para asignar todos los listeners a la ventana creada
 	 */
 	public static Menu arranque( boolean esMaster ) {
-
-		System.out.println( esMaster );
 
 		// Creamos una ventana y cargamos el panel
 		String title_window = ( esMaster ) ? "Adrakode Master" : "Adrakode";

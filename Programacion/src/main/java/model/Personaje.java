@@ -16,11 +16,12 @@ public class Personaje extends Data {
     
     // Constructor
     public Personaje( Model mysql ) {
-		this.mysql = mysql;
+		super( mysql );
 	}
 
     public Personaje(
-            int cod
+			Model mysql
+        ,   int cod
         ,   String nombre
         ,   String personaje
         ,   String raza
@@ -28,7 +29,7 @@ public class Personaje extends Data {
         ,   int expe
         ,   int cod_miembro
     ) {
-		super();
+		super( mysql );
         this.cod 			= cod;
         this.nombre  		= nombre;
         this.personaje		= personaje;
@@ -62,7 +63,7 @@ public class Personaje extends Data {
 			// Ejecuta la inserción
 			pstmt.executeUpdate();
 			
-			super.getPersonajes().add( new Personaje( cod, nombre, nombre, raza, clase, 0, get_id_personaje( nombre ) ) );
+			super.getPersonajes().add( new Personaje( this.mysql, cod, nombre, nombre, raza, clase, 0, get_id_personaje( nombre ) ) );
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -103,7 +104,8 @@ public class Personaje extends Data {
             // Creamos un objeto personaje por cada registro y lo añadimos al Data
             while( rs.next() ) {
                 Personaje temp_personaje = new Personaje(
-                        rs.getInt( 1 )
+						this.mysql
+                    ,   rs.getInt( 1 )
                     ,   rs.getString( 2 )
                     ,   rs.getString( 3 )
                     ,   rs.getString( 4 )

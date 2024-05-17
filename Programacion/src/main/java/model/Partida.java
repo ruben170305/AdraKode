@@ -10,13 +10,14 @@ public class Partida extends Data {
     private int part_id, num_sesion, duracion, dificultad, numero_jugadores, en_curso, anfitrion_id;
     private String nombre, fecha, ambientacion, nombre_anfitrion, apellidos_anfitrion;
 
-    public Partida( Model mysql ){
-		this.mysql = mysql;
+    public Partida( Model mysql ) {
+		super( mysql );
 	}
 
     // Constructor
     public Partida(
-            int part_id
+			Model mysql
+        ,   int part_id
         ,   int num_sesion
         ,   String nombre
         ,   int duracion
@@ -29,7 +30,7 @@ public class Partida extends Data {
         ,   String nombre_anfitrion
         ,   String apellidos_anfitrion
     ) {
-        super();
+        super( mysql );
         this.part_id                = part_id;
         this.num_sesion             = num_sesion;
         this.nombre                 = nombre;
@@ -62,7 +63,8 @@ public class Partida extends Data {
             // Creamos un objeto partida por cada registro y lo añadimos al Data
             while( rs.next() ) {
                 Partida temp_partida = new Partida(
-                        rs.getInt( 1 )
+						this.mysql
+                    ,   rs.getInt( 1 )
                     ,   rs.getInt( 2 )
                     ,   rs.getString( 3 )
                     ,   rs.getInt( 4 )
@@ -105,7 +107,8 @@ public class Partida extends Data {
             // Creamos un objeto partida por cada registro y lo añadimos al Data
             while( rs.next() ) {
                 Partida temp_partida = new Partida(
-                        rs.getInt( 1 )
+						this.mysql
+                    ,   rs.getInt( 1 )
                     ,   rs.getInt( 2 )
                     ,   rs.getString( 3 )
                     ,   rs.getInt( 4 )
