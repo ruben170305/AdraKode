@@ -18,8 +18,8 @@ public class MenuMain {
 	static CrearPersonaje cPersonaje = new CrearPersonaje(menu);
 
 	// Instanciamos las ventanas junto a sus listeners
-	static CrearPartida cPartida 			 = new CrearPartida();
-	static EditarPartida ePartida 			 = new EditarPartida();
+	static CrearPartida cPartida = new CrearPartida();
+	static EditarPartida ePartida = new EditarPartida();
 	
 
 	static VerPartidaMasterListener ver_partidas_master_listener = new VerPartidaMasterListener( ePartida, menu, home );
@@ -62,8 +62,6 @@ public class MenuMain {
 	 * @return Devuelve Menu ventanaPpal para asignar todos los listeners a la ventana creada
 	 */
 	public static Menu arranque( boolean esMaster ) {
-
-		System.out.println( esMaster );
 
 		// Creamos una ventana y cargamos el panel
 		String title_window = ( esMaster ) ? "Adrakode Master" : "Adrakode";
