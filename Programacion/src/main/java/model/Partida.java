@@ -1,6 +1,12 @@
 package model;
 
-public class Partida {
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+public class Partida extends Data {
 
     // Definimos las características de la Partida
     private int part_id;
@@ -16,6 +22,55 @@ public class Partida {
         this.dia          = dia;
         this.hora         = hora;
     }
+
+    /**
+	 * Método que realiza la consulta de datos a MySQL
+	 * @return rs
+	 */
+	public ResultSet conseguir_partidas() {
+
+		ResultSet rs = null;
+
+		try {
+			String sql = "SELECT p.*, m.nombre as nombre_anfitrion, m.apellidos as apellidos_anfitrion " +
+			"FROM partida p " +
+			"LEFT JOIN miembro m " +
+			"ON p.anfitrion_id = m.cod";
+
+			rs = super.mysql.Model_query( sql );
+			return rs;
+		} catch ( SQLException e ) {
+			e.printStackTrace();
+		}
+
+		return rs;
+	}
+    
+    public ArrayList<String> get_data() {
+		ResultSet rs = null;
+		String sql = "SELECT nombre FROM personaje WHERE cod_miembro = ?";
+
+		// Obtener la conexión
+		try {
+			Connection conn = super.mysql.get_connection();
+			PreparedStatement pstmt = conn.prepareStatement( sql );
+
+			// Establecer el parámetro cod_miembro
+			pstmt.setInt(1, user.getUser_id());
+
+			// Ejecutar la consulta
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				nombres.add(rs.getString("nombre"));
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return nombres;
+	}
 
     // Getters y Setters
     public int getPart_id() {
