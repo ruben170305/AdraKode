@@ -4,39 +4,33 @@ import java.awt.EventQueue;
 
 import views.*;
 import listeners.*;
-import model.Data;
-import model.Personaje;
-import model.Usuario;
+import model.*;
 
 public class MenuMain {
 
-	// Inicializamos la ventana principal y la ventana del Home
-	static Data data = new Data();
+	static Model mysql = new Model();
+	static { mysql.get_connection(); }
+	static Data data = new Data( mysql );
+
 	static Menu menu = new Menu( "Adrakode", false );
 	static Home home = new Home();
 	static Listener list = new Listener( menu, home );
 	static Usuario user = new Usuario(); 
-	static Personaje personaje = new Personaje();
+	static Personaje personaje = new Personaje( mysql );
+
 	static CrearPersonaje cPersonaje = new CrearPersonaje(menu);
+	static CrearPartida cPartida = new CrearPartida();
+	static EditarPartida ePartida = new EditarPartida();
+	static VerPartidas vPartidas;
+	static VerPartidasMaster vPartidasMaster;
 
-	// Instanciamos las ventanas junto a sus listeners
-	static CrearPartida cPartida 			 = new CrearPartida();
-	static EditarPartida ePartida 			 = new EditarPartida();
-	
-
-	static VerPartidaMasterListener ver_partidas_master_listener = new VerPartidaMasterListener( ePartida, menu, home );
-	static VerPartidasMaster vPartidasMaster = new VerPartidasMaster(ver_partidas_master_listener);
-
-	static VerPartidaListener ver_partidas_listener = new VerPartidaListener( menu, home );
-	static VerPartidas vPartidas = new VerPartidas( ver_partidas_listener) ;
-	
-	static EditarPersonajesListener editar_personaje_listener = new EditarPersonajesListener( menu, home );
+	static VerPersonajes vPersonajes;
 	static EditarPersonaje ePersonaje = new EditarPersonaje();
 
+	static VerPartidaMasterListener ver_partidas_master_listener = new VerPartidaMasterListener( ePartida, menu, home );
+	static VerPartidaListener ver_partidas_listener = new VerPartidaListener( menu, home );
+	static EditarPersonajesListener editar_personaje_listener = new EditarPersonajesListener( menu, home );
 	static VerPersonajesListener ver_personajes_listener = new VerPersonajesListener( ePersonaje, menu, home, user, cPersonaje, personaje );
-	
-	static VerPersonajes vPersonajes = new VerPersonajes( ver_personajes_listener, personaje );
-
 	static CrearPersonajeListener crear_personaje_listener = new CrearPersonajeListener( menu, home, cPersonaje, user );
 
 	static VentanaPrincipalLogin login = new VentanaPrincipalLogin(user);
@@ -46,6 +40,13 @@ public class MenuMain {
 			
 			@Override
 			public void run() {
+				data.initialize_partidas();
+				data.initialize_personajes();
+
+				vPartidas = new VerPartidas( data );
+				vPartidasMaster = new VerPartidasMaster( data );
+				vPersonajes = new VerPersonajes( data );
+
 				//Arrancamos la vista login para comprobar si es game master o no
 				LoginListener loginlistener = new LoginListener(login);
 				login.setListener( loginlistener );
@@ -107,7 +108,7 @@ public class MenuMain {
 		// Vinculación de Listeners
 		cPersonaje.setListener(crear_personaje_listener);
 		ePersonaje.setListener( editar_personaje_listener );
-		vPersonajes.setListener();
+		vPersonajes.setListener( ver_personajes_listener );
 
 		// Vinculamos el listener de la ventana principal a su ventana
 		menu.setListener( listener );

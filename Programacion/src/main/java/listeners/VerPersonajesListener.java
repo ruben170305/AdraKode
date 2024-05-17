@@ -35,10 +35,10 @@ public class VerPersonajesListener extends Listener implements ActionListener {
 		if (ae.getActionCommand().equals("SELECCIONAR")) {
 			super.menu.cargarPanel(home);
 		} else if (buttonName.equals("ACTUALIZAR")) {
-			this.personaje.update_data();
+			this.personaje.update_data( cPersonaje, user );
 			super.menu.cargarPanel(home);
 		} else if (buttonName.equals("BORRAR")) {
-			this.personaje.delete_data();
+			this.personaje.delete_data( user );
 			super.menu.cargarPanel(home);
 		}
 

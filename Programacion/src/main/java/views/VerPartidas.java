@@ -8,8 +8,6 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import listeners.*;
 import java.awt.*;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import model.*;
 
@@ -61,6 +59,8 @@ public class VerPartidas extends JPanel {
 		ArrayList<Object[]> row_data_list = new ArrayList<>();
 
 		for ( Partida partida : rows ) {
+
+			System.out.println(partida.getAmbientacion());
 			
 			// Inicializamos un Objeto temporal donde almacenamos los datos de la fila
 			Object[] row_data = new Object[ columns.length ];

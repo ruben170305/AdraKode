@@ -15,7 +15,9 @@ public class Personaje extends Data {
     private int cod, cod_miembro, expe;
     
     // Constructor
-    public Personaje() {}
+    public Personaje( Model mysql ) {
+		this.mysql = mysql;
+	}
 
     public Personaje(
             int cod
@@ -26,6 +28,7 @@ public class Personaje extends Data {
         ,   int expe
         ,   int cod_miembro
     ) {
+		super();
         this.cod 			= cod;
         this.nombre  		= nombre;
         this.personaje		= personaje;
@@ -40,7 +43,7 @@ public class Personaje extends Data {
 		// Consulta SQL
 		String sql = "insert into personaje (nombre, personaje, raza, clase, expe, cod_miembro) values (?, ?, ?, ?, ?, ?)";
 		try {
-            Connection conn = super.mysql.get_connection();
+            Connection conn = this.mysql.get_connection();
             PreparedStatement pstmt = conn.prepareStatement( sql );
             
             String nombre = cPersonaje.getLblSeleccionarPersonaje().getText();
@@ -71,7 +74,7 @@ public class Personaje extends Data {
 		String sql = "SELECT cod FROM personaje WHERE nombre = ?";
 		int numero = 0;
 		try {
-            Connection conn = super.mysql.get_connection();
+            Connection conn = this.mysql.get_connection();
             PreparedStatement pstmt = conn.prepareStatement( sql );
             pstmt.setString( 1, nombre );
             
@@ -91,10 +94,11 @@ public class Personaje extends Data {
 	public void conseguir_personajes() {
 
 		try {
+			ArrayList<Personaje> personajes = new ArrayList<>();
 
             // Realizamos una consulta para capturar todos los personajes
 			String sql = "SELECT * from personaje";
-			ResultSet rs = super.mysql.Model_query( sql );
+			ResultSet rs = this.mysql.Model_query( sql );
 
             // Creamos un objeto personaje por cada registro y lo añadimos al Data
             while( rs.next() ) {
@@ -109,21 +113,23 @@ public class Personaje extends Data {
                 );
 
                 // Añadimos al Data
-                super.getPersonajes().add( temp_personaje );
+                personajes.add( temp_personaje );
 
             }
+
+			super.setPersonajes( personajes );
+
 		} catch ( SQLException e ) {
 			e.printStackTrace();
 		}
 	}
 	
-	public void update_data() {
-		Model mysql = new Model();
-		mysql.get_connection();
+	
+	public void update_data( CrearPersonaje cPersonaje, Usuario user) {
 
 		String sql = "UPDATE personaje SET nombre = ?, personaje = ?, raza = ?, clase = ?, expe = ? WHERE cod_miembro = ? AND id_personaje = ?";
 		try {
-            Connection conn = super.mysql.get_connection();
+            Connection conn = this.mysql.get_connection();
             PreparedStatement pstmt = conn.prepareStatement( sql );
 
 			pstmt.setString(1, cPersonaje.getLblSeleccionarPersonaje().getText()); // Suponiendo que 'Personaje' es un valor fijo
@@ -132,23 +138,24 @@ public class Personaje extends Data {
 			pstmt.setString(4, cPersonaje.getTxtClase().getText());
 			pstmt.setInt(5, 0); // Si 'expe' es un entero, debes definir cómo se obtiene el valor
 			pstmt.setInt(6, user.getUser_id());
-			pstmt.setInt(7, personaje.getPers_id());
+			pstmt.setInt(7, this.cod);
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
 
-	public void delete_data() {
+	
+	public void delete_data( Usuario user ) {
 		
-		Connection conn = super.mysql.get_connection();
+		Connection conn = this.mysql.get_connection();
 		String delete = "DELETE FROM personaje WHERE cod_miembro = ? AND cod = ?";
 		
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(delete);
 			
 			pstmt.setInt(1, user.getUser_id());
-			pstmt.setInt(2, personaje.getPers_id());
+			pstmt.setInt(2, this.cod);
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

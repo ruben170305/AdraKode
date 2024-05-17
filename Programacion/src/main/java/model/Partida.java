@@ -1,7 +1,5 @@
 package model;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -12,7 +10,9 @@ public class Partida extends Data {
     private int part_id, num_sesion, duracion, dificultad, numero_jugadores, en_curso, anfitrion_id;
     private String nombre, fecha, ambientacion, nombre_anfitrion, apellidos_anfitrion;
 
-    public Partida(){}
+    public Partida( Model mysql ){
+		this.mysql = mysql;
+	}
 
     // Constructor
     public Partida(
@@ -48,15 +48,16 @@ public class Partida extends Data {
 	 * Método que realiza la consulta de datos a MySQL
 	 */
 	public void conseguir_partidas() {
-
+		
 		try {
+			ArrayList<Partida> partidas = new ArrayList<>();
 
             // Realizamos una consulta para capturar todas las partidas con su anfitrión
 			String sql = "SELECT p.*, m.nombre as nombre_anfitrion, m.apellidos as apellidos_anfitrion " +
 			"FROM partida p " +
 			"LEFT JOIN miembro m " +
 			"ON p.anfitrion_id = m.cod";
-			ResultSet rs = super.mysql.Model_query( sql );
+			ResultSet rs = this.mysql.Model_query( sql );
 
             // Creamos un objeto partida por cada registro y lo añadimos al Data
             while( rs.next() ) {
@@ -76,9 +77,12 @@ public class Partida extends Data {
                 );
 
                 // Añadimos al Data
-                super.getPartidas().add( temp_partida );
+                partidas.add( temp_partida );
 
             }
+
+			super.setPartidas( partidas );
+
 		} catch ( SQLException e ) {
 			e.printStackTrace();
 		}
@@ -96,7 +100,7 @@ public class Partida extends Data {
 			"FROM partida p " +
 			"LEFT JOIN miembro m " +
 			"ON p.anfitrion_id = m.cod";
-			ResultSet rs = super.mysql.Model_query( sql );
+			ResultSet rs = this.mysql.Model_query( sql );
 
             // Creamos un objeto partida por cada registro y lo añadimos al Data
             while( rs.next() ) {
@@ -219,7 +223,5 @@ public class Partida extends Data {
 	public void setApellidos_anfitrion(String apellidos_anfitrion) {
 		this.apellidos_anfitrion = apellidos_anfitrion;
 	}
-
-
 	
 }

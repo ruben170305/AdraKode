@@ -5,8 +5,9 @@ import java.awt.*;
 import java.util.ArrayList;
 import javax.swing.border.*;
 import listeners.VerPersonajesListener;
-import model.Personaje;
+
 import javax.swing.*;
+import model.*;
 
 public class VerPersonajes extends JPanel {
 	
@@ -15,14 +16,11 @@ public class VerPersonajes extends JPanel {
     private JButton btnSeleccionar, btnEditar, btnBorrar; 
     private JProgressBar pbExp, pbFuerza, pbDestreza, pbConstitucion, pbInteligencia, pbSabiduria, pbCarisma; 
     private JComboBox comboBoxSeleccionar;
-    
-    private Personaje personaje;
-    private VerPersonajesListener listener;
+    private Data data;
 
 	
-    public VerPersonajes( VerPersonajesListener listener, Personaje personaje ) {
-		this.listener = listener;
-		this.personaje = personaje;
+    public VerPersonajes( Data data ) {
+        this.data = data;
 		setBackground(new Color(242, 242, 242));
 		initialize_components();
 		//make_visible();
@@ -73,7 +71,11 @@ public class VerPersonajes extends JPanel {
         add(lblSeleccionarPersonaje);
 
         //ComboBox
-        ArrayList<String> opcionesComboBox = listener.get_data();
+        ArrayList<String> opcionesComboBox = new ArrayList<String>();
+        ArrayList<Personaje> personajes = this.data.getPersonajes();
+        for( Personaje personaje : personajes ) {
+            opcionesComboBox.add( personaje.getNombre() );
+        }
 
         // Convertir el ArrayList a un array
         String[] opcionesArray = new String[opcionesComboBox.size()];
@@ -311,19 +313,22 @@ public class VerPersonajes extends JPanel {
 	 */
 	
 	public void cargarDatosEnComboBox() {
-		ArrayList<String> opcionesComboBox = new ArrayList<String>(); 
-        // Guardar los datos en el ArrayList y actualizar el JComboBox
-        opcionesComboBox.addAll(listener.get_data());
+        ArrayList<String> opcionesComboBox = new ArrayList<String>();
+        ArrayList<Personaje> personajes = this.data.getPersonajes();
+        for( Personaje personaje : personajes ) {
+            opcionesComboBox.add( personaje.getNombre() );
+        }
+
         comboBoxSeleccionar.removeAllItems();
         for (String nombre : opcionesComboBox) {
             comboBoxSeleccionar.addItem(nombre);
         }
     }
 	
-	public void setListener() {
-		btnEditar.addActionListener( this.listener );
-		btnSeleccionar.addActionListener( this.listener );
-		btnBorrar.addActionListener( this.listener );
+	public void setListener( VerPersonajesListener listener ) {
+		btnEditar.addActionListener( listener );
+		btnSeleccionar.addActionListener( listener );
+		btnBorrar.addActionListener( listener );
 	}
 
 }
