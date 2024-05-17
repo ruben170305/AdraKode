@@ -4,12 +4,14 @@ import java.awt.EventQueue;
 
 import views.*;
 import listeners.*;
+import model.Data;
 import model.Personaje;
 import model.Usuario;
 
 public class MenuMain {
 
 	// Inicializamos la ventana principal y la ventana del Home
+	static Data data = new Data();
 	static Menu menu = new Menu( "Adrakode", false );
 	static Home home = new Home();
 	static Listener list = new Listener( menu, home );
