@@ -12,31 +12,35 @@ public class Personaje extends Data {
 
     // Definimos las características del Personaje
     private String nombre, personaje, clase, raza;
-    private int cod, cod_miembro, exp;
+    private int cod, cod_miembro, expe;
     
     // Constructor
-    public Personaje() {
-    	
-    }
-    public Personaje( int cod, String nombre, String personaje, String raza, String clase, int exp, int cod_miembro ) {
+    public Personaje() {}
+
+    public Personaje(
+            int cod
+        ,   String nombre
+        ,   String personaje
+        ,   String raza
+        ,   String clase
+        ,   int expe
+        ,   int cod_miembro
+    ) {
         this.cod 			= cod;
         this.nombre  		= nombre;
         this.personaje		= personaje;
         this.raza   		= raza;
         this.clase   		= clase;
-        this.exp     		= exp;
+        this.expe     		= expe;
         this.cod_miembro 	= cod_miembro;
     }
     
-    
 	public void crear_personaje( CrearPersonaje cPersonaje, Usuario user ) {
-		// Instanciamos el modelo
-		super.mysql.get_connection();
 
 		// Consulta SQL
 		String sql = "insert into personaje (nombre, personaje, raza, clase, expe, cod_miembro) values (?, ?, ?, ?, ?, ?)";
 		try {
-            Connection conn = mysql.get_connection();
+            Connection conn = super.mysql.get_connection();
             PreparedStatement pstmt = conn.prepareStatement( sql );
             
             String nombre = cPersonaje.getLblSeleccionarPersonaje().getText();
@@ -55,67 +59,75 @@ public class Personaje extends Data {
 			// Ejecuta la inserción
 			pstmt.executeUpdate();
 			
-			super.getPersonajes().add( new Personaje(cod, nombre, nombre, raza, clase, 0, get_id_personaje(nombre) ) );
+			super.getPersonajes().add( new Personaje( cod, nombre, nombre, raza, clase, 0, get_id_personaje( nombre ) ) );
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
-	
-	public int get_id_personaje(String nombre) {
+
+    public int get_id_personaje( String nombre ) {
 		// Consulta SQL
 		String sql = "SELECT cod FROM personaje WHERE nombre = ?";
 		int numero = 0;
 		try {
-            Connection conn = mysql.get_connection();
+            Connection conn = super.mysql.get_connection();
             PreparedStatement pstmt = conn.prepareStatement( sql );
-            pstmt.setString(1, nombre);
+            pstmt.setString( 1, nombre );
             
             ResultSet rsResultSet = pstmt.executeQuery( sql );
             
-            numero = rsResultSet.getInt(1);
-			
-			
+            numero = rsResultSet.getInt( 1 );
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} 
 		return numero;
 	}
-	
-	public ResultSet conseguir_personajes() {
 
-		ResultSet rs = null;
-
-		// Creamos una conexión con MySQL
-		Model mysql = new Model();
-		mysql.get_connection();
+    /**
+	 * Método que realiza la consulta de datos a MySQL
+	 */
+	public void conseguir_personajes() {
 
 		try {
-			String sql = "SELECT p.*, m.nombre as nombre_anfitrion, m.apellidos as apellidos_anfitrion " +
-			"FROM partida p " +
-			"LEFT JOIN miembro m " +
-			"ON p.anfitrion_id = m.cod";
 
-			rs = mysql.Model_query( sql );
-			return rs;
+            // Realizamos una consulta para capturar todos los personajes
+			String sql = "SELECT * from personaje";
+			ResultSet rs = super.mysql.Model_query( sql );
+
+            // Creamos un objeto personaje por cada registro y lo añadimos al Data
+            while( rs.next() ) {
+                Personaje temp_personaje = new Personaje(
+                        rs.getInt( 1 )
+                    ,   rs.getString( 2 )
+                    ,   rs.getString( 3 )
+                    ,   rs.getString( 4 )
+                    ,   rs.getString( 5 )
+                    ,   rs.getInt( 6 )
+                    ,   rs.getInt( 7 )
+                );
+
+                // Añadimos al Data
+                super.getPersonajes().add( temp_personaje );
+
+            }
 		} catch ( SQLException e ) {
 			e.printStackTrace();
 		}
-
-		return rs;
 	}
 	
 	public void update_data() {
 		Model mysql = new Model();
 		mysql.get_connection();
 
-		String update = "UPDATE personaje SET nombre = ?, personaje = ?, raza = ?, clase = ?, expe = ? WHERE cod_miembro = ? AND id_personaje = ?";
-		try (Connection conn = mysql.get_connection(); PreparedStatement pstmt = conn.prepareStatement(update)) {
-			pstmt.setString(1, cPersonaje.getLblSeleccionarPersonaje().getText()); // Suponiendo que 'Personaje' es un
-																					// valor fijo
-			pstmt.setString(2, cPersonaje.getLblSeleccionarPersonaje().getText()); // Suponiendo que 'Personaje' es un
-																					// valor fijo
+		String sql = "UPDATE personaje SET nombre = ?, personaje = ?, raza = ?, clase = ?, expe = ? WHERE cod_miembro = ? AND id_personaje = ?";
+		try {
+            Connection conn = super.mysql.get_connection();
+            PreparedStatement pstmt = conn.prepareStatement( sql );
+
+			pstmt.setString(1, cPersonaje.getLblSeleccionarPersonaje().getText()); // Suponiendo que 'Personaje' es un valor fijo
+			pstmt.setString(2, cPersonaje.getLblSeleccionarPersonaje().getText()); // Suponiendo que 'Personaje' es un valor fijo
 			pstmt.setString(3, cPersonaje.getTxtRaza().getText());
 			pstmt.setString(4, cPersonaje.getTxtClase().getText());
 			pstmt.setInt(5, 0); // Si 'expe' es un entero, debes definir cómo se obtiene el valor
@@ -128,14 +140,12 @@ public class Personaje extends Data {
 	}
 
 	public void delete_data() {
-		Model mysql = new Model();
-		mysql.get_connection();
 		
-		Connection conn = mysql.get_connection();
+		Connection conn = super.mysql.get_connection();
 		String delete = "DELETE FROM personaje WHERE cod_miembro = ? AND cod = ?";
-		PreparedStatement pstmt;
+		
 		try {
-			pstmt = conn.prepareStatement(delete);
+			PreparedStatement pstmt = conn.prepareStatement(delete);
 			
 			pstmt.setInt(1, user.getUser_id());
 			pstmt.setInt(2, personaje.getPers_id());
@@ -184,11 +194,10 @@ public class Personaje extends Data {
 		this.cod_miembro = cod_miembro;
 	}
 	public int getExp() {
-		return exp;
+		return expe;
 	}
-	public void setExp(int exp) {
-		this.exp = exp;
+	public void setExpe(int expe) {
+		this.expe = expe;
 	}
-	
 	
 }
