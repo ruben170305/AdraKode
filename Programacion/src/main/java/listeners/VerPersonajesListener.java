@@ -8,7 +8,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import javax.naming.spi.DirStateFactory.Result;
 import javax.swing.JButton;
 
 import model.Model;
@@ -24,6 +23,9 @@ public class VerPersonajesListener extends Listener implements ActionListener {
 	private Personaje personaje;
 
 	// Constructor del Listener
+//	public VerPersonajesListener() {
+//		super();
+//	}
 	public VerPersonajesListener(EditarPersonaje ep, Menu menu, Home home, Usuario user, CrearPersonaje cPersonaje,
 			Personaje personaje) {
 		super(menu, home);
@@ -68,9 +70,8 @@ public class VerPersonajesListener extends Listener implements ActionListener {
 		String buttonName = sourceButton.getName();
 		if (ae.getActionCommand().equals("SELECCIONAR")) {
 			super.menu.cargarPanel(home);
-		} else if (buttonName.equals("ACTUALIZAR")) {
-			update_data();
-			super.menu.cargarPanel(home);
+		} else if (buttonName.equals("EDITAR")) {
+			super.menu.cargarPanel(ep);
 		} else if (buttonName.equals("BORRAR")) {
 			delete_data();
 			super.menu.cargarPanel(home);

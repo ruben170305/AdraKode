@@ -281,6 +281,7 @@ public class VerPersonajes extends JPanel {
 		
 		//Boton editar
 		btnEditar = new JButton( "" );
+		btnEditar.setName("EDITAR");
 		btnEditar.setIcon(new ImageIcon(VerPersonajes.class.getResource("/img/botonEditarW.png")));
 		btnEditar.setOpaque(true);
 		btnEditar.setForeground(new Color(29, 29, 27));
