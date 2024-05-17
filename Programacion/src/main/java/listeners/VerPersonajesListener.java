@@ -20,22 +20,25 @@ public class VerPersonajesListener extends Listener implements ActionListener {
 	private EditarPersonaje ep;
 	private Usuario user;
 	private CrearPersonaje cPersonaje;
+	private VerPersonajes vPersonaje;
 	private Personaje personaje;
 
 	// Constructor del Listener
-//	public VerPersonajesListener() {
-//		super();
-//	}
+	public VerPersonajesListener(Usuario user) {
+		super();
+		this.user = user;
+	}
 	public VerPersonajesListener(EditarPersonaje ep, Menu menu, Home home, Usuario user, CrearPersonaje cPersonaje,
-			Personaje personaje) {
+			VerPersonajes vPersonaje, Personaje personaje) {
 		super(menu, home);
 		this.cPersonaje = cPersonaje;
+		this.vPersonaje = vPersonaje;
 		this.ep = ep;
 		this.user = user;
 		this.personaje = personaje;
 	}
 
-	public ArrayList<String> get_data() {
+	public ArrayList<String> get_data(Usuario user) {
 		Model mysql = new Model();
 		ResultSet rs = null;
 		String query = "SELECT nombre FROM personaje WHERE cod_miembro = ?";
@@ -104,11 +107,11 @@ public class VerPersonajesListener extends Listener implements ActionListener {
 		Model mysql = new Model();
 		mysql.get_connection();
 
-		String delete = "DELETE FROM personaje WHERE cod_miembro = ? AND cod = ?";
+		String delete = "DELETE FROM personaje WHERE cod_miembro = ? AND nombre = ?";
 
 		try (Connection conn = mysql.get_connection(); PreparedStatement pstmt = conn.prepareStatement(delete)) {
 			pstmt.setInt(1, user.getUser_id());
-			pstmt.setInt(2, personaje.getPers_id());
+			pstmt.setString(2, vPersonaje.getComboBoxSeleccionar().getSelectedItem().toString());
 			System.out.println(pstmt.toString());
 
 			pstmt.executeUpdate();

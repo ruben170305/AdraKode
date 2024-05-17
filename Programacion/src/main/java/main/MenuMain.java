@@ -8,7 +8,7 @@ import model.Personaje;
 import model.Usuario;
 
 public class MenuMain {
-
+	
 	// Inicializamos la ventana principal y la ventana del Home
 	static Menu menu = new Menu( "Adrakode", false );
 	static Home home = new Home();
@@ -31,9 +31,10 @@ public class MenuMain {
 	static EditarPersonajesListener editar_personaje_listener = new EditarPersonajesListener( menu, home );
 	static EditarPersonaje ePersonaje = new EditarPersonaje();
 
-	static VerPersonajesListener ver_personajes_listener = new VerPersonajesListener( ePersonaje, menu, home, user, cPersonaje, personaje );
+	static VerPersonajes vPersonajes = new VerPersonajes( user );
+	static VerPersonajesListener ver_personajes_listener = new VerPersonajesListener( ePersonaje, menu, home, user, cPersonaje, vPersonajes, personaje );
 	
-	static VerPersonajes vPersonajes = new VerPersonajes( ver_personajes_listener );
+	
 
 	static CrearPersonajeListener crear_personaje_listener = new CrearPersonajeListener( menu, home, cPersonaje, user );
 
@@ -105,7 +106,7 @@ public class MenuMain {
 		// Vinculación de Listeners
 		cPersonaje.setListener(crear_personaje_listener);
 		ePersonaje.setListener( editar_personaje_listener );
-		vPersonajes.setListener();
+		vPersonajes.setListener( ver_personajes_listener );
 
 		// Vinculamos el listener de la ventana principal a su ventana
 		menu.setListener( listener );
