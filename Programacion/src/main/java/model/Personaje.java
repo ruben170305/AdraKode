@@ -65,6 +65,7 @@ public class Personaje extends Data {
 	public int get_id_personaje(String nombre) {
 		// Consulta SQL
 		String sql = "SELECT cod FROM personaje WHERE nombre = ?";
+		int numero = 0;
 		try {
             Connection conn = mysql.get_connection();
             PreparedStatement pstmt = conn.prepareStatement( sql );
@@ -72,50 +73,15 @@ public class Personaje extends Data {
             
             ResultSet rsResultSet = pstmt.executeQuery( sql );
             
-            int numero = rsResultSet.getInt(1);
+            numero = rsResultSet.getInt(1);
 			
-			return numero;
+			
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} 
+		return numero;
 	}
-
-	/**
-    
-	Método que realiza la consulta de datos a MySQL*/
-	  public void conseguir_personajes() {
-
-	        try {
-	            // Realizamos una consulta para capturar todas las partidas con su anfitrión
-	            String sql = "SELECT * FROM personajes WHERE cod = ?";
-	            ResultSet rs = super.mysql.Model_query( sql );
-
-	            // Creamos un objeto partida por cada registro y lo añadimos al Data
-	            while( rs.next() ) {
-	                Partida temp_partida = new Partida(
-	                        rs.getString( 1 )
-	                    ,   rs.getString( 2 )
-	                    ,   rs.getString( 3 )
-	                    ,   rs.getInt( 4 )
-	                    ,   rs.getInt( 5 )
-	                    ,   rs.getString( 6 )
-	                    ,   rs.getInt( 7 )
-	                    ,   rs.getString( 8 )
-	                    ,   rs.getInt( 9 )
-	                    ,   rs.getInt( 10 )
-	                    ,   rs.getString( 11 )
-	                    ,   rs.getString( 12 )
-	                );
-
-	                // Añadimos al Data
-	                super.getPartidas().add( temp_partida );
-
-	            }
-	        } catch ( SQLException e ) {
-	            e.printStackTrace();
-	        }
-	    }
 	public String getNombre() {
 		return nombre;
 	}

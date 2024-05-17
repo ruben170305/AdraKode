@@ -9,67 +9,119 @@ import java.util.ArrayList;
 public class Partida extends Data {
 
     // Definimos las características de la Partida
-    private int part_id;
-    private String nombre, ambientacion, dia, hora;
-    private boolean en_curso;
+    private int part_id, num_sesion, duracion, dificultad, numero_jugadores, en_curso, anfitrion_id;
+    private String nombre, fecha, ambientacion, nombre_anfitrion, apellidos_anfitrion;
+
+    public Partida(){}
 
     // Constructor
-    public Partida( int part_id, String nombre, boolean en_curso, String ambientacion, String dia, String hora ) {
-        this.part_id      = part_id;
-        this.nombre       = nombre;
-        this.en_curso     = en_curso;
-        this.ambientacion = ambientacion;
-        this.dia          = dia;
-        this.hora         = hora;
+    public Partida(
+            int part_id
+        ,   int num_sesion
+        ,   String nombre
+        ,   int duracion
+        ,   int dificultad
+        ,   String fecha
+        ,   int numero_jugadores
+        ,   String ambientacion
+        ,   int en_curso
+        ,   int anfitrion_id
+        ,   String nombre_anfitrion
+        ,   String apellidos_anfitrion
+    ) {
+        super();
+        this.part_id                = part_id;
+        this.num_sesion             = num_sesion;
+        this.nombre                 = nombre;
+        this.duracion               = duracion;
+        this.dificultad             = dificultad;
+        this.fecha                  = fecha;
+        this.numero_jugadores       = numero_jugadores;
+        this.ambientacion           = ambientacion;
+        this.en_curso               = en_curso;
+        this.anfitrion_id           = anfitrion_id;
+        this.nombre_anfitrion       = nombre_anfitrion;
+        this.apellidos_anfitrion    = apellidos_anfitrion;
     }
 
     /**
 	 * Método que realiza la consulta de datos a MySQL
-	 * @return rs
 	 */
-	public ResultSet conseguir_partidas() {
-
-		ResultSet rs = null;
+	public void conseguir_partidas() {
 
 		try {
+
+            // Realizamos una consulta para capturar todas las partidas con su anfitrión
 			String sql = "SELECT p.*, m.nombre as nombre_anfitrion, m.apellidos as apellidos_anfitrion " +
 			"FROM partida p " +
 			"LEFT JOIN miembro m " +
 			"ON p.anfitrion_id = m.cod";
+			ResultSet rs = super.mysql.Model_query( sql );
 
-			rs = super.mysql.Model_query( sql );
-			return rs;
+            // Creamos un objeto partida por cada registro y lo añadimos al Data
+            while( rs.next() ) {
+                Partida temp_partida = new Partida(
+                        rs.getInt( 1 )
+                    ,   rs.getInt( 2 )
+                    ,   rs.getString( 3 )
+                    ,   rs.getInt( 4 )
+                    ,   rs.getInt( 5 )
+                    ,   rs.getString( 6 )
+                    ,   rs.getInt( 7 )
+                    ,   rs.getString( 8 )
+                    ,   rs.getInt( 9 )
+                    ,   rs.getInt( 10 )
+                    ,   rs.getString( 11 )
+                    ,   rs.getString( 12 )
+                );
+
+                // Añadimos al Data
+                super.getPartidas().add( temp_partida );
+
+            }
 		} catch ( SQLException e ) {
 			e.printStackTrace();
 		}
-
-		return rs;
 	}
     
-    public ArrayList<String> get_data() {
-		ResultSet rs = null;
-		String sql = "SELECT nombre FROM personaje WHERE cod_miembro = ?";
+    /**
+	 * Método que realiza la consulta de datos a MySQL
+	 */
+	public void conseguir_partidas_filtradas() {
 
-		// Obtener la conexión
 		try {
-			Connection conn = super.mysql.get_connection();
-			PreparedStatement pstmt = conn.prepareStatement( sql );
 
-			// Establecer el parámetro cod_miembro
-			pstmt.setInt(1, user.getUser_id());
+            // Realizamos una consulta para capturar todas las partidas con su anfitrión
+			String sql = "SELECT p.*, m.nombre as nombre_anfitrion, m.apellidos as apellidos_anfitrion " +
+			"FROM partida p " +
+			"LEFT JOIN miembro m " +
+			"ON p.anfitrion_id = m.cod";
+			ResultSet rs = super.mysql.Model_query( sql );
 
-			// Ejecutar la consulta
-			rs = pstmt.executeQuery();
+            // Creamos un objeto partida por cada registro y lo añadimos al Data
+            while( rs.next() ) {
+                Partida temp_partida = new Partida(
+                        rs.getInt( 1 )
+                    ,   rs.getInt( 2 )
+                    ,   rs.getString( 3 )
+                    ,   rs.getInt( 4 )
+                    ,   rs.getInt( 5 )
+                    ,   rs.getString( 6 )
+                    ,   rs.getInt( 7 )
+                    ,   rs.getString( 8 )
+                    ,   rs.getInt( 9 )
+                    ,   rs.getInt( 10 )
+                    ,   rs.getString( 11 )
+                    ,   rs.getString( 12 )
+                );
 
-			while (rs.next()) {
-				nombres.add(rs.getString("nombre"));
-			}
+                // Añadimos al Data
+                super.getPartidas().add( temp_partida );
 
-		} catch (SQLException e) {
+            }
+		} catch ( SQLException e ) {
 			e.printStackTrace();
 		}
-
-		return nombres;
 	}
 
     // Getters y Setters

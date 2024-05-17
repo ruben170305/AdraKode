@@ -3,6 +3,15 @@ package model;
 import java.util.ArrayList;
 
 public class Data {
+
+	protected Model mysql;
+	
+	public Data(){}
+
+    public Data( Model mysql ) {
+		this.mysql = mysql;
+	}
+
 	private ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
 	private ArrayList<Partida> partidas = new ArrayList<Partida>();
 	private ArrayList<Personaje> personajes = new ArrayList<Personaje>();
