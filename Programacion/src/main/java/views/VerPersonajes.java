@@ -292,6 +292,7 @@ public class VerPersonajes extends JPanel {
 		
 		//Boton borrar
 		btnBorrar = new JButton();
+		btnBorrar.setName("BORRAR");
 		btnBorrar.setIcon(new ImageIcon(VerPersonajes.class.getResource("/img/botonBorrarW.png")));
 		btnBorrar.setOpaque(true);
 		btnBorrar.setForeground(new Color(29, 29, 27));

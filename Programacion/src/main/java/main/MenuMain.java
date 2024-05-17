@@ -13,7 +13,9 @@ public class MenuMain {
 	static Menu menu = new Menu( "Adrakode", false );
 	static Home home = new Home();
 	static Listener list = new Listener( menu, home );
-	static Usuario user = new Usuario();
+	static Usuario user = new Usuario(); 
+	static Personaje personaje = new Personaje();
+	static CrearPersonaje cPersonaje = new CrearPersonaje(menu);
 
 	// Instanciamos las ventanas junto a sus listeners
 	static CrearPartida cPartida 			 = new CrearPartida();
@@ -26,12 +28,11 @@ public class MenuMain {
 	static EditarPersonajesListener editar_personaje_listener = new EditarPersonajesListener( menu, home );
 	static EditarPersonaje ePersonaje = new EditarPersonaje();
 
-	static VerPersonajesListener ver_personajes_listener = new VerPersonajesListener( ePersonaje, menu, home, user );
+	static VerPersonajesListener ver_personajes_listener = new VerPersonajesListener( ePersonaje, menu, home, user, cPersonaje, personaje );
+	
 	static VerPersonajes vPersonajes = new VerPersonajes( ver_personajes_listener );
 
-	static CrearPersonaje cPersonaje = new CrearPersonaje(menu);
-	static Personaje personaje;
-	static CrearPersonajeListener crear_personaje_listener = new CrearPersonajeListener( menu, home, cPersonaje, user, personaje );
+	static CrearPersonajeListener crear_personaje_listener = new CrearPersonajeListener( menu, home, cPersonaje, user );
 
 	static VentanaPrincipalLogin login = new VentanaPrincipalLogin(user);
 
