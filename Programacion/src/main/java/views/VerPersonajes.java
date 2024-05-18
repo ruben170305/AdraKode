@@ -4,6 +4,9 @@ package views;
 import java.awt.*;
 import java.util.ArrayList;
 import javax.swing.border.*;
+
+import com.mysql.cj.protocol.Resultset;
+
 import listeners.VerPersonajesListener;
 import model.Partida;
 import model.Personaje;
@@ -13,6 +16,8 @@ import javax.swing.*;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class VerPersonajes extends JPanel {
 	
@@ -74,19 +79,18 @@ public class VerPersonajes extends JPanel {
         lblSeleccionarPersonaje.setBounds(236, 144, 152, 19);
         add(lblSeleccionarPersonaje);
 
-        ArrayList<Personaje> opcionesComboBox = listener.get_data();
+        ArrayList<Personaje> opcionesComboBox = new ArrayList<Personaje>();
 
         // Crear un ArrayList para almacenar los nombres de los personajes
         ArrayList<String> nombresPersonajes = new ArrayList<>();
 
         // Iterar sobre la lista de Personaje y agregar los nombres a la lista de nombres
-        for (Personaje personaje : opcionesComboBox) {
-            nombresPersonajes.add( personaje.getNombre() );
-        }
+//        for (Personaje personaje : opcionesComboBox) {
+//            nombresPersonajes.add( personaje.getNombre() );
+//        }
 
         // Convertir el ArrayList de nombres a un array de cadenas
         String[] opcionesArray = nombresPersonajes.toArray(new String[0]);
-
         // Ahora puedes usar opcionesArray como las opciones para tu JComboBox
         comboBoxSeleccionar = new JComboBox<>(opcionesArray);
         comboBoxSeleccionar.setFont(new Font("Open Sans", Font.BOLD, 14));
@@ -98,21 +102,43 @@ public class VerPersonajes extends JPanel {
         add(comboBoxSeleccionar);
 
         // Añade el ActionListener al JComboBox
-        comboBoxSeleccionar.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                int selected_index = comboBoxSeleccionar.getSelectedIndex();
-                if ( selected_index != -1 ) {
-                    Personaje selected_personaje = opcionesComboBox.get( selected_index );
-                    
-                    pbExp.setValue( selected_personaje.getExpe() );
-                    pbFuerza.setValue( selected_personaje.getFuerza() );
-                    pbDestreza.setValue( selected_personaje.getDestreza() );
-                    pbConstitucion.setValue( selected_personaje.getConstitucion() );
-                    pbInteligencia.setValue( selected_personaje.getInteligencia() );
-                }
-            }
-        });
+//        comboBoxSeleccionar.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                String selected_index = comboBoxSeleccionar.getSelectedItem().toString();
+//                ResultSet rs = listener.get_data();
+//                String nombre = "";
+//				try {
+//					nombre = rs.getString("nombre");
+//				} catch (SQLException e1) {
+//					// TODO Auto-generated catch block
+//					e1.printStackTrace();
+//				}
+//                if ( selected_index.equals(nombre) ) {
+//                	
+//                	try {
+//                		getLblRaza().setText(rs.getString("raza"));
+//                		getLblClase().setText(rs.getString("clase"));
+//					} catch (Exception e2) {
+//						// TODO: handle exception
+//						e2.getStackTrace();
+//					}
+//                    
+////                    pbExp.setValue( rs.getStri );
+////                    pbFuerza.setValue( selected_personaje.getFuerza() );
+////                    pbDestreza.setValue( selected_personaje.getDestreza() );
+////                    pbConstitucion.setValue( selected_personaje.getConstitucion() );
+////                    pbInteligencia.setValue( selected_personaje.getInteligencia() );
+//                } else {
+//                	try {
+//						rs.next();
+//					} catch (SQLException e1) {
+//						// TODO Auto-generated catch block
+//						e1.printStackTrace();
+//					}
+//                }
+//            }
+//        });
         
         // Iconos
         lblIconoExp = new JLabel();
@@ -267,7 +293,7 @@ public class VerPersonajes extends JPanel {
 
 		// Barra progreso carisma
 		pbCarisma = new JProgressBar();
-        pbCarisma.setValue( opcionesComboBox.get( 0 ).getCarisma() );
+        //pbCarisma.setValue( opcionesComboBox.get( 0 ).getCarisma() );
 		pbCarisma.setBackground(new Color(242, 242, 242));
 		pbCarisma.setForeground(new Color(52, 75, 89));
 		pbCarisma.setFont(new Font("Oxygen", Font.PLAIN, 11));
@@ -340,18 +366,19 @@ public class VerPersonajes extends JPanel {
 	 */
 	
 	public void cargarDatosEnComboBox() {
-		ArrayList<String> opcionesComboBox = new ArrayList<String>(); 
-
-		ArrayList<Personaje> personajes = listener.get_data();
-        for( Personaje personaje : personajes ) {
-            opcionesComboBox.add( personaje.getNombre() );
-        }
+        comboBoxSeleccionar.removeAllItems();
+		ResultSet rs = listener.get_data();
+        try {
+			while (rs.next()) {
+			    getComboBoxSeleccionar().addItem(rs.getString("nombre"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
         // Guardar los datos en el ArrayList y actualizar el JComboBox
-        comboBoxSeleccionar.removeAllItems();
-        for (String nombre : opcionesComboBox) {
-            comboBoxSeleccionar.addItem(nombre);
-        }
+        
     }
 	
 	public void setListener(VerPersonajesListener listener) {

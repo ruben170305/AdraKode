@@ -48,7 +48,7 @@ public class VerPersonajesListener extends Listener implements ActionListener {
 	}
 	
 
-	public ArrayList<Personaje> get_data() {
+	public ResultSet get_data() {
 
 		Model mysql = new Model();
 		ResultSet rs = null;
@@ -56,7 +56,7 @@ public class VerPersonajesListener extends Listener implements ActionListener {
 		ArrayList<Personaje> personajes = new ArrayList<>();
 
 		// Realizamos una consulta para capturar todos los personajes
-		String sql = "select p.*, j.* from personaje p left join juega j on j.id_personaje = p.cod where p.cod_miembro = ?";
+		String sql = "SELECT * FROM personaje WHERE cod_miembro=?";
 		try {
 			Connection conn = mysql.get_connection();
 			PreparedStatement pstmt = conn.prepareStatement( sql );
@@ -67,33 +67,33 @@ public class VerPersonajesListener extends Listener implements ActionListener {
 			rs = pstmt.executeQuery();
 
 			// Creamos un objeto personaje por cada registro y lo añadimos al Data
-			while( rs.next() && rs != null ) {
-				Personaje temp_personaje = new Personaje(
-						rs.getInt( 1 )
-					,   rs.getString( 2 )
-					,   rs.getString( 3 )
-					,   rs.getString( 4 )
-					,   rs.getString( 5 )
-					,   rs.getInt( 6 )
-					,   rs.getInt( 7 )
-					,   rs.getInt( 8 )
-					,   rs.getInt( 9 )
-					,   rs.getInt( 10 )
-					,   rs.getInt( 11 )
-					,   rs.getInt( 12 )
-					,   rs.getInt( 13 )
-				);
-
-				// Añadimos al Data
-				personajes.add( temp_personaje );
-
-			}
+//			while( rs.next() && rs != null ) {
+//				Personaje temp_personaje = new Personaje(
+//						rs.getInt( 1 )
+//					,   rs.getString( 2 )
+//					,   rs.getString( 3 )
+//					,   rs.getString( 4 )
+//					,   rs.getString( 5 )
+//					,   rs.getInt( 6 )
+//					,   rs.getInt( 7 )
+//					,   rs.getInt( 8 )
+//					,   rs.getInt( 9 )
+//					,   rs.getInt( 10 )
+//					,   rs.getInt( 11 )
+//					,   rs.getInt( 12 )
+//					,   rs.getInt( 13 )
+//				);
+//
+//				// Añadimos al Data
+//				personajes.add( temp_personaje );
+//
+//			}
 
 		} catch ( SQLException e ) {
 			e.printStackTrace();
 		}
 
-		return personajes;
+		return rs;
 
 	}
 
