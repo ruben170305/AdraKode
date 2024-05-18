@@ -21,7 +21,7 @@ public class VerPartidasMaster extends JPanel {
 	private JLabel lblTituloPartida, lblAnfitrion, lblJugadores, lblDuración, lblFecha, lblEstado, lblTitulo, lblImagen;
 	private VerPartidaMasterListener listener;
 
-	public VerPartidasMaster( VerPartidaMasterListener listener ) {
+	public VerPartidasMaster(VerPartidaMasterListener listener) {
 		this.listener = listener;
 		initialize_components();
 	}
