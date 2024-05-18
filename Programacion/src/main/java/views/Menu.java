@@ -192,6 +192,21 @@ public class Menu extends JFrame {
 		
 	}
 	
+	public boolean mostrarMensajeConfirmEditado() {
+		int opcion = JOptionPane.showConfirmDialog(this, 
+				"¿Seguro que desea actualizar el elemento?", 
+				"Confirmación",
+				JOptionPane.YES_NO_OPTION,
+				JOptionPane.WARNING_MESSAGE);
+		
+		if (opcion == JOptionPane.YES_OPTION) {
+			return true;
+		} else {
+			return false;
+		}
+		
+	}
+	
 	// Getters y Setters
 	public boolean isGameMaster() {
 		return gameMaster;
