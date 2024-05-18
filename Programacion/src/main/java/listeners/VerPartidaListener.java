@@ -2,6 +2,8 @@ package listeners;
 
 import java.awt.event.*;
 import java.sql.*;
+import java.util.ArrayList;
+
 import model.*;
 import views.Home;
 import views.Menu;
@@ -55,5 +57,56 @@ public class VerPartidaListener extends Listener implements ActionListener {
 		}
 
 		return rs;
+	}
+
+
+	public ArrayList<Partida> get_data_arrays() {
+
+		Model mysql = new Model();
+		ResultSet rs = null;
+
+		ArrayList<Partida> partidas = new ArrayList<>();
+
+		// Realizamos una consulta para capturar todas las partidas
+		String sql = "SELECT p.*, m.nombre as nombre_anfitrion, m.apellidos as apellidos_anfitrion " +
+		"FROM partida p " +
+		"LEFT JOIN miembro m " +
+		"ON p.anfitrion_id = m.cod";
+		try {
+			Connection conn = mysql.get_connection();
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+
+			// Ejecutar la consulta
+			rs = pstmt.executeQuery();
+
+			// Creamos un objeto partida por cada registro y lo añadimos al Data
+			while( rs.next() && rs != null ) {
+                Partida temp_partida = new Partida(
+                        rs.getInt( 1 )
+                    ,   rs.getInt( 2 )
+                    ,   rs.getString( 3 )
+                    ,   rs.getInt( 4 )
+                    ,   rs.getInt( 5 )
+                    ,   rs.getString( 6 )
+                    ,   rs.getInt( 7 )
+                    ,   rs.getString( 8 )
+                    ,   rs.getInt( 9 )
+                    ,   rs.getInt( 10 )
+                    ,   rs.getString( 11 )
+                    ,   rs.getString( 12 )
+                );
+
+				// Añadimos al Data
+				partidas.add( temp_partida );
+
+			}
+
+
+		} catch ( SQLException e ) {
+			e.printStackTrace();
+		}
+
+		return partidas;
+
 	}
 }

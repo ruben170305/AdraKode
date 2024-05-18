@@ -7,6 +7,9 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import listeners.*;
+import model.Partida;
+import model.Personaje;
+
 import java.awt.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -116,22 +119,13 @@ public class VerPartidas extends JPanel {
 		add(lblImagen);
 		
 		// Etiquetas
-		lblTituloPartida = new JLabel( data[0][1].toString() );
+		lblTituloPartida = new JLabel( "Nivel: " + data[0][1].toString() );
 		lblTituloPartida.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTituloPartida.setIcon(null);
 		lblTituloPartida.setForeground(new Color(29, 29, 27));
 		lblTituloPartida.setFont(new Font("Oxygen", Font.BOLD, 18));
 		lblTituloPartida.setBounds(302, 106, 195, 26);
 		add(lblTituloPartida);
-		
-		
-		lblNivelPartidaTitulo = new JLabel("Nivel: ");
-		lblNivelPartidaTitulo.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblNivelPartidaTitulo.setIcon(null);
-		lblNivelPartidaTitulo.setForeground(new Color(29, 29, 27));
-		lblNivelPartidaTitulo.setFont(new Font("Oxygen", Font.BOLD, 18));
-		lblNivelPartidaTitulo.setBounds(211, 134, 195, 26);
-		add(lblNivelPartidaTitulo);
 		
 		lblNivelPartida = new JLabel( data[0][1].toString() );
 		lblNivelPartida.setHorizontalAlignment(SwingConstants.LEFT);
@@ -180,17 +174,24 @@ public class VerPartidas extends JPanel {
 		lblTituloComboBox = new JLabel("Jugador: ");
 		lblTituloComboBox.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblTituloComboBox.setIcon(null);
-		lblNivelPartidaTitulo.setForeground(new Color(29, 29, 27));
+		lblTituloComboBox.setForeground(new Color(29, 29, 27));
 		lblTituloComboBox.setFont(new Font("Oxygen", Font.BOLD, 18));
 		lblTituloComboBox.setBounds(302, 479, 83, 26);
 		add(lblTituloComboBox);
 		
-		//ComboBox
-        ArrayList<String> opcionesComboBox = null; //Añadir listener
+		// ComboBox
+       ArrayList<Partida> opcionesComboBox = listener.get_data_arrays();
 
-        // Convertir el ArrayList a un array
-        String[] opcionesArray = new String[opcionesComboBox.size()];
-        opcionesComboBox.toArray(opcionesArray);
+        // Crear un ArrayList para almacenar los nombres de las personaje
+        ArrayList<String> nombre_partidas = new ArrayList<>();
+
+        // Iterar sobre la lista de Partida y agregar los nombres a la lista de nombres
+        for ( Partida partida : opcionesComboBox ) {
+            nombre_partidas.add( partida.getNombre() );
+        }
+
+        // Convertir el ArrayList de nombres a un array de cadenas
+        String[] opcionesArray = nombre_partidas.toArray(new String[0]);
         comboBoxJugador = new JComboBox<>(opcionesArray);
         comboBoxJugador.setFont(new Font("Open Sans", Font.BOLD, 14));
         comboBoxJugador.setForeground(new Color(29, 29, 27));
@@ -232,5 +233,13 @@ public class VerPartidas extends JPanel {
 	
 	public void setListener( VerPartidaListener listener ) {
 		btnSeleccionar.addActionListener( listener );
+	}
+	
+	public JComboBox getComboBoxJugador() {
+		return comboBoxJugador;
+	}
+
+	public void setComboBoxJugador(JComboBox comboBoxJugador) {
+		this.comboBoxJugador = comboBoxJugador;
 	}
 }

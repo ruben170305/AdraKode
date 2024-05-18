@@ -7,14 +7,9 @@ import javax.swing.border.*;
 import com.mysql.cj.protocol.Resultset;
 
 import listeners.VerPersonajesListener;
-import model.Partida;
 import model.Personaje;
-import model.Usuario;
 
 import javax.swing.*;
-
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -86,7 +81,7 @@ public class VerPersonajes extends JPanel {
 		ArrayList<String> nombresPersonajes = new ArrayList<>();
 
 		// Iterar sobre la lista de Personaje y agregar los nombres a la lista de
-		// nombres
+		// nombres//
 //        for (Personaje personaje : opcionesComboBox) {
 //            nombresPersonajes.add( personaje.getNombre() );
 //        }
