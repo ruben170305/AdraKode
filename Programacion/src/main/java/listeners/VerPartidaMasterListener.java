@@ -22,7 +22,6 @@ public class VerPartidaMasterListener extends Listener implements ActionListener
 
 		// Capturamos el nombre del componente
 		String nombreComponente = ( ( JButton ) ae.getSource() ).getName();
-		// TODO Auto-generated method stub
 		if ( ae.getActionCommand().equals( "JUGAR" ) ) {
             this.menu.cargarPanel(home);
             //this.ep.make_visible();

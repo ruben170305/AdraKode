@@ -6,7 +6,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -31,8 +30,7 @@ public class VerPersonajesListener extends Listener implements ActionListener {
 	}
 
 	// Constructor del Listener
-	public VerPersonajesListener(EditarPersonaje ep, Menu menu, Home home, Usuario user, CrearPersonaje cPersonaje,
-			VerPersonajes vPersonajes, Personaje personaje) {
+	public VerPersonajesListener(EditarPersonaje ep, Menu menu, Home home, Usuario user, CrearPersonaje cPersonaje, VerPersonajes vPersonajes, Personaje personaje) {
 		super(menu, home);
 		this.cPersonaje = cPersonaje;
 		this.ep = ep;
@@ -46,41 +44,15 @@ public class VerPersonajesListener extends Listener implements ActionListener {
 		Model mysql = new Model();
 		ResultSet rs = null;
 
-		ArrayList<Personaje> personajes = new ArrayList<>();
-
 		// Realizamos una consulta para capturar todos los personajes
 		String sql = "SELECT * FROM personaje WHERE cod_miembro=?";
 		try {
 			Connection conn = mysql.get_connection();
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, user.getUser_id());
-			System.out.println(pstmt.toString());
 
 			// Ejecutar la consulta
 			rs = pstmt.executeQuery();
-
-			// Creamos un objeto personaje por cada registro y lo añadimos al Data
-//			while( rs.next() && rs != null ) {
-//				Personaje temp_personaje = new Personaje(
-//						rs.getInt( 1 )
-//					,   rs.getString( 2 )
-//					,   rs.getString( 3 )
-//					,   rs.getString( 4 )
-//					,   rs.getString( 5 )
-//					,   rs.getInt( 6 )
-//					,   rs.getInt( 7 )
-//					,   rs.getInt( 8 )
-//					,   rs.getInt( 9 )
-//					,   rs.getInt( 10 )
-//					,   rs.getInt( 11 )
-//					,   rs.getInt( 12 )
-//					,   rs.getInt( 13 )
-//				);
-//
-//				// Añadimos al Data
-//				personajes.add( temp_personaje );
-//
-//			}
 
 		} catch (SQLException e) {
 			e.printStackTrace();

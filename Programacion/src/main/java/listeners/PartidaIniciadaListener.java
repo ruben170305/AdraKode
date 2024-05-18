@@ -6,32 +6,14 @@ import java.sql.*;
 import model.*;
 import views.Home;
 import views.Menu;
-import views.PartidaIniciada;
 
-public class VerPartidaListener extends Listener implements ActionListener {
-	
-	
-	private PartidaIniciada partida_iniciada;
+public class PartidaIniciadaListener extends Listener implements ActionListener {
+
 	private Usuario user;
 
-	public VerPartidaListener( Menu menu, Home home, PartidaIniciada partida_iniciada, Usuario user ) {
+	public PartidaIniciadaListener( Menu menu, Home home, Usuario user ) {
 		super( menu, home );
-		this.partida_iniciada = partida_iniciada;
 		this.user = user;
-	}
-
-
-    @Override
-	public void actionPerformed( ActionEvent ae ) {
-
-		// Dependiendo del listener, realizamos una acción u otra
-		switch ( ae.getActionCommand() ) {
-			case "JUGAR":
-				this.menu.cargarPanel( partida_iniciada );
-				break;
-			default:
-				break;
-		}
 	}
 
 	/**
@@ -64,11 +46,13 @@ public class VerPartidaListener extends Listener implements ActionListener {
 
 	public ResultSet get_data_personajes() {
 
-		Model mysql = new Model();
 		ResultSet rs = null;
 
+		// Creamos una conexión con MySQL
+		Model mysql = new Model();
+
 		// Realizamos una consulta para capturar todos los personajes
-		String sql = "SELECT * FROM personaje WHERE cod_miembro=?";
+		String sql = "select p.*, j.* from personaje p left join juega j on j.id_personaje = p.cod WHERE cod_miembro=?";
 		try {
 			Connection conn = mysql.get_connection();
 			PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -85,4 +69,9 @@ public class VerPartidaListener extends Listener implements ActionListener {
 		return rs;
 
 	}
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
+    }
 }

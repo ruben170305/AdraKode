@@ -7,9 +7,6 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import listeners.*;
-import model.Partida;
-import model.Personaje;
-
 import java.awt.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -18,7 +15,7 @@ import java.util.ArrayList;
 public class VerPartidas extends JPanel {
 	private JLabel lblTitulo, lblImagen;
 	private JButton btnSeleccionar;
-	private JLabel lblTituloPartida, lblAnfitrion, lblJugadores, lblDuración, lblFecha, lblEstado, lblNivelPartida, lblNivelPartidaTitulo, lblTituloComboBox;
+	private JLabel lblTituloPartida, lblAnfitrion, lblJugadores, lblDuración, lblFecha, lblEstado, lblTituloComboBox;
 	private VerPartidaListener listener;
 	private JComboBox comboBoxJugador;
 
@@ -127,14 +124,6 @@ public class VerPartidas extends JPanel {
 		lblTituloPartida.setBounds(302, 106, 195, 26);
 		add(lblTituloPartida);
 		
-		lblNivelPartida = new JLabel( data[0][1].toString() );
-		lblNivelPartida.setHorizontalAlignment(SwingConstants.LEFT);
-		lblNivelPartida.setIcon(null);
-		lblNivelPartida.setForeground(new Color(29, 29, 27));
-		lblNivelPartida.setFont(new Font("Oxygen", Font.BOLD, 18));
-		lblNivelPartida.setBounds(403, 134, 144, 26);
-		add(lblNivelPartida);
-		
 		lblAnfitrion = new JLabel( data[0][5].toString() );
 		lblAnfitrion.setIcon(new ImageIcon(VerPartidas.class.getResource("/img/usuario.png")));
 		lblAnfitrion.setForeground(new Color(29, 29, 27));
@@ -170,7 +159,6 @@ public class VerPartidas extends JPanel {
 		lblEstado.setBounds(425, 293, 183, 26);
 		add(lblEstado);
 		
-		
 		lblTituloComboBox = new JLabel("Jugador: ");
 		lblTituloComboBox.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblTituloComboBox.setIcon(null);
@@ -178,21 +166,8 @@ public class VerPartidas extends JPanel {
 		lblTituloComboBox.setFont(new Font("Oxygen", Font.BOLD, 18));
 		lblTituloComboBox.setBounds(302, 479, 83, 26);
 		add(lblTituloComboBox);
-		
-		// ComboBox
-       ArrayList<Partida> opcionesComboBox = listener.get_data_arrays();
 
-        // Crear un ArrayList para almacenar los nombres de las personaje
-        ArrayList<String> nombre_partidas = new ArrayList<>();
-
-        // Iterar sobre la lista de Partida y agregar los nombres a la lista de nombres
-        for ( Partida partida : opcionesComboBox ) {
-            nombre_partidas.add( partida.getNombre() );
-        }
-
-        // Convertir el ArrayList de nombres a un array de cadenas
-        String[] opcionesArray = nombre_partidas.toArray(new String[0]);
-        comboBoxJugador = new JComboBox<>(opcionesArray);
+        comboBoxJugador = new JComboBox<>();
         comboBoxJugador.setFont(new Font("Open Sans", Font.BOLD, 14));
         comboBoxJugador.setForeground(new Color(29, 29, 27));
         comboBoxJugador.setBackground(new Color(242, 242, 242));
@@ -230,9 +205,33 @@ public class VerPartidas extends JPanel {
 		} );
 
 	}
+
+		/**
+	 * Metodo que asigna el listener
+	 * 
+	 * @param listener Recibe el listener con el que quieres asignar los objetos
+	 */
+
+	 public void cargarDatosEnComboBox() {
+		comboBoxJugador.removeAllItems();
+		ResultSet rs = listener.get_data_personajes();
+		try {
+			while (rs.next()) {
+				getComboBoxJugador().addItem(rs.getString("nombre"));
+			}
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+
+		// Guardar los datos en el ArrayList y actualizar el JComboBox
+
+	}
 	
 	public void setListener( VerPartidaListener listener ) {
 		btnSeleccionar.addActionListener( listener );
+		this.listener = listener;
+		cargarDatosEnComboBox();
 	}
 	
 	public JComboBox getComboBoxJugador() {

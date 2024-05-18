@@ -1,10 +1,7 @@
 package views;
 
 import java.awt.*;
-import java.util.ArrayList;
 import javax.swing.border.*;
-
-import com.mysql.cj.protocol.Resultset;
 
 import listeners.VerPersonajesListener;
 import model.Personaje;
@@ -15,15 +12,12 @@ import java.sql.SQLException;
 
 public class VerPersonajes extends JPanel {
 
-	private JLabel lblTitulo, lblRaza, lblExp, lblSeleccionarPersonaje, lblIconoExp, lblIconoFuerza, lblIconoDestreza,
-			lblIconoCarisma, lblClase;
-	private JLabel lblFuerza, lblDestreza, lblConstitucion, lblInteligencia, lblSabiduria, lblCarisma, lblIconoConst,
-			lblIconoInteligencia, lblIconoSabiduria, lblIconoPersn;
+	private JLabel lblTitulo, lblRaza, lblExp, lblSeleccionarPersonaje, lblIconoExp, lblIconoFuerza, lblIconoDestreza, lblIconoCarisma, lblClase;
+	private JLabel lblFuerza, lblDestreza, lblConstitucion, lblInteligencia, lblSabiduria, lblCarisma, lblIconoConst, lblIconoInteligencia, lblIconoSabiduria, lblIconoPersn;
 	private JButton btnSeleccionar, btnEditar, btnBorrar;
 	private JProgressBar pbExp, pbFuerza, pbDestreza, pbConstitucion, pbInteligencia, pbSabiduria, pbCarisma;
 	private JComboBox comboBoxSeleccionar;
 
-	private Personaje personaje;
 	private VerPersonajesListener listener;
 
 	public VerPersonajes(VerPersonajesListener listener) {
@@ -38,7 +32,7 @@ public class VerPersonajes extends JPanel {
 		try {
 			UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 
@@ -75,16 +69,6 @@ public class VerPersonajes extends JPanel {
 		lblSeleccionarPersonaje.setBounds(236, 144, 152, 19);
 		add(lblSeleccionarPersonaje);
 
-		ArrayList<Personaje> opcionesComboBox = new ArrayList<Personaje>();
-
-		// Crear un ArrayList para almacenar los nombres de los personajes
-		ArrayList<String> nombresPersonajes = new ArrayList<>();
-
-		// Iterar sobre la lista de Personaje y agregar los nombres a la lista de
-		// nombres//
-//        for (Personaje personaje : opcionesComboBox) {
-//            nombresPersonajes.add( personaje.getNombre() );
-//        }
 
 		// Convertir el ArrayList de nombres a un array de cadenas
 		// Ahora puedes usar opcionesArray como las opciones para tu JComboBox
@@ -330,7 +314,7 @@ public class VerPersonajes extends JPanel {
 				getComboBoxSeleccionar().addItem(rs.getString("nombre"));
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 
@@ -347,237 +331,14 @@ public class VerPersonajes extends JPanel {
 		cargarDatosEnComboBox();
 	}
 
-	public JLabel getLblTitulo() {
-		return lblTitulo;
-	}
-
-	public void setLblTitulo(JLabel lblTitulo) {
-		this.lblTitulo = lblTitulo;
-	}
-
 	public JLabel getLblRaza() {
 		return lblRaza;
-	}
-
-	public void setLblRaza(JLabel lblRaza) {
-		this.lblRaza = lblRaza;
-	}
-
-	public JLabel getLblExp() {
-		return lblExp;
-	}
-
-	public void setLblExp(JLabel lblExp) {
-		this.lblExp = lblExp;
-	}
-
-	public JLabel getLblSeleccionarPersonaje() {
-		return lblSeleccionarPersonaje;
-	}
-
-	public void setLblSeleccionarPersonaje(JLabel lblSeleccionarPersonaje) {
-		this.lblSeleccionarPersonaje = lblSeleccionarPersonaje;
-	}
-
-	public JLabel getLblIconoExp() {
-		return lblIconoExp;
-	}
-
-	public void setLblIconoExp(JLabel lblIconoExp) {
-		this.lblIconoExp = lblIconoExp;
-	}
-
-	public JLabel getLblIconoFuerza() {
-		return lblIconoFuerza;
-	}
-
-	public void setLblIconoFuerza(JLabel lblIconoFuerza) {
-		this.lblIconoFuerza = lblIconoFuerza;
-	}
-
-	public JLabel getLblIconoDestreza() {
-		return lblIconoDestreza;
-	}
-
-	public void setLblIconoDestreza(JLabel lblIconoDestreza) {
-		this.lblIconoDestreza = lblIconoDestreza;
-	}
-
-	public JLabel getLblIconoCarisma() {
-		return lblIconoCarisma;
-	}
-
-	public void setLblIconoCarisma(JLabel lblIconoCarisma) {
-		this.lblIconoCarisma = lblIconoCarisma;
 	}
 
 	public JLabel getLblClase() {
 		return lblClase;
 	}
 
-	public void setLblClase(JLabel lblClase) {
-		this.lblClase = lblClase;
-	}
-
-	public JLabel getLblFuerza() {
-		return lblFuerza;
-	}
-
-	public void setLblFuerza(JLabel lblFuerza) {
-		this.lblFuerza = lblFuerza;
-	}
-
-	public JLabel getLblDestreza() {
-		return lblDestreza;
-	}
-
-	public void setLblDestreza(JLabel lblDestreza) {
-		this.lblDestreza = lblDestreza;
-	}
-
-	public JLabel getLblConstitucion() {
-		return lblConstitucion;
-	}
-
-	public void setLblConstitucion(JLabel lblConstitucion) {
-		this.lblConstitucion = lblConstitucion;
-	}
-
-	public JLabel getLblInteligencia() {
-		return lblInteligencia;
-	}
-
-	public void setLblInteligencia(JLabel lblInteligencia) {
-		this.lblInteligencia = lblInteligencia;
-	}
-
-	public JLabel getLblSabiduria() {
-		return lblSabiduria;
-	}
-
-	public void setLblSabiduria(JLabel lblSabiduria) {
-		this.lblSabiduria = lblSabiduria;
-	}
-
-	public JLabel getLblCarisma() {
-		return lblCarisma;
-	}
-
-	public void setLblCarisma(JLabel lblCarisma) {
-		this.lblCarisma = lblCarisma;
-	}
-
-	public JLabel getLblIconoConst() {
-		return lblIconoConst;
-	}
-
-	public void setLblIconoConst(JLabel lblIconoConst) {
-		this.lblIconoConst = lblIconoConst;
-	}
-
-	public JLabel getLblIconoInteligencia() {
-		return lblIconoInteligencia;
-	}
-
-	public void setLblIconoInteligencia(JLabel lblIconoInteligencia) {
-		this.lblIconoInteligencia = lblIconoInteligencia;
-	}
-
-	public JLabel getLblIconoSabiduria() {
-		return lblIconoSabiduria;
-	}
-
-	public void setLblIconoSabiduria(JLabel lblIconoSabiduria) {
-		this.lblIconoSabiduria = lblIconoSabiduria;
-	}
-
-	public JLabel getLblIconoPersn() {
-		return lblIconoPersn;
-	}
-
-	public void setLblIconoPersn(JLabel lblIconoPersn) {
-		this.lblIconoPersn = lblIconoPersn;
-	}
-
-	public JButton getBtnSeleccionar() {
-		return btnSeleccionar;
-	}
-
-	public void setBtnSeleccionar(JButton btnSeleccionar) {
-		this.btnSeleccionar = btnSeleccionar;
-	}
-
-	public JButton getBtnEditar() {
-		return btnEditar;
-	}
-
-	public void setBtnEditar(JButton btnEditar) {
-		this.btnEditar = btnEditar;
-	}
-
-	public JButton getBtnBorrar() {
-		return btnBorrar;
-	}
-
-	public void setBtnBorrar(JButton btnBorrar) {
-		this.btnBorrar = btnBorrar;
-	}
-
-	public JProgressBar getPbExp() {
-		return pbExp;
-	}
-
-	public void setPbExp(JProgressBar pbExp) {
-		this.pbExp = pbExp;
-	}
-
-	public JProgressBar getPbFuerza() {
-		return pbFuerza;
-	}
-
-	public void setPbFuerza(JProgressBar pbFuerza) {
-		this.pbFuerza = pbFuerza;
-	}
-
-	public JProgressBar getPbDestreza() {
-		return pbDestreza;
-	}
-
-	public void setPbDestreza(JProgressBar pbDestreza) {
-		this.pbDestreza = pbDestreza;
-	}
-
-	public JProgressBar getPbConstitucion() {
-		return pbConstitucion;
-	}
-
-	public void setPbConstitucion(JProgressBar pbConstitucion) {
-		this.pbConstitucion = pbConstitucion;
-	}
-
-	public JProgressBar getPbInteligencia() {
-		return pbInteligencia;
-	}
-
-	public void setPbInteligencia(JProgressBar pbInteligencia) {
-		this.pbInteligencia = pbInteligencia;
-	}
-
-	public JProgressBar getPbSabiduria() {
-		return pbSabiduria;
-	}
-
-	public void setPbSabiduria(JProgressBar pbSabiduria) {
-		this.pbSabiduria = pbSabiduria;
-	}
-
-	public JProgressBar getPbCarisma() {
-		return pbCarisma;
-	}
-
-	public void setPbCarisma(JProgressBar pbCarisma) {
-		this.pbCarisma = pbCarisma;
-	}
 
 	public JComboBox getComboBoxSeleccionar() {
 		return comboBoxSeleccionar;
@@ -585,18 +346,6 @@ public class VerPersonajes extends JPanel {
 
 	public void setComboBoxSeleccionar(JComboBox comboBoxSeleccionar) {
 		this.comboBoxSeleccionar = comboBoxSeleccionar;
-	}
-
-	public Personaje getPersonaje() {
-		return personaje;
-	}
-
-	public void setPersonaje(Personaje personaje) {
-		this.personaje = personaje;
-	}
-
-	public VerPersonajesListener getListener() {
-		return listener;
 	}
 
 }

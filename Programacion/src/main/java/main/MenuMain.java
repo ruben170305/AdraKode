@@ -1,6 +1,6 @@
 package main;
 
-import java.awt.EventQueue;
+import java.awt.EventQueue;	
 
 import views.*;
 import listeners.*;
@@ -20,12 +20,15 @@ public class MenuMain {
 	// Instanciamos las ventanas junto a sus listeners
 	static CrearPartida cPartida = new CrearPartida();
 	static EditarPartida ePartida = new EditarPartida();
+
+	static PartidaIniciadaListener partida_iniciada_listener = new PartidaIniciadaListener( menu, home, user );
+	static PartidaIniciada partida_iniciada = new PartidaIniciada( partida_iniciada_listener );
 	
 	static VerPartidaMasterListener ver_partidas_master_listener = new VerPartidaMasterListener( ePartida, menu, home );
-	static VerPartidasMaster vPartidasMaster = new VerPartidasMaster(ver_partidas_master_listener);
+	static VerPartidasMaster vPartidasMaster = new VerPartidasMaster( ver_partidas_master_listener );
 
-	static VerPartidaListener ver_partidas_listener = new VerPartidaListener( menu, home );
-	static VerPartidas vPartidas = new VerPartidas( ver_partidas_listener) ;
+	static VerPartidaListener ver_partidas_listener = new VerPartidaListener( menu, home, partida_iniciada, user );
+	static VerPartidas vPartidas = new VerPartidas( ver_partidas_listener );
 	
 	static EditarPersonajesListener editar_personaje_listener = new EditarPersonajesListener( menu, home );
 	static EditarPersonaje ePersonaje = new EditarPersonaje();
@@ -36,7 +39,7 @@ public class MenuMain {
 
 	static CrearPersonajeListener crear_personaje_listener = new CrearPersonajeListener( menu, home, cPersonaje, user );
 
-	static VentanaPrincipalLogin login = new VentanaPrincipalLogin(user);
+	static VentanaPrincipalLogin login = new VentanaPrincipalLogin( user );
 
 	public static void main( String[] args ) {
 		EventQueue.invokeLater( new Runnable() {
@@ -95,7 +98,7 @@ public class MenuMain {
 		} else {
 
 			// Vinculación de listeners
-			VerPartidaListener ver_partidas_listener = new VerPartidaListener( menu, home );
+			VerPartidaListener ver_partidas_listener = new VerPartidaListener( menu, home, partida_iniciada, user );
 			vPartidas.setListener( ver_partidas_listener );
 		}
 
