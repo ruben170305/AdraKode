@@ -16,6 +16,7 @@ public class EditarPersonaje extends JPanel {
     private JLabel lblIconoExp, lblIconoFuerza, lblIconoDestreza, lblIconoConst, lblIconoInteligencia, lblIconoSabiduria, lblIconoCarisma, lblClase, lblExp;
     private JSpinner spinnerExperiencia, spinnerFuerza, spinnerDestreza, spinnerConstitucion, spinnerInteligencia, spinnerSabiduria, spinnerCarisma;
     private JButton btnGuardarImagen, btnGuardar;
+    private JLabel lblId;
 
     public EditarPersonaje() {
         initialize_components();
@@ -273,6 +274,13 @@ public class EditarPersonaje extends JPanel {
         btnGuardarImagen.setBackground(new Color(29, 29, 27));
         btnGuardarImagen.setBounds(453, 485, 61, 45);
         add(btnGuardarImagen);
+        
+        lblId = new JLabel("ID");
+        lblId.setHorizontalAlignment(SwingConstants.RIGHT);
+        lblId.setForeground(new Color(29, 29, 27));
+        lblId.setFont(new Font("Dialog", Font.BOLD, 16));
+        lblId.setBounds(345, 174, 78, 14);
+        add(lblId);
     }
 
     /**
@@ -282,4 +290,255 @@ public class EditarPersonaje extends JPanel {
 		btnGuardar.addActionListener( listener );
         btnGuardarImagen.addActionListener( listener );
 	}
+
+	public JTextField getTxtRaza() {
+		return txtRaza;
+	}
+
+	public void setTxtRaza(JTextField txtRaza) {
+		this.txtRaza = txtRaza;
+	}
+
+	public JTextField getTxtClase() {
+		return txtClase;
+	}
+
+	public void setTxtClase(JTextField txtClase) {
+		this.txtClase = txtClase;
+	}
+
+	public JLabel getLblDestreza() {
+		return lblDestreza;
+	}
+
+	public void setLblDestreza(JLabel lblDestreza) {
+		this.lblDestreza = lblDestreza;
+	}
+
+	public JLabel getLblConstitucion() {
+		return lblConstitucion;
+	}
+
+	public void setLblConstitucion(JLabel lblConstitucion) {
+		this.lblConstitucion = lblConstitucion;
+	}
+
+	public JLabel getLblInteligencia() {
+		return lblInteligencia;
+	}
+
+	public void setLblInteligencia(JLabel lblInteligencia) {
+		this.lblInteligencia = lblInteligencia;
+	}
+
+	public JLabel getLblSabiduria() {
+		return lblSabiduria;
+	}
+
+	public void setLblSabiduria(JLabel lblSabiduria) {
+		this.lblSabiduria = lblSabiduria;
+	}
+
+	public JLabel getLblCarisma() {
+		return lblCarisma;
+	}
+
+	public void setLblCarisma(JLabel lblCarisma) {
+		this.lblCarisma = lblCarisma;
+	}
+
+	public JLabel getLblTitulo() {
+		return lblTitulo;
+	}
+
+	public void setLblTitulo(JLabel lblTitulo) {
+		this.lblTitulo = lblTitulo;
+	}
+
+	public JLabel getLblFuerza() {
+		return lblFuerza;
+	}
+
+	public void setLblFuerza(JLabel lblFuerza) {
+		this.lblFuerza = lblFuerza;
+	}
+
+	public JLabel getLblSeleccionarPersonaje() {
+		return lblSeleccionarPersonaje;
+	}
+
+	public void setLblSeleccionarPersonaje(JLabel lblSeleccionarPersonaje) {
+		this.lblSeleccionarPersonaje = lblSeleccionarPersonaje;
+	}
+
+	public JLabel getLblRaza() {
+		return lblRaza;
+	}
+
+	public void setLblRaza(JLabel lblRaza) {
+		this.lblRaza = lblRaza;
+	}
+
+	public JLabel getLblIconoPersn() {
+		return lblIconoPersn;
+	}
+
+	public void setLblIconoPersn(JLabel lblIconoPersn) {
+		this.lblIconoPersn = lblIconoPersn;
+	}
+
+	public JLabel getLblIconoExp() {
+		return lblIconoExp;
+	}
+
+	public void setLblIconoExp(JLabel lblIconoExp) {
+		this.lblIconoExp = lblIconoExp;
+	}
+
+	public JLabel getLblIconoFuerza() {
+		return lblIconoFuerza;
+	}
+
+	public void setLblIconoFuerza(JLabel lblIconoFuerza) {
+		this.lblIconoFuerza = lblIconoFuerza;
+	}
+
+	public JLabel getLblIconoDestreza() {
+		return lblIconoDestreza;
+	}
+
+	public void setLblIconoDestreza(JLabel lblIconoDestreza) {
+		this.lblIconoDestreza = lblIconoDestreza;
+	}
+
+	public JLabel getLblIconoConst() {
+		return lblIconoConst;
+	}
+
+	public void setLblIconoConst(JLabel lblIconoConst) {
+		this.lblIconoConst = lblIconoConst;
+	}
+
+	public JLabel getLblIconoInteligencia() {
+		return lblIconoInteligencia;
+	}
+
+	public void setLblIconoInteligencia(JLabel lblIconoInteligencia) {
+		this.lblIconoInteligencia = lblIconoInteligencia;
+	}
+
+	public JLabel getLblIconoSabiduria() {
+		return lblIconoSabiduria;
+	}
+
+	public void setLblIconoSabiduria(JLabel lblIconoSabiduria) {
+		this.lblIconoSabiduria = lblIconoSabiduria;
+	}
+
+	public JLabel getLblIconoCarisma() {
+		return lblIconoCarisma;
+	}
+
+	public void setLblIconoCarisma(JLabel lblIconoCarisma) {
+		this.lblIconoCarisma = lblIconoCarisma;
+	}
+
+	public JLabel getLblClase() {
+		return lblClase;
+	}
+
+	public void setLblClase(JLabel lblClase) {
+		this.lblClase = lblClase;
+	}
+
+	public JLabel getLblExp() {
+		return lblExp;
+	}
+
+	public void setLblExp(JLabel lblExp) {
+		this.lblExp = lblExp;
+	}
+
+	public JSpinner getSpinnerExperiencia() {
+		return spinnerExperiencia;
+	}
+
+	public void setSpinnerExperiencia(JSpinner spinnerExperiencia) {
+		this.spinnerExperiencia = spinnerExperiencia;
+	}
+
+	public JSpinner getSpinnerFuerza() {
+		return spinnerFuerza;
+	}
+
+	public void setSpinnerFuerza(JSpinner spinnerFuerza) {
+		this.spinnerFuerza = spinnerFuerza;
+	}
+
+	public JSpinner getSpinnerDestreza() {
+		return spinnerDestreza;
+	}
+
+	public void setSpinnerDestreza(JSpinner spinnerDestreza) {
+		this.spinnerDestreza = spinnerDestreza;
+	}
+
+	public JSpinner getSpinnerConstitucion() {
+		return spinnerConstitucion;
+	}
+
+	public void setSpinnerConstitucion(JSpinner spinnerConstitucion) {
+		this.spinnerConstitucion = spinnerConstitucion;
+	}
+
+	public JSpinner getSpinnerInteligencia() {
+		return spinnerInteligencia;
+	}
+
+	public void setSpinnerInteligencia(JSpinner spinnerInteligencia) {
+		this.spinnerInteligencia = spinnerInteligencia;
+	}
+
+	public JSpinner getSpinnerSabiduria() {
+		return spinnerSabiduria;
+	}
+
+	public void setSpinnerSabiduria(JSpinner spinnerSabiduria) {
+		this.spinnerSabiduria = spinnerSabiduria;
+	}
+
+	public JSpinner getSpinnerCarisma() {
+		return spinnerCarisma;
+	}
+
+	public void setSpinnerCarisma(JSpinner spinnerCarisma) {
+		this.spinnerCarisma = spinnerCarisma;
+	}
+
+	public JButton getBtnGuardarImagen() {
+		return btnGuardarImagen;
+	}
+
+	public void setBtnGuardarImagen(JButton btnGuardarImagen) {
+		this.btnGuardarImagen = btnGuardarImagen;
+	}
+
+	public JButton getBtnGuardar() {
+		return btnGuardar;
+	}
+
+	public void setBtnGuardar(JButton btnGuardar) {
+		this.btnGuardar = btnGuardar;
+	}
+
+	public JLabel getLblId() {
+		return lblId;
+	}
+
+	public void setLblId(JLabel lblId) {
+		this.lblId = lblId;
+	}
+	
+    
+    
 }

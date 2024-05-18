@@ -30,11 +30,9 @@ public class MenuMain {
 	static VerPartidaListener ver_partidas_listener = new VerPartidaListener( menu, home, partida_iniciada, user );
 	static VerPartidas vPartidas = new VerPartidas( ver_partidas_listener );
 	
-	static EditarPersonajesListener editar_personaje_listener = new EditarPersonajesListener( menu, home );
 	static EditarPersonaje ePersonaje = new EditarPersonaje();
-
-	static VerPersonajesListener ver_personajes_listener2 = new VerPersonajesListener( user );
-	static VerPersonajes vPersonajes = new VerPersonajes( ver_personajes_listener2 );
+	static VerPersonajes vPersonajes = new VerPersonajes();
+	static EditarPersonajesListener editar_personaje_listener = new EditarPersonajesListener( menu, home, ePersonaje, vPersonajes );
 	static VerPersonajesListener ver_personajes_listener = new VerPersonajesListener( ePersonaje, menu, home, user, cPersonaje, vPersonajes, personaje );
 
 	static CrearPersonajeListener crear_personaje_listener = new CrearPersonajeListener( menu, home, cPersonaje, user );

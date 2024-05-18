@@ -9,19 +9,23 @@ import model.Personaje;
 import javax.swing.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class VerPersonajes extends JPanel {
 
-	private JLabel lblTitulo, lblRaza, lblExp, lblSeleccionarPersonaje, lblIconoExp, lblIconoFuerza, lblIconoDestreza, lblIconoCarisma, lblClase;
-	private JLabel lblFuerza, lblDestreza, lblConstitucion, lblInteligencia, lblSabiduria, lblCarisma, lblIconoConst, lblIconoInteligencia, lblIconoSabiduria, lblIconoPersn;
+	private JLabel lblTitulo, lblRaza, lblExp, lblSeleccionarPersonaje, lblIconoExp, lblIconoFuerza, lblIconoDestreza,
+			lblIconoCarisma, lblClase;
+	private JLabel lblFuerza, lblDestreza, lblConstitucion, lblInteligencia, lblSabiduria, lblCarisma, lblIconoConst,
+			lblIconoInteligencia, lblIconoSabiduria, lblIconoPersn, idLbl;
 	private JButton btnSeleccionar, btnEditar, btnBorrar;
 	private JProgressBar pbExp, pbFuerza, pbDestreza, pbConstitucion, pbInteligencia, pbSabiduria, pbCarisma;
 	private JComboBox comboBoxSeleccionar;
+	private ArrayList<Integer> id = new ArrayList<Integer>();
 
 	private VerPersonajesListener listener;
 
-	public VerPersonajes(VerPersonajesListener listener) {
-		this.listener = listener;
+	public VerPersonajes() {
+//		this.listener = listener;
 		setBackground(new Color(242, 242, 242));
 		initialize_components();
 		// make_visible();
@@ -297,6 +301,13 @@ public class VerPersonajes extends JPanel {
 		btnBorrar.setBackground(new Color(29, 29, 27));
 		btnBorrar.setBounds(404, 467, 83, 36);
 		add(btnBorrar);
+		
+		idLbl = new JLabel("ID: ");
+		idLbl.setHorizontalAlignment(SwingConstants.CENTER);
+		idLbl.setForeground(new Color(29, 29, 27));
+		idLbl.setFont(new Font("Dialog", Font.BOLD, 16));
+		idLbl.setBounds(359, 174, 78, 14);
+		add(idLbl);
 
 	}
 
@@ -312,6 +323,7 @@ public class VerPersonajes extends JPanel {
 		try {
 			while (rs.next()) {
 				getComboBoxSeleccionar().addItem(rs.getString("nombre"));
+				id.add(rs.getInt("cod"));
 			}
 		} catch (SQLException e) {
 			
@@ -346,6 +358,27 @@ public class VerPersonajes extends JPanel {
 
 	public void setComboBoxSeleccionar(JComboBox comboBoxSeleccionar) {
 		this.comboBoxSeleccionar = comboBoxSeleccionar;
+	}
+	
+	public VerPersonajesListener getListener() {
+		return listener;
+	}
+
+	
+	public ArrayList<Integer> getId() {
+		return id;
+	}
+
+	public void setId(ArrayList<Integer> id) {
+		this.id = id;
+	}
+
+	public JLabel getIdLbl() {
+		return idLbl;
+	}
+
+	public void setIdLbl(JLabel idLbl) {
+		this.idLbl = idLbl;
 	}
 
 }
