@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 
 import model.Model;
 import model.Personaje;
@@ -24,21 +25,14 @@ public class VerPersonajesListener extends Listener implements ActionListener {
 	private Personaje personaje;
 
 	// Constructor del Listener
-	public VerPersonajesListener( Usuario user ) {
+	public VerPersonajesListener(Usuario user) {
 		super();
 		this.user = user;
 	}
 
 	// Constructor del Listener
-	public VerPersonajesListener(
-			EditarPersonaje ep
-		, 	Menu menu
-		, 	Home home
-		, 	Usuario user
-		, 	CrearPersonaje cPersonaje
-		,	VerPersonajes vPersonajes
-		, 	Personaje personaje
-	) {
+	public VerPersonajesListener(EditarPersonaje ep, Menu menu, Home home, Usuario user, CrearPersonaje cPersonaje,
+			VerPersonajes vPersonajes, Personaje personaje) {
 		super(menu, home);
 		this.cPersonaje = cPersonaje;
 		this.ep = ep;
@@ -46,7 +40,6 @@ public class VerPersonajesListener extends Listener implements ActionListener {
 		this.vPersonajes = vPersonajes;
 		this.personaje = personaje;
 	}
-	
 
 	public ResultSet get_data() {
 
@@ -59,7 +52,7 @@ public class VerPersonajesListener extends Listener implements ActionListener {
 		String sql = "SELECT * FROM personaje WHERE cod_miembro=?";
 		try {
 			Connection conn = mysql.get_connection();
-			PreparedStatement pstmt = conn.prepareStatement( sql );
+			PreparedStatement pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, user.getUser_id());
 			System.out.println(pstmt.toString());
 
@@ -89,7 +82,7 @@ public class VerPersonajesListener extends Listener implements ActionListener {
 //
 //			}
 
-		} catch ( SQLException e ) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 
@@ -103,18 +96,39 @@ public class VerPersonajesListener extends Listener implements ActionListener {
 	 */
 	@Override
 	public void actionPerformed(ActionEvent ae) {
-		JButton sourceButton = ( JButton ) ae.getSource();
-		String buttonName = sourceButton.getName();
-		if (ae.getActionCommand().equals("SELECCIONAR")) {
-			super.menu.cargarPanel(home);
-		} else if (buttonName.equals("EDITAR")) {
-			super.menu.cargarPanel(ep);
-		} else if (buttonName.equals("BORRAR")) {
-			delete_data();
-			super.menu.cargarPanel(home);
-		}
+        Object source = ae.getSource();
 
-	}
+        if (source instanceof JButton) {
+            JButton sourceButton = (JButton) source;
+            String buttonName = sourceButton.getName();
+
+            if (ae.getActionCommand().equals("SELECCIONAR")) {
+                super.menu.cargarPanel(home);
+            } else if (buttonName.equals("EDITAR")) {
+                super.menu.cargarPanel(ep);
+            } else if (buttonName.equals("BORRAR")) {
+                delete_data();
+                super.menu.cargarPanel(home);
+            }
+        } else if (source instanceof JComboBox) {
+            JComboBox<?> comboBox = (JComboBox<?>) source;
+            System.out.println("Se seleccionó un JComboBox: " + comboBox.getSelectedItem());
+            String selected_index = (String) comboBox.getSelectedItem(); // Asumiendo que el ítem seleccionado es un String
+            ResultSet rs = get_data();
+            try {
+                while (rs.next()) {
+                    String nombre = rs.getString("nombre");
+                    if (selected_index.equals(nombre)) {
+                        vPersonajes.getLblClase().setText(rs.getString("clase"));
+                        vPersonajes.getLblRaza().setText(rs.getString("raza"));
+                        break; // Sale del bucle una vez que se encuentra el ítem
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
 	public void update_data() {
 		Model mysql = new Model();
@@ -141,7 +155,8 @@ public class VerPersonajesListener extends Listener implements ActionListener {
 
 		try {
 			String delete = "DELETE FROM personaje WHERE cod_miembro = ? AND nombre = ?";
-			Connection conn = mysql.get_connection(); PreparedStatement pstmt = conn.prepareStatement(delete);
+			Connection conn = mysql.get_connection();
+			PreparedStatement pstmt = conn.prepareStatement(delete);
 			pstmt.setInt(1, user.getUser_id());
 			pstmt.setString(2, vPersonajes.getComboBoxSeleccionar().getSelectedItem().toString());
 			System.out.println(pstmt.toString());

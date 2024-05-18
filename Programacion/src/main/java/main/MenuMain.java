@@ -103,7 +103,6 @@ public class MenuMain {
 		cPersonaje.setListener(crear_personaje_listener);
 		ePersonaje.setListener( editar_personaje_listener );
 		vPersonajes.setListener( ver_personajes_listener );
-		vPersonajes.cargarDatosEnComboBox();
 
 		// Vinculamos el listener de la ventana principal a su ventana
 		menu.setListener( listener );
