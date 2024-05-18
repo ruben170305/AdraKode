@@ -14,6 +14,11 @@ public class VerPartidaListener extends Listener implements ActionListener {
 	private PartidaIniciada partida_iniciada;
 	private Usuario user;
 
+	public VerPartidaListener( Menu menu, Home home, Usuario user ) {
+		super( menu, home );
+		this.user = user;
+	}
+
 	public VerPartidaListener( Menu menu, Home home, PartidaIniciada partida_iniciada, Usuario user ) {
 		super( menu, home );
 		this.partida_iniciada = partida_iniciada;

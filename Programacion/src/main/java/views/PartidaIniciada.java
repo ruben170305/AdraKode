@@ -155,7 +155,7 @@ public class PartidaIniciada extends JPanel {
 		
 		
 		// Designamos el nombre de las columnas de la tabla
-		String[] columns_personajes = { "ID", "Nombre", "Personaje", "Raza", "Clase", "Expe" };
+		String[] columns_personajes = { "ID", "Nombre", "Personaje", "Raza", "Clase", "Expe", "Fuerza", "Destreza", "Constitucion", "Inteligencia", "Sabiduria", "Carisma" };
 
 		// Capturamos los datos de MySQL mediante una consulta
 		ResultSet rows_personajes = this.listener.get_data_personajes();
@@ -169,18 +169,18 @@ public class PartidaIniciada extends JPanel {
 				Object[] row_data = new Object[ columns_personajes.length ];
 
 				// Insertamos los datos
-                row_data[0] = rows.getInt( "cod" );
-                row_data[1] = rows.getString( "nombre" );
-                row_data[2] = rows.getString( "personaje" );
-                row_data[3] = rows.getString( "raza" );
-                row_data[4] = rows.getString( "clase" );
-				row_data[5] = rows.getInt( "expe" );
-                row_data[6] = rows.getString( "fuerza" );
-                row_data[7] = rows.getString( "destreza" );
-                row_data[8] = rows.getString( "constitucion" );
-				row_data[9] = rows.getInt( "inteligencia" );
-                row_data[10] = rows.getString( "sabiduria" );
-				row_data[11] = rows.getInt( "carisma" );
+                row_data[0] = rows_personajes.getInt( "cod" );
+                row_data[1] = rows_personajes.getString( "nombre" );
+                row_data[2] = rows_personajes.getString( "personaje" );
+                row_data[3] = rows_personajes.getString( "raza" );
+                row_data[4] = rows_personajes.getString( "clase" );
+				row_data[5] = rows_personajes.getInt( "expe" );
+                row_data[6] = rows_personajes.getString( "fuerza" );
+                row_data[7] = rows_personajes.getString( "destreza" );
+                row_data[8] = rows_personajes.getString( "constitucion" );
+				row_data[9] = rows_personajes.getInt( "inteligencia" );
+                row_data[10] = rows_personajes.getString( "sabiduria" );
+				row_data[11] = rows_personajes.getInt( "carisma" );
 
 				// Añadimos los datos al arrayList final
 				row_data_list_personajes.add( row_data );

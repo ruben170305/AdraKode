@@ -13,7 +13,7 @@ public class Usuario {
 		
 	}
 
-	public boolean consultaLogin(String usuario, String pass) throws SQLException {
+	public boolean consultaLogin(String usuario, String pass, Usuario user) throws SQLException {
 
 		// Instanciamos el modelo
 		Model mysql = new Model();
@@ -36,6 +36,8 @@ public class Usuario {
 			if (usuario.equals(usuarioEncontrado)) {
 				this.cod = userRS.getInt("cod");
 				if (pass.equals(passComp)) {
+					user.setUser_id( userRS.getInt( "cod" ) );
+					System.out.println(user.getUser_id());
 					return true;
 				} else {
 					return false;
