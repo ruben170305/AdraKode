@@ -15,8 +15,9 @@ import java.util.ArrayList;
 public class VerPartidas extends JPanel {
 	private JLabel lblTitulo, lblImagen;
 	private JButton btnSeleccionar;
-	private JLabel lblTituloPartida, lblAnfitrion, lblJugadores, lblDuración, lblFecha, lblEstado;
+	private JLabel lblTituloPartida, lblAnfitrion, lblJugadores, lblDuración, lblFecha, lblEstado, lblNivelPartida, lblNivelPartidaTitulo, lblTituloComboBox;
 	private VerPartidaListener listener;
+	private JComboBox comboBoxJugador;
 
 	public VerPartidas( VerPartidaListener listener ) {
 		this.listener = listener;
@@ -111,7 +112,7 @@ public class VerPartidas extends JPanel {
 		// Imagen de la partida
 		lblImagen = new JLabel("");
 		lblImagen.setIcon(new ImageIcon(VerPartidas.class.getResource("/img/paisaje.jpeg")));
-		lblImagen.setBounds(231, 164, 172, 143);
+		lblImagen.setBounds(231, 177, 172, 143);
 		add(lblImagen);
 		
 		// Etiquetas
@@ -120,43 +121,84 @@ public class VerPartidas extends JPanel {
 		lblTituloPartida.setIcon(null);
 		lblTituloPartida.setForeground(new Color(29, 29, 27));
 		lblTituloPartida.setFont(new Font("Oxygen", Font.BOLD, 18));
-		lblTituloPartida.setBounds(302, 121, 195, 26);
+		lblTituloPartida.setBounds(302, 106, 195, 26);
 		add(lblTituloPartida);
+		
+		
+		lblNivelPartidaTitulo = new JLabel("Nivel: ");
+		lblNivelPartidaTitulo.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblNivelPartidaTitulo.setIcon(null);
+		lblNivelPartidaTitulo.setForeground(new Color(29, 29, 27));
+		lblNivelPartidaTitulo.setFont(new Font("Oxygen", Font.BOLD, 18));
+		lblNivelPartidaTitulo.setBounds(211, 134, 195, 26);
+		add(lblNivelPartidaTitulo);
+		
+		lblNivelPartida = new JLabel( data[0][1].toString() );
+		lblNivelPartida.setHorizontalAlignment(SwingConstants.LEFT);
+		lblNivelPartida.setIcon(null);
+		lblNivelPartida.setForeground(new Color(29, 29, 27));
+		lblNivelPartida.setFont(new Font("Oxygen", Font.BOLD, 18));
+		lblNivelPartida.setBounds(403, 134, 144, 26);
+		add(lblNivelPartida);
 		
 		lblAnfitrion = new JLabel( data[0][5].toString() );
 		lblAnfitrion.setIcon(new ImageIcon(VerPartidas.class.getResource("/img/usuario.png")));
 		lblAnfitrion.setForeground(new Color(29, 29, 27));
 		lblAnfitrion.setFont(new Font("Oxygen", Font.BOLD, 14));
-		lblAnfitrion.setBounds(425, 164, 183, 26);
+		lblAnfitrion.setBounds(425, 177, 183, 26);
 		add(lblAnfitrion);
 		
 		lblJugadores = new JLabel( data[0][6].toString() );
 		lblJugadores.setIcon(new ImageIcon(VerPartidas.class.getResource("/img/equipo.png")));
 		lblJugadores.setForeground(new Color(29, 29, 27));
 		lblJugadores.setFont(new Font("Oxygen", Font.BOLD, 14));
-		lblJugadores.setBounds(425, 193, 183, 26);
+		lblJugadores.setBounds(425, 206, 183, 26);
 		add(lblJugadores);
 
 		lblDuración = new JLabel( data[0][3].toString() + "'" );
 		lblDuración.setIcon(new ImageIcon(VerPartidas.class.getResource("/img/repetir.png")));
 		lblDuración.setForeground(new Color(29, 29, 27));
 		lblDuración.setFont(new Font("Oxygen", Font.BOLD, 14));
-		lblDuración.setBounds(425, 222, 183, 26);
+		lblDuración.setBounds(425, 235, 183, 26);
 		add(lblDuración);
 		
 		lblFecha = new JLabel( data[0][4].toString() );
 		lblFecha.setIcon(new ImageIcon(VerPartidas.class.getResource("/img/calendario.png")));
 		lblFecha.setForeground(new Color(29, 29, 27));
 		lblFecha.setFont(new Font("Oxygen", Font.BOLD, 14));
-		lblFecha.setBounds(425, 251, 183, 26);
+		lblFecha.setBounds(425, 264, 183, 26);
 		add(lblFecha);
 		
 		lblEstado = new JLabel( data[0][7].toString() );
 		lblEstado.setIcon(new ImageIcon(VerPartidas.class.getResource("/img/ajustes.png")));
 		lblEstado.setForeground(new Color(29, 29, 27));
 		lblEstado.setFont(new Font("Oxygen", Font.BOLD, 14));
-		lblEstado.setBounds(425, 280, 183, 26);
+		lblEstado.setBounds(425, 293, 183, 26);
 		add(lblEstado);
+		
+		
+		lblTituloComboBox = new JLabel("Jugador: ");
+		lblTituloComboBox.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblTituloComboBox.setIcon(null);
+		lblNivelPartidaTitulo.setForeground(new Color(29, 29, 27));
+		lblTituloComboBox.setFont(new Font("Oxygen", Font.BOLD, 18));
+		lblTituloComboBox.setBounds(302, 479, 83, 26);
+		add(lblTituloComboBox);
+		
+		//ComboBox
+        ArrayList<String> opcionesComboBox = null; //Añadir listener
+
+        // Convertir el ArrayList a un array
+        String[] opcionesArray = new String[opcionesComboBox.size()];
+        opcionesComboBox.toArray(opcionesArray);
+        comboBoxJugador = new JComboBox<>(opcionesArray);
+        comboBoxJugador.setFont(new Font("Open Sans", Font.BOLD, 14));
+        comboBoxJugador.setForeground(new Color(29, 29, 27));
+        comboBoxJugador.setBackground(new Color(242, 242, 242));
+        comboBoxJugador.setBounds(395, 483, 91, 22);
+        comboBoxJugador.setBorder(BorderFactory.createEmptyBorder());
+        comboBoxJugador.setOpaque(true);
+        add(comboBoxJugador);
 
 		btnSeleccionar = new JButton("JUGAR");
 		btnSeleccionar.setFont(new Font("Oxygen", Font.BOLD, 17));
@@ -164,7 +206,7 @@ public class VerPartidas extends JPanel {
 		btnSeleccionar.setBackground(new Color(29, 161, 242));
 		btnSeleccionar.setOpaque(true);
 		btnSeleccionar.setBorderPainted(false);
-		btnSeleccionar.setBounds(314, 493, 172, 41);
+		btnSeleccionar.setBounds(314, 516, 172, 41);
 		add(btnSeleccionar);
 
 		// Añadimos un listener a cada fila de la tabla de partidas
