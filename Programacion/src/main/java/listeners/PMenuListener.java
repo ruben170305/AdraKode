@@ -67,10 +67,6 @@ public class PMenuListener implements ActionListener {
 					ventana.cargarPanel( cPartida );
 					break;
 
-				case "Editar partidas":
-					ventana.cargarPanel( ePartida );
-					break;
-
 				case "Ver partidas":
 					ventana.cargarPanel( vPartidas );
 					break;

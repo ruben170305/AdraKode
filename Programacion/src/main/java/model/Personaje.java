@@ -93,7 +93,6 @@ public class Personaje {
 
 	}
 
-    
 	public ResultSet get_personajes() {
 
 		ResultSet rs = null;
@@ -105,7 +104,6 @@ public class Personaje {
 		try {
             // Realizamos una consulta para capturar todos los personajes
             String sql = "select p.*, j.* from personaje p left join juega j on j.id_personaje = p.cod where cod_miembro=" + user.getUser_id();
-            System.out.println(sql);
             rs = mysql.Model_query( sql );
 
 		} catch ( SQLException sqle ) {
@@ -115,6 +113,45 @@ public class Personaje {
 		return rs;
 
 	}
+
+    public ResultSet get_personajes_partida( int partida_id ) {
+
+		ResultSet rs = null;
+
+		// Creamos una conexión con MySQL
+		Model mysql = new Model();
+		mysql.get_connection();
+
+		try {
+            // Realizamos una consulta para capturar todos los personajes
+            String sql = "SELECT "
+            + "j.*, "
+            + "p.*, "
+            + "ps.*, "
+            + "m.nombre AS nombre_anfitrion, "
+            + "m.apellidos AS apellidos_anfitrion "
+            + "FROM "
+            + "juega j "
+            + "LEFT JOIN partida p ON "
+            + "p.partida_id = j.id_partida "
+            + "LEFT JOIN personaje ps ON "
+            + "j.id_personaje = ps.cod "
+            + "LEFT JOIN miembro m ON "
+            + "p.anfitrion_id = m.cod "
+            + "WHERE "
+            + "j.id_partida =" + partida_id;
+
+            rs = mysql.Model_query( sql );
+            System.out.println();
+
+		} catch ( SQLException sqle ) {
+			sqle.printStackTrace();
+		}
+
+		return rs;
+
+	}
+
 
     // Getters
     public int getCod() {

@@ -86,7 +86,7 @@ public class MenuMain {
         pIniciada = new PartidaIniciada( user );
         
         vPartidasMaster = new VerPartidasMaster();
-        vPartidasMasterListener = new VerPartidaMasterListener( vPartidasMaster, ePartida, menu, home );
+        vPartidasMasterListener = new VerPartidaMasterListener( vPartidasMaster, ePartida, menu, home, user );
 
         vPartidasListener = new VerPartidaListener( menu, home );
         vPartidas = new VerPartidas( vPartidasListener, user );
@@ -123,7 +123,7 @@ public class MenuMain {
 
         // Dependiendo de que el usuario inicie sesión como Game Master, mostramos un menú diferente
         if ( esMaster ) {
-            CrearPartidaListener cPartidaListener = new CrearPartidaListener( menu, home );
+            CrearPartidaListener cPartidaListener = new CrearPartidaListener( menu, home, cPartida, user );
             EditarPartidaListener ePartidaListener = new EditarPartidaListener( menu, home );
 
             // Vinculación de listeners

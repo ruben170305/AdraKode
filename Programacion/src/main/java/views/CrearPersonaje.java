@@ -377,7 +377,4 @@ public class CrearPersonaje extends JPanel {
 		return lblSeleccionarPersonaje;
 	}
 	
-	
-	
-	
 }

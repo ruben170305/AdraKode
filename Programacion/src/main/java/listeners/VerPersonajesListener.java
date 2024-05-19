@@ -180,7 +180,6 @@ public class VerPersonajesListener extends Listener implements ActionListener {
 			PreparedStatement pstmt = conn.prepareStatement(delete);
 			pstmt.setInt(1, user.getUser_id());
 			pstmt.setInt(2, Integer.parseInt(vPersonajes.getIdLbl().getText()));
-			System.out.println(pstmt.toString());
 
 			pstmt.executeUpdate();
 		} catch (SQLException sqle) {
