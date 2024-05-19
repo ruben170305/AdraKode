@@ -108,16 +108,16 @@ public class MenuMain {
         
         // Creamos el listener del menú
         PMenuListener listener = new PMenuListener(
-                menu,
-                home,
-                cPersonaje,
-                ePersonaje,
-                vPersonajes,
-                cPartida,
-                ePartida,
-                vPartidas,
-                vPartidasMaster,
-                login
+            menu,
+            home,
+            cPersonaje,
+            ePersonaje,
+            vPersonajes,
+            cPartida,
+            ePartida,
+            vPartidas,
+            vPartidasMaster,
+            login
         );
 
         // Dependiendo de que el usuario inicie sesión como Game Master, mostramos un menú diferente

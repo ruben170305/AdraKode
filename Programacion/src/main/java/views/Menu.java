@@ -14,11 +14,9 @@ public class Menu extends JFrame {
 	private JMenuItem mntmVer;
 	private JMenuItem mntmModificarP;
 	private JMenuItem mntmTexto;
-	private JMenuItem mntmSalir;
 	private JScrollPane scrpContenedor;
 	
 	private JMenu mnPartidas;
-	private JMenuItem mntmBuscar;
 	private JMenuItem mntmCrearPartidas;
 	private JMenuItem mntmVerPartidasMaster;
 	private JMenuItem mntmVerPartidas;
@@ -43,6 +41,7 @@ public class Menu extends JFrame {
             	mostrarMensajeConfirm();
             }
         });
+
 		setSize(ANCHO, ALTO);
 		
 		// Se obtienen las dimensiones en pixels de la pantalla.       
@@ -110,14 +109,14 @@ public class Menu extends JFrame {
 	 * @param listener Parametro que recibe el listener que queremos asignar
 	 */
 	public void setListener(PMenuListener listener) {
-		mntmNuevo.addActionListener(listener);
-		mntmVer.addActionListener(listener);
 	
 		if ( gameMaster ) {
 			mntmVerPartidasMaster.addActionListener(listener);
 			mntmCrearPartidas.addActionListener(listener);
 			mntmEditarPartidas.addActionListener(listener);
 		} else {
+			mntmVer.addActionListener(listener);
+			mntmNuevo.addActionListener(listener);
 			mntmVerPartidas.addActionListener(listener);
 		}
 

@@ -209,7 +209,7 @@ public class VerPartidas extends JPanel {
 
 	}
 
-		/**
+	/**
 	 * Metodo que asigna el listener
 	 * 
 	 * @param listener Recibe el listener con el que quieres asignar los objetos
@@ -226,8 +226,6 @@ public class VerPartidas extends JPanel {
 			
 			e.printStackTrace();
 		}
-
-		// Guardar los datos en el ArrayList y actualizar el JComboBox
 
 	}
 	
