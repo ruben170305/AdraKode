@@ -228,4 +228,174 @@ public class CrearPartida extends JPanel {
 	public void setListener( CrearPartidaListener listener ) {
 		btnGuardar.addActionListener( listener );
 	}
+
+	public JLabel getLblTitulo() {
+		return lblTitulo;
+	}
+
+	public void setLblTitulo(JLabel lblTitulo) {
+		this.lblTitulo = lblTitulo;
+	}
+
+	public JLabel getLblImagen() {
+		return lblImagen;
+	}
+
+	public void setLblImagen(JLabel lblImagen) {
+		this.lblImagen = lblImagen;
+	}
+
+	public JLabel getLblAnfitrion() {
+		return lblAnfitrion;
+	}
+
+	public void setLblAnfitrion(JLabel lblAnfitrion) {
+		this.lblAnfitrion = lblAnfitrion;
+	}
+
+	public JLabel getLblJugadores() {
+		return lblJugadores;
+	}
+
+	public void setLblJugadores(JLabel lblJugadores) {
+		this.lblJugadores = lblJugadores;
+	}
+
+	public JLabel getLblDuracion() {
+		return lblDuracion;
+	}
+
+	public void setLblDuracion(JLabel lblDuracion) {
+		this.lblDuracion = lblDuracion;
+	}
+
+	public JLabel getLblFecha() {
+		return lblFecha;
+	}
+
+	public void setLblFecha(JLabel lblFecha) {
+		this.lblFecha = lblFecha;
+	}
+
+	public JLabel getLblEstado() {
+		return lblEstado;
+	}
+
+	public void setLblEstado(JLabel lblEstado) {
+		this.lblEstado = lblEstado;
+	}
+
+	public JLabel getLblNewLabel() {
+		return lblNewLabel;
+	}
+
+	public void setLblNewLabel(JLabel lblNewLabel) {
+		this.lblNewLabel = lblNewLabel;
+	}
+
+	public JLabel getLblIconAnfitrion() {
+		return lblIconAnfitrion;
+	}
+
+	public void setLblIconAnfitrion(JLabel lblIconAnfitrion) {
+		this.lblIconAnfitrion = lblIconAnfitrion;
+	}
+
+	public JLabel getLblIconJugadores() {
+		return lblIconJugadores;
+	}
+
+	public void setLblIconJugadores(JLabel lblIconJugadores) {
+		this.lblIconJugadores = lblIconJugadores;
+	}
+
+	public JLabel getLblIconDuracion() {
+		return lblIconDuracion;
+	}
+
+	public void setLblIconDuracion(JLabel lblIconDuracion) {
+		this.lblIconDuracion = lblIconDuracion;
+	}
+
+	public JLabel getLblIconFecha() {
+		return lblIconFecha;
+	}
+
+	public void setLblIconFecha(JLabel lblIconFecha) {
+		this.lblIconFecha = lblIconFecha;
+	}
+
+	public JLabel getLblIconEstado() {
+		return lblIconEstado;
+	}
+
+	public void setLblIconEstado(JLabel lblIconEstado) {
+		this.lblIconEstado = lblIconEstado;
+	}
+
+	public JButton getBtnGuardar() {
+		return btnGuardar;
+	}
+
+	public void setBtnGuardar(JButton btnGuardar) {
+		this.btnGuardar = btnGuardar;
+	}
+
+	public JButton getBtnGuardarImagen() {
+		return btnGuardarImagen;
+	}
+
+	public void setBtnGuardarImagen(JButton btnGuardarImagen) {
+		this.btnGuardarImagen = btnGuardarImagen;
+	}
+
+	public JTextField getTxtNombrePartida() {
+		return txtNombrePartida;
+	}
+
+	public void setTxtNombrePartida(JTextField txtNombrePartida) {
+		this.txtNombrePartida = txtNombrePartida;
+	}
+
+	public JTextField getTxtAnfitrion() {
+		return txtAnfitrion;
+	}
+
+	public void setTxtAnfitrion(JTextField txtAnfitrion) {
+		this.txtAnfitrion = txtAnfitrion;
+	}
+
+	public JTextField getTxtJugadores() {
+		return txtJugadores;
+	}
+
+	public void setTxtJugadores(JTextField txtJugadores) {
+		this.txtJugadores = txtJugadores;
+	}
+
+	public JTextField getTxtDuracion() {
+		return txtDuracion;
+	}
+
+	public void setTxtDuracion(JTextField txtDuracion) {
+		this.txtDuracion = txtDuracion;
+	}
+
+	public JTextField getTxtFecha() {
+		return txtFecha;
+	}
+
+	public void setTxtFecha(JTextField txtFecha) {
+		this.txtFecha = txtFecha;
+	}
+
+	public JTextField getTxtEstado() {
+		return txtEstado;
+	}
+
+	public void setTxtEstado(JTextField txtEstado) {
+		this.txtEstado = txtEstado;
+	}
+	
+	
 }
