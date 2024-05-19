@@ -29,8 +29,8 @@ public class CrearPartidaListener extends Listener implements ActionListener {
 	}
 	
 	public void crearPartidaBBDD() {
-		String sql = "INSERT INTO partida (nombre, duracion, fecha, numero_jugadores)"+
-					" VALUES (?, ?, ?, ?)";
+		String sql = "INSERT INTO partida (nombre, duracion, dificultad, fecha, numero_jugadores, ambientacion)"+
+					" VALUES (?, ?, ?, ?, ?, ?)";
 
 		Model mysql = new Model();
 		Connection conn = mysql.get_connection();
@@ -40,8 +40,10 @@ public class CrearPartidaListener extends Listener implements ActionListener {
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, cp.getTxtNombrePartida().getText());
 			ps.setInt(2, Integer.parseInt(cp.getTxtDuracion().getText()));
-			ps.setString(3, cp.getTxtFecha().getText());
-			ps.setInt(4, Integer.parseInt(cp.getTxtJugadores().getText()));
+			ps.setInt(3, Integer.parseInt( cp.getTxtDificultad().getText()));
+			ps.setString(4, cp.getTxtFecha().getText());
+			ps.setInt(5, Integer.parseInt(cp.getTxtJugadores().getText()));
+			ps.setString(6, cp.getTxtAnfitrion().getText());
 			
 			ps.executeUpdate();
 		} catch (SQLException e) {

@@ -419,6 +419,30 @@ public class CrearPartida extends JPanel {
 	public void setTxtEstado(JTextField txtEstado) {
 		this.txtEstado = txtEstado;
 	}
+
+	public JLabel getLblDificultad() {
+		return lblDificultad;
+	}
+
+	public void setLblDificultad(JLabel lblDificultad) {
+		this.lblDificultad = lblDificultad;
+	}
+
+	public JLabel getLblIconDificultad() {
+		return lblIconDificultad;
+	}
+
+	public void setLblIconDificultad(JLabel lblIconDificultad) {
+		this.lblIconDificultad = lblIconDificultad;
+	}
+
+	public JTextField getTxtDificultad() {
+		return txtDificultad;
+	}
+
+	public void setTxtDificultad(JTextField txtDificultad) {
+		this.txtDificultad = txtDificultad;
+	}
 	
 	
 }
