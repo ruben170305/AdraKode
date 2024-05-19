@@ -42,18 +42,21 @@ public class EditarPersonajesListener extends Listener implements ActionListener
 		String buttonName = sourceButton.getName();
 
 		// Dependiendo del action event, ejecutamos un panel u otro
-		if ( ae.getActionCommand().equals( "" ) || ae.getActionCommand().equals( "GUARDAR" ) ) {
+		if ( buttonName.equals("GUARDAR") ) {
 			if ( menu.mostrarMensajeConfirmEditado() ) {
 				db_update();
 				menu.cargarPanel( home );
 			} else {
 				menu.cargarPanel( vPersonajes );
 			}
+		} else if ( buttonName.equals( "botonSubirImagen" ) ) {
+			subirImagen();
 		}
-		
-		else if ( buttonName.equals( "botonSubirImagen" ) ) {}
 	}
 	
+	/**
+	 * Metodo que actualiza los elementos en la base de datos
+	 */
 	public void db_update() {
 
 		// Inicializamos la conexión con MySQL
@@ -89,6 +92,6 @@ public class EditarPersonajesListener extends Listener implements ActionListener
 	 * Metodo que permite subir imagenes
 	 */
 	public void subirImagen() {
-		
+		menu.mostrarMensajeConstruccion();
 	}
 }

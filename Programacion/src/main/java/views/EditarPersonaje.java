@@ -259,6 +259,7 @@ public class EditarPersonaje extends JPanel {
 
         // Botones
         btnGuardar = new JButton("GUARDAR");
+        btnGuardar.setName("GUARDAR");
         btnGuardar.setFont(new Font("Oxygen", Font.BOLD, 17));
         btnGuardar.setForeground(new Color(242, 242, 242));
         btnGuardar.setBackground(new Color(29, 161, 242));
@@ -283,26 +284,6 @@ public class EditarPersonaje extends JPanel {
         lblId.setForeground(new Color(29, 29, 27));
         lblId.setFont(new Font("Dialog", Font.BOLD, 16));
         lblId.setBounds(345, 174, 78, 14);
-        
-        if (esMaster) {
-			spinnerExperiencia.setEnabled(true);
-			spinnerCarisma.setEnabled(false);
-			spinnerConstitucion.setEnabled(false);
-			spinnerDestreza.setEnabled(false);
-			spinnerFuerza.setEnabled(false);
-			spinnerInteligencia.setEnabled(false);
-			spinnerSabiduria.setEnabled(false);
-			txtClase.setEditable(false);
-			txtRaza.setEditable(false);
-		} else {
-			getSpinnerExperiencia().setEnabled(false);
-			getSpinnerCarisma().setEnabled(true);
-			getSpinnerConstitucion().setEnabled(true);
-			getSpinnerDestreza().setEnabled(true);
-			spinnerFuerza.setEnabled(true);
-			spinnerInteligencia.setEnabled(true);
-			spinnerSabiduria.setEnabled(true);
-		}
     }
 
     /**
