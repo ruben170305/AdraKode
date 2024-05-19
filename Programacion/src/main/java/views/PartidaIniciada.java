@@ -101,11 +101,11 @@ public class PartidaIniciada extends JPanel {
 		// Etiquetas
 		
 		lblNivelPartida = new JLabel( data[0][1].toString() );
-		lblNivelPartida.setHorizontalAlignment(SwingConstants.LEFT);
+		lblNivelPartida.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNivelPartida.setIcon(null);
 		lblNivelPartida.setForeground(new Color(29, 29, 27));
-		lblNivelPartida.setFont(new Font("Oxygen", Font.BOLD, 18));
-		lblNivelPartida.setBounds(399, 112, 144, 26);
+		lblNivelPartida.setFont(new Font("Oxygen", Font.BOLD, 22));
+		lblNivelPartida.setBounds(177, 51, 445, 26);
 		add(lblNivelPartida);
 		
 		lblAnfitrion = new JLabel( data[0][5].toString() );
@@ -189,7 +189,7 @@ public class PartidaIniciada extends JPanel {
 		lblNombrePersonaje.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNombrePersonaje.setForeground(new Color(29, 29, 27));
 		lblNombrePersonaje.setFont(new Font("Open Sans", Font.BOLD, 18));
-		lblNombrePersonaje.setBounds(399, 322, 78, 14);
+		lblNombrePersonaje.setBounds(318, 322, 163, 14);
 		add(lblNombrePersonaje);
 		
 		// Iconos
@@ -368,18 +368,20 @@ public class PartidaIniciada extends JPanel {
 
 		// Etiqueta raza
 		lblRaza = new JLabel("Raza"); // *Añadir listeners
+		lblRaza = new JLabel(data_personajes[0][3].toString()); // *Añadir listeners
 		lblRaza.setForeground(new Color(29, 29, 27));
 		lblRaza.setHorizontalAlignment(SwingConstants.CENTER);
 		lblRaza.setFont(new Font("Open Sans", Font.BOLD, 16));
-		lblRaza.setBounds(496, 513, 78, 14);
+		lblRaza.setBounds(481, 502, 112, 22);
 		add(lblRaza);
 
 		// Etiqueta clase
 		lblClase = new JLabel("Clase"); // *Añadir listeners
+		lblClase = new JLabel(data_personajes[0][4].toString()); // *Añadir listeners
 		lblClase.setForeground(new Color(29, 29, 27));
 		lblClase.setHorizontalAlignment(SwingConstants.CENTER);
 		lblClase.setFont(new Font("Open Sans", Font.BOLD, 16));
-		lblClase.setBounds(496, 544, 78, 14);
+		lblClase.setBounds(481, 533, 112, 22);
 		add(lblClase);
 		
 	}
