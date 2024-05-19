@@ -237,6 +237,7 @@ public class CrearPartida extends JPanel {
         add(btnGuardar);
 
         btnGuardarImagen = new JButton("");
+        btnGuardarImagen.setName("cargarImagen");
         btnGuardarImagen.setIcon(new ImageIcon(EditarPersonaje.class.getResource("/img/camara_fotografica.png")));
         btnGuardarImagen.setOpaque(true);
         btnGuardarImagen.setForeground(new Color(242, 242, 242));
@@ -247,9 +248,13 @@ public class CrearPartida extends JPanel {
         add(btnGuardarImagen);
 
 	}
-	
+	/**
+	 * Metodo que asigna el listener
+	 * @param listener Parametro que recibe el listener
+	 */
 	public void setListener( CrearPartidaListener listener ) {
 		btnGuardar.addActionListener( listener );
+		btnGuardarImagen.addActionListener(listener);
 	}
 
 	public JLabel getLblTitulo() {

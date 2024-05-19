@@ -448,4 +448,29 @@ public class EditarPartida extends JPanel {
 	public void setTable(JTable table) {
 		this.table = table;
 	}
+
+	public JLabel getLblDificultad() {
+		return lblDificultad;
+	}
+
+	public void setLblDificultad(JLabel lblDificultad) {
+		this.lblDificultad = lblDificultad;
+	}
+
+	public JTextField getTxtDificultad() {
+		return txtDificultad;
+	}
+
+	public void setTxtDificultad(JTextField txtDificultad) {
+		this.txtDificultad = txtDificultad;
+	}
+
+	public JLabel getLblIconDificultad() {
+		return lblIconDificultad;
+	}
+
+	public void setLblIconDificultad(JLabel lblIconDificultad) {
+		this.lblIconDificultad = lblIconDificultad;
+	}
+	
 }

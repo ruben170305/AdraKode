@@ -33,6 +33,9 @@ public class CrearPersonajeListener extends Listener implements ActionListener {
 		}
 	}
 
+	/**
+	 * Metodo que hace el insert a la base de datos de crearPersonaje
+	 */
 	public void insert_data() {
 
 		// Instanciamos el modelo
