@@ -14,11 +14,9 @@ public class Menu extends JFrame {
 	private JMenuItem mntmVer;
 	private JMenuItem mntmModificarP;
 	private JMenuItem mntmTexto;
-	private JMenuItem mntmSalir;
 	private JScrollPane scrpContenedor;
 	
 	private JMenu mnPartidas;
-	private JMenuItem mntmBuscar;
 	private JMenuItem mntmCrearPartidas;
 	private JMenuItem mntmVerPartidasMaster;
 	private JMenuItem mntmVerPartidas;
@@ -43,6 +41,7 @@ public class Menu extends JFrame {
             	mostrarMensajeConfirm();
             }
         });
+
 		setSize(ANCHO, ALTO);
 		
 		// Se obtienen las dimensiones en pixels de la pantalla.       
@@ -92,12 +91,14 @@ public class Menu extends JFrame {
 			mntmNuevo = new JMenuItem("Nuevo personaje");
 			mnPersonajes.add(mntmNuevo);
 			
-			mntmVer = new JMenuItem("Ver personajes");
-			mnPersonajes.add(mntmVer);
+			
 		}
 		
-		mntmModificarP = new JMenuItem("Modificar personaje");
-		mnPersonajes.add(mntmModificarP);
+		mntmVer = new JMenuItem("Ver personajes");
+		mnPersonajes.add(mntmVer);
+		
+//		mntmModificarP = new JMenuItem("Modificar personaje");
+//		mnPersonajes.add(mntmModificarP);
 		
 		//Creamos y asignamos el boton Login al menu principal
 		mntmTexto = new JMenuItem("Login");
@@ -110,18 +111,18 @@ public class Menu extends JFrame {
 	 * @param listener Parametro que recibe el listener que queremos asignar
 	 */
 	public void setListener(PMenuListener listener) {
-		mntmNuevo.addActionListener(listener);
-		mntmVer.addActionListener(listener);
 	
 		if ( gameMaster ) {
 			mntmVerPartidasMaster.addActionListener(listener);
 			mntmCrearPartidas.addActionListener(listener);
 			mntmEditarPartidas.addActionListener(listener);
 		} else {
+			
+			mntmNuevo.addActionListener(listener);
 			mntmVerPartidas.addActionListener(listener);
 		}
-
-		mntmModificarP.addActionListener(listener);
+		mntmVer.addActionListener(listener);
+//		mntmModificarP.addActionListener(listener);
 		mntmTexto.addActionListener(listener);
 		//mntmSalir.addActionListener(listener);
 	}
@@ -190,6 +191,37 @@ public class Menu extends JFrame {
 			return false;
 		}
 		
+	}
+	
+	public boolean mostrarMensajeConfirmEditado() {
+		int opcion = JOptionPane.showConfirmDialog(this, 
+				"¿Seguro que desea actualizar el elemento?", 
+				"Confirmación",
+				JOptionPane.YES_NO_OPTION,
+				JOptionPane.WARNING_MESSAGE);
+		
+		if (opcion == JOptionPane.YES_OPTION) {
+			return true;
+		} else {
+			return false;
+		}
+		
+	}
+	
+	public void mostrarMensajeConstruccion() {
+		int opcion3 = JOptionPane.showConfirmDialog(this, 
+				"Esta función estará disponible próximamente. \nDisculpe las molestias", 
+				"En construcción",
+				JOptionPane.CLOSED_OPTION,
+				JOptionPane.WARNING_MESSAGE);
+	}
+	
+	public void mostrarMensajeRellenaCampos() {
+		int opcion4 = JOptionPane.showConfirmDialog(this, 
+				"Tienes que rellenar los campos que estan en blanco.", 
+				"Rellena todos los campos",
+				JOptionPane.CLOSED_OPTION,
+				JOptionPane.ERROR_MESSAGE);
 	}
 	
 	// Getters y Setters

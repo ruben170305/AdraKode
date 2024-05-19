@@ -1,15 +1,20 @@
 package model;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 public class Personaje {
 
     // Definimos las características del Personaje
     private String nombre, personaje, clase, raza;
     private int cod, cod_miembro, expe, fuerza, destreza, constitucion, inteligencia, sabiduria, carisma;
+    private Usuario user;
     
-    // Constructor
-    public Personaje()  {
-    	
+    // Constructores
+    public Personaje( Usuario user ) {
+        this.user = user;
     }
+
     public Personaje(
             int cod
         ,   String nombre
@@ -24,6 +29,7 @@ public class Personaje {
         ,   int inteligencia
         ,   int sabiduria
         ,   int carisma
+        ,   Usuario user
     ) {
         this.cod 			= cod;
         this.nombre  		= nombre;
@@ -38,7 +44,77 @@ public class Personaje {
         this.inteligencia   = inteligencia;
         this.sabiduria      = sabiduria;
         this.carisma        = carisma;
+        this.user           = user;
     }
+
+	public ResultSet get_personajes_by_cod_miembro() {
+
+		// Inicializamos el valor a devolver
+		ResultSet rs = null;
+		
+		// Inicializamos la sesión en MySQL
+		Model mysql = new Model();
+		mysql.get_connection();
+
+		// Realizamos una consulta para capturar todos los personajes
+		String sql = "select * from personaje where cod_miembro=" + user.getUser_id();
+		
+		try {
+			rs = mysql.Model_query( sql );
+		} catch ( SQLException sqle ) {
+			sqle.printStackTrace();
+		}
+
+		return rs;
+
+	}
+
+
+	public ResultSet get_personaje( int id ) {
+
+		// Inicializamos el valor a devolver
+		ResultSet rs = null;
+
+		// Iniciamos sesión en MySQL
+		Model mysql = new Model();
+		mysql.get_connection();
+
+        try {
+
+			// Realizamos una consulta para capturar todos los personajes
+			String sql = "select * from personaje WHERE cod_miembro=" + user.getUser_id() + " AND cod=" + id;
+            rs = mysql.Model_query( sql );
+
+		} catch ( SQLException sqle ) {
+			sqle.printStackTrace();
+		}
+
+		return rs;
+
+	}
+
+    
+	public ResultSet get_personajes() {
+
+		ResultSet rs = null;
+
+		// Creamos una conexión con MySQL
+		Model mysql = new Model();
+		mysql.get_connection();
+
+		try {
+            // Realizamos una consulta para capturar todos los personajes
+            String sql = "select p.*, j.* from personaje p left join juega j on j.id_personaje = p.cod where cod_miembro=" + user.getUser_id();
+            System.out.println(sql);
+            rs = mysql.Model_query( sql );
+
+		} catch ( SQLException sqle ) {
+			sqle.printStackTrace();
+		}
+
+		return rs;
+
+	}
 
     // Getters
     public int getCod() {

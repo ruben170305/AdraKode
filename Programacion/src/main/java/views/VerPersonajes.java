@@ -1,41 +1,34 @@
 package views;
 
 import java.awt.*;
-import java.util.ArrayList;
 import javax.swing.border.*;
 
-import com.mysql.cj.protocol.Resultset;
-
 import listeners.VerPersonajesListener;
-import model.Partida;
 import model.Personaje;
 import model.Usuario;
 
 import javax.swing.*;
-
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class VerPersonajes extends JPanel {
 
-	private JLabel lblTitulo, lblRaza, lblExp, lblSeleccionarPersonaje, lblIconoExp, lblIconoFuerza, lblIconoDestreza,
-			lblIconoCarisma, lblClase;
-	private JLabel lblFuerza, lblDestreza, lblConstitucion, lblInteligencia, lblSabiduria, lblCarisma, lblIconoConst,
-			lblIconoInteligencia, lblIconoSabiduria, lblIconoPersn;
+	private JLabel lblTitulo, lblRaza, lblExp, lblSeleccionarPersonaje, lblIconoExp, lblIconoFuerza, lblIconoDestreza, lblIconoCarisma, lblClase;
+	private JLabel lblFuerza, lblDestreza, lblConstitucion, lblInteligencia, lblSabiduria, lblCarisma, lblIconoConst, lblIconoInteligencia, lblIconoSabiduria, lblIconoPersn, idLbl;
 	private JButton btnSeleccionar, btnEditar, btnBorrar;
 	private JProgressBar pbExp, pbFuerza, pbDestreza, pbConstitucion, pbInteligencia, pbSabiduria, pbCarisma;
 	private JComboBox comboBoxSeleccionar;
 
+	private ArrayList<Integer> id = new ArrayList<Integer>();
 	private Personaje personaje;
-	private VerPersonajesListener listener;
 
-	public VerPersonajes(VerPersonajesListener listener) {
-		this.listener = listener;
+	public VerPersonajes( Usuario user ) {
 		setBackground(new Color(242, 242, 242));
+
+		this.personaje = new Personaje( user );
+		
 		initialize_components();
-		// make_visible();
 	}
 
 	private void initialize_components() {
@@ -43,7 +36,7 @@ public class VerPersonajes extends JPanel {
 		try {
 			UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 
@@ -80,16 +73,6 @@ public class VerPersonajes extends JPanel {
 		lblSeleccionarPersonaje.setBounds(236, 144, 152, 19);
 		add(lblSeleccionarPersonaje);
 
-		ArrayList<Personaje> opcionesComboBox = new ArrayList<Personaje>();
-
-		// Crear un ArrayList para almacenar los nombres de los personajes
-		ArrayList<String> nombresPersonajes = new ArrayList<>();
-
-		// Iterar sobre la lista de Personaje y agregar los nombres a la lista de
-		// nombres
-//        for (Personaje personaje : opcionesComboBox) {
-//            nombresPersonajes.add( personaje.getNombre() );
-//        }
 
 		// Convertir el ArrayList de nombres a un array de cadenas
 		// Ahora puedes usar opcionesArray como las opciones para tu JComboBox
@@ -318,6 +301,12 @@ public class VerPersonajes extends JPanel {
 		btnBorrar.setBackground(new Color(29, 29, 27));
 		btnBorrar.setBounds(404, 467, 83, 36);
 		add(btnBorrar);
+		
+		idLbl = new JLabel("ID: ");
+		idLbl.setHorizontalAlignment(SwingConstants.CENTER);
+		idLbl.setForeground(new Color(29, 29, 27));
+		idLbl.setFont(new Font("Dialog", Font.BOLD, 16));
+		idLbl.setBounds(359, 174, 78, 14);
 
 	}
 
@@ -329,13 +318,14 @@ public class VerPersonajes extends JPanel {
 
 	public void cargarDatosEnComboBox() {
 		comboBoxSeleccionar.removeAllItems();
-		ResultSet rs = listener.get_data();
+		ResultSet rs = personaje.get_personajes();
 		try {
 			while (rs.next()) {
 				getComboBoxSeleccionar().addItem(rs.getString("nombre"));
+				id.add(rs.getInt("cod"));
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 
@@ -343,13 +333,45 @@ public class VerPersonajes extends JPanel {
 
 	}
 
-	public void setListener(VerPersonajesListener listener) {
-		btnEditar.addActionListener(listener);
-		btnSeleccionar.addActionListener(listener);
-		btnBorrar.addActionListener(listener);
-		comboBoxSeleccionar.addActionListener(listener);
-		this.listener = listener;
+	public void setListener( VerPersonajesListener listener ) {
+		btnEditar.addActionListener( listener );
+		btnSeleccionar.addActionListener( listener );
+		btnBorrar.addActionListener( listener );
+		comboBoxSeleccionar.addActionListener( listener );
 		cargarDatosEnComboBox();
+	}
+
+	public JLabel getLblRaza() {
+		return lblRaza;
+	}
+
+	public JLabel getLblClase() {
+		return lblClase;
+	}
+
+
+	public JComboBox getComboBoxSeleccionar() {
+		return comboBoxSeleccionar;
+	}
+
+	public void setComboBoxSeleccionar(JComboBox comboBoxSeleccionar) {
+		this.comboBoxSeleccionar = comboBoxSeleccionar;
+	}
+	
+	public ArrayList<Integer> getId() {
+		return id;
+	}
+
+	public void setId(ArrayList<Integer> id) {
+		this.id = id;
+	}
+
+	public JLabel getIdLbl() {
+		return idLbl;
+	}
+
+	public void setIdLbl(JLabel idLbl) {
+		this.idLbl = idLbl;
 	}
 
 	public JLabel getLblTitulo() {
@@ -358,14 +380,6 @@ public class VerPersonajes extends JPanel {
 
 	public void setLblTitulo(JLabel lblTitulo) {
 		this.lblTitulo = lblTitulo;
-	}
-
-	public JLabel getLblRaza() {
-		return lblRaza;
-	}
-
-	public void setLblRaza(JLabel lblRaza) {
-		this.lblRaza = lblRaza;
 	}
 
 	public JLabel getLblExp() {
@@ -414,14 +428,6 @@ public class VerPersonajes extends JPanel {
 
 	public void setLblIconoCarisma(JLabel lblIconoCarisma) {
 		this.lblIconoCarisma = lblIconoCarisma;
-	}
-
-	public JLabel getLblClase() {
-		return lblClase;
-	}
-
-	public void setLblClase(JLabel lblClase) {
-		this.lblClase = lblClase;
 	}
 
 	public JLabel getLblFuerza() {
@@ -584,14 +590,6 @@ public class VerPersonajes extends JPanel {
 		this.pbCarisma = pbCarisma;
 	}
 
-	public JComboBox getComboBoxSeleccionar() {
-		return comboBoxSeleccionar;
-	}
-
-	public void setComboBoxSeleccionar(JComboBox comboBoxSeleccionar) {
-		this.comboBoxSeleccionar = comboBoxSeleccionar;
-	}
-
 	public Personaje getPersonaje() {
 		return personaje;
 	}
@@ -600,8 +598,13 @@ public class VerPersonajes extends JPanel {
 		this.personaje = personaje;
 	}
 
-	public VerPersonajesListener getListener() {
-		return listener;
+	public void setLblRaza(JLabel lblRaza) {
+		this.lblRaza = lblRaza;
 	}
+
+	public void setLblClase(JLabel lblClase) {
+		this.lblClase = lblClase;
+	}
+	
 
 }
