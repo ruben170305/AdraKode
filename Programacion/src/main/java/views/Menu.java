@@ -216,6 +216,14 @@ public class Menu extends JFrame {
 				JOptionPane.WARNING_MESSAGE);
 	}
 	
+	public void mostrarMensajeRellenaCampos() {
+		int opcion4 = JOptionPane.showConfirmDialog(this, 
+				"Tienes que rellenar los campos que estan en blanco.", 
+				"Rellena todos los campos",
+				JOptionPane.CLOSED_OPTION,
+				JOptionPane.ERROR_MESSAGE);
+	}
+	
 	// Getters y Setters
 	public boolean isGameMaster() {
 		return gameMaster;
