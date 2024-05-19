@@ -92,11 +92,11 @@ public class MenuMain {
         pIniciada = new PartidaIniciada( user );
 
         // Ventanas y listeners de personajes
-        ePersonaje = new EditarPersonaje();
+        ePersonaje = new EditarPersonaje(esMaster);
         vPersonajes = new VerPersonajes( user );
 
-        ePersonajesListener = new EditarPersonajesListener( menu, home, ePersonaje, vPersonajes );
-        vPersonajesListener = new VerPersonajesListener( ePersonaje, menu, home, user, cPersonaje, vPersonajes, personaje );
+        ePersonajesListener = new EditarPersonajesListener( menu, home, ePersonaje, vPersonajes, user );
+        vPersonajesListener = new VerPersonajesListener( ePersonaje, menu, home, user, cPersonaje, vPersonajes, personaje, esMaster );
 
         cPersonajeListener = new CrearPersonajeListener( menu, home, cPersonaje, user );
 

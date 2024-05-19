@@ -17,9 +17,12 @@ public class EditarPersonaje extends JPanel {
     private JSpinner spinnerExperiencia, spinnerFuerza, spinnerDestreza, spinnerConstitucion, spinnerInteligencia, spinnerSabiduria, spinnerCarisma;
     private JButton btnGuardarImagen, btnGuardar;
     private JLabel lblId;
+    
+    private boolean esMaster;
 
-    public EditarPersonaje() {
+    public EditarPersonaje(boolean esMaster) {
         initialize_components();
+        this.esMaster = esMaster;
     }
 
     private void initialize_components() {
@@ -280,6 +283,26 @@ public class EditarPersonaje extends JPanel {
         lblId.setForeground(new Color(29, 29, 27));
         lblId.setFont(new Font("Dialog", Font.BOLD, 16));
         lblId.setBounds(345, 174, 78, 14);
+        
+        if (esMaster) {
+			spinnerExperiencia.setEnabled(true);
+			spinnerCarisma.setEnabled(false);
+			spinnerConstitucion.setEnabled(false);
+			spinnerDestreza.setEnabled(false);
+			spinnerFuerza.setEnabled(false);
+			spinnerInteligencia.setEnabled(false);
+			spinnerSabiduria.setEnabled(false);
+			txtClase.setEditable(false);
+			txtRaza.setEditable(false);
+		} else {
+			getSpinnerExperiencia().setEnabled(false);
+			getSpinnerCarisma().setEnabled(true);
+			getSpinnerConstitucion().setEnabled(true);
+			getSpinnerDestreza().setEnabled(true);
+			spinnerFuerza.setEnabled(true);
+			spinnerInteligencia.setEnabled(true);
+			spinnerSabiduria.setEnabled(true);
+		}
     }
 
     /**
@@ -537,6 +560,7 @@ public class EditarPersonaje extends JPanel {
 	public void setLblId(JLabel lblId) {
 		this.lblId = lblId;
 	}
+	
 	
     
     

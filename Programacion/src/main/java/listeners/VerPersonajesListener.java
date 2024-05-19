@@ -22,6 +22,7 @@ public class VerPersonajesListener extends Listener implements ActionListener {
 	private CrearPersonaje cPersonaje;
 	private VerPersonajes vPersonajes;
 	private Personaje personaje;
+	private boolean esMaster;
 
 	// Constructor del Listener
 	public VerPersonajesListener( Usuario user ) {
@@ -38,6 +39,7 @@ public class VerPersonajesListener extends Listener implements ActionListener {
 		, 	CrearPersonaje cPersonaje
 		, 	VerPersonajes vPersonajes
 		, 	Personaje personaje
+		, 	boolean esMaster
 	) {
 		super( menu, home );
 		this.cPersonaje = cPersonaje;
@@ -45,6 +47,7 @@ public class VerPersonajesListener extends Listener implements ActionListener {
 		this.user = user;
 		this.vPersonajes = vPersonajes;
 		this.personaje = personaje;
+		this.esMaster = esMaster;
 	}
 
 	/**
@@ -123,11 +126,36 @@ public class VerPersonajesListener extends Listener implements ActionListener {
 				ep.getTxtRaza().setText(rs.getString("raza"));
 				ep.getTxtClase().setText(rs.getString("clase"));
 				ep.getLblId().setText(id+"");
+				ep.getSpinnerExperiencia().setValue(rs.getInt("expe"));
+				ep.getSpinnerFuerza().setValue(rs.getInt("fuerza"));
+				ep.getSpinnerDestreza().setValue(rs.getInt("destreza"));
+				ep.getSpinnerConstitucion().setValue(rs.getInt("constitucion"));
+				ep.getSpinnerInteligencia().setValue(rs.getInt("inteligencia"));
+				ep.getSpinnerSabiduria().setValue(rs.getInt("sabiduria"));
+				ep.getSpinnerCarisma().setValue(rs.getInt("carisma"));
 			}
 		} catch ( Exception e ) {
 			e.printStackTrace();
 		}
-
+		if (esMaster) {
+			ep.getSpinnerExperiencia().setEnabled(true);
+			ep.getSpinnerCarisma().setEnabled(false);
+			ep.getSpinnerConstitucion().setEnabled(false);
+			ep.getSpinnerDestreza().setEnabled(false);
+			ep.getSpinnerFuerza().setEnabled(false);
+			ep.getSpinnerInteligencia().setEnabled(false);
+			ep.getSpinnerSabiduria().setEnabled(false);
+			ep.getTxtClase().setEditable(false);
+			ep.getTxtRaza().setEditable(false);
+		} else {
+			ep.getSpinnerExperiencia().setEnabled(false);
+			ep.getSpinnerCarisma().setEnabled(true);
+			ep.getSpinnerConstitucion().setEnabled(true);
+			ep.getSpinnerDestreza().setEnabled(true);
+			ep.getSpinnerFuerza().setEnabled(true);
+			ep.getSpinnerInteligencia().setEnabled(true);
+			ep.getSpinnerSabiduria().setEnabled(true);
+		}
 		menu.cargarPanel( ep );
 	}
 
