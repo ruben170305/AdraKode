@@ -36,7 +36,7 @@ CREATE TABLE partida (
     fecha VARCHAR(50) DEFAULT 'Por definir',
     numero_jugadores INT DEFAULT 1,
     ambientacion VARCHAR(50) DEFAULT 'General',
-    en_curso BOOLEAN DEFAULT FALSE,
+    en_curso VARCHAR(50) DEFAULT 1,
     anfitrion_id INT,
     CONSTRAINT FOREIGN KEY (anfitrion_id) REFERENCES miembro(cod)
 );
