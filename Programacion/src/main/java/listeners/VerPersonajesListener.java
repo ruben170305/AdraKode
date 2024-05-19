@@ -109,7 +109,6 @@ public class VerPersonajesListener extends Listener implements ActionListener {
 					e.printStackTrace();
 				}
 			}
-
 		}
 	}
 

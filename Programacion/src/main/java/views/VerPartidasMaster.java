@@ -10,15 +10,13 @@ import listeners.VerPartidaMasterListener;
 import model.*;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class VerPartidasMaster extends JPanel {
 	private JButton btnEditar, btnBorrar, btnSeleccionar;
-	private JLabel lblTituloPartida, lblAnfitrion, lblJugadores, lblDuración, lblFecha, lblEstado, lblTitulo, lblImagen;
+	private JLabel lblIdPartida, lblTituloPartida, lblAnfitrion, lblJugadores, lblDuración, lblFecha, lblEstado, lblTitulo, lblImagen;
 	private Partida partida;
 
 	public VerPartidasMaster() {
@@ -117,6 +115,11 @@ public class VerPartidasMaster extends JPanel {
 		add(lblImagen);
 		
 		// Etiquetas
+		lblIdPartida = new JLabel( "0" );
+		lblTituloPartida.setHorizontalAlignment(SwingConstants.CENTER);
+		lblTituloPartida.setBounds(0, 0, 0, 0);
+		add( lblIdPartida );
+
 		lblTituloPartida = new JLabel("Partida 1");
 		lblTituloPartida.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTituloPartida.setIcon(null);

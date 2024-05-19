@@ -1,28 +1,20 @@
 package listeners;
 
 import java.awt.event.*;
-import java.sql.*;
-
-import model.*;
-import views.Home;
-import views.Menu;
-import views.PartidaIniciada;
+import views.*;
 
 public class VerPartidaListener extends Listener implements ActionListener {
 	
 	
 	private PartidaIniciada partida_iniciada;
-	private Usuario user;
 
-	public VerPartidaListener( Menu menu, Home home, Usuario user ) {
+	public VerPartidaListener( Menu menu, Home home ) {
 		super( menu, home );
-		this.user = user;
 	}
 
-	public VerPartidaListener( Menu menu, Home home, PartidaIniciada partida_iniciada, Usuario user ) {
+	public VerPartidaListener( Menu menu, Home home, PartidaIniciada partida_iniciada ) {
 		super( menu, home );
 		this.partida_iniciada = partida_iniciada;
-		this.user = user;
 	}
 
 

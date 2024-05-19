@@ -99,22 +99,6 @@ public class PartidaIniciada extends JPanel {
 		add(lblImagen);
 		
 		// Etiquetas
-		lblTituloPartida = new JLabel( data[0][1].toString() );
-		lblTituloPartida.setHorizontalAlignment(SwingConstants.CENTER);
-		lblTituloPartida.setIcon(null);
-		lblTituloPartida.setForeground(new Color(29, 29, 27));
-		lblTituloPartida.setFont(new Font("Oxygen", Font.BOLD, 25));
-		lblTituloPartida.setBounds(302, 44, 195, 26);
-		add(lblTituloPartida);
-		
-		
-		lblNivelPartidaTitulo = new JLabel("Nivel: ");
-		lblNivelPartidaTitulo.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblNivelPartidaTitulo.setIcon(null);
-		lblNivelPartidaTitulo.setForeground(new Color(29, 29, 27));
-		lblNivelPartidaTitulo.setFont(new Font("Oxygen", Font.BOLD, 18));
-		lblNivelPartidaTitulo.setBounds(207, 112, 195, 26);
-		add(lblNivelPartidaTitulo);
 		
 		lblNivelPartida = new JLabel( data[0][1].toString() );
 		lblNivelPartida.setHorizontalAlignment(SwingConstants.LEFT);
@@ -158,7 +142,6 @@ public class PartidaIniciada extends JPanel {
 		lblEstado.setFont(new Font("Oxygen", Font.BOLD, 14));
 		lblEstado.setBounds(425, 265, 183, 26);
 		add(lblEstado);
-		
 		
 		// Designamos el nombre de las columnas de la tabla
 		String[] columns_personajes = { "ID", "Nombre", "Personaje", "Raza", "Clase", "Expe", "Fuerza", "Destreza", "Constitucion", "Inteligencia", "Sabiduria", "Carisma" };
@@ -318,7 +301,7 @@ public class PartidaIniciada extends JPanel {
 
 		// Barra progreso fuerza
 		pbFuerza = new JProgressBar();
-		pbExp.setValue( Integer.parseInt( data_personajes[0][6].toString() ) );
+		pbFuerza.setValue( Integer.parseInt( data_personajes[0][6].toString() ) );
 		pbFuerza.setBackground(new Color(242, 242, 242));
 		pbFuerza.setForeground(new Color(52, 75, 89));
 		pbFuerza.setFont(new Font("Oxygen", Font.PLAIN, 11));
@@ -328,7 +311,7 @@ public class PartidaIniciada extends JPanel {
 
 		// Barra progreso destreza
 		pbDestreza = new JProgressBar();
-		pbExp.setValue( Integer.parseInt( data_personajes[0][7].toString() ) );
+		pbDestreza.setValue( Integer.parseInt( data_personajes[0][7].toString() ) );
 		pbDestreza.setBackground(new Color(242, 242, 242));
 		pbDestreza.setForeground(new Color(52, 75, 89));
 		pbDestreza.setFont(new Font("Oxygen", Font.PLAIN, 11));
@@ -338,7 +321,7 @@ public class PartidaIniciada extends JPanel {
 
 		// Barra progreso constitución
 		pbConstitucion = new JProgressBar();
-		pbExp.setValue( Integer.parseInt( data_personajes[0][8].toString() ) );
+		pbConstitucion.setValue( Integer.parseInt( data_personajes[0][8].toString() ) );
 		pbConstitucion.setBackground(new Color(242, 242, 242));
 		pbConstitucion.setForeground(new Color(52, 75, 89));
 		pbConstitucion.setFont(new Font("Oxygen", Font.PLAIN, 11));
@@ -348,7 +331,7 @@ public class PartidaIniciada extends JPanel {
 
 		// Barra progreso inteligencia
 		pbInteligencia = new JProgressBar();
-		pbExp.setValue( Integer.parseInt( data_personajes[0][9].toString() ) );
+		pbInteligencia.setValue( Integer.parseInt( data_personajes[0][9].toString() ) );
 		pbInteligencia.setBackground(new Color(242, 242, 242));
 		pbInteligencia.setForeground(new Color(52, 75, 89));
 		pbInteligencia.setFont(new Font("Oxygen", Font.PLAIN, 11));
@@ -358,7 +341,7 @@ public class PartidaIniciada extends JPanel {
 
 		// Barra progreso sabiduría
 		pbSabiduria = new JProgressBar();
-		pbExp.setValue( Integer.parseInt( data_personajes[0][10].toString() ) );
+		pbSabiduria.setValue( Integer.parseInt( data_personajes[0][10].toString() ) );
 		pbSabiduria.setBackground(new Color(242, 242, 242));
 		pbSabiduria.setForeground(new Color(52, 75, 89));
 		pbSabiduria.setFont(new Font("Oxygen", Font.PLAIN, 11));
@@ -368,7 +351,7 @@ public class PartidaIniciada extends JPanel {
 
 		// Barra progreso carisma
 		pbCarisma = new JProgressBar();
-		pbExp.setValue( Integer.parseInt( data_personajes[0][11].toString() ) );
+		pbCarisma.setValue( Integer.parseInt( data_personajes[0][11].toString() ) );
 		pbCarisma.setBackground(new Color(242, 242, 242));
 		pbCarisma.setForeground(new Color(52, 75, 89));
 		pbCarisma.setFont(new Font("Oxygen", Font.PLAIN, 11));
