@@ -82,8 +82,8 @@ public class Menu extends JFrame {
 			mntmCrearPartidas = new JMenuItem( "Crear partida" );
 			mnPartidas.add( mntmCrearPartidas );
 			
-			mntmEditarPartidas = new JMenuItem( "Editar partidas" );
-			mnPartidas.add(mntmEditarPartidas);	
+			// mntmEditarPartidas = new JMenuItem( "Editar partidas" );
+			// mnPartidas.add(mntmEditarPartidas);	
 		} else {
 			mntmVerPartidas = new JMenuItem( "Ver partidas" );
 			mnPartidas.add( mntmVerPartidas );
@@ -115,7 +115,7 @@ public class Menu extends JFrame {
 		if ( gameMaster ) {
 			mntmVerPartidasMaster.addActionListener(listener);
 			mntmCrearPartidas.addActionListener(listener);
-			mntmEditarPartidas.addActionListener(listener);
+			// mntmEditarPartidas.addActionListener(listener);
 		} else {
 			
 			mntmNuevo.addActionListener(listener);

@@ -18,6 +18,7 @@ public class VerPartidasMaster extends JPanel {
 	private JButton btnEditar, btnBorrar;
 	private JLabel lblIdPartida, lblTituloPartida, lblAnfitrion, lblJugadores, lblDuración, lblFecha, lblEstado, lblTitulo, lblImagen;
 	private Partida partida;
+	private JTable table;
 
 	public VerPartidasMaster() {
 		this.partida = new Partida();
@@ -99,7 +100,7 @@ public class VerPartidasMaster extends JPanel {
 
 		// Creamos una plantilla para la tabla
 		DefaultTableModel template = new DefaultTableModel(data, columns);
-		JTable table = new JTable(template);
+		table = new JTable(template);
 		table.setForeground(new Color(29, 29, 27));
 		table.setBackground(new Color(242, 242, 242));
 		table.setFont(new Font("Open Sans", Font.PLAIN, 12));
@@ -212,6 +213,7 @@ public class VerPartidasMaster extends JPanel {
 	public void setListener( VerPartidaMasterListener listener ) {
 		btnEditar.addActionListener( listener );
 		btnBorrar.addActionListener( listener );
+		table.getSelectionModel().addListSelectionListener(listener);
 	}
 
 	public JLabel getIdPartidaLbl() {
@@ -220,6 +222,110 @@ public class VerPartidasMaster extends JPanel {
 
 	public void setIdPartidaLbl( JLabel lblIdPartida ) {
 		this.lblIdPartida = lblIdPartida;
+	}
+
+	public JButton getBtnEditar() {
+		return btnEditar;
+	}
+
+	public void setBtnEditar(JButton btnEditar) {
+		this.btnEditar = btnEditar;
+	}
+
+	public JButton getBtnBorrar() {
+		return btnBorrar;
+	}
+
+	public void setBtnBorrar(JButton btnBorrar) {
+		this.btnBorrar = btnBorrar;
+	}
+
+	public JLabel getLblIdPartida() {
+		return lblIdPartida;
+	}
+
+	public void setLblIdPartida(JLabel lblIdPartida) {
+		this.lblIdPartida = lblIdPartida;
+	}
+
+	public JLabel getLblTituloPartida() {
+		return lblTituloPartida;
+	}
+
+	public void setLblTituloPartida(JLabel lblTituloPartida) {
+		this.lblTituloPartida = lblTituloPartida;
+	}
+
+	public JLabel getLblAnfitrion() {
+		return lblAnfitrion;
+	}
+
+	public void setLblAnfitrion(JLabel lblAnfitrion) {
+		this.lblAnfitrion = lblAnfitrion;
+	}
+
+	public JLabel getLblJugadores() {
+		return lblJugadores;
+	}
+
+	public void setLblJugadores(JLabel lblJugadores) {
+		this.lblJugadores = lblJugadores;
+	}
+
+	public JLabel getLblDuración() {
+		return lblDuración;
+	}
+
+	public void setLblDuración(JLabel lblDuración) {
+		this.lblDuración = lblDuración;
+	}
+
+	public JLabel getLblFecha() {
+		return lblFecha;
+	}
+
+	public void setLblFecha(JLabel lblFecha) {
+		this.lblFecha = lblFecha;
+	}
+
+	public JLabel getLblEstado() {
+		return lblEstado;
+	}
+
+	public void setLblEstado(JLabel lblEstado) {
+		this.lblEstado = lblEstado;
+	}
+
+	public JLabel getLblTitulo() {
+		return lblTitulo;
+	}
+
+	public void setLblTitulo(JLabel lblTitulo) {
+		this.lblTitulo = lblTitulo;
+	}
+
+	public JLabel getLblImagen() {
+		return lblImagen;
+	}
+
+	public void setLblImagen(JLabel lblImagen) {
+		this.lblImagen = lblImagen;
+	}
+
+	public Partida getPartida() {
+		return partida;
+	}
+
+	public void setPartida(Partida partida) {
+		this.partida = partida;
+	}
+
+	public JTable getTable() {
+		return table;
+	}
+
+	public void setTable(JTable table) {
+		this.table = table;
 	}
 	
 }
