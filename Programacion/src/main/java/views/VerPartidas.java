@@ -7,34 +7,37 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import listeners.*;
+import model.*;
+
 import java.awt.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class VerPartidas extends JPanel {
-	private JLabel lblTitulo, lblImagen;
+	private JLabel lblTitulo, lblImagen, lblIdPartida, lblIdJugador;
 	private JButton btnSeleccionar;
-	private JLabel lblTituloPartida, lblAnfitrion, lblJugadores, lblDuración, lblFecha, lblEstado, lblNivelPartida, lblNivelPartidaTitulo, lblTituloComboBox;
-	private VerPartidaListener listener;
+	private JLabel lblTituloPartida, lblAnfitrion, lblJugadores, lblDuración, lblFecha, lblEstado, lblTituloComboBox;
 	private JComboBox comboBoxJugador;
+	private Partida partida;
+	private Personaje personaje;
 
-	public VerPartidas( VerPartidaListener listener ) {
-		this.listener = listener;
-		setBackground( new Color( 242, 242, 242 ) );
+	public VerPartidas( VerPartidaListener listener, Usuario user ) {
+		this.partida = new Partida();
+		this.personaje = new Personaje( user );
+		
 		initialize_components();
 	}
 
 	private void initialize_components() {
 
+		setBackground( new Color( 242, 242, 242 ) );
+
 		// layout absoluto
-		setLayout(null);
+		setLayout( null );
 
 		// Tamaño y posicion de ventana
-		setSize(800, 600);
-
-		// Capturamos la colección de datos de MySQL
-		this.listener.get_data();
+		setSize( 800, 600 );
 		
 		/* COMPONENTES */
 
@@ -60,7 +63,7 @@ public class VerPartidas extends JPanel {
 		String[] columns = { "ID", "Nombre", "Ambientación", "Duración", "Fecha", "Anfitrion", "Nº jugadores", "Estado" };
 
 		// Capturamos los datos de MySQL mediante una consulta
-		ResultSet rows = this.listener.get_data();
+		ResultSet rows = partida.get_partidas();
 		ArrayList<Object[]> row_data_list = new ArrayList<>();
 
 		// Capturamos el número de filas del resultado de la consulta
@@ -114,32 +117,21 @@ public class VerPartidas extends JPanel {
 		lblImagen.setIcon(new ImageIcon(VerPartidas.class.getResource("/img/paisaje.jpeg")));
 		lblImagen.setBounds(231, 177, 172, 143);
 		add(lblImagen);
+
+		// Etiquetas
+		lblIdPartida = new JLabel( data[0][0].toString() );
+		lblIdPartida.setHorizontalAlignment(SwingConstants.CENTER);
+		lblIdPartida.setBounds(0, 0, 0, 0);
+		add( lblIdPartida );
 		
 		// Etiquetas
-		lblTituloPartida = new JLabel( data[0][1].toString() );
+		lblTituloPartida = new JLabel( "Nivel: " + data[0][1].toString() );
 		lblTituloPartida.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTituloPartida.setIcon(null);
 		lblTituloPartida.setForeground(new Color(29, 29, 27));
 		lblTituloPartida.setFont(new Font("Oxygen", Font.BOLD, 18));
 		lblTituloPartida.setBounds(302, 106, 195, 26);
 		add(lblTituloPartida);
-		
-		
-		lblNivelPartidaTitulo = new JLabel("Nivel: ");
-		lblNivelPartidaTitulo.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblNivelPartidaTitulo.setIcon(null);
-		lblNivelPartidaTitulo.setForeground(new Color(29, 29, 27));
-		lblNivelPartidaTitulo.setFont(new Font("Oxygen", Font.BOLD, 18));
-		lblNivelPartidaTitulo.setBounds(211, 134, 195, 26);
-		add(lblNivelPartidaTitulo);
-		
-		lblNivelPartida = new JLabel( data[0][1].toString() );
-		lblNivelPartida.setHorizontalAlignment(SwingConstants.LEFT);
-		lblNivelPartida.setIcon(null);
-		lblNivelPartida.setForeground(new Color(29, 29, 27));
-		lblNivelPartida.setFont(new Font("Oxygen", Font.BOLD, 18));
-		lblNivelPartida.setBounds(403, 134, 144, 26);
-		add(lblNivelPartida);
 		
 		lblAnfitrion = new JLabel( data[0][5].toString() );
 		lblAnfitrion.setIcon(new ImageIcon(VerPartidas.class.getResource("/img/usuario.png")));
@@ -176,22 +168,15 @@ public class VerPartidas extends JPanel {
 		lblEstado.setBounds(425, 293, 183, 26);
 		add(lblEstado);
 		
-		
 		lblTituloComboBox = new JLabel("Jugador: ");
 		lblTituloComboBox.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblTituloComboBox.setIcon(null);
-		lblNivelPartidaTitulo.setForeground(new Color(29, 29, 27));
+		lblTituloComboBox.setForeground(new Color(29, 29, 27));
 		lblTituloComboBox.setFont(new Font("Oxygen", Font.BOLD, 18));
 		lblTituloComboBox.setBounds(302, 479, 83, 26);
 		add(lblTituloComboBox);
-		
-		//ComboBox
-        ArrayList<String> opcionesComboBox = null; //Añadir listener
 
-        // Convertir el ArrayList a un array
-        String[] opcionesArray = new String[opcionesComboBox.size()];
-        opcionesComboBox.toArray(opcionesArray);
-        comboBoxJugador = new JComboBox<>(opcionesArray);
+        comboBoxJugador = new JComboBox<>();
         comboBoxJugador.setFont(new Font("Open Sans", Font.BOLD, 14));
         comboBoxJugador.setForeground(new Color(29, 29, 27));
         comboBoxJugador.setBackground(new Color(242, 242, 242));
@@ -208,6 +193,11 @@ public class VerPartidas extends JPanel {
 		btnSeleccionar.setBorderPainted(false);
 		btnSeleccionar.setBounds(314, 516, 172, 41);
 		add(btnSeleccionar);
+
+		lblIdJugador = new JLabel( "0" );
+		lblIdJugador.setHorizontalAlignment(SwingConstants.CENTER);
+		lblIdJugador.setBounds(0, 0, 0, 0);
+		add( lblIdJugador );
 
 		// Añadimos un listener a cada fila de la tabla de partidas
 		table.getSelectionModel().addListSelectionListener( new ListSelectionListener() {
@@ -229,8 +219,54 @@ public class VerPartidas extends JPanel {
 		} );
 
 	}
+
+	/**
+	 * Metodo que asigna el listener
+	 * 
+	 * @param listener Recibe el listener con el que quieres asignar los objetos
+	 */
+
+	 public void cargarDatosEnComboBox() {
+		comboBoxJugador.removeAllItems();
+		ResultSet rs = personaje.get_personajes();
+		try {
+			while (rs.next()) {
+				lblIdJugador.setText( String.valueOf( rs.getInt( "cod" ) ) );
+				getComboBoxJugador().addItem(rs.getString("nombre"));
+			}
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+
+	}
 	
 	public void setListener( VerPartidaListener listener ) {
 		btnSeleccionar.addActionListener( listener );
+		cargarDatosEnComboBox();
+	}
+	
+	public JComboBox getComboBoxJugador() {
+		return comboBoxJugador;
+	}
+
+	public void setComboBoxJugador(JComboBox comboBoxJugador) {
+		this.comboBoxJugador = comboBoxJugador;
+	}
+
+	public JLabel getIdPartidaLbl() {
+		return lblIdPartida;
+	}
+
+	public void setIdPartidaLbl( JLabel lblIdPartida ) {
+		this.lblIdPartida = lblIdPartida;
+	}
+
+	public JLabel getIdJugadorLbl() {
+		return lblIdJugador;
+	}
+
+	public void setIdJugadorLbl( JLabel lblIdJugador ) {
+		this.lblIdJugador = lblIdJugador;
 	}
 }

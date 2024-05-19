@@ -258,6 +258,7 @@ public class CrearPersonaje extends JPanel {
 
         // Botones
         btnGuardar = new JButton("CREAR");
+        btnGuardar.setName("CREAR");
         btnGuardar.setFont(new Font("Oxygen", Font.BOLD, 17));
         btnGuardar.setForeground(new Color(242, 242, 242));
         btnGuardar.setBackground(new Color(29, 161, 242));
@@ -267,6 +268,7 @@ public class CrearPersonaje extends JPanel {
         add(btnGuardar);
 
         btnGuardarImagen = new JButton("");
+        btnGuardarImagen.setName("subirImagen");
         btnGuardarImagen.setIcon(new ImageIcon(EditarPersonaje.class.getResource("/img/camara_fotografica.png")));
         btnGuardarImagen.setOpaque(true);
         btnGuardarImagen.setForeground(new Color(242, 242, 242));
@@ -287,6 +289,7 @@ public class CrearPersonaje extends JPanel {
 
 	public void setListener( CrearPersonajeListener listener ) {
 		btnGuardar.addActionListener( listener );
+		btnGuardarImagen.addActionListener(listener);
 	}
 
 	

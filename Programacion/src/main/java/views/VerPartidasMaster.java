@@ -6,23 +6,23 @@ import javax.swing.border.LineBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
-import views.*;
 import listeners.VerPartidaMasterListener;
+import model.*;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class VerPartidasMaster extends JPanel {
-	private JButton btnEditar, btnBorrar, btnSeleccionar;
-	private JLabel lblTituloPartida, lblAnfitrion, lblJugadores, lblDuración, lblFecha, lblEstado, lblTitulo, lblImagen;
-	private VerPartidaMasterListener listener;
+	private JButton btnEditar, btnBorrar;
+	private JLabel lblIdPartida, lblTituloPartida, lblAnfitrion, lblJugadores, lblDuración, lblFecha, lblEstado, lblTitulo, lblImagen;
+	private Partida partida;
+	private JTable table;
 
-	public VerPartidasMaster(VerPartidaMasterListener listener) {
-		this.listener = listener;
+	public VerPartidasMaster() {
+		this.partida = new Partida();
+		
 		initialize_components();
 	}
 
@@ -60,7 +60,7 @@ public class VerPartidasMaster extends JPanel {
 		String[] columns = { "ID", "Nombre", "Ambientación", "Duración", "Fecha", "Anfitrion", "Nº jugadores", "Estado" };
 
 		// Capturamos los datos de MySQL mediante una consulta
-		ResultSet rows = this.listener.get_data();
+		ResultSet rows = partida.get_partidas();
 		ArrayList<Object[]> row_data_list = new ArrayList<>();
 
 		// Capturamos el número de filas del resultado de la consulta
@@ -100,7 +100,7 @@ public class VerPartidasMaster extends JPanel {
 
 		// Creamos una plantilla para la tabla
 		DefaultTableModel template = new DefaultTableModel(data, columns);
-		JTable table = new JTable(template);
+		table = new JTable(template);
 		table.setForeground(new Color(29, 29, 27));
 		table.setBackground(new Color(242, 242, 242));
 		table.setFont(new Font("Open Sans", Font.PLAIN, 12));
@@ -116,7 +116,12 @@ public class VerPartidasMaster extends JPanel {
 		add(lblImagen);
 		
 		// Etiquetas
-		lblTituloPartida = new JLabel("Partida 1");
+		lblIdPartida = new JLabel( data[0][0].toString() );
+		lblIdPartida.setHorizontalAlignment(SwingConstants.CENTER);
+		lblIdPartida.setBounds(0, 0, 0, 0);
+		add( lblIdPartida );
+
+		lblTituloPartida = new JLabel(data[0][1].toString());
 		lblTituloPartida.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTituloPartida.setIcon(null);
 		lblTituloPartida.setForeground(new Color(29, 29, 27));
@@ -124,35 +129,35 @@ public class VerPartidasMaster extends JPanel {
 		lblTituloPartida.setBounds(302, 121, 195, 26);
 		add(lblTituloPartida);
 		
-		lblAnfitrion = new JLabel("Anfitrión 1");
+		lblAnfitrion = new JLabel( data[0][5].toString() );
 		lblAnfitrion.setIcon(new ImageIcon(VerPartidasMaster.class.getResource("/img/usuario.png")));
 		lblAnfitrion.setForeground(new Color(29, 29, 27));
 		lblAnfitrion.setFont(new Font("Oxygen", Font.BOLD, 14));
 		lblAnfitrion.setBounds(425, 164, 183, 26);
 		add(lblAnfitrion);
 		
-		lblJugadores = new JLabel("4");
+		lblJugadores = new JLabel( data[0][6].toString() );
 		lblJugadores.setIcon(new ImageIcon(VerPartidasMaster.class.getResource("/img/equipo.png")));
 		lblJugadores.setForeground(new Color(29, 29, 27));
 		lblJugadores.setFont(new Font("Oxygen", Font.BOLD, 14));
 		lblJugadores.setBounds(425, 193, 183, 26);
 		add(lblJugadores);
 
-		lblDuración = new JLabel("30'");
+		lblDuración = new JLabel( data[0][3].toString() );
 		lblDuración.setIcon(new ImageIcon(VerPartidasMaster.class.getResource("/img/repetir.png")));
 		lblDuración.setForeground(new Color(29, 29, 27));
 		lblDuración.setFont(new Font("Oxygen", Font.BOLD, 14));
 		lblDuración.setBounds(425, 222, 183, 26);
 		add(lblDuración);
 		
-		lblFecha = new JLabel("13-04 16:00 pm");
+		lblFecha = new JLabel( data[0][4].toString() );
 		lblFecha.setIcon(new ImageIcon(VerPartidasMaster.class.getResource("/img/calendario.png")));
 		lblFecha.setForeground(new Color(29, 29, 27));
 		lblFecha.setFont(new Font("Oxygen", Font.BOLD, 14));
 		lblFecha.setBounds(425, 251, 183, 26);
 		add(lblFecha);
 		
-		lblEstado = new JLabel("En curso");
+		lblEstado = new JLabel( data[0][7].toString() );
 		lblEstado.setIcon(new ImageIcon(VerPartidasMaster.class.getResource("/img/ajustes.png")));
 		lblEstado.setForeground(new Color(29, 29, 27));
 		lblEstado.setFont(new Font("Oxygen", Font.BOLD, 14));
@@ -183,19 +188,6 @@ public class VerPartidasMaster extends JPanel {
 		btnBorrar.setBounds(404, 482, 83, 36);
 		add(btnBorrar);
 
-		btnSeleccionar = new JButton("JUGAR");
-		btnSeleccionar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnSeleccionar.setFont(new Font("Oxygen", Font.BOLD, 17));
-		btnSeleccionar.setForeground(new Color(242, 242, 242));
-		btnSeleccionar.setBackground(new Color(29, 161, 242));
-		btnSeleccionar.setOpaque(true);
-		btnSeleccionar.setBorderPainted(false);
-		btnSeleccionar.setBounds(315, 523, 172, 41);
-		add(btnSeleccionar);
-
 		// Añadimos un listener a cada fila de la tabla de partidas
 		table.getSelectionModel().addListSelectionListener( new ListSelectionListener() {
 			
@@ -205,6 +197,7 @@ public class VerPartidasMaster extends JPanel {
 				int selected_row = table.getSelectedRow();
 
 				// Actualizamos los JLabel con la información de la fila seleccionada
+				lblIdPartida.setText( table.getValueAt( selected_row, 0 ).toString() );
 				lblTituloPartida.setText( table.getValueAt( selected_row, 1 ).toString() );
 				lblAnfitrion.setText( table.getValueAt( selected_row, 5 ).toString() );
 				lblJugadores.setText( table.getValueAt( selected_row, 6 ).toString() );
@@ -219,8 +212,120 @@ public class VerPartidasMaster extends JPanel {
 	
 	public void setListener( VerPartidaMasterListener listener ) {
 		btnEditar.addActionListener( listener );
-		btnSeleccionar.addActionListener( listener );
 		btnBorrar.addActionListener( listener );
+		table.getSelectionModel().addListSelectionListener(listener);
+	}
+
+	public JLabel getIdPartidaLbl() {
+		return lblIdPartida;
+	}
+
+	public void setIdPartidaLbl( JLabel lblIdPartida ) {
+		this.lblIdPartida = lblIdPartida;
+	}
+
+	public JButton getBtnEditar() {
+		return btnEditar;
+	}
+
+	public void setBtnEditar(JButton btnEditar) {
+		this.btnEditar = btnEditar;
+	}
+
+	public JButton getBtnBorrar() {
+		return btnBorrar;
+	}
+
+	public void setBtnBorrar(JButton btnBorrar) {
+		this.btnBorrar = btnBorrar;
+	}
+
+	public JLabel getLblIdPartida() {
+		return lblIdPartida;
+	}
+
+	public void setLblIdPartida(JLabel lblIdPartida) {
+		this.lblIdPartida = lblIdPartida;
+	}
+
+	public JLabel getLblTituloPartida() {
+		return lblTituloPartida;
+	}
+
+	public void setLblTituloPartida(JLabel lblTituloPartida) {
+		this.lblTituloPartida = lblTituloPartida;
+	}
+
+	public JLabel getLblAnfitrion() {
+		return lblAnfitrion;
+	}
+
+	public void setLblAnfitrion(JLabel lblAnfitrion) {
+		this.lblAnfitrion = lblAnfitrion;
+	}
+
+	public JLabel getLblJugadores() {
+		return lblJugadores;
+	}
+
+	public void setLblJugadores(JLabel lblJugadores) {
+		this.lblJugadores = lblJugadores;
+	}
+
+	public JLabel getLblDuración() {
+		return lblDuración;
+	}
+
+	public void setLblDuración(JLabel lblDuración) {
+		this.lblDuración = lblDuración;
+	}
+
+	public JLabel getLblFecha() {
+		return lblFecha;
+	}
+
+	public void setLblFecha(JLabel lblFecha) {
+		this.lblFecha = lblFecha;
+	}
+
+	public JLabel getLblEstado() {
+		return lblEstado;
+	}
+
+	public void setLblEstado(JLabel lblEstado) {
+		this.lblEstado = lblEstado;
+	}
+
+	public JLabel getLblTitulo() {
+		return lblTitulo;
+	}
+
+	public void setLblTitulo(JLabel lblTitulo) {
+		this.lblTitulo = lblTitulo;
+	}
+
+	public JLabel getLblImagen() {
+		return lblImagen;
+	}
+
+	public void setLblImagen(JLabel lblImagen) {
+		this.lblImagen = lblImagen;
+	}
+
+	public Partida getPartida() {
+		return partida;
+	}
+
+	public void setPartida(Partida partida) {
+		this.partida = partida;
+	}
+
+	public JTable getTable() {
+		return table;
+	}
+
+	public void setTable(JTable table) {
+		this.table = table;
 	}
 	
 }
