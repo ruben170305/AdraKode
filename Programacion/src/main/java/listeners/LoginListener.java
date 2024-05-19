@@ -55,7 +55,6 @@ public class LoginListener implements ActionListener {
 					// Llamamos al metodo arranque para que cree la ventana menu y nos devuelva esa ventana
 					// Posteriormente, mostramos la ventana
 					this.menu = MenuMain.boot( esMaster );
-					System.out.println(esMaster);
 					menu.make_visible();
 				} else {
 					login.mostrarMensajeErrorLogin();

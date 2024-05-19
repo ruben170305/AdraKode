@@ -105,6 +105,7 @@ public class Personaje {
 		try {
             // Realizamos una consulta para capturar todos los personajes
             String sql = "select p.*, j.* from personaje p left join juega j on j.id_personaje = p.cod where cod_miembro=" + user.getUser_id();
+            System.out.println(sql);
             rs = mysql.Model_query( sql );
 
 		} catch ( SQLException sqle ) {

@@ -15,7 +15,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class VerPartidas extends JPanel {
-	private JLabel lblTitulo, lblImagen;
+	private JLabel lblTitulo, lblImagen, lblIdPartida, lblIdJugador;
 	private JButton btnSeleccionar;
 	private JLabel lblTituloPartida, lblAnfitrion, lblJugadores, lblDuración, lblFecha, lblEstado, lblTituloComboBox;
 	private JComboBox comboBoxJugador;
@@ -117,6 +117,12 @@ public class VerPartidas extends JPanel {
 		lblImagen.setIcon(new ImageIcon(VerPartidas.class.getResource("/img/paisaje.jpeg")));
 		lblImagen.setBounds(231, 177, 172, 143);
 		add(lblImagen);
+
+		// Etiquetas
+		lblIdPartida = new JLabel( data[0][0].toString() );
+		lblIdPartida.setHorizontalAlignment(SwingConstants.CENTER);
+		lblIdPartida.setBounds(0, 0, 0, 0);
+		add( lblIdPartida );
 		
 		// Etiquetas
 		lblTituloPartida = new JLabel( "Nivel: " + data[0][1].toString() );
@@ -188,6 +194,11 @@ public class VerPartidas extends JPanel {
 		btnSeleccionar.setBounds(314, 516, 172, 41);
 		add(btnSeleccionar);
 
+		lblIdJugador = new JLabel( "0" );
+		lblIdJugador.setHorizontalAlignment(SwingConstants.CENTER);
+		lblIdJugador.setBounds(0, 0, 0, 0);
+		add( lblIdJugador );
+
 		// Añadimos un listener a cada fila de la tabla de partidas
 		table.getSelectionModel().addListSelectionListener( new ListSelectionListener() {
 			
@@ -220,6 +231,7 @@ public class VerPartidas extends JPanel {
 		ResultSet rs = personaje.get_personajes();
 		try {
 			while (rs.next()) {
+				lblIdJugador.setText( String.valueOf( rs.getInt( "cod" ) ) );
 				getComboBoxJugador().addItem(rs.getString("nombre"));
 			}
 		} catch (SQLException e) {
@@ -240,5 +252,21 @@ public class VerPartidas extends JPanel {
 
 	public void setComboBoxJugador(JComboBox comboBoxJugador) {
 		this.comboBoxJugador = comboBoxJugador;
+	}
+
+	public JLabel getIdPartidaLbl() {
+		return lblIdPartida;
+	}
+
+	public void setIdPartidaLbl( JLabel lblIdPartida ) {
+		this.lblIdPartida = lblIdPartida;
+	}
+
+	public JLabel getIdJugadorLbl() {
+		return lblIdJugador;
+	}
+
+	public void setIdJugadorLbl( JLabel lblIdJugador ) {
+		this.lblIdJugador = lblIdJugador;
 	}
 }

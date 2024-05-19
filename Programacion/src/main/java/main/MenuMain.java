@@ -84,9 +84,9 @@ public class MenuMain {
         // Listeners para ver partidas
         pIniciadaListener = new PartidaIniciadaListener( menu, home, user );
         pIniciada = new PartidaIniciada( user );
-
-        vPartidasMasterListener = new VerPartidaMasterListener( ePartida, menu, home, user, pIniciada );
+        
         vPartidasMaster = new VerPartidasMaster();
+        vPartidasMasterListener = new VerPartidaMasterListener( vPartidasMaster, ePartida, menu, home );
 
         vPartidasListener = new VerPartidaListener( menu, home );
         vPartidas = new VerPartidas( vPartidasListener, user );
@@ -131,7 +131,7 @@ public class MenuMain {
             ePartida.setListener( ePartidaListener );
             vPartidasMaster.setListener( vPartidasMasterListener );
         } else {
-            VerPartidaListener ver_partidas_listener = new VerPartidaListener( menu, home, pIniciada );
+            VerPartidaListener ver_partidas_listener = new VerPartidaListener( menu, home, pIniciada, vPartidas, user );
             vPartidas.setListener( ver_partidas_listener );
         }
 
