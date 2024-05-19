@@ -1,6 +1,6 @@
 package main;
 
-import java.awt.EventQueue;	
+import java.awt.EventQueue;
 
 import views.*;
 import listeners.*;
@@ -8,105 +8,141 @@ import model.Personaje;
 import model.Usuario;
 
 public class MenuMain {
-	
-	// Inicializamos la ventana principal y la ventana del Home
-	static Menu menu = new Menu( "Adrakode", false );
-	static Home home = new Home();
-	static Listener list = new Listener( menu, home );
-	static Usuario user = new Usuario(); 
-	static Personaje personaje = new Personaje();
-	static CrearPersonaje cPersonaje = new CrearPersonaje(menu);
+    
+    // Inicializamos la ventana principal y la ventana del Home
+    static Menu menu;
+    static Home home;
+    static Listener list;
+    static Usuario user; 
+    static Personaje personaje;
+    static CrearPersonaje cPersonaje;
 
-	// Instanciamos las ventanas junto a sus listeners
-	static CrearPartida cPartida = new CrearPartida();
-	static EditarPartida ePartida = new EditarPartida();
-	
-	static VerPartidaMasterListener ver_partidas_master_listener = new VerPartidaMasterListener( ePartida, menu, home );
-	static VerPartidasMaster vPartidasMaster = new VerPartidasMaster( ver_partidas_master_listener );
+    // Ventanas de creación y edición de partidas
+    static CrearPartida cPartida;
+    static EditarPartida ePartida;
 
-	static VerPartidaListener ver_partidas_listener = new VerPartidaListener( menu, home, user );
-	static VerPartidas vPartidas = new VerPartidas( ver_partidas_listener );
-	
-	static EditarPersonaje ePersonaje = new EditarPersonaje();
-	static VerPersonajes vPersonajes = new VerPersonajes();
-	static EditarPersonajesListener editar_personaje_listener = new EditarPersonajesListener( menu, home, ePersonaje, vPersonajes );
-	static VerPersonajesListener ver_personajes_listener = new VerPersonajesListener( ePersonaje, menu, home, user, cPersonaje, vPersonajes, personaje );
+    // Listeners para ver partidas
+    static VerPartidaMasterListener vPartidasMasterListener;
+    static VerPartidasMaster vPartidasMaster;
 
-	static CrearPersonajeListener crear_personaje_listener = new CrearPersonajeListener( menu, home, cPersonaje, user );
+    static VerPartidaListener vPartidasListener;
+    static VerPartidas vPartidas;
+    
+    static PartidaIniciadaListener pIniciadaListener;
+    static PartidaIniciada pIniciada;
 
-	static VentanaPrincipalLogin login = new VentanaPrincipalLogin( user );
+    // Ventanas y listeners de personajes
+    static EditarPersonaje ePersonaje;
+    static VerPersonajes vPersonajes;
 
-	public static void main( String[] args ) {
-		EventQueue.invokeLater( new Runnable() {
-			
-			@Override
-			public void run() {
-				//Arrancamos la vista login para comprobar si es game master o no
-				LoginListener loginlistener = new LoginListener(login);
-				login.setListener( loginlistener );
+    static EditarPersonajesListener ePersonajesListener;
+    static VerPersonajesListener vPersonajesListener;
 
-				//Hacemos visible el login y cargamos el panel home a la ventana principal para que cuando se muestre este preparada
-				login.make_visible();
-			}
-		});
-	}
+    static CrearPersonajeListener cPersonajeListener;
 
-	/**
-	 * Método que inicializa la ventana principal (Menu) este se encarga de decir al menu si es game master o no.
-	 * Se llama desde el loginlistener para que cuando se cierre el login se ejecuten estas sentencias y se actualice
-	 * correctamente el menu
-	 * @param esMaster Recibe true or false dependiendo del checkbox de login
-	 * @return Devuelve Menu ventanaPpal para asignar todos los listeners a la ventana creada
-	 */
-	public static Menu arranque( boolean esMaster ) {
+    // Ventana de login
+    static VentanaPrincipalLogin login;
 
-		// Creamos una ventana y cargamos el panel
-		String title_window = ( esMaster ) ? "Adrakode Master" : "Adrakode";
-		menu.setGameMaster( esMaster );
-		menu.setTitle( title_window );
-		cPersonaje.inicializarComponentes();
-		menu.crearMenu();
-		menu.cargarPanel( home );
-		
-		//Creamos el listener del menu
-		PMenuListener listener = new PMenuListener(
-				menu
-			, 	home
-			, 	ePersonaje
-			,	cPersonaje
-			, 	vPersonajes
-			,	cPartida
-			, 	ePartida
-			, 	vPartidas
-			, 	vPartidasMaster
-			, 	login
-		);
-		
-		if( esMaster ) {
-			CrearPartidaListener crear_partida_listener = new CrearPartidaListener( menu, home );
-			EditarPartidaListener editar_partida_listener = new EditarPartidaListener( menu, home );
+    public static void main( String[] args ) {
+        EventQueue.invokeLater( new Runnable() {
 
-			// Vinculación de listeners
-			cPartida.setListener( crear_partida_listener );
-			ePartida.setListener( editar_partida_listener );
-			vPartidasMaster.setListener( ver_partidas_master_listener );
-		} else {
-			// Vinculación de listeners
-			PartidaIniciadaListener partida_iniciada_listener = new PartidaIniciadaListener( menu, home, user );
-			PartidaIniciada partida_iniciada = new PartidaIniciada( partida_iniciada_listener );
+            @Override
+            public void run() {
+                // Inicializamos solo lo necesario para el login
+                user = new Usuario();
+                login = new VentanaPrincipalLogin( user );
+                
+                // Configuramos el listener para el login
+                LoginListener loginlistener = new LoginListener( login );
+                login.setListener( loginlistener );
 
-			VerPartidaListener ver_partidas_listener = new VerPartidaListener( menu, home, partida_iniciada, user );
-			vPartidas.setListener( ver_partidas_listener );
-		}
+                // Hacemos visible el login
+                login.make_visible();
+            }
+        });
+    }
 
-		// Vinculación de Listeners
-		cPersonaje.setListener(crear_personaje_listener);
-		ePersonaje.setListener( editar_personaje_listener );
-		vPersonajes.setListener( ver_personajes_listener );
+    /**
+     * Método que inicializa la ventana principal (Menu) este se encarga de decir al menu si es game master o no.
+     * Se llama desde el loginlistener para que cuando se cierre el login se ejecuten estas sentencias y se actualice
+     * correctamente el menu
+     * @param esMaster Recibe true or false dependiendo del checkbox de login
+     * @return Devuelve Menu ventanaPpal para asignar todos los listeners a la ventana creada
+     */
+    public static Menu boot( boolean esMaster ) {
+        // Creamos la ventana principal y el Home
+        menu = new Menu( esMaster ? "Adrakode Master" : "Adrakode", esMaster );
+        home = new Home();
+        list = new Listener( menu, home );
+        personaje = new Personaje( user );
+        cPersonaje = new CrearPersonaje( menu );
 
-		// Vinculamos el listener de la ventana principal a su ventana
-		menu.setListener( listener );
-		
-		return menu;
-	}
+        // Ventanas de creación y edición de partidas
+        cPartida = new CrearPartida();
+        ePartida = new EditarPartida();
+
+        // Listeners para ver partidas
+        vPartidasMasterListener = new VerPartidaMasterListener( ePartida, menu, home );
+        vPartidasMaster = new VerPartidasMaster();
+
+        vPartidasListener = new VerPartidaListener( menu, home, user );
+        vPartidas = new VerPartidas( vPartidasListener, user );
+
+        pIniciadaListener = new PartidaIniciadaListener( menu, home, user );
+        pIniciada = new PartidaIniciada( user );
+
+        // Ventanas y listeners de personajes
+        ePersonaje = new EditarPersonaje();
+        vPersonajes = new VerPersonajes( user );
+
+        ePersonajesListener = new EditarPersonajesListener( menu, home, ePersonaje, vPersonajes );
+        vPersonajesListener = new VerPersonajesListener( ePersonaje, menu, home, user, cPersonaje, vPersonajes, personaje );
+
+        cPersonajeListener = new CrearPersonajeListener( menu, home, cPersonaje, user );
+
+        // Creamos la ventana y cargamos el panel
+        menu.setGameMaster( esMaster );
+        cPersonaje.inicializarComponentes();
+        menu.crearMenu();
+        menu.cargarPanel( home );
+        
+        // Creamos el listener del menú
+        PMenuListener listener = new PMenuListener(
+                menu,
+                home,
+                cPersonaje,
+                ePersonaje,
+                vPersonajes,
+                cPartida,
+                ePartida,
+                vPartidas,
+                vPartidasMaster,
+                login
+        );
+
+        // Dependiendo de que el usuario inicie sesión como Game Master, mostramos un menú diferente
+        if ( esMaster ) {
+            CrearPartidaListener cPartidaListener = new CrearPartidaListener( menu, home );
+            EditarPartidaListener ePartidaListener = new EditarPartidaListener( menu, home );
+
+            // Vinculación de listeners
+            cPartida.setListener( cPartidaListener );
+            ePartida.setListener( ePartidaListener );
+            vPartidasMaster.setListener( vPartidasMasterListener );
+        } else {
+            VerPartidaListener ver_partidas_listener = new VerPartidaListener( menu, home, pIniciada, user );
+            vPartidas.setListener( ver_partidas_listener );
+        }
+
+        // Vinculación de Listeners
+        cPersonaje.setListener( cPersonajeListener );
+        ePersonaje.setListener( ePersonajesListener );
+        vPersonajes.setListener( vPersonajesListener );
+        pIniciada.setListener( pIniciadaListener );
+
+        // Vinculamos el listener de la ventana principal a su ventana
+        menu.setListener( listener );
+
+        return menu;
+    }
 }

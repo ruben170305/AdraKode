@@ -6,8 +6,8 @@ import javax.swing.border.LineBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
-import views.*;
 import listeners.VerPartidaMasterListener;
+import model.*;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -19,10 +19,11 @@ import java.util.ArrayList;
 public class VerPartidasMaster extends JPanel {
 	private JButton btnEditar, btnBorrar, btnSeleccionar;
 	private JLabel lblTituloPartida, lblAnfitrion, lblJugadores, lblDuración, lblFecha, lblEstado, lblTitulo, lblImagen;
-	private VerPartidaMasterListener listener;
+	private Partida partida;
 
-	public VerPartidasMaster(VerPartidaMasterListener listener) {
-		this.listener = listener;
+	public VerPartidasMaster() {
+		this.partida = new Partida();
+		
 		initialize_components();
 	}
 
@@ -60,7 +61,7 @@ public class VerPartidasMaster extends JPanel {
 		String[] columns = { "ID", "Nombre", "Ambientación", "Duración", "Fecha", "Anfitrion", "Nº jugadores", "Estado" };
 
 		// Capturamos los datos de MySQL mediante una consulta
-		ResultSet rows = this.listener.get_data();
+		ResultSet rows = partida.get_partidas();
 		ArrayList<Object[]> row_data_list = new ArrayList<>();
 
 		// Capturamos el número de filas del resultado de la consulta

@@ -48,14 +48,14 @@ public class Model {
 	public ResultSet Model_query( String sql ) throws SQLException {
 		
 		// Inicializamos el RS y el STMT a devolver
-		ResultSet rs   = null;
+		ResultSet rs = null;
 		Statement stmt = null;
 
 		try {
 
 			// Inicializamos el Statement y ejecutamos la consulta
 			stmt = this.conn.createStatement();
-			rs   = stmt.executeQuery( sql );
+			rs = stmt.executeQuery( sql );
 
 			// Devolvemos el array de datos
 			return rs;

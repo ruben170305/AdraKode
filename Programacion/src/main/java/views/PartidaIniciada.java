@@ -4,6 +4,8 @@ package views;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import listeners.*;
+import model.*;
+
 import java.awt.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,15 +14,19 @@ import java.util.ArrayList;
 public class PartidaIniciada extends JPanel {
 	private JLabel lblImagen;
 	private JLabel lblTituloPartida, lblAnfitrion, lblJugadores, lblDuración, lblFecha, lblEstado, lblNivelPartida, lblNivelPartidaTitulo;
-	private PartidaIniciadaListener listener;
 	
 	private JLabel lblRaza, lblExp, lblIconoExp, lblIconoFuerza, lblIconoDestreza, lblIconoCarisma, lblClase, lblNombrePersonaje;
 	private JLabel lblFuerza, lblDestreza, lblConstitucion, lblInteligencia, lblSabiduria, lblCarisma, lblIconoConst, lblIconoInteligencia, lblIconoSabiduria, lblIconoPersn;
 	private JProgressBar pbExp, pbFuerza, pbDestreza, pbConstitucion, pbInteligencia, pbSabiduria, pbCarisma;
+	private Partida partida;
+	private Personaje personaje;
 
-	public PartidaIniciada( PartidaIniciadaListener listener ) {
-		this.listener = listener;
+	public PartidaIniciada( Usuario user ) {
 		setBackground( new Color( 242, 242, 242 ) );
+
+		this.partida = new Partida();
+		this.personaje = new Personaje( user );
+
 		initialize_components();
 	}
 
@@ -48,7 +54,7 @@ public class PartidaIniciada extends JPanel {
 		String[] columns = { "ID", "Nombre", "Ambientación", "Duración", "Fecha", "Anfitrion", "Nº jugadores", "Estado" };
 
 		// Capturamos los datos de MySQL mediante una consulta
-		ResultSet rows = this.listener.get_data();
+		ResultSet rows = partida.get_partidas();
 		ArrayList<Object[]> row_data_list = new ArrayList<>();
 
 		// Capturamos el número de filas del resultado de la consulta
@@ -158,7 +164,7 @@ public class PartidaIniciada extends JPanel {
 		String[] columns_personajes = { "ID", "Nombre", "Personaje", "Raza", "Clase", "Expe", "Fuerza", "Destreza", "Constitucion", "Inteligencia", "Sabiduria", "Carisma" };
 
 		// Capturamos los datos de MySQL mediante una consulta
-		ResultSet rows_personajes = this.listener.get_data_personajes();
+		ResultSet rows_personajes = personaje.get_personajes();
 		ArrayList<Object[]> row_data_list_personajes = new ArrayList<>();
 
 		// Capturamos el número de filas del resultado de la consulta
@@ -394,4 +400,9 @@ public class PartidaIniciada extends JPanel {
 		add(lblClase);
 		
 	}
+
+	public void setListener( PartidaIniciadaListener listener ) {
+		//btnSeleccionar.addActionListener( listener );
+	}
+
 }

@@ -5,6 +5,7 @@ import javax.swing.border.*;
 
 import listeners.VerPersonajesListener;
 import model.Personaje;
+import model.Usuario;
 
 import javax.swing.*;
 import java.sql.ResultSet;
@@ -13,22 +14,21 @@ import java.util.ArrayList;
 
 public class VerPersonajes extends JPanel {
 
-	private JLabel lblTitulo, lblRaza, lblExp, lblSeleccionarPersonaje, lblIconoExp, lblIconoFuerza, lblIconoDestreza,
-			lblIconoCarisma, lblClase;
-	private JLabel lblFuerza, lblDestreza, lblConstitucion, lblInteligencia, lblSabiduria, lblCarisma, lblIconoConst,
-			lblIconoInteligencia, lblIconoSabiduria, lblIconoPersn, idLbl;
+	private JLabel lblTitulo, lblRaza, lblExp, lblSeleccionarPersonaje, lblIconoExp, lblIconoFuerza, lblIconoDestreza, lblIconoCarisma, lblClase;
+	private JLabel lblFuerza, lblDestreza, lblConstitucion, lblInteligencia, lblSabiduria, lblCarisma, lblIconoConst, lblIconoInteligencia, lblIconoSabiduria, lblIconoPersn, idLbl;
 	private JButton btnSeleccionar, btnEditar, btnBorrar;
 	private JProgressBar pbExp, pbFuerza, pbDestreza, pbConstitucion, pbInteligencia, pbSabiduria, pbCarisma;
 	private JComboBox comboBoxSeleccionar;
+
 	private ArrayList<Integer> id = new ArrayList<Integer>();
+	private Personaje personaje;
 
-	private VerPersonajesListener listener;
-
-	public VerPersonajes() {
-//		this.listener = listener;
+	public VerPersonajes( Usuario user ) {
 		setBackground(new Color(242, 242, 242));
+
+		this.personaje = new Personaje( user );
+		
 		initialize_components();
-		// make_visible();
 	}
 
 	private void initialize_components() {
@@ -319,7 +319,7 @@ public class VerPersonajes extends JPanel {
 
 	public void cargarDatosEnComboBox() {
 		comboBoxSeleccionar.removeAllItems();
-		ResultSet rs = listener.get_data();
+		ResultSet rs = personaje.get_personajes();
 		try {
 			while (rs.next()) {
 				getComboBoxSeleccionar().addItem(rs.getString("nombre"));
@@ -334,12 +334,11 @@ public class VerPersonajes extends JPanel {
 
 	}
 
-	public void setListener(VerPersonajesListener listener) {
-		btnEditar.addActionListener(listener);
-		btnSeleccionar.addActionListener(listener);
-		btnBorrar.addActionListener(listener);
-		comboBoxSeleccionar.addActionListener(listener);
-		this.listener = listener;
+	public void setListener( VerPersonajesListener listener ) {
+		btnEditar.addActionListener( listener );
+		btnSeleccionar.addActionListener( listener );
+		btnBorrar.addActionListener( listener );
+		comboBoxSeleccionar.addActionListener( listener );
 		cargarDatosEnComboBox();
 	}
 
@@ -359,11 +358,6 @@ public class VerPersonajes extends JPanel {
 	public void setComboBoxSeleccionar(JComboBox comboBoxSeleccionar) {
 		this.comboBoxSeleccionar = comboBoxSeleccionar;
 	}
-	
-	public VerPersonajesListener getListener() {
-		return listener;
-	}
-
 	
 	public ArrayList<Integer> getId() {
 		return id;

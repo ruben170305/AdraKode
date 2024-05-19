@@ -7,6 +7,8 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import listeners.*;
+import model.*;
+
 import java.awt.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -16,25 +18,26 @@ public class VerPartidas extends JPanel {
 	private JLabel lblTitulo, lblImagen;
 	private JButton btnSeleccionar;
 	private JLabel lblTituloPartida, lblAnfitrion, lblJugadores, lblDuración, lblFecha, lblEstado, lblTituloComboBox;
-	private VerPartidaListener listener;
 	private JComboBox comboBoxJugador;
+	private Partida partida;
+	private Personaje personaje;
 
-	public VerPartidas( VerPartidaListener listener ) {
-		this.listener = listener;
-		setBackground( new Color( 242, 242, 242 ) );
+	public VerPartidas( VerPartidaListener listener, Usuario user ) {
+		this.partida = new Partida();
+		this.personaje = new Personaje( user );
+		
 		initialize_components();
 	}
 
 	private void initialize_components() {
 
+		setBackground( new Color( 242, 242, 242 ) );
+
 		// layout absoluto
-		setLayout(null);
+		setLayout( null );
 
 		// Tamaño y posicion de ventana
-		setSize(800, 600);
-
-		// Capturamos la colección de datos de MySQL
-		this.listener.get_data();
+		setSize( 800, 600 );
 		
 		/* COMPONENTES */
 
@@ -60,7 +63,7 @@ public class VerPartidas extends JPanel {
 		String[] columns = { "ID", "Nombre", "Ambientación", "Duración", "Fecha", "Anfitrion", "Nº jugadores", "Estado" };
 
 		// Capturamos los datos de MySQL mediante una consulta
-		ResultSet rows = this.listener.get_data();
+		ResultSet rows = partida.get_partidas();
 		ArrayList<Object[]> row_data_list = new ArrayList<>();
 
 		// Capturamos el número de filas del resultado de la consulta
@@ -214,7 +217,7 @@ public class VerPartidas extends JPanel {
 
 	 public void cargarDatosEnComboBox() {
 		comboBoxJugador.removeAllItems();
-		ResultSet rs = listener.get_data_personajes();
+		ResultSet rs = personaje.get_personajes();
 		try {
 			while (rs.next()) {
 				getComboBoxJugador().addItem(rs.getString("nombre"));
@@ -230,7 +233,6 @@ public class VerPartidas extends JPanel {
 	
 	public void setListener( VerPartidaListener listener ) {
 		btnSeleccionar.addActionListener( listener );
-		this.listener = listener;
 		cargarDatosEnComboBox();
 	}
 	

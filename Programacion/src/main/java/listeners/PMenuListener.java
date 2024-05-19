@@ -20,8 +20,8 @@ public class PMenuListener implements ActionListener {
 	public PMenuListener(
 			Menu ventana
 		, 	Home home
-		, 	EditarPersonaje ePersonaje
 		, 	CrearPersonaje cPersonaje
+		, 	EditarPersonaje ePersonaje
 		, 	VerPersonajes vPersonajes
 		,	CrearPartida cPartida
 		, 	EditarPartida ePartida
@@ -45,43 +45,53 @@ public class PMenuListener implements ActionListener {
 	/**
 	 * Metodo del listener que cambia de ventana según la opcion que clickemos en el menu
 	 */
-	public void actionPerformed( ActionEvent ev ) {
-		if ( ev.getSource() instanceof JMenuItem ) {
+	public void actionPerformed( ActionEvent ae ) {
+		if ( ae.getSource() instanceof JMenuItem ) {
 
 			// Dependiendo de la instrucción, mostramos una vista u otra
-			switch ( ev.getActionCommand() ) {
+			switch ( ae.getActionCommand() ) {
 				case "Nuevo personaje":
 					ventana.cargarPanel( cPersonaje );
 					break;
+
 				case "Modificar personaje":
 					ventana.cargarPanel( ePersonaje );
 					break;
+
 				case "Ver personajes":
 					vPersonajes.cargarDatosEnComboBox();
 					ventana.cargarPanel( vPersonajes );
 					break;
+
 				case "Crear partida":
 					ventana.cargarPanel( cPartida );
 					break;
+
 				case "Editar partidas":
 					ventana.cargarPanel( ePartida );
 					break;
+
 				case "Ver partidas":
 					ventana.cargarPanel( vPartidas );
 					break;
+
 				case "Ver partidas Master":
 					ventana.cargarPanel( vPartidasMaster );
 					break;
+
 				case "Login":
 					ventana.dispose();
 					ventana.cargarPanel( home );
 					login.make_visible();
 					break;
+
 				case "Salir":
 					ventana.mostrarMensajeConfirm();
 					break;
+
 				default:
 					break;
+
 			}
 		}
 	}
