@@ -5,46 +5,55 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+import javax.swing.JButton;
+
 import model.Model;
 import model.Usuario;
 import views.*;
 
 public class CrearPartidaListener extends Listener implements ActionListener {
-	
+
 	private CrearPartida cp;
 	private Usuario user;
-	
-	public CrearPartidaListener( Menu menu, Home home, CrearPartida cp, Usuario user ) {
-		super( menu, home );
+
+	public CrearPartidaListener(Menu menu, Home home, CrearPartida cp, Usuario user) {
+		super(menu, home);
 		this.cp = cp;
 		this.user = user;
 	}
 
 	@Override
-	public void actionPerformed( ActionEvent ae ) {
-		if (  ae.getActionCommand().equals( "CREAR" ) ) {
+	public void actionPerformed(ActionEvent ae) {
+		// Capturamos el nombre del componente
+		String nombreComponente = ((JButton) ae.getSource()).getName();
+		if (nombreComponente.equals("CREAR")) {
 			crearPartidaBBDD();
-			this.menu.cargarPanel( home );
+			this.menu.cargarPanel(home);
+		} else if (nombreComponente.equals("cargarImagen")) {
+			menu.mostrarMensajeConstruccion();
 		}
 	}
-	
+
+	/**
+	 * Metodo que hace el insert a la base de datos de partida
+	 */
 	public void crearPartidaBBDD() {
-		String sql = "INSERT INTO partida (nombre, duracion, dificultad, fecha, numero_jugadores, ambientacion)"+
-					" VALUES (?, ?, ?, ?, ?, ?)";
+		String sql = "INSERT INTO partida (nombre, duracion, dificultad, fecha, numero_jugadores, ambientacion)"
+				+ " VALUES (?, ?, ?, ?, ?, ?)";
 
 		Model mysql = new Model();
 		Connection conn = mysql.get_connection();
 		PreparedStatement ps = null;
-		
+
 		try {
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, cp.getTxtNombrePartida().getText());
 			ps.setInt(2, Integer.parseInt(cp.getTxtDuracion().getText()));
-			ps.setInt(3, Integer.parseInt( cp.getTxtDificultad().getText()));
+			ps.setInt(3, Integer.parseInt(cp.getTxtDificultad().getText()));
 			ps.setString(4, cp.getTxtFecha().getText());
 			ps.setInt(5, Integer.parseInt(cp.getTxtJugadores().getText()));
 			ps.setString(6, cp.getTxtAnfitrion().getText());
-			
+
 			ps.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -60,8 +69,7 @@ public class CrearPartidaListener extends Listener implements ActionListener {
 				// TODO Auto-generated catch block
 			}
 		}
-		
-		
+
 	}
 
 }

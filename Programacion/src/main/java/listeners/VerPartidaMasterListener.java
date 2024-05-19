@@ -129,10 +129,8 @@ public class VerPartidaMasterListener extends Listener implements ActionListener
 			sqle.printStackTrace();
 		}
 
-		// Cargamos el menú
+		// Cargamos el menÃº
 		menu.cargarPanel( ePartida );
 	}
 
 }
-
-

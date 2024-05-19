@@ -451,4 +451,25 @@ public class EditarPartida extends JPanel {
 	public JTextField getTxtDificultad() {
 		return txtDificultad;
 	}
+
+	public JLabel getLblDificultad() {
+		return lblDificultad;
+	}
+
+	public void setLblDificultad(JLabel lblDificultad) {
+		this.lblDificultad = lblDificultad;
+	}
+
+	public void setTxtDificultad(JTextField txtDificultad) {
+		this.txtDificultad = txtDificultad;
+	}
+
+	public JLabel getLblIconDificultad() {
+		return lblIconDificultad;
+	}
+
+	public void setLblIconDificultad(JLabel lblIconDificultad) {
+		this.lblIconDificultad = lblIconDificultad;
+	}
+	
 }

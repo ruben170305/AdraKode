@@ -142,6 +142,7 @@ public class Personaje {
             + "j.id_partida =" + partida_id;
 
             rs = mysql.Model_query( sql );
+            System.out.println();
 
 		} catch ( SQLException sqle ) {
 			sqle.printStackTrace();

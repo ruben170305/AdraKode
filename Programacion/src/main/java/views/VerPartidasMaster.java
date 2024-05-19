@@ -209,7 +209,10 @@ public class VerPartidasMaster extends JPanel {
 		} );
 
 	}
-	
+	/**
+	 * Metodo que asigna el listener
+	 * @param listener Parametro que recibe el listener
+	 */
 	public void setListener( VerPartidaMasterListener listener ) {
 		btnEditar.addActionListener( listener );
 		btnBorrar.addActionListener( listener );
