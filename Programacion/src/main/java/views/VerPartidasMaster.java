@@ -184,19 +184,6 @@ public class VerPartidasMaster extends JPanel {
 		btnBorrar.setBounds(404, 482, 83, 36);
 		add(btnBorrar);
 
-		btnSeleccionar = new JButton("JUGAR");
-		btnSeleccionar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnSeleccionar.setFont(new Font("Oxygen", Font.BOLD, 17));
-		btnSeleccionar.setForeground(new Color(242, 242, 242));
-		btnSeleccionar.setBackground(new Color(29, 161, 242));
-		btnSeleccionar.setOpaque(true);
-		btnSeleccionar.setBorderPainted(false);
-		btnSeleccionar.setBounds(315, 523, 172, 41);
-		add(btnSeleccionar);
-
 		// Añadimos un listener a cada fila de la tabla de partidas
 		table.getSelectionModel().addListSelectionListener( new ListSelectionListener() {
 			
