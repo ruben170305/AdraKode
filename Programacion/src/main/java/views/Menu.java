@@ -91,12 +91,14 @@ public class Menu extends JFrame {
 			mntmNuevo = new JMenuItem("Nuevo personaje");
 			mnPersonajes.add(mntmNuevo);
 			
-			mntmVer = new JMenuItem("Ver personajes");
-			mnPersonajes.add(mntmVer);
+			
 		}
 		
-		mntmModificarP = new JMenuItem("Modificar personaje");
-		mnPersonajes.add(mntmModificarP);
+		mntmVer = new JMenuItem("Ver personajes");
+		mnPersonajes.add(mntmVer);
+		
+//		mntmModificarP = new JMenuItem("Modificar personaje");
+//		mnPersonajes.add(mntmModificarP);
 		
 		//Creamos y asignamos el boton Login al menu principal
 		mntmTexto = new JMenuItem("Login");
@@ -115,12 +117,12 @@ public class Menu extends JFrame {
 			mntmCrearPartidas.addActionListener(listener);
 			mntmEditarPartidas.addActionListener(listener);
 		} else {
-			mntmVer.addActionListener(listener);
+			
 			mntmNuevo.addActionListener(listener);
 			mntmVerPartidas.addActionListener(listener);
 		}
-
-		mntmModificarP.addActionListener(listener);
+		mntmVer.addActionListener(listener);
+//		mntmModificarP.addActionListener(listener);
 		mntmTexto.addActionListener(listener);
 		//mntmSalir.addActionListener(listener);
 	}

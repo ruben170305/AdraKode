@@ -71,7 +71,7 @@ public class MenuMain {
      */
     public static Menu boot( boolean esMaster ) {
         // Creamos la ventana principal y el Home
-        menu = new Menu( esMaster ? "Adrakode Master" : "Adrakode", esMaster );
+        menu = new Menu( esMaster ? "AdraKode Master" : "AdraKode", esMaster );
         home = new Home();
         list = new Listener( menu, home );
         personaje = new Personaje( user );
