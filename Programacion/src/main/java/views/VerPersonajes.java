@@ -307,7 +307,6 @@ public class VerPersonajes extends JPanel {
 		idLbl.setForeground(new Color(29, 29, 27));
 		idLbl.setFont(new Font("Dialog", Font.BOLD, 16));
 		idLbl.setBounds(359, 174, 78, 14);
-		add(idLbl);
 
 	}
 
@@ -374,5 +373,238 @@ public class VerPersonajes extends JPanel {
 	public void setIdLbl(JLabel idLbl) {
 		this.idLbl = idLbl;
 	}
+
+	public JLabel getLblTitulo() {
+		return lblTitulo;
+	}
+
+	public void setLblTitulo(JLabel lblTitulo) {
+		this.lblTitulo = lblTitulo;
+	}
+
+	public JLabel getLblExp() {
+		return lblExp;
+	}
+
+	public void setLblExp(JLabel lblExp) {
+		this.lblExp = lblExp;
+	}
+
+	public JLabel getLblSeleccionarPersonaje() {
+		return lblSeleccionarPersonaje;
+	}
+
+	public void setLblSeleccionarPersonaje(JLabel lblSeleccionarPersonaje) {
+		this.lblSeleccionarPersonaje = lblSeleccionarPersonaje;
+	}
+
+	public JLabel getLblIconoExp() {
+		return lblIconoExp;
+	}
+
+	public void setLblIconoExp(JLabel lblIconoExp) {
+		this.lblIconoExp = lblIconoExp;
+	}
+
+	public JLabel getLblIconoFuerza() {
+		return lblIconoFuerza;
+	}
+
+	public void setLblIconoFuerza(JLabel lblIconoFuerza) {
+		this.lblIconoFuerza = lblIconoFuerza;
+	}
+
+	public JLabel getLblIconoDestreza() {
+		return lblIconoDestreza;
+	}
+
+	public void setLblIconoDestreza(JLabel lblIconoDestreza) {
+		this.lblIconoDestreza = lblIconoDestreza;
+	}
+
+	public JLabel getLblIconoCarisma() {
+		return lblIconoCarisma;
+	}
+
+	public void setLblIconoCarisma(JLabel lblIconoCarisma) {
+		this.lblIconoCarisma = lblIconoCarisma;
+	}
+
+	public JLabel getLblFuerza() {
+		return lblFuerza;
+	}
+
+	public void setLblFuerza(JLabel lblFuerza) {
+		this.lblFuerza = lblFuerza;
+	}
+
+	public JLabel getLblDestreza() {
+		return lblDestreza;
+	}
+
+	public void setLblDestreza(JLabel lblDestreza) {
+		this.lblDestreza = lblDestreza;
+	}
+
+	public JLabel getLblConstitucion() {
+		return lblConstitucion;
+	}
+
+	public void setLblConstitucion(JLabel lblConstitucion) {
+		this.lblConstitucion = lblConstitucion;
+	}
+
+	public JLabel getLblInteligencia() {
+		return lblInteligencia;
+	}
+
+	public void setLblInteligencia(JLabel lblInteligencia) {
+		this.lblInteligencia = lblInteligencia;
+	}
+
+	public JLabel getLblSabiduria() {
+		return lblSabiduria;
+	}
+
+	public void setLblSabiduria(JLabel lblSabiduria) {
+		this.lblSabiduria = lblSabiduria;
+	}
+
+	public JLabel getLblCarisma() {
+		return lblCarisma;
+	}
+
+	public void setLblCarisma(JLabel lblCarisma) {
+		this.lblCarisma = lblCarisma;
+	}
+
+	public JLabel getLblIconoConst() {
+		return lblIconoConst;
+	}
+
+	public void setLblIconoConst(JLabel lblIconoConst) {
+		this.lblIconoConst = lblIconoConst;
+	}
+
+	public JLabel getLblIconoInteligencia() {
+		return lblIconoInteligencia;
+	}
+
+	public void setLblIconoInteligencia(JLabel lblIconoInteligencia) {
+		this.lblIconoInteligencia = lblIconoInteligencia;
+	}
+
+	public JLabel getLblIconoSabiduria() {
+		return lblIconoSabiduria;
+	}
+
+	public void setLblIconoSabiduria(JLabel lblIconoSabiduria) {
+		this.lblIconoSabiduria = lblIconoSabiduria;
+	}
+
+	public JLabel getLblIconoPersn() {
+		return lblIconoPersn;
+	}
+
+	public void setLblIconoPersn(JLabel lblIconoPersn) {
+		this.lblIconoPersn = lblIconoPersn;
+	}
+
+	public JButton getBtnSeleccionar() {
+		return btnSeleccionar;
+	}
+
+	public void setBtnSeleccionar(JButton btnSeleccionar) {
+		this.btnSeleccionar = btnSeleccionar;
+	}
+
+	public JButton getBtnEditar() {
+		return btnEditar;
+	}
+
+	public void setBtnEditar(JButton btnEditar) {
+		this.btnEditar = btnEditar;
+	}
+
+	public JButton getBtnBorrar() {
+		return btnBorrar;
+	}
+
+	public void setBtnBorrar(JButton btnBorrar) {
+		this.btnBorrar = btnBorrar;
+	}
+
+	public JProgressBar getPbExp() {
+		return pbExp;
+	}
+
+	public void setPbExp(JProgressBar pbExp) {
+		this.pbExp = pbExp;
+	}
+
+	public JProgressBar getPbFuerza() {
+		return pbFuerza;
+	}
+
+	public void setPbFuerza(JProgressBar pbFuerza) {
+		this.pbFuerza = pbFuerza;
+	}
+
+	public JProgressBar getPbDestreza() {
+		return pbDestreza;
+	}
+
+	public void setPbDestreza(JProgressBar pbDestreza) {
+		this.pbDestreza = pbDestreza;
+	}
+
+	public JProgressBar getPbConstitucion() {
+		return pbConstitucion;
+	}
+
+	public void setPbConstitucion(JProgressBar pbConstitucion) {
+		this.pbConstitucion = pbConstitucion;
+	}
+
+	public JProgressBar getPbInteligencia() {
+		return pbInteligencia;
+	}
+
+	public void setPbInteligencia(JProgressBar pbInteligencia) {
+		this.pbInteligencia = pbInteligencia;
+	}
+
+	public JProgressBar getPbSabiduria() {
+		return pbSabiduria;
+	}
+
+	public void setPbSabiduria(JProgressBar pbSabiduria) {
+		this.pbSabiduria = pbSabiduria;
+	}
+
+	public JProgressBar getPbCarisma() {
+		return pbCarisma;
+	}
+
+	public void setPbCarisma(JProgressBar pbCarisma) {
+		this.pbCarisma = pbCarisma;
+	}
+
+	public Personaje getPersonaje() {
+		return personaje;
+	}
+
+	public void setPersonaje(Personaje personaje) {
+		this.personaje = personaje;
+	}
+
+	public void setLblRaza(JLabel lblRaza) {
+		this.lblRaza = lblRaza;
+	}
+
+	public void setLblClase(JLabel lblClase) {
+		this.lblClase = lblClase;
+	}
+	
 
 }

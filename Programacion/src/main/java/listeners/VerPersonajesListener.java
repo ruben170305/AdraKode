@@ -93,6 +93,13 @@ public class VerPersonajesListener extends Listener implements ActionListener {
 							vPersonajes.getLblClase().setText( rs.getString("clase" ) );
 							vPersonajes.getLblRaza().setText( rs.getString("raza" ) );
 							vPersonajes.getIdLbl().setText( rs.getString("cod" ) );
+							vPersonajes.getPbExp().setValue(rs.getInt("expe"));
+							vPersonajes.getPbFuerza().setValue(rs.getInt("fuerza"));
+							vPersonajes.getPbDestreza().setValue(rs.getInt("destreza"));
+							vPersonajes.getPbConstitucion().setValue(rs.getInt("constitucion"));
+							vPersonajes.getPbInteligencia().setValue(rs.getInt("inteligencia"));
+							vPersonajes.getPbSabiduria().setValue(rs.getInt("sabiduria"));
+							vPersonajes.getPbCarisma().setValue(rs.getInt("carisma"));;
 
 							// Sale del bucle una vez que se encuentra el ítem
 							break;

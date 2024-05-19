@@ -280,7 +280,6 @@ public class EditarPersonaje extends JPanel {
         lblId.setForeground(new Color(29, 29, 27));
         lblId.setFont(new Font("Dialog", Font.BOLD, 16));
         lblId.setBounds(345, 174, 78, 14);
-        add(lblId);
     }
 
     /**

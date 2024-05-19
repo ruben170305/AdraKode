@@ -405,4 +405,294 @@ public class PartidaIniciada extends JPanel {
 		//btnSeleccionar.addActionListener( listener );
 	}
 
+	public JLabel getLblImagen() {
+		return lblImagen;
+	}
+
+	public void setLblImagen(JLabel lblImagen) {
+		this.lblImagen = lblImagen;
+	}
+
+	public JLabel getLblTituloPartida() {
+		return lblTituloPartida;
+	}
+
+	public void setLblTituloPartida(JLabel lblTituloPartida) {
+		this.lblTituloPartida = lblTituloPartida;
+	}
+
+	public JLabel getLblAnfitrion() {
+		return lblAnfitrion;
+	}
+
+	public void setLblAnfitrion(JLabel lblAnfitrion) {
+		this.lblAnfitrion = lblAnfitrion;
+	}
+
+	public JLabel getLblJugadores() {
+		return lblJugadores;
+	}
+
+	public void setLblJugadores(JLabel lblJugadores) {
+		this.lblJugadores = lblJugadores;
+	}
+
+	public JLabel getLblDuración() {
+		return lblDuración;
+	}
+
+	public void setLblDuración(JLabel lblDuración) {
+		this.lblDuración = lblDuración;
+	}
+
+	public JLabel getLblFecha() {
+		return lblFecha;
+	}
+
+	public void setLblFecha(JLabel lblFecha) {
+		this.lblFecha = lblFecha;
+	}
+
+	public JLabel getLblEstado() {
+		return lblEstado;
+	}
+
+	public void setLblEstado(JLabel lblEstado) {
+		this.lblEstado = lblEstado;
+	}
+
+	public JLabel getLblNivelPartida() {
+		return lblNivelPartida;
+	}
+
+	public void setLblNivelPartida(JLabel lblNivelPartida) {
+		this.lblNivelPartida = lblNivelPartida;
+	}
+
+	public JLabel getLblNivelPartidaTitulo() {
+		return lblNivelPartidaTitulo;
+	}
+
+	public void setLblNivelPartidaTitulo(JLabel lblNivelPartidaTitulo) {
+		this.lblNivelPartidaTitulo = lblNivelPartidaTitulo;
+	}
+
+	public JLabel getLblRaza() {
+		return lblRaza;
+	}
+
+	public void setLblRaza(JLabel lblRaza) {
+		this.lblRaza = lblRaza;
+	}
+
+	public JLabel getLblExp() {
+		return lblExp;
+	}
+
+	public void setLblExp(JLabel lblExp) {
+		this.lblExp = lblExp;
+	}
+
+	public JLabel getLblIconoExp() {
+		return lblIconoExp;
+	}
+
+	public void setLblIconoExp(JLabel lblIconoExp) {
+		this.lblIconoExp = lblIconoExp;
+	}
+
+	public JLabel getLblIconoFuerza() {
+		return lblIconoFuerza;
+	}
+
+	public void setLblIconoFuerza(JLabel lblIconoFuerza) {
+		this.lblIconoFuerza = lblIconoFuerza;
+	}
+
+	public JLabel getLblIconoDestreza() {
+		return lblIconoDestreza;
+	}
+
+	public void setLblIconoDestreza(JLabel lblIconoDestreza) {
+		this.lblIconoDestreza = lblIconoDestreza;
+	}
+
+	public JLabel getLblIconoCarisma() {
+		return lblIconoCarisma;
+	}
+
+	public void setLblIconoCarisma(JLabel lblIconoCarisma) {
+		this.lblIconoCarisma = lblIconoCarisma;
+	}
+
+	public JLabel getLblClase() {
+		return lblClase;
+	}
+
+	public void setLblClase(JLabel lblClase) {
+		this.lblClase = lblClase;
+	}
+
+	public JLabel getLblNombrePersonaje() {
+		return lblNombrePersonaje;
+	}
+
+	public void setLblNombrePersonaje(JLabel lblNombrePersonaje) {
+		this.lblNombrePersonaje = lblNombrePersonaje;
+	}
+
+	public JLabel getLblFuerza() {
+		return lblFuerza;
+	}
+
+	public void setLblFuerza(JLabel lblFuerza) {
+		this.lblFuerza = lblFuerza;
+	}
+
+	public JLabel getLblDestreza() {
+		return lblDestreza;
+	}
+
+	public void setLblDestreza(JLabel lblDestreza) {
+		this.lblDestreza = lblDestreza;
+	}
+
+	public JLabel getLblConstitucion() {
+		return lblConstitucion;
+	}
+
+	public void setLblConstitucion(JLabel lblConstitucion) {
+		this.lblConstitucion = lblConstitucion;
+	}
+
+	public JLabel getLblInteligencia() {
+		return lblInteligencia;
+	}
+
+	public void setLblInteligencia(JLabel lblInteligencia) {
+		this.lblInteligencia = lblInteligencia;
+	}
+
+	public JLabel getLblSabiduria() {
+		return lblSabiduria;
+	}
+
+	public void setLblSabiduria(JLabel lblSabiduria) {
+		this.lblSabiduria = lblSabiduria;
+	}
+
+	public JLabel getLblCarisma() {
+		return lblCarisma;
+	}
+
+	public void setLblCarisma(JLabel lblCarisma) {
+		this.lblCarisma = lblCarisma;
+	}
+
+	public JLabel getLblIconoConst() {
+		return lblIconoConst;
+	}
+
+	public void setLblIconoConst(JLabel lblIconoConst) {
+		this.lblIconoConst = lblIconoConst;
+	}
+
+	public JLabel getLblIconoInteligencia() {
+		return lblIconoInteligencia;
+	}
+
+	public void setLblIconoInteligencia(JLabel lblIconoInteligencia) {
+		this.lblIconoInteligencia = lblIconoInteligencia;
+	}
+
+	public JLabel getLblIconoSabiduria() {
+		return lblIconoSabiduria;
+	}
+
+	public void setLblIconoSabiduria(JLabel lblIconoSabiduria) {
+		this.lblIconoSabiduria = lblIconoSabiduria;
+	}
+
+	public JLabel getLblIconoPersn() {
+		return lblIconoPersn;
+	}
+
+	public void setLblIconoPersn(JLabel lblIconoPersn) {
+		this.lblIconoPersn = lblIconoPersn;
+	}
+
+	public JProgressBar getPbExp() {
+		return pbExp;
+	}
+
+	public void setPbExp(JProgressBar pbExp) {
+		this.pbExp = pbExp;
+	}
+
+	public JProgressBar getPbFuerza() {
+		return pbFuerza;
+	}
+
+	public void setPbFuerza(JProgressBar pbFuerza) {
+		this.pbFuerza = pbFuerza;
+	}
+
+	public JProgressBar getPbDestreza() {
+		return pbDestreza;
+	}
+
+	public void setPbDestreza(JProgressBar pbDestreza) {
+		this.pbDestreza = pbDestreza;
+	}
+
+	public JProgressBar getPbConstitucion() {
+		return pbConstitucion;
+	}
+
+	public void setPbConstitucion(JProgressBar pbConstitucion) {
+		this.pbConstitucion = pbConstitucion;
+	}
+
+	public JProgressBar getPbInteligencia() {
+		return pbInteligencia;
+	}
+
+	public void setPbInteligencia(JProgressBar pbInteligencia) {
+		this.pbInteligencia = pbInteligencia;
+	}
+
+	public JProgressBar getPbSabiduria() {
+		return pbSabiduria;
+	}
+
+	public void setPbSabiduria(JProgressBar pbSabiduria) {
+		this.pbSabiduria = pbSabiduria;
+	}
+
+	public JProgressBar getPbCarisma() {
+		return pbCarisma;
+	}
+
+	public void setPbCarisma(JProgressBar pbCarisma) {
+		this.pbCarisma = pbCarisma;
+	}
+
+	public Partida getPartida() {
+		return partida;
+	}
+
+	public void setPartida(Partida partida) {
+		this.partida = partida;
+	}
+
+	public Personaje getPersonaje() {
+		return personaje;
+	}
+
+	public void setPersonaje(Personaje personaje) {
+		this.personaje = personaje;
+	}
+	
+	
+
 }
