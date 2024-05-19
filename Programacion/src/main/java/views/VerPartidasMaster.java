@@ -210,7 +210,7 @@ public class VerPartidasMaster extends JPanel {
 	
 	public void setListener( VerPartidaMasterListener listener ) {
 		btnEditar.addActionListener( listener );
-		btnSeleccionar.addActionListener( listener );
+		//btnSeleccionar.addActionListener( listener );
 		btnBorrar.addActionListener( listener );
 	}
 	
