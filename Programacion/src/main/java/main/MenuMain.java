@@ -123,7 +123,7 @@ public class MenuMain {
 
         // Dependiendo de que el usuario inicie sesión como Game Master, mostramos un menú diferente
         if ( esMaster ) {
-            CrearPartidaListener cPartidaListener = new CrearPartidaListener( menu, home );
+            CrearPartidaListener cPartidaListener = new CrearPartidaListener( menu, home, cPartida, user );
             EditarPartidaListener ePartidaListener = new EditarPartidaListener( menu, home );
 
             // Vinculación de listeners
