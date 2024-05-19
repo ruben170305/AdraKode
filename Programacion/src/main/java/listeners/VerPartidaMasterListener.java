@@ -19,6 +19,7 @@ public class VerPartidaMasterListener extends Listener implements ActionListener
 	private VerPartidasMaster vPartidaMaster;
 	private Personaje personaje;
 	int selected_row = 0;
+	private Partida partida;
 	
 	public VerPartidaMasterListener( VerPartidasMaster vPartidaMaster, EditarPartida ePartida, Menu menu, Home home, Usuario user ) {
 		super( menu, home );
@@ -26,6 +27,7 @@ public class VerPartidaMasterListener extends Listener implements ActionListener
 		this.ePartida = ePartida;
 
 		this.personaje = new Personaje( user );
+		this.partida = new Partida();
 	}
 
 	@Override
@@ -65,16 +67,13 @@ public class VerPartidaMasterListener extends Listener implements ActionListener
 			ps.executeUpdate();
 
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			try {
 				ps.close();
 				conn.close();
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-			} catch (Exception e2) {
-				// TODO: handle exception
+				e.printStackTrace();
 			}
 			
 		}
@@ -86,28 +85,38 @@ public class VerPartidaMasterListener extends Listener implements ActionListener
 		DefaultTableModel model = ( DefaultTableModel ) ePartida.getTable().getModel();
 		model.setRowCount( 0 ); // Limpiar la tabla existente
 
-		// Datos del personaje seleccionado
-		ResultSet rs_personaje = personaje.get_personajes_partida( partida_id );
+		ResultSet rs = partida.get_partida( partida_id );
 
 		try {
-			while( rs_personaje.next() ) {
+			while( rs.next() ) {
 				ePartida.getTxtAnfitrion().setText(
-					rs_personaje.getString( "nombre_anfitrion" ) + " " +
-					rs_personaje.getString( "apellidos_anfitrion" )
+					rs.getString( "nombre_anfitrion" ) + " " +
+					rs.getString( "apellidos_anfitrion" )
 				);
 
-				ePartida.getTxtDuracion().setText( String.valueOf( rs_personaje.getInt( "duracion" ) ) );
+				ePartida.getTxtDuracion().setText( String.valueOf( rs.getInt( "duracion" ) ) );
 
 				String en_curso_text = "";
-				if( Integer.parseInt( rs_personaje.getString( "en_curso" ) ) == 1 )
+				if( Integer.parseInt( rs.getString( "en_curso" ) ) == 1 )
 					en_curso_text = "En curso";
 				else
 					en_curso_text = "Finalizada";
 				ePartida.getTxtEstado().setText( en_curso_text );
 
-				ePartida.getTxtFecha().setText( rs_personaje.getString( "fecha" ) );
-				ePartida.getTxtJugadores().setText( String.valueOf( rs_personaje.getInt( "numero_jugadores" ) ) );
-				ePartida.getTxtNombrePartida().setText( rs_personaje.getString( "nombre" ) );
+				ePartida.getTxtFecha().setText( rs.getString( "fecha" ) );
+				ePartida.getTxtJugadores().setText( String.valueOf( rs.getInt( "numero_jugadores" ) ) );
+				ePartida.getTxtNombrePartida().setText( rs.getString( "nombre" ) );
+				ePartida.getTxtDificultad().setText( String.valueOf( rs.getInt( "dificultad" ) ) );
+			}
+		} catch( SQLException sqle ) {
+			sqle.printStackTrace();
+		}
+
+		// Datos del personaje seleccionado
+		ResultSet rs_personaje = personaje.get_personajes_partida( partida_id );
+
+		try {
+			while( rs_personaje.next() ) {
 
 				// Definimos los campos de la tabla
 				String jugador = rs_personaje.getString("personaje");

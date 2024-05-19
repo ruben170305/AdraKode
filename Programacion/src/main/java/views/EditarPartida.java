@@ -125,8 +125,7 @@ public class EditarPartida extends JPanel {
 		lblIconEstado.setForeground(new Color(29, 29, 27));
 		lblIconEstado.setFont(new Font("Oxygen", Font.BOLD, 14));
 		lblIconEstado.setBounds(409, 461, 32, 26);
-		add(lblIconEstado);
-        
+		add(lblIconEstado);        
 		
 		// Etiquetas 
         lblAnfitrion = new JLabel("Ambientación");
@@ -231,7 +230,7 @@ public class EditarPartida extends JPanel {
         
   		// Tabla
 		// Designamos el nombre de las columnas de la tabla
-		String[] columns = { "Jugador", "Experiencia", "Raza", "Clase"};
+		String[] columns = { "Jugador", "Experiencia", "Raza", "Clase" };
 
 		// Insertamos los datos de la tabla
 		Object[][] data = { 
@@ -447,5 +446,9 @@ public class EditarPartida extends JPanel {
 	
 	public void setTable(JTable table) {
 		this.table = table;
+	}
+
+	public JTextField getTxtDificultad() {
+		return txtDificultad;
 	}
 }

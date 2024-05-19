@@ -99,13 +99,12 @@ public class PartidaIniciada extends JPanel {
 		add(lblImagen);
 		
 		// Etiquetas
-		
 		lblNivelPartida = new JLabel( data[0][1].toString() );
 		lblNivelPartida.setHorizontalAlignment(SwingConstants.LEFT);
 		lblNivelPartida.setIcon(null);
 		lblNivelPartida.setForeground(new Color(29, 29, 27));
 		lblNivelPartida.setFont(new Font("Oxygen", Font.BOLD, 18));
-		lblNivelPartida.setBounds(399, 112, 144, 26);
+		lblNivelPartida.setBounds(316, 58, 200, 26);
 		add(lblNivelPartida);
 		
 		lblAnfitrion = new JLabel( data[0][5].toString() );
@@ -367,7 +366,7 @@ public class PartidaIniciada extends JPanel {
 		add(lblIconoPersn);
 
 		// Etiqueta raza
-		lblRaza = new JLabel("Raza"); // *Añadir listeners
+		lblRaza = new JLabel(data_personajes[0][3].toString()); // *Añadir listeners
 		lblRaza.setForeground(new Color(29, 29, 27));
 		lblRaza.setHorizontalAlignment(SwingConstants.CENTER);
 		lblRaza.setFont(new Font("Open Sans", Font.BOLD, 16));
@@ -375,7 +374,7 @@ public class PartidaIniciada extends JPanel {
 		add(lblRaza);
 
 		// Etiqueta clase
-		lblClase = new JLabel("Clase"); // *Añadir listeners
+		lblClase = new JLabel(data_personajes[0][4].toString()); // *Añadir listeners
 		lblClase.setForeground(new Color(29, 29, 27));
 		lblClase.setHorizontalAlignment(SwingConstants.CENTER);
 		lblClase.setFont(new Font("Open Sans", Font.BOLD, 16));
