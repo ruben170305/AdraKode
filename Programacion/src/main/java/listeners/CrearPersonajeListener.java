@@ -28,6 +28,7 @@ public class CrearPersonajeListener extends Listener implements ActionListener {
 		// Dependiendo del action event, ejecutamos un panel u otro
 		if (buttonName.equals("CREAR")) {
 			insert_data();
+			menu.cargarPanel(home);
 		} else if (buttonName.equals("subirImagen")) {
 			menu.mostrarMensajeConstruccion();
 		}
@@ -76,12 +77,25 @@ public class CrearPersonajeListener extends Listener implements ActionListener {
 		        cod_miembro == null) {
 		        
 		        throw new IllegalArgumentException("Todos los campos obligatorios deben ser completados.");
+		    } else {
+		    	pstmt.setString(1, nombre);
+		    	pstmt.setString(2, personaje);
+		    	pstmt.setString(3, raza);
+		    	pstmt.setString(4, clase);
+		    	pstmt.setInt(5, expe);
+		    	pstmt.setInt(6, fuerza);
+		    	pstmt.setInt(7, destreza);
+		    	pstmt.setInt(8, constitucion);
+		    	pstmt.setInt(9, inteligencia);
+		    	pstmt.setInt(10, sabiduria);
+		    	pstmt.setInt(11, carisma);
+		    	pstmt.setInt(12, cod_miembro);
 		    }
 
 			// Ejecuta la inserción
 			pstmt.executeUpdate();
 		} catch (SQLException sqle) {
-			
+			sqle.printStackTrace();
 		} catch (IllegalArgumentException e) {
 			// TODO: handle exception
 			menu.mostrarMensajeRellenaCampos();
