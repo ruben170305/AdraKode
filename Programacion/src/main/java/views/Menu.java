@@ -208,6 +208,14 @@ public class Menu extends JFrame {
 		
 	}
 	
+	public void mostrarMensajeConstruccion() {
+		int opcion3 = JOptionPane.showConfirmDialog(this, 
+				"Esta función estará disponible próximamente. \nDisculpe las molestias", 
+				"En construcción",
+				JOptionPane.CLOSED_OPTION,
+				JOptionPane.WARNING_MESSAGE);
+	}
+	
 	// Getters y Setters
 	public boolean isGameMaster() {
 		return gameMaster;

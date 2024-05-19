@@ -25,23 +25,15 @@ public class VerPersonajesListener extends Listener implements ActionListener {
 	private boolean esMaster;
 
 	// Constructor del Listener
-	public VerPersonajesListener( Usuario user ) {
+	public VerPersonajesListener(Usuario user) {
 		super();
 		this.user = user;
 	}
 
 	// Constructor del Listener
-	public VerPersonajesListener(
-			EditarPersonaje ep
-		, 	Menu menu
-		, 	Home home
-		, 	Usuario user
-		, 	CrearPersonaje cPersonaje
-		, 	VerPersonajes vPersonajes
-		, 	Personaje personaje
-		, 	boolean esMaster
-	) {
-		super( menu, home );
+	public VerPersonajesListener(EditarPersonaje ep, Menu menu, Home home, Usuario user, CrearPersonaje cPersonaje,
+			VerPersonajes vPersonajes, Personaje personaje, boolean esMaster) {
+		super(menu, home);
 		this.cPersonaje = cPersonaje;
 		this.ep = ep;
 		this.user = user;
@@ -55,60 +47,61 @@ public class VerPersonajesListener extends Listener implements ActionListener {
 	 * del boton
 	 */
 	@Override
-	public void actionPerformed( ActionEvent ae ) {
+	public void actionPerformed(ActionEvent ae) {
 		Object source = ae.getSource();
 
-		if ( source instanceof JButton ) {
-			JButton sourceButton = ( JButton ) source;
+		if (source instanceof JButton) {
+			JButton sourceButton = (JButton) source;
 			String buttonName = sourceButton.getName();
 
 			// Dependiendo del texto del botón realizamos una acción u otra
-			if ( ae.getActionCommand().equals( "SELECCIONAR" ) ) {
-				menu.cargarPanel( home );
+			if (ae.getActionCommand().equals("SELECCIONAR")) {
+				menu.cargarPanel(home);
 
-			} else if ( buttonName.equals( "EDITAR" ) ) {
-				editar_personaje( Integer.parseInt( vPersonajes.getIdLbl().getText() ) );
+			} else if (buttonName.equals("EDITAR")) {
+				editar_personaje(Integer.parseInt(vPersonajes.getIdLbl().getText()));
 
-			} else if ( buttonName.equals( "BORRAR" ) ) {
-				if ( menu.mostrarMensajeConfirmborrado() ) {
+			} else if (buttonName.equals("BORRAR")) {
+				if (menu.mostrarMensajeConfirmborrado()) {
 					delete_data();
 					menu.cargarPanel(home);
 				}
 			}
 
-		} else if ( source instanceof JComboBox ) {
+		} else if (source instanceof JComboBox) {
 
 			// Capturamos el ComboBox y el Item seleccionado
-			JComboBox<?> comboBox = ( JComboBox<?> ) source;
-			String selected_index = ( String ) comboBox.getSelectedItem();
+			JComboBox<?> comboBox = (JComboBox<?>) source;
+			String selected_index = (String) comboBox.getSelectedItem();
 
-			if( selected_index != null ) {
+			if (selected_index != null) {
 
 				// Capturamos los datos de la DB
 				ResultSet rs = personaje.get_personajes();
 
 				try {
-					while ( rs.next() ) {
+					while (rs.next()) {
 
-						String nombre = rs.getString( "nombre" );
-						if ( selected_index.equals( nombre ) ) {
+						String nombre = rs.getString("nombre");
+						if (selected_index.equals(nombre)) {
 
-							vPersonajes.getLblClase().setText( rs.getString("clase" ) );
-							vPersonajes.getLblRaza().setText( rs.getString("raza" ) );
-							vPersonajes.getIdLbl().setText( rs.getString("cod" ) );
+							vPersonajes.getLblClase().setText(rs.getString("clase"));
+							vPersonajes.getLblRaza().setText(rs.getString("raza"));
+							vPersonajes.getIdLbl().setText(rs.getString("cod"));
 							vPersonajes.getPbExp().setValue(rs.getInt("expe"));
 							vPersonajes.getPbFuerza().setValue(rs.getInt("fuerza"));
 							vPersonajes.getPbDestreza().setValue(rs.getInt("destreza"));
 							vPersonajes.getPbConstitucion().setValue(rs.getInt("constitucion"));
 							vPersonajes.getPbInteligencia().setValue(rs.getInt("inteligencia"));
 							vPersonajes.getPbSabiduria().setValue(rs.getInt("sabiduria"));
-							vPersonajes.getPbCarisma().setValue(rs.getInt("carisma"));;
+							vPersonajes.getPbCarisma().setValue(rs.getInt("carisma"));
+							;
 
 							// Sale del bucle una vez que se encuentra el ítem
 							break;
 						}
 					}
-				} catch ( Exception e ) {
+				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
@@ -116,16 +109,16 @@ public class VerPersonajesListener extends Listener implements ActionListener {
 		}
 	}
 
-	public void editar_personaje( int id ) {
+	public void editar_personaje(int id) {
 
 		// Capturamos los datos de la DB
-		ResultSet rs = personaje.get_personaje( id );
+		ResultSet rs = personaje.get_personaje(id);
 		try {
 			while (rs.next()) {
 				ep.getLblSeleccionarPersonaje().setText(rs.getString("nombre"));
 				ep.getTxtRaza().setText(rs.getString("raza"));
 				ep.getTxtClase().setText(rs.getString("clase"));
-				ep.getLblId().setText(id+"");
+				ep.getLblId().setText(id + "");
 				ep.getSpinnerExperiencia().setValue(rs.getInt("expe"));
 				ep.getSpinnerFuerza().setValue(rs.getInt("fuerza"));
 				ep.getSpinnerDestreza().setValue(rs.getInt("destreza"));
@@ -134,7 +127,7 @@ public class VerPersonajesListener extends Listener implements ActionListener {
 				ep.getSpinnerSabiduria().setValue(rs.getInt("sabiduria"));
 				ep.getSpinnerCarisma().setValue(rs.getInt("carisma"));
 			}
-		} catch ( Exception e ) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		if (esMaster) {
@@ -156,7 +149,7 @@ public class VerPersonajesListener extends Listener implements ActionListener {
 			ep.getSpinnerInteligencia().setEnabled(true);
 			ep.getSpinnerSabiduria().setEnabled(true);
 		}
-		menu.cargarPanel( ep );
+		menu.cargarPanel(ep);
 	}
 
 	public void update_data() {
