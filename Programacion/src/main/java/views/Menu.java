@@ -218,7 +218,7 @@ public class Menu extends JFrame {
 	
 	public void mostrarMensajeRellenaCampos() {
 		int opcion4 = JOptionPane.showConfirmDialog(this, 
-				"Tienes que rellenar los campos que estan en blanco.", 
+				"Tienes que rellenar los campos que están en blanco.", 
 				"Rellena todos los campos",
 				JOptionPane.CLOSED_OPTION,
 				JOptionPane.ERROR_MESSAGE);

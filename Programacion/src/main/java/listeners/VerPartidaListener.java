@@ -49,8 +49,6 @@ public class VerPartidaListener extends Listener implements ActionListener {
 
 	public void jugar_partida( int partida_id, int jugador_id ) {
 
-		System.out.println( "Partida_id => " + partida_id + " Jugador_id =>" + jugador_id );
-
 		// Datos de la partida seleccionada
 		ResultSet rs_partida = partida.get_partida( partida_id );
 

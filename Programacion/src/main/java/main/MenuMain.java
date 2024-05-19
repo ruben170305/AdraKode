@@ -86,7 +86,7 @@ public class MenuMain {
         pIniciada = new PartidaIniciada( user );
         
         vPartidasMaster = new VerPartidasMaster();
-        vPartidasMasterListener = new VerPartidaMasterListener( vPartidasMaster, ePartida, menu, home );
+        vPartidasMasterListener = new VerPartidaMasterListener( vPartidasMaster, ePartida, menu, home, user );
 
         vPartidasListener = new VerPartidaListener( menu, home );
         vPartidas = new VerPartidas( vPartidasListener, user );

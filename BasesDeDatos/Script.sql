@@ -28,15 +28,15 @@ CREATE TABLE personaje (
 	CONSTRAINT FOREIGN KEY (cod_miembro) REFERENCES miembro(cod)
 );
 CREATE TABLE partida (
-	partida_id INT AUTO_INCREMENT PRIMARY KEY,
-    num_sesion INT,
+    partida_id INT AUTO_INCREMENT PRIMARY KEY,
+    num_sesion INT DEFAULT 1,
     nombre VARCHAR(50),
-    duracion INT,
-	dificultad int(11),
-    fecha VARCHAR(50),
-    numero_jugadores int(11),
-    ambientacion VARCHAR(50),
-    en_curso boolean,
+    duracion INT DEFAULT 120,
+    dificultad INT DEFAULT 1,
+    fecha VARCHAR(50) DEFAULT 'Por definir',
+    numero_jugadores INT DEFAULT 1,
+    ambientacion VARCHAR(50) DEFAULT 'General',
+    en_curso BOOLEAN DEFAULT FALSE,
     anfitrion_id INT,
     CONSTRAINT FOREIGN KEY (anfitrion_id) REFERENCES miembro(cod)
 );

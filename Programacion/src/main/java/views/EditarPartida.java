@@ -14,6 +14,7 @@ public class EditarPartida extends JPanel {
 	private JButton btnGuardar, btnGuardarImagen;
 	private JTextField txtNombrePartida, txtAnfitrion, txtJugadores, txtDuracion, txtFecha, txtEstado;
 	private JLabel lblNewLabel, lblIconAnfitrion, lblIconJugadores, lblIconDuracion, lblIconFecha, lblIconEstado;
+	private JTable table;
 
 	public EditarPartida() {
 		initialize_components();
@@ -223,7 +224,7 @@ public class EditarPartida extends JPanel {
 
 		// Creamos una plantilla para la tabla
 		DefaultTableModel template = new DefaultTableModel(data, columns);
-		JTable table = new JTable(template);
+		table = new JTable(template);
 		table.setLocation(599, 0);
 		table.setForeground(new Color(29, 29, 27));
 		table.setBackground(new Color(242, 242, 242));
@@ -240,22 +241,188 @@ public class EditarPartida extends JPanel {
         btnGuardar.setBackground(new Color(29, 161, 242));
         btnGuardar.setOpaque(true);
         btnGuardar.setBorderPainted(false);
-        btnGuardar.setBounds(286, 510, 159, 45);
+        btnGuardar.setBounds(314, 510, 159, 45);
         add(btnGuardar);
-
-        btnGuardarImagen = new JButton("");
-        btnGuardarImagen.setIcon(new ImageIcon(EditarPersonaje.class.getResource("/img/camara_fotografica.png")));
-        btnGuardarImagen.setOpaque(true);
-        btnGuardarImagen.setForeground(new Color(242, 242, 242));
-        btnGuardarImagen.setFont(new Font("Oxygen", Font.BOLD, 17));
-        btnGuardarImagen.setBorderPainted(false);
-        btnGuardarImagen.setBackground(new Color(29, 29, 27));
-        btnGuardarImagen.setBounds(453, 510, 61, 45);
-        add(btnGuardarImagen);
 
 	}
 	
 	public void setListener( EditarPartidaListener listener ) {
 		btnGuardar.addActionListener( listener );
+	}
+
+	public JLabel getLblTitulo() {
+		return lblTitulo;
+	}
+	
+	public void setLblTitulo(JLabel lblTitulo) {
+		this.lblTitulo = lblTitulo;
+	}
+	
+	public JLabel getLblImagen() {
+		return lblImagen;
+	}
+	
+	public void setLblImagen(JLabel lblImagen) {
+		this.lblImagen = lblImagen;
+	}
+	
+	public JLabel getLblAnfitrion() {
+		return lblAnfitrion;
+	}
+	
+	public void setLblAnfitrion(JLabel lblAnfitrion) {
+		this.lblAnfitrion = lblAnfitrion;
+	}
+	
+	public JLabel getLblJugadores() {
+		return lblJugadores;
+	}
+	
+	public void setLblJugadores(JLabel lblJugadores) {
+		this.lblJugadores = lblJugadores;
+	}
+	
+	public JLabel getLblDuracion() {
+		return lblDuracion;
+	}
+	
+	public void setLblDuracion(JLabel lblDuracion) {
+		this.lblDuracion = lblDuracion;
+	}
+	
+	public JLabel getLblFecha() {
+		return lblFecha;
+	}
+	
+	public void setLblFecha(JLabel lblFecha) {
+		this.lblFecha = lblFecha;
+	}
+	
+	public JLabel getLblEstado() {
+		return lblEstado;
+	}
+	
+	public void setLblEstado(JLabel lblEstado) {
+		this.lblEstado = lblEstado;
+	}
+	
+	public JButton getBtnGuardar() {
+		return btnGuardar;
+	}
+	
+	public void setBtnGuardar(JButton btnGuardar) {
+		this.btnGuardar = btnGuardar;
+	}
+	
+	public JButton getBtnGuardarImagen() {
+		return btnGuardarImagen;
+	}
+	
+	public void setBtnGuardarImagen(JButton btnGuardarImagen) {
+		this.btnGuardarImagen = btnGuardarImagen;
+	}
+	
+	public JTextField getTxtNombrePartida() {
+		return txtNombrePartida;
+	}
+	
+	public void setTxtNombrePartida(JTextField txtNombrePartida) {
+		this.txtNombrePartida = txtNombrePartida;
+	}
+	
+	public JTextField getTxtAnfitrion() {
+		return txtAnfitrion;
+	}
+	
+	public void setTxtAnfitrion(JTextField txtAnfitrion) {
+		this.txtAnfitrion = txtAnfitrion;
+	}
+	
+	public JTextField getTxtJugadores() {
+		return txtJugadores;
+	}
+	
+	public void setTxtJugadores(JTextField txtJugadores) {
+		this.txtJugadores = txtJugadores;
+	}
+	
+	public JTextField getTxtDuracion() {
+		return txtDuracion;
+	}
+	
+	public void setTxtDuracion(JTextField txtDuracion) {
+		this.txtDuracion = txtDuracion;
+	}
+	
+	public JTextField getTxtFecha() {
+		return txtFecha;
+	}
+	
+	public void setTxtFecha(JTextField txtFecha) {
+		this.txtFecha = txtFecha;
+	}
+	
+	public JTextField getTxtEstado() {
+		return txtEstado;
+	}
+	
+	public void setTxtEstado(JTextField txtEstado) {
+		this.txtEstado = txtEstado;
+	}
+	
+	public JLabel getLblNewLabel() {
+		return lblNewLabel;
+	}
+	
+	public void setLblNewLabel(JLabel lblNewLabel) {
+		this.lblNewLabel = lblNewLabel;
+	}
+	
+	public JLabel getLblIconAnfitrion() {
+		return lblIconAnfitrion;
+	}
+	
+	public void setLblIconAnfitrion(JLabel lblIconAnfitrion) {
+		this.lblIconAnfitrion = lblIconAnfitrion;
+	}
+	
+	public JLabel getLblIconJugadores() {
+		return lblIconJugadores;
+	}
+	
+	public void setLblIconJugadores(JLabel lblIconJugadores) {
+		this.lblIconJugadores = lblIconJugadores;
+	}
+	
+	public JLabel getLblIconDuracion() {
+		return lblIconDuracion;
+	}
+	
+	public void setLblIconDuracion(JLabel lblIconDuracion) {
+		this.lblIconDuracion = lblIconDuracion;
+	}
+	
+	public JLabel getLblIconFecha() {
+		return lblIconFecha;
+	}
+	
+	public void setLblIconFecha(JLabel lblIconFecha) {
+		this.lblIconFecha = lblIconFecha;
+	}
+	
+	public JLabel getLblIconEstado() {
+		return lblIconEstado;
+	}
+	
+	public void setLblIconEstado(JLabel lblIconEstado) {
+		this.lblIconEstado = lblIconEstado;
+	}
+
+	public JTable getTable() {
+		return table;
+	}
+	
+	public void setTable(JTable table) {
+		this.table = table;
 	}
 }
