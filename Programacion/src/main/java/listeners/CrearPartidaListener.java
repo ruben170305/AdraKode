@@ -27,9 +27,7 @@ public class CrearPartidaListener extends Listener implements ActionListener {
 		// Capturamos el nombre del componente
 		String nombreComponente = ((JButton) ae.getSource()).getName();
 		if (nombreComponente.equals("CREAR")) {
-			if (crearPartidaBBDD()) {
-				this.menu.cargarPanel(home);
-			}
+			crearPartidaBBDD();
 		} else if (nombreComponente.equals("cargarImagen")) {
 			menu.mostrarMensajeConstruccion();
 		}
@@ -38,7 +36,7 @@ public class CrearPartidaListener extends Listener implements ActionListener {
 	/**
 	 * Metodo que hace el insert a la base de datos de partida
 	 */
-	public boolean crearPartidaBBDD() {
+	public void crearPartidaBBDD() {
 		String sql = "INSERT INTO partida (nombre, duracion, dificultad, fecha, numero_jugadores, ambientacion)"
 				+ " VALUES (?, ?, ?, ?, ?, ?)";
 
@@ -56,14 +54,15 @@ public class CrearPartidaListener extends Listener implements ActionListener {
 			ps.setString(6, cp.getTxtAnfitrion().getText());
 
 			ps.executeUpdate();
-			return true;
+			
+			menu.cargarPanel(home);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (Exception e) {
 			// TODO: handle exception
+			e.printStackTrace();
 			menu.mostrarMensajeRellenaCampos();
-			return false;
 		} finally {
 			try {
 				ps.close();
@@ -72,7 +71,6 @@ public class CrearPartidaListener extends Listener implements ActionListener {
 				// TODO Auto-generated catch block
 			}
 		}
-		return true;
 
 	}
 
