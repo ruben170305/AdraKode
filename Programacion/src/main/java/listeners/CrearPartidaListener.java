@@ -37,8 +37,8 @@ public class CrearPartidaListener extends Listener implements ActionListener {
 	 * Metodo que hace el insert a la base de datos de partida
 	 */
 	public void crearPartidaBBDD() {
-		String sql = "INSERT INTO partida (nombre, duracion, dificultad, fecha, numero_jugadores, ambientacion)"
-				+ " VALUES (?, ?, ?, ?, ?, ?)";
+		String sql = "INSERT INTO partida (nombre, duracion, dificultad, fecha, numero_jugadores, ambientacion, anfitrion_id)"
+				+ " VALUES (?, ?, ?, ?, ?, ?, ?)";
 
 		Model mysql = new Model();
 		Connection conn = mysql.get_connection();
@@ -52,6 +52,7 @@ public class CrearPartidaListener extends Listener implements ActionListener {
 			ps.setString(4, cp.getTxtFecha().getText());
 			ps.setInt(5, Integer.parseInt(cp.getTxtJugadores().getText()));
 			ps.setString(6, cp.getTxtAnfitrion().getText());
+			ps.setInt(7, user.getUser_id());
 
 			ps.executeUpdate();
 			
