@@ -60,10 +60,12 @@ public class Partida {
 		mysql.get_connection();
 
 		try {
-			String sql = "SELECT p.*, m.nombre as nombre_anfitrion, m.apellidos as apellidos_anfitrion " +
+			String sql = "SELECT p.*, m.nombre as nombre_anfitrion, m.apellidos as apellidos_anfitrion, ps.cod as personaje_id " +
 			"FROM partida p " +
 			"LEFT JOIN miembro m " +
-			"ON p.anfitrion_id = m.cod";
+			"ON p.anfitrion_id = m.cod " +
+			"left join personaje ps " +
+			"on m.cod = ps.cod_miembro ";
 
 			rs = mysql.Model_query( sql );
 

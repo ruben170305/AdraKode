@@ -120,10 +120,11 @@ public class VerPartidaMasterListener extends Listener implements ActionListener
 
 				// Definimos los campos de la tabla
 				String jugador = rs_personaje.getString("personaje");
+				String experiencia = rs_personaje.getString("expe");
                 String raza = rs_personaje.getString("raza");
                 String clase = rs_personaje.getString("clase");
 
-                model.addRow( new Object[]{ jugador, raza, clase } );
+                model.addRow( new Object[]{ jugador, experiencia, raza, clase } );
 			}
 		} catch( SQLException sqle ) {
 			sqle.printStackTrace();

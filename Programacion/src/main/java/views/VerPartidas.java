@@ -60,7 +60,7 @@ public class VerPartidas extends JPanel {
 		add(separator);
 		
 		// Designamos el nombre de las columnas de la tabla
-		String[] columns = { "ID", "Nombre", "Ambientación", "Duración", "Fecha", "Anfitrion", "Nº jugadores", "Estado" };
+		String[] columns = { "ID", "Nombre", "Ambientación", "Duración", "Fecha", "Anfitrion", "Nº jugadores", "Estado", "ID jugador" };
 
 		// Capturamos los datos de MySQL mediante una consulta
 		ResultSet rows = partida.get_partidas();
@@ -72,7 +72,7 @@ public class VerPartidas extends JPanel {
 
 				// Inicializamos un Objeto temporal donde almacenamos los datos de la fila
 				Object[] row_data = new Object[ columns.length ];
-
+           
 				// Insertamos los datos
                 row_data[0] = rows.getString( "partida_id" );
                 row_data[1] = rows.getString( "nombre" );
@@ -88,7 +88,9 @@ public class VerPartidas extends JPanel {
 				// Determinamos el estado
 				String en_curso_text = ( Integer.parseInt( rows.getString( "en_curso" ) ) == 1 ) ? "En curso" : "Finalizada";
                 row_data[7] = en_curso_text;
-
+                
+                row_data[8] = rows.getInt( "personaje_id" );
+                
 				// Añadimos los datos al arrayList final
 				row_data_list.add( row_data );
 			}
@@ -194,7 +196,7 @@ public class VerPartidas extends JPanel {
 		btnSeleccionar.setBounds(314, 516, 172, 41);
 		add(btnSeleccionar);
 
-		lblIdJugador = new JLabel( "0" );
+		lblIdJugador = new JLabel( data[0][8].toString() );
 		lblIdJugador.setHorizontalAlignment(SwingConstants.CENTER);
 		lblIdJugador.setBounds(0, 0, 0, 0);
 		add( lblIdJugador );
@@ -208,12 +210,14 @@ public class VerPartidas extends JPanel {
 				int selected_row = table.getSelectedRow();
 
 				// Actualizamos los JLabel con la información de la fila seleccionada
+				lblIdPartida.setText( table.getValueAt( selected_row, 0 ).toString() );
 				lblTituloPartida.setText( table.getValueAt( selected_row, 1 ).toString() );
 				lblAnfitrion.setText( table.getValueAt( selected_row, 5 ).toString() );
 				lblJugadores.setText( table.getValueAt( selected_row, 6 ).toString() );
 				lblDuración.setText( table.getValueAt( selected_row, 3 ).toString() + "'" );
 				lblFecha.setText( table.getValueAt( selected_row, 4 ).toString() );
 				lblEstado.setText( table.getValueAt( selected_row, 7 ).toString() );
+				lblIdJugador.setText( table.getValueAt( selected_row, 8 ).toString() );
 			}
 
 		} );
