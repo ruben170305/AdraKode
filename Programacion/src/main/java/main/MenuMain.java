@@ -78,7 +78,7 @@ public class MenuMain {
         cPersonaje = new CrearPersonaje( menu );
 
         // Ventanas de creación y edición de partidas
-        cPartida = new CrearPartida();
+        cPartida = new CrearPartida( user );
         ePartida = new EditarPartida();
 
         // Listeners para ver partidas
@@ -89,8 +89,7 @@ public class MenuMain {
         vPartidasMasterListener = new VerPartidaMasterListener( vPartidasMaster, ePartida, menu, home, user );
 
         vPartidasListener = new VerPartidaListener( menu, home );
-        vPartidas = new VerPartidas( vPartidasListener, user );
-
+        vPartidas = new VerPartidas( user );
 
         // Ventanas y listeners de personajes
         ePersonaje = new EditarPersonaje(esMaster);
@@ -123,7 +122,7 @@ public class MenuMain {
 
         // Dependiendo de que el usuario inicie sesión como Game Master, mostramos un menú diferente
         if ( esMaster ) {
-            CrearPartidaListener cPartidaListener = new CrearPartidaListener( menu, home, cPartida, user );
+            CrearPartidaListener cPartidaListener = new CrearPartidaListener( menu, home, cPartida, esMaster, user );
             EditarPartidaListener ePartidaListener = new EditarPartidaListener( menu, home );
 
             // Vinculación de listeners

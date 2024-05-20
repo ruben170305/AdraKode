@@ -23,6 +23,7 @@ public class Menu extends JFrame {
 	private JMenuItem mntmEditarPartidas;
 	
 	private boolean gameMaster;
+	private PMenuListener listener_menu;
 	
 	public Menu(String titulo, boolean esMaster) {
 		super(titulo);
@@ -111,20 +112,19 @@ public class Menu extends JFrame {
 	 * @param listener Parametro que recibe el listener que queremos asignar
 	 */
 	public void setListener(PMenuListener listener) {
+
+		this.listener_menu = listener;
 	
 		if ( gameMaster ) {
 			mntmVerPartidasMaster.addActionListener(listener);
 			mntmCrearPartidas.addActionListener(listener);
-			// mntmEditarPartidas.addActionListener(listener);
 		} else {
 			
 			mntmNuevo.addActionListener(listener);
 			mntmVerPartidas.addActionListener(listener);
 		}
 		mntmVer.addActionListener(listener);
-//		mntmModificarP.addActionListener(listener);
 		mntmTexto.addActionListener(listener);
-		//mntmSalir.addActionListener(listener);
 	}
 	
 	/**
@@ -232,6 +232,14 @@ public class Menu extends JFrame {
 	public void setGameMaster(boolean gameMaster) {
 		this.gameMaster = gameMaster;
 		crearMenu();	
+	}
+
+	public PMenuListener getListener_menu() {
+		return listener_menu;
+	}
+
+	public void setListener_menu(PMenuListener listener_menu) {
+		this.listener_menu = listener_menu;
 	}
 	
 }

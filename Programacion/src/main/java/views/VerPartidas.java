@@ -22,7 +22,7 @@ public class VerPartidas extends JPanel {
 	private Partida partida;
 	private Personaje personaje;
 
-	public VerPartidas( VerPartidaListener listener, Usuario user ) {
+	public VerPartidas( Usuario user ) {
 		this.partida = new Partida();
 		this.personaje = new Personaje( user );
 		
@@ -72,7 +72,7 @@ public class VerPartidas extends JPanel {
 
 				// Inicializamos un Objeto temporal donde almacenamos los datos de la fila
 				Object[] row_data = new Object[ columns.length ];
-           
+        
 				// Insertamos los datos
                 row_data[0] = rows.getString( "partida_id" );
                 row_data[1] = rows.getString( "nombre" );

@@ -92,4 +92,84 @@ public class PMenuListener implements ActionListener {
 		}
 	}
 
+	public Menu getVentana() {
+		return ventana;
+	}
+
+	public void setVentana(Menu ventana) {
+		this.ventana = ventana;
+	}
+
+	public Home getHome() {
+		return home;
+	}
+
+	public void setHome(Home home) {
+		this.home = home;
+	}
+
+	public CrearPersonaje getCPersonaje() {
+		return cPersonaje;
+	}
+
+	public void setCPersonaje(CrearPersonaje cPersonaje) {
+		this.cPersonaje = cPersonaje;
+	}
+
+	public EditarPersonaje getEPersonaje() {
+		return ePersonaje;
+	}
+
+	public void setEPersonaje(EditarPersonaje ePersonaje) {
+		this.ePersonaje = ePersonaje;
+	}
+
+	public VentanaPrincipalLogin getLogin() {
+		return login;
+	}
+
+	public void setLogin(VentanaPrincipalLogin login) {
+		this.login = login;
+	}
+
+	public VerPersonajes getVPersonajes() {
+		return vPersonajes;
+	}
+
+	public void setVPersonajes(VerPersonajes vPersonajes) {
+		this.vPersonajes = vPersonajes;
+	}
+
+	public CrearPartida getCPartida() {
+		return cPartida;
+	}
+
+	public void setCPartida(CrearPartida cPartida) {
+		this.cPartida = cPartida;
+	}
+
+	public EditarPartida getEPartida() {
+		return ePartida;
+	}
+
+	public void setEPartida(EditarPartida ePartida) {
+		this.ePartida = ePartida;
+	}
+
+	public VerPartidas getVPartidas() {
+		return vPartidas;
+	}
+
+	public void setVPartidas(VerPartidas vPartidas) {
+		this.vPartidas = vPartidas;
+	}
+
+	public VerPartidasMaster getVPartidasMaster() {
+		return vPartidasMaster;
+	}
+
+	public void setVPartidasMaster(VerPartidasMaster vPartidasMaster) {
+		this.vPartidasMaster = vPartidasMaster;
+	}
+
 }

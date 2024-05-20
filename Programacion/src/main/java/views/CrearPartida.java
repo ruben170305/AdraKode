@@ -8,14 +8,17 @@ import javax.swing.border.LineBorder;
 import listeners.CrearPartidaListener;
 
 import java.awt.*;
+import model.*;
 
 public class CrearPartida extends JPanel {
-	private JLabel lblTitulo, lblImagen, lblAnfitrion, lblJugadores, lblDuracion, lblFecha, lblEstado, lblDificultad;
+	private JLabel lblTitulo, lblImagen, lblAmbientacion, lblJugadores, lblDuracion, lblFecha, lblEstado, lblDificultad, lblIdAnfitrion;
 	private JLabel lblNewLabel, lblIconAnfitrion, lblIconJugadores, lblIconDuracion, lblIconFecha, lblIconEstado, lblIconDificultad;
 	private JButton btnGuardar, btnGuardarImagen;
 	private JTextField txtNombrePartida, txtAnfitrion, txtJugadores, txtDuracion, txtFecha, txtEstado, txtDificultad;
+	private Usuario user;
 
-	public CrearPartida() {
+	public CrearPartida( Usuario user ) {
+		this.user = user;
 		initialize_components();
 	}
 
@@ -126,12 +129,12 @@ public class CrearPartida extends JPanel {
         
 		
 		// Etiquetas 
-        lblAnfitrion = new JLabel("Ambientación");
-        lblAnfitrion.setHorizontalAlignment(SwingConstants.LEFT);
-        lblAnfitrion.setForeground(new Color(29, 29, 27));
-        lblAnfitrion.setFont(new Font("Oxygen", Font.BOLD, 14));
-        lblAnfitrion.setBounds(306, 311, 108, 26);
-        add(lblAnfitrion);
+        lblAmbientacion = new JLabel("Ambientación");
+        lblAmbientacion.setHorizontalAlignment(SwingConstants.LEFT);
+        lblAmbientacion.setForeground(new Color(29, 29, 27));
+        lblAmbientacion.setFont(new Font("Oxygen", Font.BOLD, 14));
+        lblAmbientacion.setBounds(306, 311, 108, 26);
+        add(lblAmbientacion);
         
         lblDificultad = new JLabel("Dificultad");
         lblDificultad.setHorizontalAlignment(SwingConstants.LEFT);
@@ -170,64 +173,70 @@ public class CrearPartida extends JPanel {
         
         
         //Campo texto
-  		txtNombrePartida = new JTextField();
-  		txtNombrePartida.setBackground(new Color(242, 242, 242));
-  		txtNombrePartida.setFont(new Font("Open Sans", Font.PLAIN, 11));
-  		txtNombrePartida.setBounds(373, 120, 121, 14);
-  		txtNombrePartida.setColumns(10);
-  		txtNombrePartida.setBorder(border);
-  		add(txtNombrePartida);
-  		
-  		txtAnfitrion = new JTextField();
-  		txtAnfitrion.setBackground(new Color(242, 242, 242));
-  		txtAnfitrion.setFont(new Font("Open Sans", Font.PLAIN, 11));
-  		txtAnfitrion.setBounds(405, 317, 125, 14);
-  		txtAnfitrion.setColumns(10);
-  		txtAnfitrion.setBorder(border);
-  		add(txtAnfitrion);
-  		
-  		txtDificultad = new JTextField();
-  		txtDificultad.setBackground(new Color(242, 242, 242));
-  		txtDificultad.setFont(new Font("Open Sans", Font.PLAIN, 11));
-  		txtDificultad.setBounds(405, 345, 125, 14);
-  		txtDificultad.setColumns(10);
-  		txtDificultad.setBorder(border);
-  		add(txtDificultad);
-  		
-  		txtJugadores = new JTextField();
-  		txtJugadores.setBackground(new Color(242, 242, 242));
-  		txtJugadores.setFont(new Font("Open Sans", Font.PLAIN, 11));
-  		txtJugadores.setBounds(405, 373, 125, 14);
-  		txtJugadores.setColumns(10);
-  		txtJugadores.setBorder(border);
-  		add(txtJugadores);
-  		
-  		txtDuracion = new JTextField();
-  		txtDuracion.setBackground(new Color(242, 242, 242));
-  		txtDuracion.setFont(new Font("Open Sans", Font.PLAIN, 11));
-  		txtDuracion.setBounds(405, 401, 125, 14);
-  		txtDuracion.setColumns(10);
-  		txtDuracion.setBorder(border);
-  		add(txtDuracion);
-  		
-  		txtFecha = new JTextField();
-  		txtFecha.setBackground(new Color(242, 242, 242));
-  		txtFecha.setFont(new Font("Open Sans", Font.PLAIN, 11));
-  		txtFecha.setBounds(405, 429, 125, 14);
-  		txtFecha.setColumns(10);
-  		txtFecha.setBorder(border);
-  		add(txtFecha);
-  		
-  		txtEstado = new JTextField();
-  		txtEstado.setBackground(new Color(242, 242, 242));
-  		txtEstado.setFont(new Font("Open Sans", Font.PLAIN, 11));
-  		txtEstado.setBounds(405, 457, 125, 14);
-  		txtEstado.setColumns(10);
-  		txtEstado.setBorder(border);
-  		add(txtEstado);
-  		
+		txtNombrePartida = new JTextField();
+		txtNombrePartida.setBackground(new Color(242, 242, 242));
+		txtNombrePartida.setFont(new Font("Open Sans", Font.PLAIN, 11));
+		txtNombrePartida.setBounds(373, 120, 121, 14);
+		txtNombrePartida.setColumns(10);
+		txtNombrePartida.setBorder(border);
+		add(txtNombrePartida);
+		
+		txtAnfitrion = new JTextField();
+		txtAnfitrion.setBackground(new Color(242, 242, 242));
+		txtAnfitrion.setFont(new Font("Open Sans", Font.PLAIN, 11));
+		txtAnfitrion.setBounds(405, 317, 125, 14);
+		txtAnfitrion.setColumns(10);
+		txtAnfitrion.setBorder(border);
+		add(txtAnfitrion);
+		
+		txtDificultad = new JTextField();
+		txtDificultad.setBackground(new Color(242, 242, 242));
+		txtDificultad.setFont(new Font("Open Sans", Font.PLAIN, 11));
+		txtDificultad.setBounds(405, 345, 125, 14);
+		txtDificultad.setColumns(10);
+		txtDificultad.setBorder(border);
+		add(txtDificultad);
+		
+		txtJugadores = new JTextField();
+		txtJugadores.setBackground(new Color(242, 242, 242));
+		txtJugadores.setFont(new Font("Open Sans", Font.PLAIN, 11));
+		txtJugadores.setBounds(405, 373, 125, 14);
+		txtJugadores.setColumns(10);
+		txtJugadores.setBorder(border);
+		add(txtJugadores);
+		
+		txtDuracion = new JTextField();
+		txtDuracion.setBackground(new Color(242, 242, 242));
+		txtDuracion.setFont(new Font("Open Sans", Font.PLAIN, 11));
+		txtDuracion.setBounds(405, 401, 125, 14);
+		txtDuracion.setColumns(10);
+		txtDuracion.setBorder(border);
+		add(txtDuracion);
+		
+		txtFecha = new JTextField();
+		txtFecha.setBackground(new Color(242, 242, 242));
+		txtFecha.setFont(new Font("Open Sans", Font.PLAIN, 11));
+		txtFecha.setBounds(405, 429, 125, 14);
+		txtFecha.setColumns(10);
+		txtFecha.setBorder(border);
+		add(txtFecha);
+		
+		txtEstado = new JTextField();
+		txtEstado.setBackground(new Color(242, 242, 242));
+		txtEstado.setFont(new Font("Open Sans", Font.PLAIN, 11));
+		txtEstado.setBounds(405, 457, 125, 14);
+		txtEstado.setColumns(10);
+		txtEstado.setBorder(border);
+		add(txtEstado);
+
+		lblIdAnfitrion = new JLabel( String.valueOf( user.getUser_id() ) );
+		lblIdAnfitrion.setHorizontalAlignment(SwingConstants.CENTER);
+		lblIdAnfitrion.setBounds(0, 0, 0, 0);
+		add( lblIdAnfitrion );
+		
         // Botones
         btnGuardar = new JButton("CREAR");
+		btnGuardar.setName("CREAR");
         btnGuardar.setFont(new Font("Oxygen", Font.BOLD, 17));
         btnGuardar.setForeground(new Color(242, 242, 242));
         btnGuardar.setBackground(new Color(29, 161, 242));
@@ -257,6 +266,14 @@ public class CrearPartida extends JPanel {
 		btnGuardarImagen.addActionListener(listener);
 	}
 
+	public JLabel getLblIdAnfitrion() {
+		return lblIdAnfitrion;
+	}
+
+	public void setLblIdAnfitrion(JLabel lblIdAnfitrion) {
+		this.lblIdAnfitrion = lblIdAnfitrion;
+	}
+
 	public JLabel getLblTitulo() {
 		return lblTitulo;
 	}
@@ -273,12 +290,12 @@ public class CrearPartida extends JPanel {
 		this.lblImagen = lblImagen;
 	}
 
-	public JLabel getLblAnfitrion() {
-		return lblAnfitrion;
+	public JLabel getlblAmbientacion() {
+		return lblAmbientacion;
 	}
 
-	public void setLblAnfitrion(JLabel lblAnfitrion) {
-		this.lblAnfitrion = lblAnfitrion;
+	public void setlblAmbientacion(JLabel lblAmbientacion) {
+		this.lblAmbientacion = lblAmbientacion;
 	}
 
 	public JLabel getLblJugadores() {

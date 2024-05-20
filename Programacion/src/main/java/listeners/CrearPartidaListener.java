@@ -7,28 +7,40 @@ import java.sql.SQLException;
 
 import javax.swing.JButton;
 
-import model.Model;
-import model.Usuario;
+import model.*;
 import views.*;
 
 public class CrearPartidaListener extends Listener implements ActionListener {
 
 	private CrearPartida cp;
+	private boolean esMaster;
 	private Usuario user;
 
-	public CrearPartidaListener(Menu menu, Home home, CrearPartida cp, Usuario user) {
+	public CrearPartidaListener(Menu menu, Home home, CrearPartida cp, boolean esMaster, Usuario user) {
 		super(menu, home);
 		this.cp = cp;
+		this.esMaster = esMaster;
 		this.user = user;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent ae) {
+
 		// Capturamos el nombre del componente
 		String nombreComponente = ((JButton) ae.getSource()).getName();
-		if (nombreComponente.equals("CREAR")) {
-			crearPartidaBBDD();
-			this.menu.cargarPanel(home);
+
+		if (nombreComponente.equals("CREAR") && nombreComponente != null) {
+			boolean renderize = crearPartidaBBDD();
+
+			// Renderizamos de nuevo la ventana del listado de partidas
+			if( esMaster && renderize ) {
+				VerPartidasMaster vPartidasMaster = new VerPartidasMaster();
+				VerPartidaMasterListener vPartidaMasterListener = new VerPartidaMasterListener(vPartidasMaster, menu.getListener_menu().getEPartida(), menu, home, user);
+				vPartidasMaster.setListener(vPartidaMasterListener);
+				// menu.getListener_menu().getVPartidasMaster().dispose();
+				menu.getListener_menu().setVPartidasMaster(vPartidasMaster);
+				menu.cargarPanel(vPartidasMaster);
+			}
 		} else if (nombreComponente.equals("cargarImagen")) {
 			menu.mostrarMensajeConstruccion();
 		}
@@ -37,9 +49,10 @@ public class CrearPartidaListener extends Listener implements ActionListener {
 	/**
 	 * Metodo que hace el insert a la base de datos de partida
 	 */
-	public void crearPartidaBBDD() {
-		String sql = "INSERT INTO partida (nombre, duracion, dificultad, fecha, numero_jugadores, ambientacion)"
-				+ " VALUES (?, ?, ?, ?, ?, ?)";
+	public boolean crearPartidaBBDD() {
+
+		String sql = "INSERT INTO partida (nombre, duracion, dificultad, fecha, numero_jugadores, ambientacion, en_curso, anfitrion_id)"
+				+ " VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
 		Model mysql = new Model();
 		Connection conn = mysql.get_connection();
@@ -53,22 +66,26 @@ public class CrearPartidaListener extends Listener implements ActionListener {
 			ps.setString(4, cp.getTxtFecha().getText());
 			ps.setInt(5, Integer.parseInt(cp.getTxtJugadores().getText()));
 			ps.setString(6, cp.getTxtAnfitrion().getText());
+			ps.setInt(7, Integer.parseInt(cp.getTxtEstado().getText()));
+			ps.setInt(8, Integer.parseInt( cp.getLblIdAnfitrion().getText()));
 
 			ps.executeUpdate();
+			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (Exception e) {
-			// TODO: handle exception
 			menu.mostrarMensajeRellenaCampos();
+			return false;
 		} finally {
 			try {
 				ps.close();
 				conn.close();
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 		}
+
+		return true;
 
 	}
 
