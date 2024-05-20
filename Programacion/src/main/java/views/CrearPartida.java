@@ -228,6 +228,7 @@ public class CrearPartida extends JPanel {
   		
         // Botones
         btnGuardar = new JButton("CREAR");
+        btnGuardar.setName("CREAR");
         btnGuardar.setFont(new Font("Oxygen", Font.BOLD, 17));
         btnGuardar.setForeground(new Color(242, 242, 242));
         btnGuardar.setBackground(new Color(29, 161, 242));
