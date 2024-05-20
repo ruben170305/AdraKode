@@ -24,7 +24,6 @@ public class MenuMain {
     // Listeners para ver partidas
     static VerPartidaMasterListener vPartidasMasterListener;
     static VerPartidasMaster vPartidasMaster;
-
     static VerPartidaListener vPartidasListener;
     static VerPartidas vPartidas;
     
@@ -85,7 +84,7 @@ public class MenuMain {
         pIniciadaListener = new PartidaIniciadaListener( menu, home, user );
         pIniciada = new PartidaIniciada( user );
         
-        vPartidasMaster = new VerPartidasMaster();
+        vPartidasMaster = new VerPartidasMaster(user);
         vPartidasMasterListener = new VerPartidaMasterListener( vPartidasMaster, ePartida, menu, home, user );
 
         vPartidasListener = new VerPartidaListener( menu, home );

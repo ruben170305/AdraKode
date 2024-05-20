@@ -29,7 +29,6 @@ public class Personaje {
         ,   int inteligencia
         ,   int sabiduria
         ,   int carisma
-        ,   Usuario user
     ) {
         this.cod 			= cod;
         this.nombre  		= nombre;
@@ -44,7 +43,6 @@ public class Personaje {
         this.inteligencia   = inteligencia;
         this.sabiduria      = sabiduria;
         this.carisma        = carisma;
-        this.user           = user;
     }
 
 	public ResultSet get_personajes_by_cod_miembro() {

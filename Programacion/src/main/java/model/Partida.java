@@ -1,5 +1,7 @@
 package model;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -8,9 +10,13 @@ public class Partida {
     // Definimos las características de la Partida
     private int part_id, num_sesion, duracion, dificultad, numero_jugadores, en_curso, anfitrion_id;
     private String nombre, fecha, ambientacion, nombre_anfitrion, apellidos_anfitrion;
+    private Usuario user;
 
     // Constructores
 	public Partida(){}
+	public Partida(Usuario user) {
+		this.user = user;
+	}
     public Partida(
             int part_id
         ,   int num_sesion
@@ -24,6 +30,7 @@ public class Partida {
         ,   int anfitrion_id
         ,   String nombre_anfitrion
         ,   String apellidos_anfitrion
+        ,	Usuario user
     ) {
         this.part_id                = part_id;
         this.num_sesion             = num_sesion;
@@ -37,6 +44,7 @@ public class Partida {
         this.anfitrion_id           = anfitrion_id;
         this.nombre_anfitrion       = nombre_anfitrion;
         this.apellidos_anfitrion    = apellidos_anfitrion;
+        this.user					= user;
     }
 
 	/**
@@ -58,6 +66,34 @@ public class Partida {
 			"ON p.anfitrion_id = m.cod";
 
 			rs = mysql.Model_query( sql );
+
+		} catch ( SQLException e ) {
+			e.printStackTrace();
+		}
+
+		return rs;
+	}
+	
+	public ResultSet get_partidas_master() {
+
+		ResultSet rs = null;
+
+		// Creamos una conexión con MySQL
+		Model mysql = new Model();
+		Connection conn = mysql.get_connection();
+		PreparedStatement ps = null;
+
+		try {
+			String sql = "SELECT p.*, m.nombre as nombre_anfitrion, m.apellidos as apellidos_anfitrion " +
+			"FROM partida p " +
+			"LEFT JOIN miembro m " +
+			"ON p.anfitrion_id = m.cod WHERE p.anfitrion_id = ?";
+			
+			ps = conn.prepareStatement(sql);
+			
+			ps.setInt(1, user.getUser_id());
+
+			rs = ps.executeQuery();
 
 		} catch ( SQLException e ) {
 			e.printStackTrace();

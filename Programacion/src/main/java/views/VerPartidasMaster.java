@@ -19,9 +19,11 @@ public class VerPartidasMaster extends JPanel {
 	private JLabel lblIdPartida, lblTituloPartida, lblAnfitrion, lblJugadores, lblDuración, lblFecha, lblEstado, lblTitulo, lblImagen;
 	private Partida partida;
 	private JTable table;
+	private Usuario user;
 
-	public VerPartidasMaster() {
-		this.partida = new Partida();
+	public VerPartidasMaster(Usuario user) {
+		this.user = user;
+		this.partida = new Partida(user);
 		
 		initialize_components();
 	}
@@ -60,7 +62,7 @@ public class VerPartidasMaster extends JPanel {
 		String[] columns = { "ID", "Nombre", "Ambientación", "Duración", "Fecha", "Anfitrion", "Nº jugadores", "Estado" };
 
 		// Capturamos los datos de MySQL mediante una consulta
-		ResultSet rows = partida.get_partidas();
+		ResultSet rows = partida.get_partidas_master();
 		ArrayList<Object[]> row_data_list = new ArrayList<>();
 
 		// Capturamos el número de filas del resultado de la consulta
