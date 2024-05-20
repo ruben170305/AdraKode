@@ -1,9 +1,12 @@
 package listeners;
 
 import java.awt.event.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import model.Model;
 import model.Partida;
 import model.Personaje;
 import model.Usuario;
@@ -38,14 +41,45 @@ public class VerPartidaListener extends Listener implements ActionListener {
 		switch ( ae.getActionCommand() ) {
 			case "JUGAR":
 
+				// Capturamos los datos de la vista
 				int partida_id = Integer.parseInt( vPartida.getIdPartidaLbl().getText() );
 				int jugador_id = Integer.parseInt( vPartida.getIdJugadorLbl().getText() );
+				
+				// Insertamos el registro y cambiamos la vista a la de PartidaIniciada
+				insertar_partida( partida_id, jugador_id );
 				jugar_partida( partida_id, jugador_id );
 				break;
 			default:
 				break;
 		}
 	}
+    
+    public void insertar_partida( int partida_id, int jugador_id ) {
+    	
+    	PreparedStatement pstmt = null;
+    	Model mysql = new Model();
+    	Connection conn = mysql.get_connection();
+    	
+    	try {
+    		
+    		// Definimos la consulta
+    		String sql = "insert into juega( id_partida, id_personaje ) values( ?, ? )";
+    		
+            // Preparar la consulta
+    		pstmt = conn.prepareStatement( sql );
+    		
+    		// Sustituimos los datos
+    		pstmt.setInt( 1, partida_id );
+    		pstmt.setInt( 2, jugador_id );
+
+            // Ejecutar la actualización
+            pstmt.executeUpdate();
+    		
+    	} catch( SQLException e ) {
+    		e.printStackTrace();
+    	}
+    	
+    }
 
 	public void jugar_partida( int partida_id, int jugador_id ) {
 
