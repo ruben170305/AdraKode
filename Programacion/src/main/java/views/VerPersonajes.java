@@ -277,6 +277,9 @@ public class VerPersonajes extends JPanel {
 		btnSeleccionar.setOpaque(true);
 		btnSeleccionar.setBorderPainted(false);
 		btnSeleccionar.setBounds(315, 509, 172, 41);
+		if (esMaster) {
+			btnSeleccionar.setText("VOLVER");
+		}
 		add(btnSeleccionar);
 
 		// Boton editar
