@@ -99,12 +99,7 @@ public class VerPartidaListener extends Listener implements ActionListener {
 				pIniciada.getLblDuración().setText( String.valueOf( rs_partida.getInt( "duracion" ) ) );
 				pIniciada.getLblFecha().setText( rs_partida.getString( "fecha" ) );
 
-				String en_curso_text = "";
-				if( Integer.parseInt( rs_partida.getString( "en_curso" ) ) == 1 )
-					en_curso_text = "En curso";
-				else
-					en_curso_text = "Finalizada";
-				pIniciada.getLblEstado().setText( en_curso_text );
+				pIniciada.getLblEstado().setText( rs_partida.getString( "en_curso" ) );
 			}
 		} catch( SQLException sqle ) {
 			sqle.printStackTrace();

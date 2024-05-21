@@ -66,7 +66,7 @@ public class CrearPartidaListener extends Listener implements ActionListener {
 			ps.setString(4, cp.getTxtFecha().getText());
 			ps.setInt(5, Integer.parseInt(cp.getTxtJugadores().getText()));
 			ps.setString(6, cp.getTxtAnfitrion().getText());
-			ps.setInt(7, Integer.parseInt(cp.getTxtEstado().getText()));
+			ps.setString(7, cp.getTxtEstado().getText());
 			ps.setInt(8, Integer.parseInt( cp.getLblIdAnfitrion().getText()));
 
 			ps.executeUpdate();

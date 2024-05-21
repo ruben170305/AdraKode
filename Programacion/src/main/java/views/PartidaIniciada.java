@@ -77,8 +77,7 @@ public class PartidaIniciada extends JPanel {
 				row_data[5] = anfitrion;
 
 				// Determinamos el estado
-				String en_curso_text = ( Integer.parseInt( rows.getString( "en_curso" ) ) == 1 ) ? "En curso" : "Finalizada";
-                row_data[7] = en_curso_text;
+                row_data[7] = rows.getString( "en_curso" );;
 
 				// Añadimos los datos al arrayList final
 				row_data_list.add( row_data );

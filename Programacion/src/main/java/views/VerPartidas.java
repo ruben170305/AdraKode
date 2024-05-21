@@ -86,8 +86,7 @@ public class VerPartidas extends JPanel {
 				row_data[5] = anfitrion;
 
 				// Determinamos el estado
-				String en_curso_text = ( Integer.parseInt( rows.getString( "en_curso" ) ) == 1 ) ? "En curso" : "Finalizada";
-                row_data[7] = en_curso_text;
+                row_data[7] =  rows.getString( "en_curso" );
                 
                 row_data[8] = rows.getInt( "personaje_id" );
                 

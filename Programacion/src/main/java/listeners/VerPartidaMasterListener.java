@@ -95,13 +95,7 @@ public class VerPartidaMasterListener extends Listener implements ActionListener
 				);
 
 				ePartida.getTxtDuracion().setText( String.valueOf( rs.getInt( "duracion" ) ) );
-
-				String en_curso_text = "";
-				if( Integer.parseInt( rs.getString( "en_curso" ) ) == 1 )
-					en_curso_text = "En curso";
-				else
-					en_curso_text = "Finalizada";
-				ePartida.getTxtEstado().setText( en_curso_text );
+				ePartida.getTxtEstado().setText( rs.getString( "en_curso" ) );
 
 				ePartida.getTxtFecha().setText( rs.getString( "fecha" ) );
 				ePartida.getTxtJugadores().setText( String.valueOf( rs.getInt( "numero_jugadores" ) ) );
@@ -130,7 +124,7 @@ public class VerPartidaMasterListener extends Listener implements ActionListener
 			sqle.printStackTrace();
 		}
 
-		// Cargamos el menÃº
+		// Cargamos el menú
 		menu.cargarPanel( ePartida );
 	}
 
