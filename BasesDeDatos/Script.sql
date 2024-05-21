@@ -36,7 +36,7 @@ CREATE TABLE partida (
     fecha VARCHAR(50) DEFAULT 'Por definir',
     numero_jugadores INT DEFAULT 1,
     ambientacion VARCHAR(50) DEFAULT 'General',
-    en_curso VARCHAR(50) DEFAULT 1,
+    en_curso VARCHAR(50) DEFAULT 'En curso',
     anfitrion_id INT,
     CONSTRAINT FOREIGN KEY (anfitrion_id) REFERENCES miembro(cod)
 );
@@ -65,9 +65,9 @@ INSERT INTO personaje (nombre, personaje, raza, clase, expe, fuerza, destreza, c
 ('Borin', 'Hammerhand', 'Enano', 'Paladin', 15, 16, 10, 18, 10, 12, 12, 2005);
 
 INSERT INTO partida (`partida_id`, `num_sesion`, `nombre`, `duracion`, `dificultad`, `fecha`, `numero_jugadores`, `ambientacion`, `en_curso`, `anfitrion_id`) VALUES
-(3001, 10, 'Amanecer de fuego', 180, 0, 'Martes a las 17:00', 4, 'Fantasía medieval', 1, 2001),
-(3002, 15, 'Crepúsculo gélido', 150, 0, 'Martes a las 19:00', 4, 'Fantasía gélida', 0, 2002),
-(3003, 20, 'La caída de la noche', 210, 0, 'Miercoles a las 16:00', 4, 'Fantasía oscura', 1, 2003),
-(3004, 25, 'El alba dorada', 160, 0, 'Jueves a las 21:00', 4, 'Fantasía clásica', 0, 2004),
-(3006, 40, 'Que habeís tocado', 120, 0, 'Viernes a las 12:00', 4, 'Resolver conflictos', 0, 2006),
-(3005, 30, 'Sombras persistentes', 190, 0, 'Sábado a las 20:00', 4, 'Fantasía steampunk', 1, 2005);
+(3001, 10, 'Amanecer de fuego', 180, 0, 'Martes a las 17:00', 4, 'Fantasía medieval', 'En curso', 2001),
+(3002, 15, 'Crepúsculo gélido', 150, 0, 'Martes a las 19:00', 4, 'Fantasía gélida', 'Finalizado', 2002),
+(3003, 20, 'La caída de la noche', 210, 0, 'Miercoles a las 16:00', 4, 'Fantasía oscura', 'En curso', 2003),
+(3004, 25, 'El alba dorada', 160, 0, 'Jueves a las 21:00', 4, 'Fantasía clásica', 'En curso', 2004),
+(3006, 40, 'Que habeís tocado', 120, 0, 'Viernes a las 12:00', 4, 'Resolver conflictos', 'Finalizado', 2006),
+(3005, 30, 'Sombras persistentes', 190, 0, 'Sábado a las 20:00', 4, 'Fantasía steampunk', 'Finalizado', 2005);
