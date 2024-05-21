@@ -113,6 +113,28 @@ public class Personaje {
 		return rs;
 
 	}
+	
+	public ResultSet get_personajes_all() {
+
+		// Inicializamos el valor a devolver
+		ResultSet rs = null;
+		
+		// Inicializamos la sesión en MySQL
+		Model mysql = new Model();
+		mysql.get_connection();
+
+		// Realizamos una consulta para capturar todos los personajes
+		String sql = "select * from personaje";
+		
+		try {
+			rs = mysql.Model_query( sql );
+		} catch ( SQLException sqle ) {
+			sqle.printStackTrace();
+		}
+
+		return rs;
+
+	}
 
     public ResultSet get_personajes_partida( int partida_id ) {
 

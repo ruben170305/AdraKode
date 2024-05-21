@@ -69,5 +69,5 @@ INSERT INTO partida (`partida_id`, `num_sesion`, `nombre`, `duracion`, `dificult
 (3002, 15, 'Crepúsculo gélido', 150, 0, 'Martes a las 19:00', 4, 'Fantasía gélida', 'Finalizado', 2002),
 (3003, 20, 'La caída de la noche', 210, 0, 'Miercoles a las 16:00', 4, 'Fantasía oscura', 'En curso', 2003),
 (3004, 25, 'El alba dorada', 160, 0, 'Jueves a las 21:00', 4, 'Fantasía clásica', 'En curso', 2004),
-(3006, 40, 'Que habeís tocado', 120, 0, 'Viernes a las 12:00', 4, 'Resolver conflictos', 'Finalizado', 2006),
+(3006, 40, 'Que habéis tocado', 120, 0, 'Viernes a las 12:00', 4, 'Resolver conflictos', 'Finalizado', 2006),
 (3005, 30, 'Sombras persistentes', 190, 0, 'Sábado a las 20:00', 4, 'Fantasía steampunk', 'Finalizado', 2005);

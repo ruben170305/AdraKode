@@ -19,13 +19,14 @@ public class VerPersonajes extends JPanel {
 	private JButton btnSeleccionar, btnEditar, btnBorrar;
 	private JProgressBar pbExp, pbFuerza, pbDestreza, pbConstitucion, pbInteligencia, pbSabiduria, pbCarisma;
 	private JComboBox comboBoxSeleccionar;
+	private boolean esMaster;
 
 	private ArrayList<Integer> id = new ArrayList<Integer>();
 	private Personaje personaje;
 
-	public VerPersonajes( Usuario user ) {
+	public VerPersonajes( Usuario user, boolean esMaster ) {
 		setBackground(new Color(242, 242, 242));
-
+		this.esMaster = esMaster;
 		this.personaje = new Personaje( user );
 		
 		initialize_components();
@@ -318,7 +319,12 @@ public class VerPersonajes extends JPanel {
 
 	public void cargarDatosEnComboBox() {
 		comboBoxSeleccionar.removeAllItems();
-		ResultSet rs = personaje.get_personajes();
+		ResultSet rs = null;
+		if (esMaster) {
+			rs = personaje.get_personajes_all();
+		} else {
+			rs = personaje.get_personajes();
+		}
 		try {
 			while (rs.next()) {
 				getComboBoxSeleccionar().addItem(rs.getString("nombre"));

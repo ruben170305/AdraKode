@@ -93,7 +93,7 @@ public class MenuMain {
 
         // Ventanas y listeners de personajes
         ePersonaje = new EditarPersonaje(esMaster);
-        vPersonajes = new VerPersonajes( user );
+        vPersonajes = new VerPersonajes( user, esMaster );
 
         ePersonajesListener = new EditarPersonajesListener( menu, home, ePersonaje, vPersonajes, user );
         vPersonajesListener = new VerPersonajesListener( ePersonaje, menu, home, user, cPersonaje, vPersonajes, personaje, esMaster );
