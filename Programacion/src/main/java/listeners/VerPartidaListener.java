@@ -6,6 +6,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.table.DefaultTableModel;
+
 import model.Model;
 import model.Partida;
 import model.Personaje;
@@ -16,23 +19,30 @@ public class VerPartidaListener extends Listener implements ActionListener {
 	
 	
 	private PartidaIniciada pIniciada;
-	private VerPartidas vPartida;
-	private Partida partida;
-	private Personaje personaje;
+	private VerPartidas vp;
+	private Usuario user;
 
-	public VerPartidaListener( Menu menu, Home home ) {
-		super( menu, home );
+	public VerPartidaListener( Menu menu, Home home, Model mysql ) {
+		super( menu, home, mysql );
 	}
 
-	public VerPartidaListener( Menu menu, Home home, PartidaIniciada pIniciada, VerPartidas vPartida, Usuario user ) {
-		super( menu, home );
+	public VerPartidaListener( Menu menu, Home home, Model mysql, PartidaIniciada pIniciada, VerPartidas vp, Usuario user ) {
+		super( menu, home, mysql );
 		this.pIniciada = pIniciada;
-		this.vPartida = vPartida;
-
-		this.partida = new Partida();
-		this.personaje = new Personaje( user );
+		this.vp = vp;
+		this.user = user;
 	}
-
+	
+	public void transfer_table_partidas() {
+		
+		Object[][] data = mysql.get_table_partidas();
+		
+		// Designamos el nombre de las columnas de la tabla
+		String[] columns = { "ID", "Nombre", "Ambientación", "Duración", "Fecha", "Anfitrion", "Nº jugadores", "Estado", "ID jugador" };
+		
+        DefaultTableModel template = new DefaultTableModel(data, columns);
+        vp.getTable().setModel(template);
+	}
 
     @Override
 	public void actionPerformed( ActionEvent ae ) {
@@ -40,88 +50,56 @@ public class VerPartidaListener extends Listener implements ActionListener {
 		// Dependiendo del listener, realizamos una acción u otra
 		switch ( ae.getActionCommand() ) {
 			case "JUGAR":
-
-				// Capturamos los datos de la vista
-				int partida_id = Integer.parseInt( vPartida.getIdPartidaLbl().getText() );
-				int jugador_id = Integer.parseInt( vPartida.getIdJugadorLbl().getText() );
+				
+				// Capturamos la fila y el valor del ID de la partida
+				int selected_row = vp.getTable().getSelectedRow();
+				int partida_id = Integer.parseInt( vp.getTable().getValueAt( selected_row, 0 ).toString() );
+				int jugador_id = Integer.parseInt( vp.getTable().getValueAt( selected_row, 8 ).toString() );
 				
 				// Insertamos el registro y cambiamos la vista a la de PartidaIniciada
-				insertar_partida( partida_id, jugador_id );
-				jugar_partida( partida_id, jugador_id );
+				mysql.insertar_partida( partida_id, jugador_id );
+				mysql.jugar_partida( partida_id, jugador_id, pIniciada, user, menu );
 				break;
 			default:
 				break;
 		}
 	}
     
-    public void insertar_partida( int partida_id, int jugador_id ) {
-    	
-    	PreparedStatement pstmt = null;
-    	Model mysql = new Model();
-    	Connection conn = mysql.get_connection();
-    	
-    	try {
-    		
-    		// Definimos la consulta
-    		String sql = "insert into juega( id_partida, id_personaje ) values( ?, ? )";
-    		
-            // Preparar la consulta
-    		pstmt = conn.prepareStatement( sql );
-    		
-    		// Sustituimos los datos
-    		pstmt.setInt( 1, partida_id );
-    		pstmt.setInt( 2, jugador_id );
+	/**
+	 * Metodo que asigna el listener
+	 * 
+	 * @param listener Recibe el listener con el que quieres asignar los objetos
+	 */
 
-            // Ejecutar la actualización
-            pstmt.executeUpdate();
-    		
-    	} catch( SQLException e ) {
-    		e.printStackTrace();
-    	}
-    	
-    }
-
-	public void jugar_partida( int partida_id, int jugador_id ) {
-
-		// Datos de la partida seleccionada
-		ResultSet rs_partida = partida.get_partida( partida_id );
-
+	 public void cargarDatosEnComboBox() {
+		 vp.getComboBoxJugador().removeAllItems();
+		ResultSet rs = mysql.get_personajes( user );
 		try {
-			while( rs_partida.next() ) {
-				pIniciada.getLblNivelPartida().setText( rs_partida.getString( "nombre" ) );
-
-				pIniciada.getLblAnfitrion().setText(
-					rs_partida.getString( "nombre_anfitrion" ) +
-					rs_partida.getString( "apellidos_anfitrion" )
-				);
-
-				pIniciada.getLblJugadores().setText( String.valueOf( rs_partida.getInt( "numero_jugadores" ) ) );
-				pIniciada.getLblDuración().setText( String.valueOf( rs_partida.getInt( "duracion" ) ) );
-				pIniciada.getLblFecha().setText( rs_partida.getString( "fecha" ) );
-
-				pIniciada.getLblEstado().setText( rs_partida.getString( "en_curso" ) );
+			while (rs.next()) {
+				vp.getIdJugadorLbl().setText( String.valueOf( rs.getInt( "cod" ) ) );
+				vp.getComboBoxJugador().addItem(rs.getString("nombre"));
 			}
-		} catch( SQLException sqle ) {
-			sqle.printStackTrace();
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
 		}
 
-		// Datos del personaje seleccionado
-		ResultSet rs_personaje = personaje.get_personaje( jugador_id );
-
-		try {
-			while( rs_personaje.next() ) {
-				pIniciada.getPbFuerza().setValue( rs_personaje.getInt( "fuerza" ) );
-				pIniciada.getPbDestreza().setValue( rs_personaje.getInt( "destreza" ) );
-				pIniciada.getPbConstitucion().setValue( rs_personaje.getInt( "constitucion" ) );
-				pIniciada.getPbInteligencia().setValue( rs_personaje.getInt( "inteligencia" ) );
-				pIniciada.getPbSabiduria().setValue( rs_personaje.getInt( "sabiduria" ) );
-				pIniciada.getPbCarisma().setValue( rs_personaje.getInt( "carisma" ) );
-			}
-		} catch( SQLException sqle ) {
-			sqle.printStackTrace();
-		}
-
-		// Cargamos el menú
-		menu.cargarPanel( pIniciada );
 	}
+	 
+	public void valueChanged(ListSelectionEvent e) {
+
+		// Capturamos la fila y el valor del ID de la partida
+		int selected_row = vp.getTable().getSelectedRow();
+
+		// Actualizamos los JLabel con la información de la fila seleccionada
+		vp.getLblIdPartida().setText( vp.getTable().getValueAt( selected_row, 0 ).toString() );
+		vp.getLblTituloPartida().setText( vp.getTable().getValueAt( selected_row, 1 ).toString() );
+		vp.getLblAnfitrion().setText( vp.getTable().getValueAt( selected_row, 5 ).toString() );
+		vp.getLblJugadores().setText( vp.getTable().getValueAt( selected_row, 6 ).toString() );
+		vp.getLblDuración().setText( vp.getTable().getValueAt( selected_row, 3 ).toString() + "'" );
+		vp.getLblFecha().setText( vp.getTable().getValueAt( selected_row, 4 ).toString() );
+		vp.getLblEstado().setText( vp.getTable().getValueAt( selected_row, 7 ).toString() );
+		vp.getLblIdJugador().setText( vp.getTable().getValueAt( selected_row, 8 ).toString() );
+	}
+    
 }

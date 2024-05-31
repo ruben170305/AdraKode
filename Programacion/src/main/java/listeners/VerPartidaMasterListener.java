@@ -15,19 +15,29 @@ import model.*;
 import views.*;
 
 public class VerPartidaMasterListener extends Listener implements ActionListener, ListSelectionListener {
-	private EditarPartida ePartida;
-	private VerPartidasMaster vPartidaMaster;
-	private Personaje personaje;
+	private EditarPartida ep;
+	private VerPartidasMaster vp;
 	int selected_row = 0;
-	private Partida partida;
+	private Usuario user;
 	
-	public VerPartidaMasterListener( VerPartidasMaster vPartidaMaster, EditarPartida ePartida, Menu menu, Home home, Usuario user ) {
-		super( menu, home );
-		this.vPartidaMaster = vPartidaMaster;
-		this.ePartida = ePartida;
-
-		this.personaje = new Personaje( user );
-		this.partida = new Partida();
+	public VerPartidaMasterListener( VerPartidasMaster vp, EditarPartida ep, Menu menu, Home home, Model mysql, Usuario user ) {
+		super( menu, home, mysql );
+		this.vp = vp;
+		this.ep = ep;
+		this.user = user;
+		
+		vp.getTable().getSelectionModel().addListSelectionListener(this);
+	}
+	
+	public void transfer_table_partidas() {
+		
+		Object[][] data = mysql.get_table_partidas();
+		
+		// Designamos el nombre de las columnas de la tabla
+		String[] columns = { "ID", "Nombre", "Ambientación", "Duración", "Fecha", "Anfitrion", "Nº jugadores", "Estado", "ID jugador" };
+		
+        DefaultTableModel template = new DefaultTableModel(data, columns);
+        vp.getTable().setModel(template);
 	}
 
 	@Override
@@ -37,95 +47,43 @@ public class VerPartidaMasterListener extends Listener implements ActionListener
 		String nombreComponente = ((JButton) ae.getSource()).getName();
 		if (nombreComponente.equals("editar")) {
 
-			int partida_id = Integer.parseInt( vPartidaMaster.getIdPartidaLbl().getText());
-			editar_partida( partida_id );
+			int partida_id = Integer.parseInt( vp.getIdPartidaLbl().getText());
+			mysql.editar_partida( partida_id, ep, menu );
 		} else if (nombreComponente.equals("borrar")) {
 			if (menu.mostrarMensajeConfirmborrado()) {
-				borrarPartida(selected_row);
-				menu.cargarPanel(home);
+				
+				// Capturamos la fila y el valor del ID de la partida
+				int selected_row = vp.getTable().getSelectedRow();
+				int partida_id = Integer.parseInt( vp.getTable().getValueAt( selected_row, 0 ).toString() );
+				
+				mysql.borrar_partida(partida_id, mysql);
+				
+				// Renderizamos la ventana del listado de partidas
+				VerPartidasMaster vPartidasMaster = new VerPartidasMaster();
+				VerPartidaMasterListener vPartidaMasterListener = new VerPartidaMasterListener( vPartidasMaster, menu.getListener_menu().getEPartida(), menu, home, mysql, user );
+				vPartidasMaster.setListener( vPartidaMasterListener );
+				// menu.getListener_menu().getVPartidasMaster().dispose();
+				menu.getListener_menu().setVPartidasMaster( vPartidasMaster );
+				menu.cargarPanel( vPartidasMaster );
 			}
 		}
+		
 	}
 
 	public void valueChanged(ListSelectionEvent e) {
 
 		// Capturamos la fila y el valor del ID de la partida
-		int selected_row1 = vPartidaMaster.getTable().getSelectedRow();
-		selected_row = Integer.parseInt(vPartidaMaster.getTable().getValueAt(selected_row1, 0).toString());
-	}
+		int selected_row = vp.getTable().getSelectedRow();
 
-	public void borrarPartida(int id) {
-		String sql = "DELETE FROM partida WHERE partida_id=?";
-		Model mysql = new Model();
-
-		Connection conn = mysql.get_connection();
-		PreparedStatement ps = null;
-		try {
-			ps = conn.prepareStatement(sql);
-			ps.setInt(1, id);
-			
-			ps.executeUpdate();
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				ps.close();
-				conn.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-			
-		}
-	}
-
-	public void editar_partida( int partida_id ) {
-
-		// Modificar datos de la tabla
-		DefaultTableModel model = ( DefaultTableModel ) ePartida.getTable().getModel();
-		model.setRowCount( 0 ); // Limpiar la tabla existente
-
-		ResultSet rs = partida.get_partida( partida_id );
-
-		try {
-			while( rs.next() ) {
-				ePartida.getTxtAnfitrion().setText(
-					rs.getString( "nombre_anfitrion" ) + " " +
-					rs.getString( "apellidos_anfitrion" )
-				);
-
-				ePartida.getTxtDuracion().setText( String.valueOf( rs.getInt( "duracion" ) ) );
-				ePartida.getTxtEstado().setText( rs.getString( "en_curso" ) );
-
-				ePartida.getTxtFecha().setText( rs.getString( "fecha" ) );
-				ePartida.getTxtJugadores().setText( String.valueOf( rs.getInt( "numero_jugadores" ) ) );
-				ePartida.getTxtNombrePartida().setText( rs.getString( "nombre" ) );
-				ePartida.getTxtDificultad().setText( String.valueOf( rs.getInt( "dificultad" ) ) );
-			}
-		} catch( SQLException sqle ) {
-			sqle.printStackTrace();
-		}
-
-		// Datos del personaje seleccionado
-		ResultSet rs_personaje = personaje.get_personajes_partida( partida_id );
-
-		try {
-			while( rs_personaje.next() ) {
-
-				// Definimos los campos de la tabla
-				String jugador = rs_personaje.getString("personaje");
-				String experiencia = rs_personaje.getString("expe");
-                String raza = rs_personaje.getString("raza");
-                String clase = rs_personaje.getString("clase");
-
-                model.addRow( new Object[]{ jugador, experiencia, raza, clase } );
-			}
-		} catch( SQLException sqle ) {
-			sqle.printStackTrace();
-		}
-
-		// Cargamos el menú
-		menu.cargarPanel( ePartida );
+		// Actualizamos los JLabel con la información de la fila seleccionada
+		vp.getLblIdPartida().setText( vp.getTable().getValueAt( selected_row, 0 ).toString() );
+		vp.getLblTituloPartida().setText( vp.getTable().getValueAt( selected_row, 1 ).toString() );
+		vp.getLblAnfitrion().setText( vp.getTable().getValueAt( selected_row, 5 ).toString() );
+		vp.getLblJugadores().setText( vp.getTable().getValueAt( selected_row, 6 ).toString() );
+		vp.getLblDuración().setText( vp.getTable().getValueAt( selected_row, 3 ).toString() + "'" );
+		vp.getLblFecha().setText( vp.getTable().getValueAt( selected_row, 4 ).toString() );
+		vp.getLblEstado().setText( vp.getTable().getValueAt( selected_row, 7 ).toString() );
+		vp.getLblIdJugador().setText( vp.getTable().getValueAt( selected_row, 8 ).toString() );
 	}
 
 }

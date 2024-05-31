@@ -8,9 +8,9 @@ public class PMenuListener implements ActionListener {
 	
 	private Menu ventana;
 	private Home home;
-	private views.CrearPersonaje cPersonaje;
-	private views.EditarPersonaje ePersonaje;
-	private views.VentanaPrincipalLogin login;
+	private CrearPersonaje cPersonaje;
+	private EditarPersonaje ePersonaje;
+	private VentanaPrincipalLogin login;
 	private VerPersonajes vPersonajes;
 	private CrearPartida cPartida;
 	private EditarPartida ePartida;
@@ -59,7 +59,7 @@ public class PMenuListener implements ActionListener {
 					break;
 
 				case "Ver personajes":
-					vPersonajes.cargarDatosEnComboBox();
+					vPersonajes.getListener().cargarDatosEnComboBox();
 					ventana.cargarPanel( vPersonajes );
 					break;
 

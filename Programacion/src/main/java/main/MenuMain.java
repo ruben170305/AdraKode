@@ -1,6 +1,7 @@
 package main;
 
 import java.awt.EventQueue;
+import model.*;
 
 import views.*;
 import listeners.*;
@@ -13,7 +14,12 @@ public class MenuMain {
     static Menu menu;
     static Home home;
     static Listener list;
-    static Usuario user; 
+    
+    // Instanciamos el modelo e iniciamos sesión
+    static Model mysql = new Model();
+    static { mysql.get_connection(); }
+    
+    static Usuario user;
     static Personaje personaje;
     static CrearPersonaje cPersonaje;
 
@@ -53,8 +59,8 @@ public class MenuMain {
                 login = new VentanaPrincipalLogin( user );
                 
                 // Configuramos el listener para el login
-                LoginListener loginlistener = new LoginListener( login );
-                login.setListener( loginlistener );
+                LoginListener login_listener = new LoginListener( login );
+                login.setListener( login_listener );
 
                 // Hacemos visible el login
                 login.make_visible();
@@ -73,7 +79,7 @@ public class MenuMain {
         // Creamos la ventana principal y el Home
         menu = new Menu( esMaster ? "AdraKode Master" : "AdraKode", esMaster );
         home = new Home();
-        list = new Listener( menu, home );
+        list = new Listener( menu, home, mysql );
         personaje = new Personaje( user );
         cPersonaje = new CrearPersonaje( menu );
 
@@ -82,23 +88,23 @@ public class MenuMain {
         ePartida = new EditarPartida();
 
         // Listeners para ver partidas
-        pIniciadaListener = new PartidaIniciadaListener( menu, home, user );
+        pIniciadaListener = new PartidaIniciadaListener( menu, home, mysql, user );
         pIniciada = new PartidaIniciada( user );
         
         vPartidasMaster = new VerPartidasMaster();
-        vPartidasMasterListener = new VerPartidaMasterListener( vPartidasMaster, ePartida, menu, home, user );
+        vPartidasMasterListener = new VerPartidaMasterListener( vPartidasMaster, ePartida, menu, home, mysql, user );
 
-        vPartidasListener = new VerPartidaListener( menu, home );
+        vPartidasListener = new VerPartidaListener( menu, home, mysql );
         vPartidas = new VerPartidas( user );
 
         // Ventanas y listeners de personajes
         ePersonaje = new EditarPersonaje(esMaster);
         vPersonajes = new VerPersonajes( user, esMaster );
 
-        ePersonajesListener = new EditarPersonajesListener( menu, home, ePersonaje, vPersonajes, user );
-        vPersonajesListener = new VerPersonajesListener( ePersonaje, menu, home, user, cPersonaje, vPersonajes, personaje, esMaster );
+        ePersonajesListener = new EditarPersonajesListener( menu, home, mysql, ePersonaje, vPersonajes, user );
+        vPersonajesListener = new VerPersonajesListener( ePersonaje, menu, home, mysql, user, cPersonaje, vPersonajes, personaje, esMaster );
 
-        cPersonajeListener = new CrearPersonajeListener( menu, home, cPersonaje, user );
+        cPersonajeListener = new CrearPersonajeListener( menu, home, mysql, cPersonaje, user );
 
         // Creamos la ventana y cargamos el panel
         menu.setGameMaster( esMaster );
@@ -108,29 +114,30 @@ public class MenuMain {
         
         // Creamos el listener del menú
         PMenuListener listener = new PMenuListener(
-            menu,
-            home,
-            cPersonaje,
-            ePersonaje,
-            vPersonajes,
-            cPartida,
-            ePartida,
-            vPartidas,
-            vPartidasMaster,
-            login
+        		menu
+            , 	home
+            ,	cPersonaje
+            ,	ePersonaje
+            ,	vPersonajes
+            ,	cPartida
+            ,	ePartida
+            ,	vPartidas
+            ,	vPartidasMaster
+            ,	login
         );
 
         // Dependiendo de que el usuario inicie sesión como Game Master, mostramos un menú diferente
         if ( esMaster ) {
-            CrearPartidaListener cPartidaListener = new CrearPartidaListener( menu, home, cPartida, esMaster, user );
-            EditarPartidaListener ePartidaListener = new EditarPartidaListener( menu, home );
+            CrearPartidaListener cPartidaListener = new CrearPartidaListener( menu, home, mysql, cPartida, esMaster, user );
+            EditarPartidaListener ePartidaListener = new EditarPartidaListener( menu, home, mysql, user, ePartida );
 
             // Vinculación de listeners
             cPartida.setListener( cPartidaListener );
             ePartida.setListener( ePartidaListener );
             vPartidasMaster.setListener( vPartidasMasterListener );
         } else {
-            VerPartidaListener ver_partidas_listener = new VerPartidaListener( menu, home, pIniciada, vPartidas, user );
+        	System.out.println("okkk");
+            VerPartidaListener ver_partidas_listener = new VerPartidaListener( menu, home, mysql, pIniciada, vPartidas, user );
             vPartidas.setListener( ver_partidas_listener );
         }
 
@@ -138,7 +145,6 @@ public class MenuMain {
         cPersonaje.setListener( cPersonajeListener );
         ePersonaje.setListener( ePersonajesListener );
         vPersonajes.setListener( vPersonajesListener );
-        pIniciada.setListener( pIniciadaListener );
 
         // Vinculamos el listener de la ventana principal a su ventana
         menu.setListener( listener );

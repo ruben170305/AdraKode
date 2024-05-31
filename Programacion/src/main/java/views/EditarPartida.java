@@ -10,10 +10,10 @@ import listeners.EditarPartidaListener;
 import java.awt.*;
 
 public class EditarPartida extends JPanel {
-	private JLabel lblTitulo, lblImagen, lblAnfitrion, lblJugadores, lblDuracion, lblFecha, lblEstado, lblDificultad;
+	private JLabel lblIdPartida, lblTitulo, lblImagen, lblAmbientacion, lblJugadores, lblDuracion, lblFecha, lblEstado, lblDificultad;
 	private JButton btnGuardar, btnGuardarImagen;
-	private JTextField txtNombrePartida, txtAnfitrion, txtJugadores, txtDuracion, txtFecha, txtEstado, txtDificultad;
-	private JLabel lblNewLabel, lblIconAnfitrion, lblIconJugadores, lblIconDuracion, lblIconFecha, lblIconEstado, lblIconDificultad;
+	private JTextField txtNombrePartida, txtAmbientacion, txtJugadores, txtDuracion, txtFecha, txtEstado, txtDificultad;
+	private JLabel lblNewLabel, lblIconAmbientacion, lblIconJugadores, lblIconDuracion, lblIconFecha, lblIconEstado, lblIconDificultad;
 	private JTable table;
 
 	public EditarPartida() {
@@ -34,10 +34,7 @@ public class EditarPartida extends JPanel {
 		setLayout(null);
 
 		// Tamaño y posicion de ventana
-		setSize(800, 600);
-		// setLocation(null);
-
-		
+		setSize(800, 600);		
 		
 		/* COMPONENTES */
 
@@ -61,6 +58,12 @@ public class EditarPartida extends JPanel {
 		separator.setForeground(new Color(29, 29, 27));
 		separator.setBounds(337, 88, 125, 3);
 		add(separator);
+		
+		// Etiquetas
+		lblIdPartida = new JLabel( "" );
+		lblIdPartida.setHorizontalAlignment(SwingConstants.CENTER);
+		lblIdPartida.setBounds(0, 0, 0, 0);
+		add( lblIdPartida );
 
 		//Label partida
 		lblNewLabel = new JLabel("Partida:");
@@ -79,13 +82,13 @@ public class EditarPartida extends JPanel {
 		
 		
 		// Iconos
-		lblIconAnfitrion = new JLabel("");
-		lblIconAnfitrion.setHorizontalAlignment(SwingConstants.CENTER);
-		lblIconAnfitrion.setIcon(new ImageIcon(VerPartidasMaster.class.getResource("/img/usuario.png")));
-		lblIconAnfitrion.setForeground(new Color(29, 29, 27));
-		lblIconAnfitrion.setFont(new Font("Oxygen", Font.BOLD, 14));
-		lblIconAnfitrion.setBounds(409, 331, 32, 26);
-		add(lblIconAnfitrion);
+		lblIconAmbientacion = new JLabel("");
+		lblIconAmbientacion.setHorizontalAlignment(SwingConstants.CENTER);
+		lblIconAmbientacion.setIcon(new ImageIcon(VerPartidasMaster.class.getResource("/img/usuario.png")));
+		lblIconAmbientacion.setForeground(new Color(29, 29, 27));
+		lblIconAmbientacion.setFont(new Font("Oxygen", Font.BOLD, 14));
+		lblIconAmbientacion.setBounds(409, 331, 32, 26);
+		add(lblIconAmbientacion);
 		
 		lblIconDificultad = new JLabel("");
 		lblIconDificultad.setHorizontalAlignment(SwingConstants.CENTER);
@@ -129,12 +132,12 @@ public class EditarPartida extends JPanel {
         
 		
 		// Etiquetas 
-        lblAnfitrion = new JLabel("Ambientación");
-        lblAnfitrion.setHorizontalAlignment(SwingConstants.LEFT);
-        lblAnfitrion.setForeground(new Color(29, 29, 27));
-        lblAnfitrion.setFont(new Font("Oxygen", Font.BOLD, 14));
-        lblAnfitrion.setBounds(451, 331, 108, 26);
-        add(lblAnfitrion);
+        lblAmbientacion = new JLabel("Ambientación");
+        lblAmbientacion.setHorizontalAlignment(SwingConstants.LEFT);
+        lblAmbientacion.setForeground(new Color(29, 29, 27));
+        lblAmbientacion.setFont(new Font("Oxygen", Font.BOLD, 14));
+        lblAmbientacion.setBounds(451, 331, 108, 26);
+        add(lblAmbientacion);
         
         lblDificultad = new JLabel("Dificultad");
         lblDificultad.setHorizontalAlignment(SwingConstants.LEFT);
@@ -181,13 +184,13 @@ public class EditarPartida extends JPanel {
   		txtNombrePartida.setBorder(border);
   		add(txtNombrePartida);
   		
-  		txtAnfitrion = new JTextField();
-  		txtAnfitrion.setBackground(new Color(242, 242, 242));
-  		txtAnfitrion.setFont(new Font("Open Sans", Font.PLAIN, 11));
-  		txtAnfitrion.setBounds(550, 337, 114, 14);
-  		txtAnfitrion.setColumns(10);
-  		txtAnfitrion.setBorder(border);
-  		add(txtAnfitrion);
+  		txtAmbientacion = new JTextField();
+  		txtAmbientacion.setBackground(new Color(242, 242, 242));
+  		txtAmbientacion.setFont(new Font("Open Sans", Font.PLAIN, 11));
+  		txtAmbientacion.setBounds(550, 337, 114, 14);
+  		txtAmbientacion.setColumns(10);
+  		txtAmbientacion.setBorder(border);
+  		add(txtAmbientacion);
   		
   		txtDificultad = new JTextField();
   		txtDificultad.setBackground(new Color(242, 242, 242));
@@ -269,6 +272,14 @@ public class EditarPartida extends JPanel {
 
 	}
 	
+	public JLabel getLblIdPartida() {
+		return lblIdPartida;
+	}
+
+	public void setLblIdPartida(JLabel lblIdPartida) {
+		this.lblIdPartida = lblIdPartida;
+	}
+
 	public void setListener( EditarPartidaListener listener ) {
 		btnGuardar.addActionListener( listener );
 	}
@@ -287,14 +298,6 @@ public class EditarPartida extends JPanel {
 	
 	public void setLblImagen(JLabel lblImagen) {
 		this.lblImagen = lblImagen;
-	}
-	
-	public JLabel getLblAnfitrion() {
-		return lblAnfitrion;
-	}
-	
-	public void setLblAnfitrion(JLabel lblAnfitrion) {
-		this.lblAnfitrion = lblAnfitrion;
 	}
 	
 	public JLabel getLblJugadores() {
@@ -349,16 +352,32 @@ public class EditarPartida extends JPanel {
 		return txtNombrePartida;
 	}
 	
+	public JLabel getLblAmbientacion() {
+		return lblAmbientacion;
+	}
+
+	public void setLblAmbientacion(JLabel lblAmbientacion) {
+		this.lblAmbientacion = lblAmbientacion;
+	}
+
+	public JTextField getTxtAmbientacion() {
+		return txtAmbientacion;
+	}
+
+	public void setTxtAmbientacion(JTextField txtAmbientacion) {
+		this.txtAmbientacion = txtAmbientacion;
+	}
+
+	public JLabel getLblIconAmbientacion() {
+		return lblIconAmbientacion;
+	}
+
+	public void setLblIconAmbientacion(JLabel lblIconAmbientacion) {
+		this.lblIconAmbientacion = lblIconAmbientacion;
+	}
+
 	public void setTxtNombrePartida(JTextField txtNombrePartida) {
 		this.txtNombrePartida = txtNombrePartida;
-	}
-	
-	public JTextField getTxtAnfitrion() {
-		return txtAnfitrion;
-	}
-	
-	public void setTxtAnfitrion(JTextField txtAnfitrion) {
-		this.txtAnfitrion = txtAnfitrion;
 	}
 	
 	public JTextField getTxtJugadores() {
@@ -399,14 +418,6 @@ public class EditarPartida extends JPanel {
 	
 	public void setLblNewLabel(JLabel lblNewLabel) {
 		this.lblNewLabel = lblNewLabel;
-	}
-	
-	public JLabel getLblIconAnfitrion() {
-		return lblIconAnfitrion;
-	}
-	
-	public void setLblIconAnfitrion(JLabel lblIconAnfitrion) {
-		this.lblIconAnfitrion = lblIconAnfitrion;
 	}
 	
 	public JLabel getLblIconJugadores() {
