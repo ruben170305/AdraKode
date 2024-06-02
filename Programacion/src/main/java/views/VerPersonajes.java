@@ -19,13 +19,13 @@ public class VerPersonajes extends JPanel {
 	private JButton btnSeleccionar, btnEditar, btnBorrar;
 	private JProgressBar pbExp, pbFuerza, pbDestreza, pbConstitucion, pbInteligencia, pbSabiduria, pbCarisma;
 	private JComboBox comboBoxSeleccionar;
-
-	private ArrayList<Integer> id = new ArrayList<Integer>();
+	private boolean esMaster;
 	private Personaje personaje;
+	private VerPersonajesListener listener;
 
-	public VerPersonajes( Usuario user ) {
+	public VerPersonajes( Usuario user, boolean esMaster ) {
 		setBackground(new Color(242, 242, 242));
-
+		this.esMaster = esMaster;
 		this.personaje = new Personaje( user );
 		
 		initialize_components();
@@ -276,6 +276,9 @@ public class VerPersonajes extends JPanel {
 		btnSeleccionar.setOpaque(true);
 		btnSeleccionar.setBorderPainted(false);
 		btnSeleccionar.setBounds(315, 509, 172, 41);
+		if (esMaster) {
+			btnSeleccionar.setText("VOLVER");
+		}
 		add(btnSeleccionar);
 
 		// Boton editar
@@ -302,7 +305,7 @@ public class VerPersonajes extends JPanel {
 		btnBorrar.setBounds(404, 467, 83, 36);
 		add(btnBorrar);
 		
-		idLbl = new JLabel("ID: ");
+		idLbl = new JLabel("");
 		idLbl.setHorizontalAlignment(SwingConstants.CENTER);
 		idLbl.setForeground(new Color(29, 29, 27));
 		idLbl.setFont(new Font("Dialog", Font.BOLD, 16));
@@ -310,39 +313,21 @@ public class VerPersonajes extends JPanel {
 
 	}
 
-	/**
-	 * Metodo que asigna el listener
-	 * 
-	 * @param listener Recibe el listener con el que quieres asignar los objetos
-	 */
-
-	public void cargarDatosEnComboBox() {
-		comboBoxSeleccionar.removeAllItems();
-		ResultSet rs = personaje.get_personajes();
-		try {
-			while (rs.next()) {
-				getComboBoxSeleccionar().addItem(rs.getString("nombre"));
-				id.add(rs.getInt("cod"));
-			}
-		} catch (SQLException e) {
-			
-			e.printStackTrace();
-		}
-
-		// Guardar los datos en el ArrayList y actualizar el JComboBox
-
-	}
-
 	public void setListener( VerPersonajesListener listener ) {
+		listener.cargarDatosEnComboBox();
 		btnEditar.addActionListener( listener );
 		btnSeleccionar.addActionListener( listener );
 		btnBorrar.addActionListener( listener );
 		comboBoxSeleccionar.addActionListener( listener );
-		cargarDatosEnComboBox();
+		this.listener = listener;
 	}
 
 	public JLabel getLblRaza() {
 		return lblRaza;
+	}
+
+	public VerPersonajesListener getListener() {
+		return listener;
 	}
 
 	public JLabel getLblClase() {
@@ -356,14 +341,6 @@ public class VerPersonajes extends JPanel {
 
 	public void setComboBoxSeleccionar(JComboBox comboBoxSeleccionar) {
 		this.comboBoxSeleccionar = comboBoxSeleccionar;
-	}
-	
-	public ArrayList<Integer> getId() {
-		return id;
-	}
-
-	public void setId(ArrayList<Integer> id) {
-		this.id = id;
 	}
 
 	public JLabel getIdLbl() {

@@ -21,11 +21,12 @@ public class EditarPersonajesListener extends Listener implements ActionListener
 	public EditarPersonajesListener(
 			Menu menu
 		, 	Home home
+		,	Model mysql
 		, 	EditarPersonaje ep
 		, 	VerPersonajes vPersonaje
 		, 	Usuario user
 	) {
-		super( menu, home );
+		super( menu, home, mysql );
 		this.ep = ep;
 		this.vPersonajes = vPersonaje;
 		this.user = user;
@@ -44,8 +45,19 @@ public class EditarPersonajesListener extends Listener implements ActionListener
 		// Dependiendo del action event, ejecutamos un panel u otro
 		if ( buttonName.equals("GUARDAR") ) {
 			if ( menu.mostrarMensajeConfirmEditado() ) {
-				db_update();
-				menu.cargarPanel( home );
+				
+				boolean renderize = mysql.update_personaje_ep( ep, user );
+
+				// Renderizamos de nuevo la ventana del listado de partidas
+				if( renderize ) {
+					VerPersonajes vPersonajes = new VerPersonajes( user, false );
+					VerPersonajesListener vPersonajesListener = new VerPersonajesListener( menu, home, mysql, user, vPersonajes );
+					vPersonajes.setListener( vPersonajesListener );
+					// menu.getListener_menu().getVPartidasMaster().dispose();
+					menu.getListener_menu().setVPersonajes( vPersonajes );
+					menu.cargarPanel( vPersonajes );
+				}
+				
 			} else {
 				menu.cargarPanel( vPersonajes );
 			}
@@ -53,40 +65,7 @@ public class EditarPersonajesListener extends Listener implements ActionListener
 			subirImagen();
 		}
 	}
-	
-	/**
-	 * Metodo que actualiza los elementos en la base de datos
-	 */
-	public void db_update() {
 
-		// Inicializamos la conexión con MySQL
-		Model mysql = new Model();
-		String sql = "UPDATE personaje "
-				+ "SET clase=?, raza=?, expe=?, fuerza=?, destreza=?, constitucion=?, inteligencia=?, sabiduria=?, carisma=?, cod_miembro=? "
-				+ "WHERE cod=?";
-		Connection conn = mysql.get_connection();
-
-		try {
-			// Consulta para actualizar la tabla
-			PreparedStatement pstmt = conn.prepareStatement( sql );
-			pstmt.setString( 1, ep.getTxtClase().getText() );
-			pstmt.setString( 2, ep.getTxtRaza().getText() );
-			pstmt.setInt(3, (int) ep.getSpinnerExperiencia().getValue());
-			pstmt.setInt(4, (int) ep.getSpinnerFuerza().getValue());
-			pstmt.setInt(5, (int) ep.getSpinnerDestreza().getValue());
-			pstmt.setInt(6, (int) ep.getSpinnerConstitucion().getValue());
-			pstmt.setInt(7, (int) ep.getSpinnerInteligencia().getValue());
-			pstmt.setInt(8, (int) ep.getSpinnerSabiduria().getValue());
-			pstmt.setInt(9, (int) ep.getSpinnerCarisma().getValue());
-			pstmt.setInt(10, (int) user.getUser_id());
-			pstmt.setInt(11, Integer.parseInt(ep.getLblId().getText()));
-			
-			pstmt.executeUpdate();
-
-		} catch ( SQLException sqle ) {
-			sqle.printStackTrace();
-		}
-	}
 	
 	/**
 	 * Metodo que permite subir imagenes

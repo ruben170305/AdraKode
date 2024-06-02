@@ -541,8 +541,4 @@ public class EditarPersonaje extends JPanel {
 	public void setLblId(JLabel lblId) {
 		this.lblId = lblId;
 	}
-	
-	
-    
-    
 }

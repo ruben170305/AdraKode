@@ -18,14 +18,9 @@ public class PartidaIniciada extends JPanel {
 	private JLabel lblRaza, lblExp, lblIconoExp, lblIconoFuerza, lblIconoDestreza, lblIconoCarisma, lblClase, lblNombrePersonaje;
 	private JLabel lblFuerza, lblDestreza, lblConstitucion, lblInteligencia, lblSabiduria, lblCarisma, lblIconoConst, lblIconoInteligencia, lblIconoSabiduria, lblIconoPersn;
 	private JProgressBar pbExp, pbFuerza, pbDestreza, pbConstitucion, pbInteligencia, pbSabiduria, pbCarisma;
-	private Partida partida;
-	private Personaje personaje;
 
 	public PartidaIniciada( Usuario user ) {
 		setBackground( new Color( 242, 242, 242 ) );
-
-		this.partida = new Partida();
-		this.personaje = new Personaje( user );
 
 		initialize_components();
 	}
@@ -50,48 +45,6 @@ public class PartidaIniciada extends JPanel {
 		
 		//PARTIDA DETALLES
 		
-		// Designamos el nombre de las columnas de la tabla
-		String[] columns = { "ID", "Nombre", "Ambientación", "Duración", "Fecha", "Anfitrion", "Nº jugadores", "Estado" };
-
-		// Capturamos los datos de MySQL mediante una consulta
-		ResultSet rows = partida.get_partidas();
-		ArrayList<Object[]> row_data_list = new ArrayList<>();
-
-		// Capturamos el número de filas del resultado de la consulta
-		try {
-			while ( rows.next() ) {
-
-				// Inicializamos un Objeto temporal donde almacenamos los datos de la fila
-				Object[] row_data = new Object[ columns.length ];
-
-				// Insertamos los datos
-                row_data[0] = rows.getString( "partida_id" );
-                row_data[1] = rows.getString( "nombre" );
-                row_data[2] = rows.getString( "ambientacion" );
-                row_data[3] = rows.getString( "duracion" );
-                row_data[4] = rows.getString( "fecha" );
-				row_data[6] = rows.getInt( "numero_jugadores" );
-
-				// Formateo de campos
-				String anfitrion = rows.getString( "nombre_anfitrion" ) + " " + rows.getString( "apellidos_anfitrion" );
-				row_data[5] = anfitrion;
-
-				// Determinamos el estado
-				String en_curso_text = ( Integer.parseInt( rows.getString( "en_curso" ) ) == 1 ) ? "En curso" : "Finalizada";
-                row_data[7] = en_curso_text;
-
-				// Añadimos los datos al arrayList final
-				row_data_list.add( row_data );
-			}
-
-		} catch ( SQLException e ) {
-			e.printStackTrace();
-		}
-
-		// Pasamos los datos al Objeto final que insertaremos en la tabla
-        Object[][] data = new Object[ row_data_list.size() ][ columns.length ];
-		row_data_list.toArray( data );
-		
 		// Imagen de la partida
 		lblImagen = new JLabel("");
 		lblImagen.setIcon(new ImageIcon(PartidaIniciada.class.getResource("/img/paisaje.jpeg")));
@@ -99,96 +52,56 @@ public class PartidaIniciada extends JPanel {
 		add(lblImagen);
 		
 		// Etiquetas
-		lblNivelPartida = new JLabel( data[0][1].toString() );
-		lblNivelPartida.setHorizontalAlignment(SwingConstants.LEFT);
+		lblNivelPartida = new JLabel( "" );
+		lblNivelPartida.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNivelPartida.setIcon(null);
 		lblNivelPartida.setForeground(new Color(29, 29, 27));
-		lblNivelPartida.setFont(new Font("Oxygen", Font.BOLD, 18));
-		lblNivelPartida.setBounds(316, 58, 200, 26);
+		lblNivelPartida.setFont(new Font("Oxygen", Font.BOLD, 22));
+		lblNivelPartida.setBounds(177, 51, 445, 26);
 		add(lblNivelPartida);
 		
-		lblAnfitrion = new JLabel( data[0][5].toString() );
+		lblAnfitrion = new JLabel( "" );
 		lblAnfitrion.setIcon(new ImageIcon(PartidaIniciada.class.getResource("/img/usuario.png")));
 		lblAnfitrion.setForeground(new Color(29, 29, 27));
 		lblAnfitrion.setFont(new Font("Oxygen", Font.BOLD, 14));
 		lblAnfitrion.setBounds(425, 149, 183, 26);
 		add(lblAnfitrion);
 		
-		lblJugadores = new JLabel( data[0][6].toString() );
+		lblJugadores = new JLabel( "" );
 		lblJugadores.setIcon(new ImageIcon(PartidaIniciada.class.getResource("/img/equipo.png")));
 		lblJugadores.setForeground(new Color(29, 29, 27));
 		lblJugadores.setFont(new Font("Oxygen", Font.BOLD, 14));
 		lblJugadores.setBounds(425, 178, 183, 26);
 		add(lblJugadores);
 
-		lblDuración = new JLabel( data[0][3].toString() + "'" );
+		lblDuración = new JLabel( "" );
 		lblDuración.setIcon(new ImageIcon(PartidaIniciada.class.getResource("/img/repetir.png")));
 		lblDuración.setForeground(new Color(29, 29, 27));
 		lblDuración.setFont(new Font("Oxygen", Font.BOLD, 14));
 		lblDuración.setBounds(425, 207, 183, 26);
 		add(lblDuración);
 		
-		lblFecha = new JLabel( data[0][4].toString() );
+		lblFecha = new JLabel( "" );
 		lblFecha.setIcon(new ImageIcon(PartidaIniciada.class.getResource("/img/calendario.png")));
 		lblFecha.setForeground(new Color(29, 29, 27));
 		lblFecha.setFont(new Font("Oxygen", Font.BOLD, 14));
 		lblFecha.setBounds(425, 236, 183, 26);
 		add(lblFecha);
 		
-		lblEstado = new JLabel( data[0][7].toString() );
+		lblEstado = new JLabel( "" );
 		lblEstado.setIcon(new ImageIcon(PartidaIniciada.class.getResource("/img/ajustes.png")));
 		lblEstado.setForeground(new Color(29, 29, 27));
 		lblEstado.setFont(new Font("Oxygen", Font.BOLD, 14));
 		lblEstado.setBounds(425, 265, 183, 26);
 		add(lblEstado);
 		
-		// Designamos el nombre de las columnas de la tabla
-		String[] columns_personajes = { "ID", "Nombre", "Personaje", "Raza", "Clase", "Expe", "Fuerza", "Destreza", "Constitucion", "Inteligencia", "Sabiduria", "Carisma" };
-
-		// Capturamos los datos de MySQL mediante una consulta
-		ResultSet rows_personajes = personaje.get_personajes();
-		ArrayList<Object[]> row_data_list_personajes = new ArrayList<>();
-
-		// Capturamos el número de filas del resultado de la consulta
-		try {
-			while ( rows_personajes.next() ) {
-
-				// Inicializamos un Objeto temporal donde almacenamos los datos de la fila
-				Object[] row_data = new Object[ columns_personajes.length ];
-
-				// Insertamos los datos
-                row_data[0] = rows_personajes.getInt( "cod" );
-                row_data[1] = rows_personajes.getString( "nombre" );
-                row_data[2] = rows_personajes.getString( "personaje" );
-                row_data[3] = rows_personajes.getString( "raza" );
-                row_data[4] = rows_personajes.getString( "clase" );
-				row_data[5] = rows_personajes.getInt( "expe" );
-                row_data[6] = rows_personajes.getString( "fuerza" );
-                row_data[7] = rows_personajes.getString( "destreza" );
-                row_data[8] = rows_personajes.getString( "constitucion" );
-				row_data[9] = rows_personajes.getInt( "inteligencia" );
-                row_data[10] = rows_personajes.getString( "sabiduria" );
-				row_data[11] = rows_personajes.getInt( "carisma" );
-
-				// Añadimos los datos al arrayList final
-				row_data_list_personajes.add( row_data );
-			}
-
-		} catch ( SQLException e ) {
-			e.printStackTrace();
-		}
-
-		// Pasamos los datos al Objeto final que insertaremos en la tabla
-		Object[][] data_personajes = new Object[ row_data_list_personajes.size() ][ columns_personajes.length ];
-		row_data_list_personajes.toArray( data_personajes );
-		
 		//PERSONAJE DETALLES
 		
-		lblNombrePersonaje = new JLabel( data_personajes[0][1].toString() ); // *Añadir listeners
+		lblNombrePersonaje = new JLabel( "" ); // *Añadir listeners
 		lblNombrePersonaje.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNombrePersonaje.setForeground(new Color(29, 29, 27));
 		lblNombrePersonaje.setFont(new Font("Open Sans", Font.BOLD, 18));
-		lblNombrePersonaje.setBounds(399, 322, 78, 14);
+		lblNombrePersonaje.setBounds(318, 322, 163, 14);
 		add(lblNombrePersonaje);
 		
 		// Iconos
@@ -290,7 +203,6 @@ public class PartidaIniciada extends JPanel {
 
 		// Barra progreso experiencia
 		pbExp = new JProgressBar();
-		pbExp.setValue( Integer.parseInt( data_personajes[0][5].toString() ) );
 		pbExp.setBackground(new Color(242, 242, 242));
 		pbExp.setForeground(new Color(52, 75, 89));
 		pbExp.setFont(new Font("Oxygen", Font.PLAIN, 11));
@@ -300,7 +212,6 @@ public class PartidaIniciada extends JPanel {
 
 		// Barra progreso fuerza
 		pbFuerza = new JProgressBar();
-		pbFuerza.setValue( Integer.parseInt( data_personajes[0][6].toString() ) );
 		pbFuerza.setBackground(new Color(242, 242, 242));
 		pbFuerza.setForeground(new Color(52, 75, 89));
 		pbFuerza.setFont(new Font("Oxygen", Font.PLAIN, 11));
@@ -310,7 +221,6 @@ public class PartidaIniciada extends JPanel {
 
 		// Barra progreso destreza
 		pbDestreza = new JProgressBar();
-		pbDestreza.setValue( Integer.parseInt( data_personajes[0][7].toString() ) );
 		pbDestreza.setBackground(new Color(242, 242, 242));
 		pbDestreza.setForeground(new Color(52, 75, 89));
 		pbDestreza.setFont(new Font("Oxygen", Font.PLAIN, 11));
@@ -320,7 +230,6 @@ public class PartidaIniciada extends JPanel {
 
 		// Barra progreso constitución
 		pbConstitucion = new JProgressBar();
-		pbConstitucion.setValue( Integer.parseInt( data_personajes[0][8].toString() ) );
 		pbConstitucion.setBackground(new Color(242, 242, 242));
 		pbConstitucion.setForeground(new Color(52, 75, 89));
 		pbConstitucion.setFont(new Font("Oxygen", Font.PLAIN, 11));
@@ -330,7 +239,6 @@ public class PartidaIniciada extends JPanel {
 
 		// Barra progreso inteligencia
 		pbInteligencia = new JProgressBar();
-		pbInteligencia.setValue( Integer.parseInt( data_personajes[0][9].toString() ) );
 		pbInteligencia.setBackground(new Color(242, 242, 242));
 		pbInteligencia.setForeground(new Color(52, 75, 89));
 		pbInteligencia.setFont(new Font("Oxygen", Font.PLAIN, 11));
@@ -340,7 +248,6 @@ public class PartidaIniciada extends JPanel {
 
 		// Barra progreso sabiduría
 		pbSabiduria = new JProgressBar();
-		pbSabiduria.setValue( Integer.parseInt( data_personajes[0][10].toString() ) );
 		pbSabiduria.setBackground(new Color(242, 242, 242));
 		pbSabiduria.setForeground(new Color(52, 75, 89));
 		pbSabiduria.setFont(new Font("Oxygen", Font.PLAIN, 11));
@@ -350,7 +257,6 @@ public class PartidaIniciada extends JPanel {
 
 		// Barra progreso carisma
 		pbCarisma = new JProgressBar();
-		pbCarisma.setValue( Integer.parseInt( data_personajes[0][11].toString() ) );
 		pbCarisma.setBackground(new Color(242, 242, 242));
 		pbCarisma.setForeground(new Color(52, 75, 89));
 		pbCarisma.setFont(new Font("Oxygen", Font.PLAIN, 11));
@@ -366,25 +272,23 @@ public class PartidaIniciada extends JPanel {
 		add(lblIconoPersn);
 
 		// Etiqueta raza
-		lblRaza = new JLabel(data_personajes[0][3].toString()); // *Añadir listeners
+		lblRaza = new JLabel("Raza"); // *Añadir listeners
+		lblRaza = new JLabel(""); // *Añadir listeners
 		lblRaza.setForeground(new Color(29, 29, 27));
 		lblRaza.setHorizontalAlignment(SwingConstants.CENTER);
 		lblRaza.setFont(new Font("Open Sans", Font.BOLD, 16));
-		lblRaza.setBounds(496, 513, 78, 14);
+		lblRaza.setBounds(481, 502, 112, 22);
 		add(lblRaza);
 
 		// Etiqueta clase
-		lblClase = new JLabel(data_personajes[0][4].toString()); // *Añadir listeners
+		lblClase = new JLabel("Clase"); // *Añadir listeners
+		lblClase = new JLabel(""); // *Añadir listeners
 		lblClase.setForeground(new Color(29, 29, 27));
 		lblClase.setHorizontalAlignment(SwingConstants.CENTER);
 		lblClase.setFont(new Font("Open Sans", Font.BOLD, 16));
-		lblClase.setBounds(496, 544, 78, 14);
+		lblClase.setBounds(481, 533, 112, 22);
 		add(lblClase);
 		
-	}
-
-	public void setListener( PartidaIniciadaListener listener ) {
-		//btnSeleccionar.addActionListener( listener );
 	}
 
 	public JLabel getLblImagen() {
@@ -658,23 +562,5 @@ public class PartidaIniciada extends JPanel {
 	public void setPbCarisma(JProgressBar pbCarisma) {
 		this.pbCarisma = pbCarisma;
 	}
-
-	public Partida getPartida() {
-		return partida;
-	}
-
-	public void setPartida(Partida partida) {
-		this.partida = partida;
-	}
-
-	public Personaje getPersonaje() {
-		return personaje;
-	}
-
-	public void setPersonaje(Personaje personaje) {
-		this.personaje = personaje;
-	}
-	
-	
 
 }
