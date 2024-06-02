@@ -61,6 +61,7 @@ public class VerPersonajesListener extends Listener implements ActionListener {
 	            menu.cargarPanel(home);
 	        } else if (buttonName.equals("EDITAR")) {
 	            mysql.editar_personaje(Integer.parseInt(vp.getIdLbl().getText()), user, ep, esMaster, menu);
+	            menu.cargarPanel(ep);
 	        } else if (buttonName.equals("BORRAR")) {
 	            if (menu.mostrarMensajeConfirmborrado()) {
 	                mysql.borrar_personaje(user, vp);

@@ -740,8 +740,6 @@ public class Model {
 	        ep.getSpinnerInteligencia().setEnabled(true);
 	        ep.getSpinnerSabiduria().setEnabled(true);
 	    }
-
-	    menu.cargarPanel(ep);
 	}
 
 	
