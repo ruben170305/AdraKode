@@ -5,8 +5,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 import model.Model;
@@ -15,7 +17,7 @@ import model.Personaje;
 import model.Usuario;
 import views.*;
 
-public class VerPartidaListener extends Listener implements ActionListener {
+public class VerPartidaListener extends Listener implements ActionListener, ListSelectionListener {
 	
 	
 	private PartidaIniciada pIniciada;
@@ -31,6 +33,8 @@ public class VerPartidaListener extends Listener implements ActionListener {
 		this.pIniciada = pIniciada;
 		this.vp = vp;
 		this.user = user;
+		
+		vp.getTable().getSelectionModel().addListSelectionListener(this);
 	}
 	
 	public void transfer_table_partidas() {
@@ -38,7 +42,7 @@ public class VerPartidaListener extends Listener implements ActionListener {
 		Object[][] data = mysql.get_table_partidas();
 		
 		// Designamos el nombre de las columnas de la tabla
-		String[] columns = { "ID", "Nombre", "Ambientación", "Duración", "Fecha", "Anfitrion", "Nº jugadores", "Estado", "ID jugador" };
+		String[] columns = { "ID", "Nombre", "Ambientación", "Duración", "Fecha", "Anfitrion", "Nº jugadores", "Estado" };
 		
         DefaultTableModel template = new DefaultTableModel(data, columns);
         vp.getTable().setModel(template);
@@ -54,10 +58,16 @@ public class VerPartidaListener extends Listener implements ActionListener {
 				// Capturamos la fila y el valor del ID de la partida
 				int selected_row = vp.getTable().getSelectedRow();
 				int partida_id = Integer.parseInt( vp.getTable().getValueAt( selected_row, 0 ).toString() );
-				int jugador_id = Integer.parseInt( vp.getTable().getValueAt( selected_row, 8 ).toString() );
+				int jugador_id = Integer.parseInt( vp.getIdJugadorLbl().getText() );
 				
 				// Insertamos el registro y cambiamos la vista a la de PartidaIniciada
-				mysql.insertar_partida( partida_id, jugador_id );
+				try {
+					mysql.insertar_partida( partida_id, jugador_id );
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
 				mysql.jugar_partida( partida_id, jugador_id, pIniciada, user, menu );
 				break;
 			default:
@@ -71,23 +81,19 @@ public class VerPartidaListener extends Listener implements ActionListener {
 	 * @param listener Recibe el listener con el que quieres asignar los objetos
 	 */
 
-	 public void cargarDatosEnComboBox() {
-		 vp.getComboBoxJugador().removeAllItems();
-		ResultSet rs = mysql.get_personajes( user );
-		try {
-			while (rs.next()) {
-				vp.getIdJugadorLbl().setText( String.valueOf( rs.getInt( "cod" ) ) );
-				vp.getComboBoxJugador().addItem(rs.getString("nombre"));
-			}
-		} catch (SQLException e) {
-			
-			e.printStackTrace();
-		}
+    public void cargarDatosEnComboBox() {
+        vp.getComboBoxJugador().removeAllItems();
+        ArrayList<Personaje> personajes = mysql.get_personajes(user);
+        
+        for (Personaje personaje : personajes) {
+            vp.getIdJugadorLbl().setText(String.valueOf(personaje.getCod()));
+            vp.getComboBoxJugador().addItem(personaje.getNombre());
+        }
+    }
 
-	}
 	 
 	public void valueChanged(ListSelectionEvent e) {
-
+		
 		// Capturamos la fila y el valor del ID de la partida
 		int selected_row = vp.getTable().getSelectedRow();
 
@@ -99,7 +105,6 @@ public class VerPartidaListener extends Listener implements ActionListener {
 		vp.getLblDuración().setText( vp.getTable().getValueAt( selected_row, 3 ).toString() + "'" );
 		vp.getLblFecha().setText( vp.getTable().getValueAt( selected_row, 4 ).toString() );
 		vp.getLblEstado().setText( vp.getTable().getValueAt( selected_row, 7 ).toString() );
-		vp.getLblIdJugador().setText( vp.getTable().getValueAt( selected_row, 8 ).toString() );
 	}
     
 }

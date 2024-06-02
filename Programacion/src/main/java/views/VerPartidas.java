@@ -60,11 +60,11 @@ public class VerPartidas extends JPanel {
 		add(separator);
 		
 		// Designamos el nombre de las columnas de la tabla
-		String[] columns = { "ID", "Nombre", "Ambientación", "Duración", "Fecha", "Anfitrion", "Nº jugadores", "Estado", "ID jugador" };
+		String[] columns = { "ID", "Nombre", "Ambientación", "Duración", "Fecha", "Anfitrion", "Nº jugadores", "Estado" };
 
 		// Insertamos los datos de la tabla
 		Object[][] data = {
-				{ "1", "Partida 1", "Ambientacion 1", "Duracion 1", "Fecha 1", "Anfitrion 1", "4", "Finalizado", "1"}
+				{ "1", "Partida 1", "Ambientacion 1", "Duracion 1", "Fecha 1", "Anfitrion 1", "4", "Finalizado"}
 		};
 		
 		// Creamos una plantilla para la tabla

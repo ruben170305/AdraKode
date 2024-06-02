@@ -1,6 +1,4 @@
 package model;
-
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class Personaje {
@@ -46,29 +44,6 @@ public class Personaje {
         this.carisma        = carisma;
         this.user           = user;
     }
-
-	public ResultSet get_personajes_by_cod_miembro() {
-
-		// Inicializamos el valor a devolver
-		ResultSet rs = null;
-		
-		// Inicializamos la sesión en MySQL
-		Model mysql = new Model();
-		mysql.get_connection();
-
-		// Realizamos una consulta para capturar todos los personajes
-		String sql = "select * from personaje where cod_miembro=" + user.getUser_id();
-		
-		try {
-			rs = mysql.Model_query( sql );
-		} catch ( SQLException sqle ) {
-			sqle.printStackTrace();
-		}
-
-		return rs;
-
-	}
-
 
     // Getters
     public int getCod() {

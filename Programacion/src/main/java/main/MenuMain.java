@@ -136,7 +136,6 @@ public class MenuMain {
             ePartida.setListener( ePartidaListener );
             vPartidasMaster.setListener( vPartidasMasterListener );
         } else {
-        	System.out.println("okkk");
             VerPartidaListener ver_partidas_listener = new VerPartidaListener( menu, home, mysql, pIniciada, vPartidas, user );
             vPartidas.setListener( ver_partidas_listener );
         }

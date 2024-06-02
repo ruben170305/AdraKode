@@ -32,7 +32,7 @@ public class CrearPersonajeListener extends Listener implements ActionListener {
 
 			// Renderizamos de nuevo la ventana del listado de partidas
 			if( renderize ) {
-				VerPersonajes vPersonajes = new VerPersonajes( user, false );
+				VerPersonajes vPersonajes = new VerPersonajes( user, true );
 				VerPersonajesListener vPersonajesListener = new VerPersonajesListener( menu, home, mysql, user, vPersonajes );
 				vPersonajes.setListener( vPersonajesListener );
 				// menu.getListener_menu().getVPartidasMaster().dispose();

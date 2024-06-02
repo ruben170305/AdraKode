@@ -34,7 +34,7 @@ public class VerPartidaMasterListener extends Listener implements ActionListener
 		Object[][] data = mysql.get_table_partidas();
 		
 		// Designamos el nombre de las columnas de la tabla
-		String[] columns = { "ID", "Nombre", "Ambientación", "Duración", "Fecha", "Anfitrion", "Nº jugadores", "Estado", "ID jugador" };
+		String[] columns = { "ID", "Nombre", "Ambientación", "Duración", "Fecha", "Anfitrion", "Nº jugadores", "Estado" };
 		
         DefaultTableModel template = new DefaultTableModel(data, columns);
         vp.getTable().setModel(template);
@@ -83,7 +83,6 @@ public class VerPartidaMasterListener extends Listener implements ActionListener
 		vp.getLblDuración().setText( vp.getTable().getValueAt( selected_row, 3 ).toString() + "'" );
 		vp.getLblFecha().setText( vp.getTable().getValueAt( selected_row, 4 ).toString() );
 		vp.getLblEstado().setText( vp.getTable().getValueAt( selected_row, 7 ).toString() );
-		vp.getLblIdJugador().setText( vp.getTable().getValueAt( selected_row, 8 ).toString() );
 	}
 
 }

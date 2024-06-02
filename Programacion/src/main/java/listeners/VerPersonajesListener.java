@@ -2,8 +2,8 @@ package listeners;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.util.ArrayList;
+
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 
@@ -18,12 +18,20 @@ public class VerPersonajesListener extends Listener implements ActionListener {
 	private Usuario user;
 	private VerPersonajes vp;
 	private boolean esMaster;
-
+	
 	// Constructor del Listener
 	public VerPersonajesListener(Menu menu, Home home, Model mysql, Usuario user, VerPersonajes vp) {
 		super( menu, home, mysql );
 		this.user = user;
 		this.vp = vp;
+	}
+
+	// Constructor del Listener
+	public VerPersonajesListener(Menu menu, Home home, Model mysql, Usuario user, EditarPersonaje ep, VerPersonajes vp) {
+		super( menu, home, mysql );
+		this.user = user;
+		this.vp = vp;
+		this.ep = ep;
 	}
 
 	// Constructor del Listener
@@ -42,62 +50,55 @@ public class VerPersonajesListener extends Listener implements ActionListener {
 	 */
 	@Override
 	public void actionPerformed(ActionEvent ae) {
-		Object source = ae.getSource();
+	    Object source = ae.getSource();
 
-		if (source instanceof JButton) {
-			JButton sourceButton = (JButton) source;
-			String buttonName = sourceButton.getName();
+	    if (source instanceof JButton) {
+	        JButton sourceButton = (JButton) source;
+	        String buttonName = sourceButton.getName();
 
-			// Dependiendo del texto del botón realizamos una acción u otra
-			if (ae.getActionCommand().equals("SELECCIONAR") || ae.getActionCommand().equals("VOLVER")) {
-				menu.cargarPanel(home);
-			} else if (buttonName.equals("EDITAR")) {
-				mysql.editar_personaje( Integer.parseInt( vp.getIdLbl().getText() ), user, ep, esMaster, menu );
-			} else if (buttonName.equals("BORRAR")) {
-				if (menu.mostrarMensajeConfirmborrado()) {
-					mysql.borrar_personaje( user, vp );
-					menu.cargarPanel(home);
-				}
-			}
+	        // Dependiendo del texto del botón realizamos una acción u otra
+	        if (ae.getActionCommand().equals("SELECCIONAR") || ae.getActionCommand().equals("VOLVER")) {
+	            menu.cargarPanel(home);
+	        } else if (buttonName.equals("EDITAR")) {
+	            mysql.editar_personaje(Integer.parseInt(vp.getIdLbl().getText()), user, ep, esMaster, menu);
+	        } else if (buttonName.equals("BORRAR")) {
+	            if (menu.mostrarMensajeConfirmborrado()) {
+	                mysql.borrar_personaje(user, vp);
+	                menu.cargarPanel(home);
+	            }
+	        }
 
-		} else if (source instanceof JComboBox) {
+	    } else if (source instanceof JComboBox) {
+	        // Capturamos el ComboBox y el Item seleccionado
+	        JComboBox<?> comboBox = (JComboBox<?>) source;
+	        String selected_index = (String) comboBox.getSelectedItem();
 
-			// Capturamos el ComboBox y el Item seleccionado
-			JComboBox<?> comboBox = (JComboBox<?>) source;
-			String selected_index = (String) comboBox.getSelectedItem();
+	        if (selected_index != null) {
+	            // Capturamos los datos de la DB
+	            ArrayList<Personaje> personajes = mysql.get_personajes(user);
 
-			if (selected_index != null) {
+	            for (Personaje personaje : personajes) {
+	                String nombre = personaje.getNombre();
+	                if (selected_index.equals(nombre)) {
+	                    vp.getLblClase().setText(personaje.getClase());
+	                    vp.getLblRaza().setText(personaje.getRaza());
+	                    vp.getIdLbl().setText(String.valueOf(personaje.getCod()));
+	                    vp.getPbExp().setValue(personaje.getExpe());
+	                    vp.getPbFuerza().setValue(personaje.getFuerza());
+	                    vp.getPbDestreza().setValue(personaje.getDestreza());
+	                    vp.getPbConstitucion().setValue(personaje.getConstitucion());
+	                    vp.getPbInteligencia().setValue(personaje.getInteligencia());
+	                    vp.getPbSabiduria().setValue(personaje.getSabiduria());
+	                    vp.getPbCarisma().setValue(personaje.getCarisma());
 
-				// Capturamos los datos de la DB
-				ResultSet rs = mysql.get_personajes( user );
-
-				try {
-					while (rs.next()) {
-
-						String nombre = rs.getString("nombre");
-						if (selected_index.equals(nombre)) {
-
-							vp.getLblClase().setText(rs.getString("clase"));
-							vp.getLblRaza().setText(rs.getString("raza"));
-							vp.getIdLbl().setText(String.valueOf( rs.getInt( "cod" ) ));
-							vp.getPbExp().setValue(rs.getInt("expe"));
-							vp.getPbFuerza().setValue(rs.getInt("fuerza"));
-							vp.getPbDestreza().setValue(rs.getInt("destreza"));
-							vp.getPbConstitucion().setValue(rs.getInt("constitucion"));
-							vp.getPbInteligencia().setValue(rs.getInt("inteligencia"));
-							vp.getPbSabiduria().setValue(rs.getInt("sabiduria"));
-							vp.getPbCarisma().setValue(rs.getInt("carisma"));
-
-							// Sale del bucle una vez que se encuentra el ítem
-							break;
-						}
-					}
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		}
+	                    // Sale del bucle una vez que se encuentra el ítem
+	                    break;
+	                }
+	            }
+	        }
+	    }
 	}
+
 	
 	/**
 	 * Metodo que asigna el listener
@@ -106,23 +107,20 @@ public class VerPersonajesListener extends Listener implements ActionListener {
 	 */
 
 	public void cargarDatosEnComboBox() {
-		vp.getComboBoxSeleccionar().removeAllItems();
-		ResultSet rs = null;
-		if (esMaster) {
-			rs = mysql.get_personajes_all();
-		} else {
-			rs = mysql.get_personajes( user );
-		}
-		
-		try {
-			while (rs.next()) {
-				vp.getIdLbl().setText( String.valueOf( rs.getInt( "cod" ) ) );
-				vp.getComboBoxSeleccionar().addItem(rs.getString("nombre"));
-			}
-		} catch (SQLException e) {
-			
-			e.printStackTrace();
-		}
+	    vp.getComboBoxSeleccionar().removeAllItems();
+	    ArrayList<Personaje> personajes;
+	    
+	    if (esMaster) {
+	        personajes = mysql.get_personajes_all();
+	    } else {
+	        personajes = mysql.get_personajes(user);
+	    }
+	    
+	    for (Personaje personaje : personajes) {
+	        vp.getIdLbl().setText(String.valueOf(personaje.getCod()));
+	        vp.getComboBoxSeleccionar().addItem(personaje.getNombre());
+	    }
 	}
+
 
 }
