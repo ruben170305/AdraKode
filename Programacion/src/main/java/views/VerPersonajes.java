@@ -2,15 +2,10 @@ package views;
 
 import java.awt.*;
 import javax.swing.border.*;
-
 import listeners.VerPersonajesListener;
 import model.Personaje;
 import model.Usuario;
-
 import javax.swing.*;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
 
 public class VerPersonajes extends JPanel {
 

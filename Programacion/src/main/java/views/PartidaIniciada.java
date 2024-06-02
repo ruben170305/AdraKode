@@ -5,11 +5,7 @@ import javax.swing.*;
 import javax.swing.border.LineBorder;
 import listeners.*;
 import model.*;
-
 import java.awt.*;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
 
 public class PartidaIniciada extends JPanel {
 	private JLabel lblImagen;
