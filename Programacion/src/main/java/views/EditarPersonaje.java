@@ -1,12 +1,9 @@
 package views;
 
 import javax.swing.*;
-
 import java.awt.*;
-
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
-
 import listeners.EditarPersonajesListener;
 
 public class EditarPersonaje extends JPanel {
@@ -541,8 +538,4 @@ public class EditarPersonaje extends JPanel {
 	public void setLblId(JLabel lblId) {
 		this.lblId = lblId;
 	}
-	
-	
-    
-    
 }

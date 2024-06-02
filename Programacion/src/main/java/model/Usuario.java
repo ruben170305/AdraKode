@@ -9,10 +9,7 @@ public class Usuario {
 	private int cod;
 
 	// Constructor
-	public Usuario() {
-		
-	}
-
+	public Usuario() {}
 	public boolean login( String usuario, String pass, Usuario user ) throws SQLException {
 
 		boolean found = false;
@@ -21,7 +18,7 @@ public class Usuario {
 		Model mysql = new Model();
 		mysql.get_connection();
 
-		// Consulta SQLBob
+		// Consulta SQL
 		String sql = "select * from miembro where nombre = '" + usuario + "'";
 		ResultSet rs = mysql.Model_query( sql );
 

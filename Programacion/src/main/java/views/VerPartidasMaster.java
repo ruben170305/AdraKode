@@ -16,13 +16,10 @@ import java.util.ArrayList;
 
 public class VerPartidasMaster extends JPanel {
 	private JButton btnEditar, btnBorrar;
-	private JLabel lblIdPartida, lblTituloPartida, lblAnfitrion, lblJugadores, lblDuración, lblFecha, lblEstado, lblTitulo, lblImagen;
-	private Partida partida;
+	private JLabel lblIdPartida, lblTituloPartida, lblAnfitrion, lblJugadores, lblDuración, lblFecha, lblEstado, lblTitulo, lblImagen, lblIdJugador;
 	private JTable table;
-
+	
 	public VerPartidasMaster() {
-		this.partida = new Partida();
-		
 		initialize_components();
 	}
 
@@ -57,47 +54,13 @@ public class VerPartidasMaster extends JPanel {
 		add(separator);
 		
 		// Designamos el nombre de las columnas de la tabla
-		String[] columns = { "ID", "Nombre", "Ambientación", "Duración", "Fecha", "Anfitrion", "Nº jugadores", "Estado" };
+		String[] columns = { "ID", "Nombre", "Ambientación", "Duración", "Fecha", "Anfitrion", "Nº jugadores", "Estado", "ID jugador" };
 
-		// Capturamos los datos de MySQL mediante una consulta
-		ResultSet rows = partida.get_partidas();
-		ArrayList<Object[]> row_data_list = new ArrayList<>();
-
-		// Capturamos el número de filas del resultado de la consulta
-		try {
-			while ( rows.next() ) {
-
-				// Inicializamos un Objeto temporal donde almacenamos los datos de la fila
-				Object[] row_data = new Object[ columns.length ];
-
-				// Insertamos los datos
-                row_data[0] = rows.getString( "partida_id" );
-                row_data[1] = rows.getString( "nombre" );
-                row_data[2] = rows.getString( "ambientacion" );
-                row_data[3] = rows.getString( "duracion" );
-                row_data[4] = rows.getString( "fecha" );
-				row_data[6] = rows.getInt( "numero_jugadores" );
-
-				// Formateo de campos
-				String anfitrion = rows.getString( "nombre_anfitrion" ) + " " + rows.getString( "apellidos_anfitrion" );
-				row_data[5] = anfitrion;
-
-				// Determinamos el estado
-				String en_curso_text = ( Integer.parseInt( rows.getString( "en_curso" ) ) == 1 ) ? "En curso" : "Finalizada";
-                row_data[7] = en_curso_text;
-
-				// Añadimos los datos al arrayList final
-				row_data_list.add( row_data );
-			}
-
-		} catch ( SQLException e ) {
-			e.printStackTrace();
-		}
-
-		// Pasamos los datos al Objeto final que insertaremos en la tabla
-        Object[][] data = new Object[ row_data_list.size() ][ columns.length ];
-		row_data_list.toArray( data );
-
+		// Insertamos los datos de la tabla
+		Object[][] data = { 
+				{ "1", "Partida 1", "Ambientacion 1", "Duracion 1", "Fecha 1", "Anfitrion 1", "4", "Finalizado", "1"}
+		};
+		
 		// Creamos una plantilla para la tabla
 		DefaultTableModel template = new DefaultTableModel(data, columns);
 		table = new JTable(template);
@@ -116,12 +79,12 @@ public class VerPartidasMaster extends JPanel {
 		add(lblImagen);
 		
 		// Etiquetas
-		lblIdPartida = new JLabel( data[0][0].toString() );
+		lblIdPartida = new JLabel( "" );
 		lblIdPartida.setHorizontalAlignment(SwingConstants.CENTER);
 		lblIdPartida.setBounds(0, 0, 0, 0);
 		add( lblIdPartida );
 
-		lblTituloPartida = new JLabel(data[0][1].toString());
+		lblTituloPartida = new JLabel("");
 		lblTituloPartida.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTituloPartida.setIcon(null);
 		lblTituloPartida.setForeground(new Color(29, 29, 27));
@@ -129,35 +92,35 @@ public class VerPartidasMaster extends JPanel {
 		lblTituloPartida.setBounds(302, 121, 195, 26);
 		add(lblTituloPartida);
 		
-		lblAnfitrion = new JLabel( data[0][5].toString() );
+		lblAnfitrion = new JLabel( "" );
 		lblAnfitrion.setIcon(new ImageIcon(VerPartidasMaster.class.getResource("/img/usuario.png")));
 		lblAnfitrion.setForeground(new Color(29, 29, 27));
 		lblAnfitrion.setFont(new Font("Oxygen", Font.BOLD, 14));
 		lblAnfitrion.setBounds(425, 164, 183, 26);
 		add(lblAnfitrion);
 		
-		lblJugadores = new JLabel( data[0][6].toString() );
+		lblJugadores = new JLabel( "" );
 		lblJugadores.setIcon(new ImageIcon(VerPartidasMaster.class.getResource("/img/equipo.png")));
 		lblJugadores.setForeground(new Color(29, 29, 27));
 		lblJugadores.setFont(new Font("Oxygen", Font.BOLD, 14));
 		lblJugadores.setBounds(425, 193, 183, 26);
 		add(lblJugadores);
 
-		lblDuración = new JLabel( data[0][3].toString() );
+		lblDuración = new JLabel( "" );
 		lblDuración.setIcon(new ImageIcon(VerPartidasMaster.class.getResource("/img/repetir.png")));
 		lblDuración.setForeground(new Color(29, 29, 27));
 		lblDuración.setFont(new Font("Oxygen", Font.BOLD, 14));
 		lblDuración.setBounds(425, 222, 183, 26);
 		add(lblDuración);
 		
-		lblFecha = new JLabel( data[0][4].toString() );
+		lblFecha = new JLabel( "" );
 		lblFecha.setIcon(new ImageIcon(VerPartidasMaster.class.getResource("/img/calendario.png")));
 		lblFecha.setForeground(new Color(29, 29, 27));
 		lblFecha.setFont(new Font("Oxygen", Font.BOLD, 14));
 		lblFecha.setBounds(425, 251, 183, 26);
 		add(lblFecha);
 		
-		lblEstado = new JLabel( data[0][7].toString() );
+		lblEstado = new JLabel( "" );
 		lblEstado.setIcon(new ImageIcon(VerPartidasMaster.class.getResource("/img/ajustes.png")));
 		lblEstado.setForeground(new Color(29, 29, 27));
 		lblEstado.setFont(new Font("Oxygen", Font.BOLD, 14));
@@ -187,27 +150,12 @@ public class VerPartidasMaster extends JPanel {
 		btnBorrar.setBackground(new Color(29, 29, 27));
 		btnBorrar.setBounds(404, 482, 83, 36);
 		add(btnBorrar);
-
-		// Añadimos un listener a cada fila de la tabla de partidas
-		table.getSelectionModel().addListSelectionListener( new ListSelectionListener() {
-			
-			public void valueChanged( ListSelectionEvent e ) {
-
-				// Capturamos la fila y el valor del ID de la partida
-				int selected_row = table.getSelectedRow();
-
-				// Actualizamos los JLabel con la información de la fila seleccionada
-				lblIdPartida.setText( table.getValueAt( selected_row, 0 ).toString() );
-				lblTituloPartida.setText( table.getValueAt( selected_row, 1 ).toString() );
-				lblAnfitrion.setText( table.getValueAt( selected_row, 5 ).toString() );
-				lblJugadores.setText( table.getValueAt( selected_row, 6 ).toString() );
-				lblDuración.setText( table.getValueAt( selected_row, 3 ).toString() + "'" );
-				lblFecha.setText( table.getValueAt( selected_row, 4 ).toString() );
-				lblEstado.setText( table.getValueAt( selected_row, 7 ).toString() );
-			}
-
-		} );
-
+		
+		lblIdJugador = new JLabel( "" );
+		lblIdJugador.setHorizontalAlignment(SwingConstants.CENTER);
+		lblIdJugador.setBounds(0, 0, 0, 0);
+		add( lblIdJugador );
+		
 	}
 	/**
 	 * Metodo que asigna el listener
@@ -216,7 +164,8 @@ public class VerPartidasMaster extends JPanel {
 	public void setListener( VerPartidaMasterListener listener ) {
 		btnEditar.addActionListener( listener );
 		btnBorrar.addActionListener( listener );
-		table.getSelectionModel().addListSelectionListener(listener);
+
+        listener.transfer_table_partidas();
 	}
 
 	public JLabel getIdPartidaLbl() {
@@ -315,14 +264,6 @@ public class VerPartidasMaster extends JPanel {
 		this.lblImagen = lblImagen;
 	}
 
-	public Partida getPartida() {
-		return partida;
-	}
-
-	public void setPartida(Partida partida) {
-		this.partida = partida;
-	}
-
 	public JTable getTable() {
 		return table;
 	}
@@ -330,5 +271,14 @@ public class VerPartidasMaster extends JPanel {
 	public void setTable(JTable table) {
 		this.table = table;
 	}
+	
+	public JLabel getLblIdJugador() {
+		return lblIdJugador;
+	}
+
+	public void setLblIdJugador(JLabel lblIdJugador) {
+		this.lblIdJugador = lblIdJugador;
+	}
+
 	
 }
