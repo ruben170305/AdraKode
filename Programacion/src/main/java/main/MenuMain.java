@@ -58,7 +58,7 @@ public class MenuMain {
                 // Inicializamos solo lo necesario para el login
                 user = new Usuario();
                 login = new VentanaPrincipalLogin( user );
-                registro = new RegistroMiembro();
+                registro = new RegistroMiembro(login);
                 
                 // Configuramos el listener para el login
                 LoginListener login_listener = new LoginListener( login, registro );

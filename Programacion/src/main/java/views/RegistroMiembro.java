@@ -21,11 +21,13 @@ public class RegistroMiembro extends JFrame {
 	private Usuario user;
 	private JTextField expediente;
 	private JTextField estudios;
+	private VentanaPrincipalLogin login;
 	//private LoginListener listener;
 
 	// private VentanaPrincipalLogin listener;
-	public RegistroMiembro() {
+	public RegistroMiembro(VentanaPrincipalLogin login) {
 		super("Nuevo usuario | AdraKode");
+		this.login = login;
 		setBackground(new Color(242, 242, 242));
 		// listener = new VentanaPrincipalLogin(login);
 		setIcon();
@@ -183,13 +185,14 @@ public class RegistroMiembro extends JFrame {
 	 */
 	public void mostrarMensajeConfirm() {
 		int opcion = JOptionPane.showConfirmDialog(this, 
-				"¿Seguro que desea abandonar la aplicación?", 
-				"Confirmación de salida",
+				"¿Seguro que desea abandonar la pantalla de crear cuenta?", 
+				"Cancelar",
 				JOptionPane.YES_NO_OPTION,
 				JOptionPane.WARNING_MESSAGE);
 		
 		if (opcion == JOptionPane.YES_OPTION) {
-			System.exit(0);
+			dispose();
+			login.make_visible();
 		} 
 		
 	}
