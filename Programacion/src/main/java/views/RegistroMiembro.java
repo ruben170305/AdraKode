@@ -5,27 +5,28 @@ import javax.swing.*;
 import java.awt.*;
 import javax.swing.border.*;
 import listeners.LoginListener;
+import listeners.RegistroListener;
 import model.Usuario;
 
 import java.awt.event.*;
 import java.io.IOException;
 import java.io.InputStream;
 
-public class VentanaPrincipalLogin extends JFrame {
+public class RegistroMiembro extends JFrame {
 
 	private JLabel lblTitulo, usuarioIcono, contrasenaIcono, logoIcono;
 	private JTextField usuario;
 	private JPasswordField contraseña;
-	private JCheckBox administrador;
-	private JButton entrar, crearCuenta;
+	private JButton entrar;
 	private Usuario user;
+	private JTextField expediente;
+	private JTextField estudios;
 	//private LoginListener listener;
 
 	// private VentanaPrincipalLogin listener;
-	public VentanaPrincipalLogin(Usuario user) {
-		super("Login AdraKode");
+	public RegistroMiembro() {
+		super("Nuevo usuario | AdraKode");
 		setBackground(new Color(242, 242, 242));
-		this.user=user;
 		// listener = new VentanaPrincipalLogin(login);
 		setIcon();
 		initialize_components();
@@ -71,7 +72,7 @@ public class VentanaPrincipalLogin extends JFrame {
 		Border border = BorderFactory.createMatteBorder(0, 0, 2, 0, new Color(29, 29, 27));
 
 		// Titulo
-		lblTitulo = new JLabel("INICIAR SESIÓN");
+		lblTitulo = new JLabel("CREAR CUENTA");
 		lblTitulo.setForeground(new Color(29, 29, 27));
 		lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTitulo.setFont(new Font("Open Sans", Font.BOLD, 25));
@@ -90,7 +91,7 @@ public class VentanaPrincipalLogin extends JFrame {
 
 		// Logo
 		logoIcono = new JLabel();
-		logoIcono.setIcon(new ImageIcon(VentanaPrincipalLogin.class.getResource("/img/imagenLogin.png")));
+		logoIcono.setIcon(new ImageIcon(RegistroMiembro.class.getResource("/img/imagenLogin.png")));
 		logoIcono.setBounds(338, 131, 124, 142);
 		getContentPane().add(logoIcono);
 
@@ -99,15 +100,15 @@ public class VentanaPrincipalLogin extends JFrame {
 		usuario.setBackground(new Color(242, 242, 242));
 		usuario.setFont(new Font("Open Sans", Font.PLAIN, 11));
 		usuario.setForeground(new Color(29, 29, 27));
-		usuario.setBounds(315, 271, 205, 35);
+		usuario.setBounds(120, 271, 205, 35);
 		usuario.setBorder(border);
 		getContentPane().add(usuario);
 
 		// Icono usuario
 		usuarioIcono = new JLabel();
 		usuarioIcono.setHorizontalAlignment(SwingConstants.CENTER);
-		usuarioIcono.setIcon(new ImageIcon(VentanaPrincipalLogin.class.getResource("/img/IconoUsuario.png")));
-		usuarioIcono.setBounds(276, 271, 34, 45);
+		usuarioIcono.setIcon(new ImageIcon(RegistroMiembro.class.getResource("/img/IconoUsuario.png")));
+		usuarioIcono.setBounds(76, 271, 34, 45);
 		getContentPane().add(usuarioIcono);
 
 		// Campo contraseña
@@ -117,45 +118,55 @@ public class VentanaPrincipalLogin extends JFrame {
 		contraseña.setForeground(new Color(29, 29, 27));
 		contraseña.setBackground(new Color(242, 242, 242));
 		contraseña.setEchoChar('\u2022'); // Establece el carácter de ocultación
-		contraseña.setBounds(315, 327, 205, 35);
+		contraseña.setBounds(120, 327, 205, 35);
 		contraseña.setBorder(border);
 		getContentPane().add(contraseña);
 
 		// Icono contraseña
 		contrasenaIcono = new JLabel();
 		contrasenaIcono.setHorizontalAlignment(SwingConstants.CENTER);
-		contrasenaIcono.setIcon(new ImageIcon(VentanaPrincipalLogin.class.getResource("/img/IconoContraseña.png")));
-		contrasenaIcono.setBounds(274, 327, 34, 45);
+		contrasenaIcono.setIcon(new ImageIcon(RegistroMiembro.class.getResource("/img/IconoContraseña.png")));
+		contrasenaIcono.setBounds(74, 327, 34, 45);
 		getContentPane().add(contrasenaIcono);
-
-		// Checkbox admin
-		administrador = new JCheckBox("Game Master");
-		administrador.setName("gamemaster");
-		administrador.setHorizontalAlignment(SwingConstants.CENTER);
-		administrador.setForeground(new Color(29, 29, 27));
-		administrador.setFont(new Font("Open Sans", Font.BOLD, 12));
-		administrador.setBounds(297, 391, 189, 20);
-		getContentPane().add(administrador);
 		
 
 		// Botón entrar
-		entrar = new JButton("ENTRAR");
+		entrar = new JButton("CREAR CUENTA");
 		entrar.setFont(new Font("Oxygen", Font.BOLD, 17));
 		entrar.setForeground(new Color(242, 242, 242));
 		entrar.setBackground(new Color(29, 161, 242));
 		entrar.setOpaque(true);
 		entrar.setBorderPainted(false);
-		entrar.setBounds(297, 418, 209, 50);
+		entrar.setBounds(295, 475, 209, 50);
 		getContentPane().add(entrar);
 		
-		crearCuenta = new JButton("CREAR CUENTA");
-		crearCuenta.setOpaque(true);
-		crearCuenta.setForeground(new Color(242, 242, 242));
-		crearCuenta.setFont(new Font("Dialog", Font.BOLD, 17));
-		crearCuenta.setBorderPainted(false);
-		crearCuenta.setBackground(new Color(29, 161, 242));
-		crearCuenta.setBounds(297, 500, 209, 50);
-		getContentPane().add(crearCuenta);
+		expediente = new JTextField();
+		expediente.setBackground(new Color(242, 242, 242));
+		expediente.setFont(new Font("Open Sans", Font.PLAIN, 11));
+		expediente.setForeground(new Color(29, 29, 27));
+		expediente.setBorder(border);
+		expediente.setBounds(508, 271, 205, 35);
+		getContentPane().add(expediente);
+		
+		estudios = new JTextField();
+		estudios.setBackground(new Color(242, 242, 242));
+		estudios.setFont(new Font("Open Sans", Font.PLAIN, 11));
+		estudios.setForeground(new Color(29, 29, 27));
+		estudios.setBorder(border);
+		estudios.setBounds(508, 327, 205, 35);
+		getContentPane().add(estudios);
+		
+		JLabel expedienteIco = new JLabel();
+		expedienteIco.setIcon(new ImageIcon(RegistroMiembro.class.getResource("/img/expediente.png")));
+		expedienteIco.setHorizontalAlignment(SwingConstants.CENTER);
+		expedienteIco.setBounds(470, 261, 34, 45);
+		getContentPane().add(expedienteIco);
+		
+		JLabel estudiosIco = new JLabel();
+		estudiosIco.setIcon(new ImageIcon(RegistroMiembro.class.getResource("/img/estudios.png")));
+		estudiosIco.setHorizontalAlignment(SwingConstants.CENTER);
+		estudiosIco.setBounds(470, 327, 34, 45);
+		getContentPane().add(estudiosIco);
 
 	}
 
@@ -163,10 +174,8 @@ public class VentanaPrincipalLogin extends JFrame {
 	 * Método que asigna el listener
 	 * @param listener Recibe el listener que quieres asignar
 	 */
-	public void setListener(LoginListener listener) {
+	public void setListener(RegistroListener listener) {
 		entrar.addActionListener(listener);
-		administrador.addActionListener(listener);
-		crearCuenta.addActionListener(listener);
 	}
 
 	/**
@@ -244,10 +253,6 @@ public class VentanaPrincipalLogin extends JFrame {
 		return contraseña;
 	}
 
-	public JCheckBox getAdministrador() {
-		return administrador;
-	}
-
 	public JButton getEntrar() {
 		return entrar;
 	}
@@ -255,4 +260,14 @@ public class VentanaPrincipalLogin extends JFrame {
 	public Usuario getUser() {
 		return user;
 	}
+
+	public JTextField getExpediente() {
+		return expediente;
+	}
+
+	public JTextField getEstudios() {
+		return estudios;
+	}
+	
+	
 }

@@ -48,6 +48,7 @@ public class MenuMain {
 
     // Ventana de login
     static VentanaPrincipalLogin login;
+    static RegistroMiembro registro;
 
     public static void main( String[] args ) {
         EventQueue.invokeLater( new Runnable() {
@@ -57,13 +58,17 @@ public class MenuMain {
                 // Inicializamos solo lo necesario para el login
                 user = new Usuario();
                 login = new VentanaPrincipalLogin( user );
+                registro = new RegistroMiembro();
                 
                 // Configuramos el listener para el login
-                LoginListener login_listener = new LoginListener( login );
+                LoginListener login_listener = new LoginListener( login, registro );
                 login.setListener( login_listener );
+                RegistroListener registro_listener = new RegistroListener(registro, login);
+                registro.setListener(registro_listener);
 
                 // Hacemos visible el login
                 login.make_visible();
+                registro.dispose();
             }
         });
     }

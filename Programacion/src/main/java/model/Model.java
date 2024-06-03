@@ -857,6 +857,26 @@ public class Model {
         // Cargamos el menú
         menu.cargarPanel(pIniciada);
     }
+    
+    public void registro_usuario(String nombre, String pass, int expediente, String estudios) {
+    	Connection conn = get_connection();
+    	String sql = "INSERT INTO miembro (nombre, pass, expediente, estudio) VALUES (?, ?, ?, ?)";
+    	PreparedStatement pstm;
+    	ResultSet rs;
+    	
+    	try {
+			pstm = conn.prepareStatement(sql);
+			pstm.setString(1, nombre);
+			pstm.setString(2, pass);
+			pstm.setInt(3, expediente);
+			pstm.setString(4, estudios);
+			
+			pstm.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    }
 
 	
 }

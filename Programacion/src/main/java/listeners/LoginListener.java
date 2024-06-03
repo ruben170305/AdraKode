@@ -9,18 +9,21 @@ import javax.swing.*;
 import main.MenuMain;
 import model.Usuario;
 import views.Menu;
+import views.RegistroMiembro;
 import views.VentanaPrincipalLogin;
 
 public class LoginListener implements ActionListener {
 	
 	private VentanaPrincipalLogin login;
+	private RegistroMiembro registro;
 	private Menu menu;
 	private Usuario user;
 	private String status = "ejecutando";
 	private boolean esMaster;
 	
-	public LoginListener( VentanaPrincipalLogin login ) {
+	public LoginListener( VentanaPrincipalLogin login, RegistroMiembro registro ) {
 		this.login = login;
+		this.registro = registro;
 	}
 	
 	@Override
@@ -63,6 +66,10 @@ public class LoginListener implements ActionListener {
 			} catch ( SQLException sqle ) {
 				sqle.printStackTrace();
 			}
+        } else if ( source instanceof JButton && e.getActionCommand().equals( "CREAR CUENTA" ) ) {
+        	login.dispose();
+        	registro.make_visible();
+        	
         }
 	}
 

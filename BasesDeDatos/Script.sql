@@ -4,7 +4,7 @@ DROP TABLE partida;
 DROP TABLE personaje;
 DROP TABLE miembro;
 CREATE TABLE miembro (
-	cod INT PRIMARY KEY,
+	cod INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(50),
     apellidos VARCHAR(50),
     pass VARCHAR(50),
