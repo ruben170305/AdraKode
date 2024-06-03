@@ -75,27 +75,19 @@ public class VerPersonajesListener extends Listener implements ActionListener {
 	        String selected_index = (String) comboBox.getSelectedItem();
 
 	        if (selected_index != null) {
-	            // Capturamos los datos de la DB
+	        	// Capturamos los datos de la DB
 	            ArrayList<Personaje> personajes = mysql.get_personajes(user);
-
-	            for (Personaje personaje : personajes) {
+	            
+	    		for (Personaje personaje : personajes) {
 	                String nombre = personaje.getNombre();
 	                if (selected_index.equals(nombre)) {
-	                    vp.getLblClase().setText(personaje.getClase());
-	                    vp.getLblRaza().setText(personaje.getRaza());
-	                    vp.getIdLbl().setText(String.valueOf(personaje.getCod()));
-	                    vp.getPbExp().setValue(personaje.getExpe());
-	                    vp.getPbFuerza().setValue(personaje.getFuerza());
-	                    vp.getPbDestreza().setValue(personaje.getDestreza());
-	                    vp.getPbConstitucion().setValue(personaje.getConstitucion());
-	                    vp.getPbInteligencia().setValue(personaje.getInteligencia());
-	                    vp.getPbSabiduria().setValue(personaje.getSabiduria());
-	                    vp.getPbCarisma().setValue(personaje.getCarisma());
-
+	                	int cod = 0;
+	                	cod = personaje.getCod();
+	                	cargarDatosPanel(cod);
 	                    // Sale del bucle una vez que se encuentra el ítem
 	                    break;
 	                }
-	            }
+	            }  
 	        }
 	    }
 	}
@@ -116,11 +108,40 @@ public class VerPersonajesListener extends Listener implements ActionListener {
 	    } else {
 	        personajes = mysql.get_personajes(user);
 	    }
-	    
+	    int i = 0;
 	    for (Personaje personaje : personajes) {
-	        vp.getIdLbl().setText(String.valueOf(personaje.getCod()));
+	    	if(i==0) {
+	    		vp.getIdLbl().setText(String.valueOf(personaje.getCod()));
+	    		cargarDatosPanel(personaje.getCod());
+	    		i++;
+	    	}
 	        vp.getComboBoxSeleccionar().addItem(personaje.getNombre());
 	    }
+	    mysql.get_personajes(user);
+	}
+	
+	public void cargarDatosPanel(int seleccionado) {
+		// Capturamos los datos de la DB
+        ArrayList<Personaje> personajes = mysql.get_personajes(user);
+        
+		for (Personaje personaje : personajes) {
+            int cod = personaje.getCod();
+            if (seleccionado==cod) {
+                vp.getLblClase().setText(personaje.getClase());
+                vp.getLblRaza().setText(personaje.getRaza());
+                vp.getIdLbl().setText(String.valueOf(personaje.getCod()));
+                vp.getPbExp().setValue(personaje.getExpe());
+                vp.getPbFuerza().setValue(personaje.getFuerza());
+                vp.getPbDestreza().setValue(personaje.getDestreza());
+                vp.getPbConstitucion().setValue(personaje.getConstitucion());
+                vp.getPbInteligencia().setValue(personaje.getInteligencia());
+                vp.getPbSabiduria().setValue(personaje.getSabiduria());
+                vp.getPbCarisma().setValue(personaje.getCarisma());
+
+                // Sale del bucle una vez que se encuentra el ítem
+                break;
+            }
+        }
 	}
 
 

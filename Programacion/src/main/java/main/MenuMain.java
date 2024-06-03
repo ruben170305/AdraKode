@@ -100,11 +100,10 @@ public class MenuMain {
         // Ventanas y listeners de personajes
         ePersonaje = new EditarPersonaje(esMaster);
         vPersonajes = new VerPersonajes( user, esMaster );
-
-        ePersonajesListener = new EditarPersonajesListener( menu, home, mysql, ePersonaje, vPersonajes, user );
+        
         vPersonajesListener = new VerPersonajesListener( ePersonaje, menu, home, mysql, user, cPersonaje, vPersonajes, personaje, esMaster );
-
-        cPersonajeListener = new CrearPersonajeListener( menu, home, mysql, cPersonaje, user );
+        ePersonajesListener = new EditarPersonajesListener( menu, home, mysql, ePersonaje, vPersonajes, user );
+        cPersonajeListener = new CrearPersonajeListener( menu, home, mysql, cPersonaje, user, vPersonajes );
 
         // Creamos la ventana y cargamos el panel
         menu.setGameMaster( esMaster );
