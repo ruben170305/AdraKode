@@ -85,13 +85,13 @@ public class VentanaPrincipalLogin extends JFrame {
 		separator.setMaximumSize(new Dimension(32778, 32767));
 		separator.setBackground(new Color(29, 29, 27));
 		separator.setForeground(new Color(29, 29, 27));
-		separator.setBounds(337, 88, 125, 3);
+		separator.setBounds(329, 88, 125, 3);
 		getContentPane().add(separator);
 
 		// Logo
 		logoIcono = new JLabel();
 		logoIcono.setIcon(new ImageIcon(VentanaPrincipalLogin.class.getResource("/img/imagenLogin.png")));
-		logoIcono.setBounds(338, 131, 124, 142);
+		logoIcono.setBounds(330, 102, 124, 142);
 		getContentPane().add(logoIcono);
 
 		// Campo usuario
@@ -99,7 +99,7 @@ public class VentanaPrincipalLogin extends JFrame {
 		usuario.setBackground(new Color(242, 242, 242));
 		usuario.setFont(new Font("Open Sans", Font.PLAIN, 11));
 		usuario.setForeground(new Color(29, 29, 27));
-		usuario.setBounds(315, 271, 205, 35);
+		usuario.setBounds(303, 242, 205, 35);
 		usuario.setBorder(border);
 		getContentPane().add(usuario);
 
@@ -107,7 +107,7 @@ public class VentanaPrincipalLogin extends JFrame {
 		usuarioIcono = new JLabel();
 		usuarioIcono.setHorizontalAlignment(SwingConstants.CENTER);
 		usuarioIcono.setIcon(new ImageIcon(VentanaPrincipalLogin.class.getResource("/img/IconoUsuario.png")));
-		usuarioIcono.setBounds(276, 271, 34, 45);
+		usuarioIcono.setBounds(264, 242, 34, 45);
 		getContentPane().add(usuarioIcono);
 
 		// Campo contraseña
@@ -117,7 +117,7 @@ public class VentanaPrincipalLogin extends JFrame {
 		contraseña.setForeground(new Color(29, 29, 27));
 		contraseña.setBackground(new Color(242, 242, 242));
 		contraseña.setEchoChar('\u2022'); // Establece el carácter de ocultación
-		contraseña.setBounds(315, 327, 205, 35);
+		contraseña.setBounds(303, 298, 205, 35);
 		contraseña.setBorder(border);
 		getContentPane().add(contraseña);
 
@@ -125,7 +125,7 @@ public class VentanaPrincipalLogin extends JFrame {
 		contrasenaIcono = new JLabel();
 		contrasenaIcono.setHorizontalAlignment(SwingConstants.CENTER);
 		contrasenaIcono.setIcon(new ImageIcon(VentanaPrincipalLogin.class.getResource("/img/IconoContraseña.png")));
-		contrasenaIcono.setBounds(274, 327, 34, 45);
+		contrasenaIcono.setBounds(264, 298, 34, 45);
 		getContentPane().add(contrasenaIcono);
 
 		// Checkbox admin
@@ -134,7 +134,7 @@ public class VentanaPrincipalLogin extends JFrame {
 		administrador.setHorizontalAlignment(SwingConstants.CENTER);
 		administrador.setForeground(new Color(29, 29, 27));
 		administrador.setFont(new Font("Open Sans", Font.BOLD, 12));
-		administrador.setBounds(297, 391, 189, 20);
+		administrador.setBounds(297, 353, 189, 20);
 		getContentPane().add(administrador);
 		
 
@@ -145,17 +145,40 @@ public class VentanaPrincipalLogin extends JFrame {
 		entrar.setBackground(new Color(29, 161, 242));
 		entrar.setOpaque(true);
 		entrar.setBorderPainted(false);
-		entrar.setBounds(297, 418, 209, 50);
+		entrar.setBounds(287, 395, 209, 50);
 		getContentPane().add(entrar);
 		
 		crearCuenta = new JButton("CREAR CUENTA");
+		crearCuenta.setContentAreaFilled(false);
+		crearCuenta.setBorder(new LineBorder(new Color(0, 0, 0), 2));
 		crearCuenta.setOpaque(true);
-		crearCuenta.setForeground(new Color(242, 242, 242));
+		crearCuenta.setForeground(new Color(29, 29, 27));
 		crearCuenta.setFont(new Font("Dialog", Font.BOLD, 17));
-		crearCuenta.setBorderPainted(false);
-		crearCuenta.setBackground(new Color(29, 161, 242));
-		crearCuenta.setBounds(297, 500, 209, 50);
+		crearCuenta.setBackground(new Color(242, 242, 242));
+		crearCuenta.setBounds(287, 479, 209, 50);
 		getContentPane().add(crearCuenta);
+		
+		JSeparator separator_1 = new JSeparator();
+		separator_1.setMaximumSize(new Dimension(32778, 32767));
+		separator_1.setForeground(new Color(29, 29, 27));
+		separator_1.setBorder(new LineBorder(new Color(0, 0, 0), 2));
+		separator_1.setBackground(new Color(29, 29, 27));
+		separator_1.setBounds(287, 461, 80, 2);
+		getContentPane().add(separator_1);
+		
+		JSeparator separator_1_1 = new JSeparator();
+		separator_1_1.setMaximumSize(new Dimension(32778, 32767));
+		separator_1_1.setForeground(new Color(29, 29, 27));
+		separator_1_1.setBorder(new LineBorder(new Color(0, 0, 0), 2));
+		separator_1_1.setBackground(new Color(29, 29, 27));
+		separator_1_1.setBounds(416, 461, 80, 2);
+		getContentPane().add(separator_1_1);
+		
+		JLabel lblNewLabel = new JLabel("o");
+		lblNewLabel.setFont(new Font("Open Sans", Font.BOLD, 14));
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setBounds(369, 443, 46, 35);
+		getContentPane().add(lblNewLabel);
 
 	}
 

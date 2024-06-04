@@ -6,6 +6,7 @@ import java.sql.SQLException;
 
 import javax.swing.*;
 
+import views.*;
 import main.MenuMain;
 import model.Usuario;
 import views.Menu;
