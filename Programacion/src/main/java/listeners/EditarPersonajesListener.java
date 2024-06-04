@@ -51,7 +51,7 @@ public class EditarPersonajesListener extends Listener implements ActionListener
 				// Renderizamos de nuevo la ventana del listado de partidas
 				if( renderize ) {
 					VerPersonajes vPersonajes = new VerPersonajes( user, false );
-					VerPersonajesListener vPersonajesListener = new VerPersonajesListener( menu, home, mysql, user, vPersonajes );
+					VerPersonajesListener vPersonajesListener = new VerPersonajesListener( menu, home, mysql, user, ep, vPersonajes );
 					vPersonajes.setListener( vPersonajesListener );
 					// menu.getListener_menu().getVPartidasMaster().dispose();
 					menu.getListener_menu().setVPersonajes( vPersonajes );

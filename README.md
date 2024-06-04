@@ -59,7 +59,7 @@ AdraKode es una herramienta diseñada para facilitar la gestión de personajes y
 
 ### Pantalla de Login
 
-    Los miembros pueden acceder con su usuario y contraseña.
+    Los miembros pueden acceder con su usuario y contraseña o crearse una cuenta nueva.
     Diferentes permisos para jugadores y Game Masters.
 
 ### Gestión de Personajes

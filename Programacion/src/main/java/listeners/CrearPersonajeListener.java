@@ -12,11 +12,13 @@ public class CrearPersonajeListener extends Listener implements ActionListener {
 
 	private CrearPersonaje cp;
 	private Usuario user;
+	private VerPersonajes vPersonajes;
 
-	public CrearPersonajeListener(Menu menu, Home home, Model mysql, CrearPersonaje cp, Usuario user) {
+	public CrearPersonajeListener(Menu menu, Home home, Model mysql, CrearPersonaje cp, Usuario user, VerPersonajes vPersonajes) {
 		super( menu, home, mysql );
 		this.cp = cp;
 		this.user = user;
+		this.vPersonajes = vPersonajes;
 	}
 
 	@Override
@@ -32,12 +34,9 @@ public class CrearPersonajeListener extends Listener implements ActionListener {
 
 			// Renderizamos de nuevo la ventana del listado de partidas
 			if( renderize ) {
-				VerPersonajes vPersonajes = new VerPersonajes( user, false );
-				VerPersonajesListener vPersonajesListener = new VerPersonajesListener( menu, home, mysql, user, vPersonajes );
-				vPersonajes.setListener( vPersonajesListener );
 				// menu.getListener_menu().getVPartidasMaster().dispose();
-				menu.getListener_menu().setVPersonajes( vPersonajes );
-				menu.cargarPanel(vPersonajes);
+				// menu.getListener_menu().setVPersonajes( vPersonajes );
+				menu.cargarPanel(home);
 			}
 			
 		} else if (buttonName.equals("subirImagen")) {

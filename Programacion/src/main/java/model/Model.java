@@ -126,14 +126,13 @@ public class Model {
 	// Métodos usados en Listeners
 	// -----------------------------------------------------------------------------------------------------
 	
-
 	/**
 	 * Método que realiza la consulta de datos a MySQL
 	 * @return rs
 	 */
-	public ResultSet get_partidas() {
+	public ArrayList<Partida> get_partidas() {
 
-		ResultSet rs = null;
+		ArrayList<Partida> lista_partidas = new ArrayList<Partida>();
 
 		// Creamos una conexión con MySQL
 		Model mysql = new Model();
@@ -147,238 +146,326 @@ public class Model {
 			"left join personaje ps " +
 			"on m.cod = ps.cod_miembro ";
 
-			rs = mysql.Model_query( sql );
+			ResultSet rs = mysql.Model_query( sql );
+			while( rs.next() ) {
+	            Partida temp_partida = new Partida(
+	                    rs.getInt("partida_id"),
+	                    rs.getInt("num_sesion"),
+	                    rs.getString("nombre"),
+	                    rs.getInt("duracion"),
+	                    rs.getInt("dificultad"),
+	                    rs.getString("fecha"),
+	                    rs.getInt("numero_jugadores"),
+	                    rs.getString("ambientacion"),
+	                    rs.getString("en_curso"),
+	                    rs.getInt("anfitrion_id"),
+	                    rs.getString("nombre_anfitrion"),
+	                    rs.getString("apellidos_anfitrion")
+	            );
+	            
+	            lista_partidas.add( temp_partida );
+			}
 
 		} catch ( SQLException e ) {
 			e.printStackTrace();
 		}
 
-		return rs;
+		return lista_partidas;
 	}
 
-		/**
+	/**
 	 * Método que realiza la consulta de datos a MySQL
-	 * @return rs
+	 * @return Partida
 	 */
-	public ResultSet get_partida( int partida_id ) {
+	public Partida get_partida(int partida_id) {
+	    Partida partida = null;
 
-		ResultSet rs = null;
+	    // Creamos una conexión con MySQL
+	    Model mysql = new Model();
+	    mysql.get_connection();
 
-		// Creamos una conexión con MySQL
-		Model mysql = new Model();
-		mysql.get_connection();
+	    try {
+	        String sql = "SELECT p.*, m.nombre as nombre_anfitrion, m.apellidos as apellidos_anfitrion, ps.cod as personaje_id " +
+	                "FROM partida p " +
+	                "LEFT JOIN miembro m " +
+	                "ON p.anfitrion_id = m.cod " +
+	                "LEFT JOIN personaje ps " +
+	                "ON m.cod = ps.cod_miembro " +
+	                "WHERE p.partida_id = " + partida_id;
 
-		try {
-			String sql = "SELECT p.*, m.nombre as nombre_anfitrion, m.apellidos as apellidos_anfitrion " +
-			"FROM partida p " +
-			"LEFT JOIN miembro m " +
-			"ON p.anfitrion_id = m.cod " +
-			"where p.partida_id = " + partida_id;
+	        ResultSet rs = mysql.Model_query(sql);
 
-			rs = mysql.Model_query( sql );
+	        if (rs.next()) {
+	            partida = new Partida (
+	                    rs.getInt("partida_id"),
+	                    rs.getInt("num_sesion"),
+	                    rs.getString("nombre"),
+	                    rs.getInt("duracion"),
+	                    rs.getInt("dificultad"),
+	                    rs.getString("fecha"),
+	                    rs.getInt("numero_jugadores"),
+	                    rs.getString("ambientacion"),
+	                    rs.getString("en_curso"),
+	                    rs.getInt("anfitrion_id"),
+	                    rs.getString("nombre_anfitrion"),
+	                    rs.getString("apellidos_anfitrion")
+	            );
+	        }
 
-		} catch ( SQLException e ) {
-			e.printStackTrace();
-		}
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
 
-		return rs;
+	    return partida;
 	}
+
 	
 	public Object[][] get_table_partidas() {
-		
-		// Designamos el nombre de las columnas de la tabla
-		String[] columns = { "ID", "Nombre", "Ambientación", "Duración", "Fecha", "Anfitrion", "Nº jugadores", "Estado", "ID jugador" };
+	    // Designamos el nombre de las columnas de la tabla
+	    String[] columns = { "ID", "Nombre", "Ambientación", "Duración", "Fecha", "Anfitrion", "Nº jugadores", "Estado" };
 
-		// Capturamos los datos de MySQL mediante una consulta
-		ResultSet rows = get_partidas();
-		ArrayList<Object[]> row_data_list = new ArrayList<>();
+	    // Capturamos los datos de MySQL mediante una consulta
+	    ArrayList<Partida> partidas = get_partidas();
+	    ArrayList<Object[]> row_data_list = new ArrayList<>();
 
-		// Capturamos el número de filas del resultado de la consulta
-		try {
-			while ( rows.next() ) {
+	    // Iteramos sobre la lista de partidas
+	    for (Partida partida : partidas) {
+	    	
+	        // Inicializamos un Objeto temporal donde almacenamos los datos de la fila
+	        Object[] row_data = new Object[columns.length];
 
-				// Inicializamos un Objeto temporal donde almacenamos los datos de la fila
-				Object[] row_data = new Object[ columns.length ];
-        
-				// Insertamos los datos
-                row_data[0] = rows.getString( "partida_id" );
-                row_data[1] = rows.getString( "nombre" );
-                row_data[2] = rows.getString( "ambientacion" );
-                row_data[3] = rows.getString( "duracion" );
-                row_data[4] = rows.getString( "fecha" );
-				row_data[6] = rows.getInt( "numero_jugadores" );
+	        // Insertamos los datos
+	        row_data[0] = partida.getPart_id();
+	        row_data[1] = partida.getNombre();
+	        row_data[2] = partida.getAmbientacion();
+	        row_data[3] = partida.getDuracion();
+	        row_data[4] = partida.getFecha();
+	        row_data[6] = partida.getNumero_jugadores();
 
-				// Formateo de campos
-				String anfitrion = rows.getString( "nombre_anfitrion" ) + " " + rows.getString( "apellidos_anfitrion" );
-				row_data[5] = anfitrion;
+	        // Formateo de campos
+	        String anfitrion = partida.getNombre_anfitrion() + " " + partida.getApellidos_anfitrion();
+	        row_data[5] = anfitrion;
 
-				// Determinamos el estado
-                row_data[7] =  rows.getString( "en_curso" );
-                
-                row_data[8] = rows.getInt( "personaje_id" );
-                
-				// Añadimos los datos al arrayList final
-				row_data_list.add( row_data );
-			}
+	        // Determinamos el estado
+	        row_data[7] = partida.getEn_curso();
 
-		} catch ( SQLException e ) {
-			e.printStackTrace();
-		}
+	        // Añadimos los datos al arrayList final
+	        row_data_list.add( row_data );
+	    }
 
-		// Pasamos los datos al Objeto final que insertaremos en la tabla
-        Object[][] data = new Object[ row_data_list.size() ][ columns.length ];
-		row_data_list.toArray( data );
-		
-		return data;
+	    // Pasamos los datos al Objeto final que insertaremos en la tabla
+	    Object[][] data = new Object[row_data_list.size()][columns.length];
+	    row_data_list.toArray(data);
+
+	    return data;
 	}
 	
-	public Object[][] get_table_personajes( Usuario user ) {
-		
-		// Designamos el nombre de las columnas de la tabla
-		String[] columns_personajes = { "ID", "Nombre", "Personaje", "Raza", "Clase", "Expe", "Fuerza", "Destreza", "Constitucion", "Inteligencia", "Sabiduria", "Carisma" };
+	public Object[][] get_table_personajes(Usuario user) {
+	    // Designamos el nombre de las columnas de la tabla
+	    String[] columns_personajes = { "ID", "Nombre", "Personaje", "Raza", "Clase", "Expe", "Fuerza", "Destreza", "Constitucion", "Inteligencia", "Sabiduria", "Carisma" };
 
-		// Capturamos los datos de MySQL mediante una consulta
-		ResultSet rows_personajes = get_personajes( user );
-		ArrayList<Object[]> row_data_list_personajes = new ArrayList<>();
+	    // Capturamos los datos de MySQL mediante una consulta
+	    ArrayList<Personaje> personajes = get_personajes(user);
+	    ArrayList<Object[]> row_data_list_personajes = new ArrayList<>();
 
-		// Capturamos el número de filas del resultado de la consulta
-		try {
-			while ( rows_personajes.next() ) {
+	    // Iteramos sobre la lista de personajes
+	    for (Personaje personaje : personajes) {
+	        // Inicializamos un Objeto temporal donde almacenamos los datos de la fila
+	        Object[] row_data = new Object[columns_personajes.length];
 
-				// Inicializamos un Objeto temporal donde almacenamos los datos de la fila
-				Object[] row_data = new Object[ columns_personajes.length ];
+	        // Insertamos los datos
+	        row_data[0] = personaje.getCod();
+	        row_data[1] = personaje.getNombre();
+	        row_data[2] = personaje.getPersonaje();
+	        row_data[3] = personaje.getRaza();
+	        row_data[4] = personaje.getClase();
+	        row_data[5] = personaje.getExpe();
+	        row_data[6] = personaje.getFuerza();
+	        row_data[7] = personaje.getDestreza();
+	        row_data[8] = personaje.getConstitucion();
+	        row_data[9] = personaje.getInteligencia();
+	        row_data[10] = personaje.getSabiduria();
+	        row_data[11] = personaje.getCarisma();
 
-				// Insertamos los datos
-                row_data[0] = rows_personajes.getInt( "cod" );
-                row_data[1] = rows_personajes.getString( "nombre" );
-                row_data[2] = rows_personajes.getString( "personaje" );
-                row_data[3] = rows_personajes.getString( "raza" );
-                row_data[4] = rows_personajes.getString( "clase" );
-				row_data[5] = rows_personajes.getInt( "expe" );
-                row_data[6] = rows_personajes.getString( "fuerza" );
-                row_data[7] = rows_personajes.getString( "destreza" );
-                row_data[8] = rows_personajes.getString( "constitucion" );
-				row_data[9] = rows_personajes.getInt( "inteligencia" );
-                row_data[10] = rows_personajes.getString( "sabiduria" );
-				row_data[11] = rows_personajes.getInt( "carisma" );
+	        // Añadimos los datos al arrayList final
+	        row_data_list_personajes.add(row_data);
+	    }
 
-				// Añadimos los datos al arrayList final
-				row_data_list_personajes.add( row_data );
-			}
+	    // Pasamos los datos al Objeto final que insertaremos en la tabla
+	    Object[][] data_personajes = new Object[row_data_list_personajes.size()][columns_personajes.length];
+	    row_data_list_personajes.toArray(data_personajes);
 
-		} catch ( SQLException e ) {
-			e.printStackTrace();
-		}
-
-		// Pasamos los datos al Objeto final que insertaremos en la tabla
-		Object[][] data_personajes = new Object[ row_data_list_personajes.size() ][ columns_personajes.length ];
-		row_data_list_personajes.toArray( data_personajes );
-		
-		return data_personajes;
+	    return data_personajes;
 	}
+
 	
-	public ResultSet get_personaje( int id ) {
+	public Personaje get_personaje(int id) {
+	    Personaje personaje = null;
 
-		// Inicializamos el valor a devolver
-		ResultSet rs = null;
+	    // Creamos una conexión con MySQL
+	    Model mysql = new Model();
+	    mysql.get_connection();
 
-		// Creamos una conexión con MySQL
-		Model mysql = new Model();
-		mysql.get_connection();
+	    try {
+	        // Realizamos una consulta para capturar el personaje
+	        String sql = "SELECT * FROM personaje WHERE cod = " + id;
+	        ResultSet rs = mysql.Model_query(sql);
 
-        try {
+	        if (rs.next()) {
+	            personaje = new Personaje(
+	                rs.getInt("cod"),
+	                rs.getString("nombre"),
+	                rs.getString("personaje"),
+	                rs.getString("raza"),
+	                rs.getString("clase"),
+	                rs.getInt("expe"),
+	                rs.getInt("cod_miembro"),
+	                rs.getInt("fuerza"),
+	                rs.getInt("destreza"),
+	                rs.getInt("constitucion"),
+	                rs.getInt("inteligencia"),
+	                rs.getInt("sabiduria"),
+	                rs.getInt("carisma"),
+	                new Usuario()
+	            );
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
 
-			// Realizamos una consulta para capturar todos los personajes
-			String sql = "select * from personaje where cod=" + id;
-            rs = mysql.Model_query( sql );
-
-		} catch ( SQLException sqle ) {
-			sqle.printStackTrace();
-		}
-
-		return rs;
-
+	    return personaje;
 	}
 
-	public ResultSet get_personajes( Usuario user ) {
+	public ArrayList<Personaje> get_personajes(Usuario user) {
+	    ArrayList<Personaje> personajes = new ArrayList<>();
 
-		ResultSet rs = null;
+	    // Creamos una conexión con MySQL
+	    Model mysql = new Model();
+	    mysql.get_connection();
 
-		// Creamos una conexión con MySQL
-		Model mysql = new Model();
-		mysql.get_connection();
+	    try {
+	        // Realizamos una consulta para capturar todos los personajes
+	        String sql = "SELECT p.*, j.* FROM personaje p LEFT JOIN juega j ON j.id_personaje = p.cod WHERE cod_miembro = " + user.getUser_id();
+	        ResultSet rs = mysql.Model_query(sql);
 
-		try {
-            // Realizamos una consulta para capturar todos los personajes
-            String sql = "select p.*, j.* from personaje p left join juega j on j.id_personaje = p.cod where cod_miembro=" + user.getUser_id();
-            rs = mysql.Model_query( sql );
+	        while (rs.next()) {
+	            Personaje personaje = new Personaje(
+	                rs.getInt("cod"),
+	                rs.getString("nombre"),
+	                rs.getString("personaje"),
+	                rs.getString("raza"),
+	                rs.getString("clase"),
+	                rs.getInt("expe"),
+	                rs.getInt("cod_miembro"),
+	                rs.getInt("fuerza"),
+	                rs.getInt("destreza"),
+	                rs.getInt("constitucion"),
+	                rs.getInt("inteligencia"),
+	                rs.getInt("sabiduria"),
+	                rs.getInt("carisma"),
+	                user
+	            );
+	            personajes.add(personaje);
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
 
-		} catch ( SQLException sqle ) {
-			sqle.printStackTrace();
-		}
-
-		return rs;
-
-	}
-	
-	public ResultSet get_personajes_all() {
-
-		// Inicializamos el valor a devolver
-		ResultSet rs = null;
-
-		// Creamos una conexión con MySQL
-		Model mysql = new Model();
-		mysql.get_connection();
-
-		// Realizamos una consulta para capturar todos los personajes
-		String sql = "select * from personaje";
-		
-		try {
-			rs = mysql.Model_query( sql );
-		} catch ( SQLException sqle ) {
-			sqle.printStackTrace();
-		}
-
-		return rs;
-
+	    return personajes;
 	}
 
-    public ResultSet get_personajes_partida( int partida_id ) {
+	public ArrayList<Personaje> get_personajes_all() {
+	    ArrayList<Personaje> personajes = new ArrayList<>();
 
-		ResultSet rs = null;
+	    // Creamos una conexión con MySQL
+	    Model mysql = new Model();
+	    mysql.get_connection();
 
-		// Creamos una conexión con MySQL
-		Model mysql = new Model();
-		mysql.get_connection();
+	    try {
+	        // Realizamos una consulta para capturar todos los personajes
+	        String sql = "SELECT * FROM personaje";
+	        ResultSet rs = mysql.Model_query(sql);
 
-		try {
-            // Realizamos una consulta para capturar todos los personajes
-            String sql = "SELECT "
-            + "j.*, "
-            + "p.*, "
-            + "ps.*, "
-            + "m.nombre AS nombre_anfitrion, "
-            + "m.apellidos AS apellidos_anfitrion "
-            + "FROM "
-            + "juega j "
-            + "LEFT JOIN partida p ON "
-            + "p.partida_id = j.id_partida "
-            + "LEFT JOIN personaje ps ON "
-            + "j.id_personaje = ps.cod "
-            + "LEFT JOIN miembro m ON "
-            + "p.anfitrion_id = m.cod "
-            + "WHERE "
-            + "j.id_partida =" + partida_id;
+	        while (rs.next()) {
+	            Personaje personaje = new Personaje(
+	                rs.getInt("cod"),
+	                rs.getString("nombre"),
+	                rs.getString("personaje"),
+	                rs.getString("raza"),
+	                rs.getString("clase"),
+	                rs.getInt("expe"),
+	                rs.getInt("cod_miembro"),
+	                rs.getInt("fuerza"),
+	                rs.getInt("destreza"),
+	                rs.getInt("constitucion"),
+	                rs.getInt("inteligencia"),
+	                rs.getInt("sabiduria"),
+	                rs.getInt("carisma"),
+	                new Usuario()
+	            );
+	            personajes.add(personaje);
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
 
-            rs = mysql.Model_query( sql );
-
-		} catch ( SQLException sqle ) {
-			sqle.printStackTrace();
-		}
-
-		return rs;
-
+	    return personajes;
 	}
+
+	public ArrayList<Personaje> get_personajes_partida(int partida_id) {
+	    ArrayList<Personaje> personajes = new ArrayList<>();
+
+	    // Creamos una conexión con MySQL
+	    Model mysql = new Model();
+	    mysql.get_connection();
+
+	    try {
+	        // Realizamos una consulta para capturar todos los personajes de una partida
+	        String sql = "SELECT "
+	            + "j.*, "
+	            + "p.*, "
+	            + "ps.*, "
+	            + "m.nombre AS nombre_anfitrion, "
+	            + "m.apellidos AS apellidos_anfitrion "
+	            + "FROM "
+	            + "juega j "
+	            + "LEFT JOIN partida p ON "
+	            + "p.partida_id = j.id_partida "
+	            + "LEFT JOIN personaje ps ON "
+	            + "j.id_personaje = ps.cod "
+	            + "LEFT JOIN miembro m ON "
+	            + "p.anfitrion_id = m.cod "
+	            + "WHERE "
+	            + "j.id_partida = " + partida_id;
+
+	        ResultSet rs = mysql.Model_query(sql);
+
+	        while (rs.next()) {
+	            Personaje personaje = new Personaje(
+	                rs.getInt("cod"),
+	                rs.getString("nombre"),
+	                rs.getString("personaje"),
+	                rs.getString("raza"),
+	                rs.getString("clase"),
+	                rs.getInt("expe"),
+	                rs.getInt("cod_miembro"),
+	                rs.getInt("fuerza"),
+	                rs.getInt("destreza"),
+	                rs.getInt("constitucion"),
+	                rs.getInt("inteligencia"),
+	                rs.getInt("sabiduria"),
+	                rs.getInt("carisma"),
+	                new Usuario()
+	            );
+	            personajes.add(personaje);
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+
+	    return personajes;
+	}
+
 	
 	/**
 	 * Metodo que hace el insert a la base de datos de partida
@@ -450,15 +537,17 @@ public class Model {
 	 */
 	public boolean borrar_partida( int id, Model mysql ) {
 		
-		System.out.println(id);
-
-	    String sql = "DELETE FROM partida WHERE partida_id=?";
+    	// Recupera los valores de los campos
+    	Object[] params = {
+    	    id // ID
+    	};
+		
 	    try {
-	    	// Recupera los valores de los campos
-	    	Object[] params = {
-	    	    id // ID
-	    	};
-
+			String sql_juega = "delete from juega where id_partida = ?";
+	        // Consulta para actualizar la tabla usando el método Model_execute_update
+	    	mysql.Model_execute_update( sql_juega, params );
+			
+		    String sql = "DELETE FROM partida WHERE partida_id=?";
 	        // Consulta para actualizar la tabla usando el método Model_execute_update
 	    	mysql.Model_execute_update( sql, params );
 
@@ -470,51 +559,41 @@ public class Model {
 	    return true;
 	}
 
-	public void editar_partida( int partida_id, EditarPartida ep, Menu menu ) {
+	public void editar_partida(int partida_id, EditarPartida ep, Menu menu) {
+	    // Modificar datos de la tabla
+	    DefaultTableModel model = (DefaultTableModel) ep.getTable().getModel();
+	    model.setRowCount(0); // Limpiar la tabla existente
 
-		// Modificar datos de la tabla
-		DefaultTableModel model = ( DefaultTableModel ) ep.getTable().getModel();
-		model.setRowCount( 0 ); // Limpiar la tabla existente
+	    Partida partida = get_partida(partida_id);
 
-		ResultSet rs = get_partida( partida_id );
+	    if (partida != null) {
+	        ep.getTxtAmbientacion().setText(partida.getAmbientacion());
+	        ep.getTxtDuracion().setText(String.valueOf(partida.getDuracion()));
+	        ep.getTxtEstado().setText(partida.getEn_curso());
+	        ep.getTxtFecha().setText(partida.getFecha());
+	        ep.getTxtJugadores().setText(String.valueOf(partida.getNumero_jugadores()));
+	        ep.getTxtNombrePartida().setText(partida.getNombre());
+	        ep.getTxtDificultad().setText(String.valueOf(partida.getDificultad()));
+	        ep.getLblIdPartida().setText(String.valueOf(partida.getPart_id()));
+	    }
 
-		try {
-			while( rs.next() ) {
-				ep.getTxtAmbientacion().setText( rs.getString( "ambientacion" ) );
-				ep.getTxtDuracion().setText( String.valueOf( rs.getInt( "duracion" ) ) );
-				ep.getTxtEstado().setText( rs.getString( "en_curso" ) );
-				ep.getTxtFecha().setText( rs.getString( "fecha" ) );
-				ep.getTxtJugadores().setText( String.valueOf( rs.getInt( "numero_jugadores" ) ) );
-				ep.getTxtNombrePartida().setText( rs.getString( "nombre" ) );
-				ep.getTxtDificultad().setText( String.valueOf( rs.getInt( "dificultad" ) ) );
-				ep.getLblIdPartida().setText( String.valueOf( rs.getInt( "partida_id" ) ) );
-			}
-		} catch( SQLException sqle ) {
-			sqle.printStackTrace();
-		}
+	    // Datos del personaje seleccionado
+	    ArrayList<Personaje> personajes = get_personajes_partida(partida_id);
 
-		// Datos del personaje seleccionado
-		ResultSet rs_personaje = get_personajes_partida( partida_id );
+	    for (Personaje personaje : personajes) {
+	        // Definimos los campos de la tabla
+	        String jugador = personaje.getPersonaje();
+	        String experiencia = String.valueOf(personaje.getExpe());
+	        String raza = personaje.getRaza();
+	        String clase = personaje.getClase();
 
-		try {
-			while( rs_personaje.next() ) {
+	        model.addRow(new Object[]{jugador, experiencia, raza, clase});
+	    }
 
-				// Definimos los campos de la tabla
-				String jugador = rs_personaje.getString("personaje");
-				String experiencia = rs_personaje.getString("expe");
-                String raza = rs_personaje.getString("raza");
-                String clase = rs_personaje.getString("clase");
-
-                model.addRow( new Object[]{ jugador, experiencia, raza, clase } );
-			}
-		} catch( SQLException sqle ) {
-			sqle.printStackTrace();
-		}
-
-		// Cargamos el menú
-		menu.cargarPanel( ep );
+	    // Cargamos el menú
+	    menu.cargarPanel(ep);
 	}
-	
+
 
 	/**
 	 * Metodo que hace el insert a la base de datos de crearPersonaje
@@ -588,7 +667,6 @@ public class Model {
         return true;
 	}
 
-
 	/**
 	 * Metodo que actualiza los elementos en la base de datos
 	 */
@@ -625,51 +703,45 @@ public class Model {
 	    return true;
 	}
 	
-
 	public void editar_personaje(int id, Usuario user, EditarPersonaje ep, boolean esMaster, Menu menu) {
+	    // Capturamos los datos de la DB
+	    Personaje personaje = get_personaje(id);
 
-		// Capturamos los datos de la DB
-		ResultSet rs = get_personaje(id);
-		try {
-			while (rs.next()) {
-				
-				System.out.println(rs.getString("nombre"));
-				ep.getLblSeleccionarPersonaje().setText(rs.getString("nombre"));
-				ep.getTxtRaza().setText(rs.getString("raza"));
-				ep.getTxtClase().setText(rs.getString("clase"));
-				ep.getLblId().setText(id + "");
-				ep.getSpinnerExperiencia().setValue(rs.getInt("expe"));
-				ep.getSpinnerFuerza().setValue(rs.getInt("fuerza"));
-				ep.getSpinnerDestreza().setValue(rs.getInt("destreza"));
-				ep.getSpinnerConstitucion().setValue(rs.getInt("constitucion"));
-				ep.getSpinnerInteligencia().setValue(rs.getInt("inteligencia"));
-				ep.getSpinnerSabiduria().setValue(rs.getInt("sabiduria"));
-				ep.getSpinnerCarisma().setValue(rs.getInt("carisma"));
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		if (esMaster) {
-			ep.getSpinnerExperiencia().setEnabled(true);
-			ep.getSpinnerCarisma().setEnabled(false);
-			ep.getSpinnerConstitucion().setEnabled(false);
-			ep.getSpinnerDestreza().setEnabled(false);
-			ep.getSpinnerFuerza().setEnabled(false);
-			ep.getSpinnerInteligencia().setEnabled(false);
-			ep.getSpinnerSabiduria().setEnabled(false);
-			ep.getTxtClase().setEditable(false);
-			ep.getTxtRaza().setEditable(false);
-		} else {
-			ep.getSpinnerExperiencia().setEnabled(false);
-			ep.getSpinnerCarisma().setEnabled(true);
-			ep.getSpinnerConstitucion().setEnabled(true);
-			ep.getSpinnerDestreza().setEnabled(true);
-			ep.getSpinnerFuerza().setEnabled(true);
-			ep.getSpinnerInteligencia().setEnabled(true);
-			ep.getSpinnerSabiduria().setEnabled(true);
-		}
-		menu.cargarPanel(ep);
+	    if (personaje != null) {
+	        ep.getLblSeleccionarPersonaje().setText(personaje.getNombre());
+	        ep.getTxtRaza().setText(personaje.getRaza());
+	        ep.getTxtClase().setText(personaje.getClase());
+	        ep.getLblId().setText(String.valueOf(id));
+	        ep.getSpinnerExperiencia().setValue(personaje.getExpe());
+	        ep.getSpinnerFuerza().setValue(personaje.getFuerza());
+	        ep.getSpinnerDestreza().setValue(personaje.getDestreza());
+	        ep.getSpinnerConstitucion().setValue(personaje.getConstitucion());
+	        ep.getSpinnerInteligencia().setValue(personaje.getInteligencia());
+	        ep.getSpinnerSabiduria().setValue(personaje.getSabiduria());
+	        ep.getSpinnerCarisma().setValue(personaje.getCarisma());
+	    }
+
+	    if (esMaster) {
+	        ep.getSpinnerExperiencia().setEnabled(true);
+	        ep.getSpinnerCarisma().setEnabled(false);
+	        ep.getSpinnerConstitucion().setEnabled(false);
+	        ep.getSpinnerDestreza().setEnabled(false);
+	        ep.getSpinnerFuerza().setEnabled(false);
+	        ep.getSpinnerInteligencia().setEnabled(false);
+	        ep.getSpinnerSabiduria().setEnabled(false);
+	        ep.getTxtClase().setEditable(false);
+	        ep.getTxtRaza().setEditable(false);
+	    } else {
+	        ep.getSpinnerExperiencia().setEnabled(false);
+	        ep.getSpinnerCarisma().setEnabled(true);
+	        ep.getSpinnerConstitucion().setEnabled(true);
+	        ep.getSpinnerDestreza().setEnabled(true);
+	        ep.getSpinnerFuerza().setEnabled(true);
+	        ep.getSpinnerInteligencia().setEnabled(true);
+	        ep.getSpinnerSabiduria().setEnabled(true);
+	    }
 	}
+
 	
 	/**
 	 * Metodo que actualiza los elementos en la base de datos
@@ -703,17 +775,21 @@ public class Model {
 	
 
 	public boolean borrar_personaje( Usuario user, VerPersonajes vp ) {
-		
-	    String sql = "DELETE FROM personaje WHERE cod_miembro = ? AND cod = ?";
+    	
 	    try {
+			Object[] params = { Integer.parseInt(vp.getIdLbl().getText()) };
+			String sql_juega = "delete from juega where id_personaje = ?";
+			Model_execute_update( sql_juega, params );
+	    	
+			String sql = "DELETE FROM personaje WHERE cod_miembro = ? AND cod = ?";
 	    	// Recupera los valores de los campos
-	    	Object[] params = {
+	    	Object[] params_delete = {
 	    			user.getUser_id()
 	    		,	Integer.parseInt(vp.getIdLbl().getText())
 	    	};
 
 	        // Consulta para actualizar la tabla usando el método Model_execute_update
-	        Model_execute_update( sql, params );
+	        Model_execute_update( sql, params_delete );
 
 	    } catch ( SQLException sqle ) {
 	        sqle.printStackTrace();
@@ -723,82 +799,84 @@ public class Model {
 	    return true;
 	}
 	
+	public void insertar_partida(int partida_id, int jugador_id) throws SQLException {
+	    Model mysql = new Model();
+	    mysql.get_connection();
+	    
+	    String sql_select = "select * from juega where id_partida = " + partida_id + " and id_personaje = " + jugador_id;
+	    ResultSet rs = mysql.Model_query( sql_select );
+	    
+	    if( !rs.next() ) {
+			String sql = "insert into juega( id_partida, id_personaje ) values( ?, ? )";
+			
+		    try {
+		    	// Recupera los valores de los campos
+		    	Object[] params = {
+		    			partida_id
+		    		,	jugador_id
+		    	};
 
-    public void insertar_partida( int partida_id, int jugador_id ) {
-    	
-    	Model mysql = new Model();
-    	mysql.get_connection();
+		        // Consulta para actualizar la tabla usando el método Model_execute_update
+		    	mysql.Model_execute_update( sql, params );
+
+		    } catch (SQLException sqle) {
+		        sqle.printStackTrace();
+		    }
+		}
+	}
+    
+    public void jugar_partida(int partida_id, int jugador_id, PartidaIniciada pIniciada, Usuario user, Menu menu) {
+        // Datos de la partida seleccionada
+        Partida partida = get_partida(partida_id);
+
+        if (partida != null) {
+            pIniciada.getLblNivelPartida().setText(partida.getNombre());
+
+            pIniciada.getLblAnfitrion().setText(
+                partida.getNombre_anfitrion() + " " + partida.getApellidos_anfitrion()
+            );
+
+            pIniciada.getLblJugadores().setText(String.valueOf(partida.getNumero_jugadores()));
+            pIniciada.getLblDuración().setText(String.valueOf(partida.getDuracion()));
+            pIniciada.getLblFecha().setText(partida.getFecha());
+            pIniciada.getLblEstado().setText(partida.getEn_curso());
+        }
+
+        // Datos del personaje seleccionado
+        Personaje personaje = get_personaje(jugador_id);
+
+        if (personaje != null) {
+            pIniciada.getPbFuerza().setValue(personaje.getFuerza());
+            pIniciada.getPbDestreza().setValue(personaje.getDestreza());
+            pIniciada.getPbConstitucion().setValue(personaje.getConstitucion());
+            pIniciada.getPbInteligencia().setValue(personaje.getInteligencia());
+            pIniciada.getPbSabiduria().setValue(personaje.getSabiduria());
+            pIniciada.getPbCarisma().setValue(personaje.getCarisma());
+        }
+
+        // Cargamos el menú
+        menu.cargarPanel(pIniciada);
+    }
+    
+    public void registro_usuario(String nombre, String pass, int expediente, String estudios) {
+    	Connection conn = get_connection();
+    	String sql = "INSERT INTO miembro (nombre, pass, expediente, estudio) VALUES (?, ?, ?, ?)";
+    	PreparedStatement pstm;
+    	ResultSet rs;
     	
     	try {
-    		
-    		ResultSet partida = mysql.get_partida( partida_id );
-    		
-    		while( !partida.next() ) {
-    		
-        		// Definimos la consulta
-        		String sql = "insert into juega( id_partida, id_personaje ) values( ?, ? )";
-        		
-        		// Recupera los valores de los campos
-    	    	Object[] params = {
-    	    			partida_id
-    	    		,	jugador_id
-    	    	};
-
-    	        // Insertamos la partida
-    	        Model_execute_update( sql, params );
-                
-                break;
-    			
-    		}
-    		
-    	} catch( SQLException e ) {
-    		e.printStackTrace();
-    	}
-    	
+			pstm = conn.prepareStatement(sql);
+			pstm.setString(1, nombre);
+			pstm.setString(2, pass);
+			pstm.setInt(3, expediente);
+			pstm.setString(4, estudios);
+			
+			pstm.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
 
-	public void jugar_partida( int partida_id, int jugador_id, PartidaIniciada pIniciada, Usuario user, Menu menu ) {
-
-		// Datos de la partida seleccionada
-		ResultSet rs_partida = get_partida( partida_id );
-
-		try {
-			while( rs_partida.next() ) {
-				pIniciada.getLblNivelPartida().setText( rs_partida.getString( "nombre" ) );
-
-				pIniciada.getLblAnfitrion().setText(
-					rs_partida.getString( "nombre_anfitrion" ) +
-					rs_partida.getString( "apellidos_anfitrion" )
-				);
-
-				pIniciada.getLblJugadores().setText( String.valueOf( rs_partida.getInt( "numero_jugadores" ) ) );
-				pIniciada.getLblDuración().setText( String.valueOf( rs_partida.getInt( "duracion" ) ) );
-				pIniciada.getLblFecha().setText( rs_partida.getString( "fecha" ) );
-
-				pIniciada.getLblEstado().setText( rs_partida.getString( "en_curso" ) );
-			}
-		} catch( SQLException sqle ) {
-			sqle.printStackTrace();
-		}
-
-		// Datos del personaje seleccionado
-		ResultSet rs_personaje = get_personaje( jugador_id );
-
-		try {
-			while( rs_personaje.next() ) {
-				pIniciada.getPbFuerza().setValue( rs_personaje.getInt( "fuerza" ) );
-				pIniciada.getPbDestreza().setValue( rs_personaje.getInt( "destreza" ) );
-				pIniciada.getPbConstitucion().setValue( rs_personaje.getInt( "constitucion" ) );
-				pIniciada.getPbInteligencia().setValue( rs_personaje.getInt( "inteligencia" ) );
-				pIniciada.getPbSabiduria().setValue( rs_personaje.getInt( "sabiduria" ) );
-				pIniciada.getPbCarisma().setValue( rs_personaje.getInt( "carisma" ) );
-			}
-		} catch( SQLException sqle ) {
-			sqle.printStackTrace();
-		}
-
-		// Cargamos el menú
-		menu.cargarPanel( pIniciada );
-	}
 	
 }

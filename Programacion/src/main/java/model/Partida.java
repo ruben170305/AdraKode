@@ -1,8 +1,5 @@
 package model;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
 public class Partida {
 
     // Definimos las características de la Partida
