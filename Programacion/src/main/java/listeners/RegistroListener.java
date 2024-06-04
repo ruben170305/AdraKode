@@ -16,26 +16,27 @@ import views.RegistroMiembro;
 import views.VentanaPrincipalLogin;
 
 public class RegistroListener implements ActionListener {
-	
+
 	private RegistroMiembro registro;
 	private VentanaPrincipalLogin login;
 	private Menu menu;
 	private Usuario user;
 	private String status = "ejecutando";
-	
-	public RegistroListener( RegistroMiembro registro, VentanaPrincipalLogin login ) {
+
+	public RegistroListener(RegistroMiembro registro, VentanaPrincipalLogin login) {
 		this.registro = registro;
 		this.login = login;
 	}
-	
+
 	@Override
 	/**
-	 * Metodo del listener que si el login es correcto cerramos la ventana de login y mostramos la ventana principal (Menu)
+	 * Metodo del listener que si el login es correcto cerramos la ventana de login
+	 * y mostramos la ventana principal (Menu)
 	 */
-	public void actionPerformed( ActionEvent e ) {
+	public void actionPerformed(ActionEvent e) {
 		Object source = e.getSource();
-        
-        if ( source instanceof JButton && e.getActionCommand().equals( "CREAR CUENTA" ) ) {
+
+		if (source instanceof JButton && e.getActionCommand().equals("CREAR CUENTA")) {
 
 			try {
 
@@ -45,23 +46,28 @@ public class RegistroListener implements ActionListener {
 				String password = registro.getContraseña().getText();
 				int expediente = Integer.parseInt(registro.getExpediente().getText());
 				String estudios = registro.getEstudios().getText();
-				
+
 				Model mysql = new Model();
 				mysql.registro_usuario(user_name, password, expediente, estudios);
-				
-			} catch ( Exception sqle ) {
+
+			} catch (Exception sqle) {
 				sqle.printStackTrace();
 			}
 			registro.dispose();
 			login.make_visible();
-        }
+			
+		} else if (source instanceof JButton && e.getActionCommand().equals("INICIAR SESION")) {
+			registro.dispose();
+			login.make_visible();
+
+		}
 	}
 
 	public RegistroMiembro getLogin() {
 		return registro;
 	}
 
-	public void setLogin( RegistroMiembro login ) {
+	public void setLogin(RegistroMiembro login) {
 		this.registro = login;
 	}
 
@@ -69,7 +75,7 @@ public class RegistroListener implements ActionListener {
 		return menu;
 	}
 
-	public void setMenu( Menu menu ) {
+	public void setMenu(Menu menu) {
 		this.menu = menu;
 	}
 

@@ -149,15 +149,16 @@ public class VentanaPrincipalLogin extends JFrame {
 		getContentPane().add(entrar);
 		
 		crearCuenta = new JButton("CREAR CUENTA");
-		crearCuenta.setContentAreaFilled(false);
-		crearCuenta.setBorder(new LineBorder(new Color(0, 0, 0), 2));
+		crearCuenta.setFont(new Font("Oxygen", Font.BOLD, 17));
+		crearCuenta.setForeground(new Color(242, 242, 242));
+		crearCuenta.setBackground(new Color(29, 29, 27));
 		crearCuenta.setOpaque(true);
-		crearCuenta.setForeground(new Color(29, 29, 27));
-		crearCuenta.setFont(new Font("Dialog", Font.BOLD, 17));
-		crearCuenta.setBackground(new Color(242, 242, 242));
+		crearCuenta.setBorderPainted(false);
 		crearCuenta.setBounds(287, 479, 209, 50);
 		getContentPane().add(crearCuenta);
 		
+		
+		//Separadores botones
 		JSeparator separator_1 = new JSeparator();
 		separator_1.setMaximumSize(new Dimension(32778, 32767));
 		separator_1.setForeground(new Color(29, 29, 27));
