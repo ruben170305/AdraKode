@@ -24,6 +24,7 @@ public class VerPartidas extends JPanel {
 	private JComboBox comboBoxJugador;
 	private JTable table;
 	private DefaultTableModel template;
+	private VerPartidaListener listener;
 
 	public VerPartidas( Usuario user ) {		
 		initialize_components();
@@ -168,11 +169,20 @@ public class VerPartidas extends JPanel {
 	}
 	
 	public void setListener( VerPartidaListener listener ) {
+		this.listener = listener;
 		btnSeleccionar.addActionListener( listener );
 		listener.cargarDatosEnComboBox();
         listener.transfer_table_partidas();
 	}
 	
+	public DefaultTableModel getTemplate() {
+		return template;
+	}
+
+	public VerPartidaListener getListener() {
+		return listener;
+	}
+
 	public JLabel getLblTitulo() {
 		return lblTitulo;
 	}
@@ -304,4 +314,6 @@ public class VerPartidas extends JPanel {
 	public DefaultTableModel getModel() {
 		return template;
 	}
+	
+	
 }

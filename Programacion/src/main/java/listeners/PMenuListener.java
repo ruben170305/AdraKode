@@ -68,6 +68,7 @@ public class PMenuListener implements ActionListener {
 					break;
 
 				case "Ver partidas":
+					vPartidas.getListener().cargarDatosEnComboBox();
 					ventana.cargarPanel( vPartidas );
 					break;
 
